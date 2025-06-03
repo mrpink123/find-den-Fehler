@@ -521,24 +521,26 @@
           <h1>find den Fehler</h1>
         </div>
 
+        <!-- Suche + Reset -->
         <div class="inputContainer">
-          <!--Fehlercode Suchfeld -->
           <input
             style="flex-grow: 2;"
             type="text"
             id="searchInput"
             placeholder="Suche nach Fehler-Code…"
+            list="codeSuggestions"
           />
+          <datalist id="codeSuggestions"></datalist>
 
-          <!-- Hersteller Auswahl -->
           <select id="herstellerFilter" style="flex-grow: 1;">
             <option value="">Alle Hersteller</option>
           </select>
 
-          <!-- Typ Auswahl -->
           <select id="typFilter" style="flex-grow: 1;">
             <option value="">Alle Typen</option>
           </select>
+
+          <button id="resetFilterBtn" title="Filter zurücksetzen">🔄</button>
         </div>
 
         <!-- Menü -->
@@ -615,13 +617,18 @@
         }));
       }
 
-      // Befüllt die Dropdown menüs
       function fillDropdowns(data) {
+        const selectedHersteller = herstellerFilter.value;
+        const selectedTyp = typFilter.value;
+
         const herstellerSet = new Set();
         const typSet = new Set();
+
         data.forEach((d) => {
           herstellerSet.add(d.hersteller);
-          typSet.add(d.typ);
+          if (!selectedHersteller || d.hersteller === selectedHersteller) {
+            typSet.add(d.typ);
+          }
         });
 
         herstellerFilter.innerHTML =
@@ -637,85 +644,58 @@
             .sort()
             .map((t) => `<option value="${t}">${t}</option>`)
             .join("");
+
+        herstellerFilter.value = selectedHersteller;
+        typFilter.value = selectedTyp;
       }
 
-      // Rendert die Seite
+      function updateAutocompleteList(data) {
+        const datalist = document.getElementById("codeSuggestions");
+        const uniqueCodes = [
+          ...new Set(data.map((d) => d.code).filter(Boolean)),
+        ];
+        datalist.innerHTML = uniqueCodes
+          .sort()
+          .map((code) => `<option value="${code}"></option>`)
+          .join("");
+      }
+
       function renderDaten() {
         const suchtext = searchInput.value.trim().toLowerCase();
         const hersteller = herstellerFilter.value.toLowerCase();
         const typ = typFilter.value.toLowerCase();
 
-        let gefiltert = [];
+        container.innerHTML = "";
+
+        let filtered = daten;
 
         if (suchtext) {
-          // Nur nach Code suchen
-          gefiltert = daten.filter((item) =>
-            item.code.toLowerCase().includes(suchtext)
+          filtered = filtered.filter(
+            (item) => item.code.toLowerCase() === suchtext
           );
-
-          // Filtere weiter nach Hersteller und Typ
-          if (hersteller) {
-            gefiltert = gefiltert.filter(
-              (item) => item.hersteller.toLowerCase() === hersteller
-            );
-          }
-
-          if (typ) {
-            gefiltert = gefiltert.filter(
-              (item) => item.typ.toLowerCase() === typ
-            );
-          }
-
-          // Dropdowns nur basierend auf den Suchergebnissen füllen
-          fillDropdowns(gefiltert);
-        } else {
-          // Kein Suchtext: nichts anzeigen
-          container.innerHTML = "";
-
-          // Dropdowns mit ALLEN Werten füllen
-          fillDropdowns(daten);
-
-          // Wenn nur Typ gewählt wurde → Cards für diesen Typ anzeigen
-          if (typ && !hersteller) {
-            gefiltert = daten.filter((item) => item.typ.toLowerCase() === typ);
-          }
-
-          // Wenn nur Hersteller gewählt wurde → Typ-Filter aktualisieren
-          else if (hersteller && !typ) {
-            const typSet = new Set(
-              daten
-                .filter((item) => item.hersteller.toLowerCase() === hersteller)
-                .map((item) => item.typ)
-            );
-
-            typFilter.innerHTML =
-              '<option value="">Alle Typen</option>' +
-              [...typSet]
-                .sort()
-                .map((t) => `<option value="${t}">${t}</option>`)
-                .join("");
-
-            // Keine Cards anzeigen
-            container.innerHTML = "";
-            return;
-          }
-
-          // Wenn beides gesetzt ist → Cards anzeigen
-          else if (hersteller && typ) {
-            gefiltert = daten.filter(
-              (item) =>
-                item.hersteller.toLowerCase() === hersteller &&
-                item.typ.toLowerCase() === typ
-            );
-          } else {
-            // Nichts gewählt → nichts anzeigen
-            return;
-          }
         }
 
-        // Cards anzeigen
-        container.innerHTML = "";
-        gefiltert.forEach((item) => {
+        if (hersteller) {
+          filtered = filtered.filter(
+            (item) => item.hersteller.toLowerCase() === hersteller
+          );
+        }
+
+        if (typ) {
+          filtered = filtered.filter((item) => item.typ.toLowerCase() === typ);
+        }
+
+        // Keine Suche, keine Filter → nichts anzeigen, aber Dropdowns mit allen Werten
+        if (!suchtext && !hersteller && !typ) {
+          fillDropdowns(daten);
+          updateAutocompleteList(daten);
+          return;
+        }
+
+        fillDropdowns(filtered);
+        updateAutocompleteList(daten);
+
+        filtered.forEach((item) => {
           const card = document.createElement("div");
           const typImageName =
             item.typ.toLowerCase().replace(/\s+/g, "_") + ".png";
@@ -728,9 +708,7 @@
           card.innerHTML = `
       <div class="cardheader">
         <div class="herstellerImageContainer">
-          <img
-            class="herstellerImage theme-image"
-            src="${herstellerImagePath}"
+          <img class="herstellerImage theme-image" src="${herstellerImagePath}"
             data-theme-light="images/hersteller/${herstellerImageName}"
             data-theme-dark="images/hersteller/dark/${herstellerImageName}"
             alt="${item.hersteller}"
@@ -738,38 +716,27 @@
           >
         </div>
         <div class="cardHeaderTyp">
-          ${item.typ ? `<b>${item.typ}</b>` : ""}
-          ${item.code ? `<p>${item.code}</p>` : ""}
+          ${item.typ ? `<b> ${item.typ} </b>` : ""}
+          ${item.code ? `<p> ${item.code} </p>` : ""}
         </div>
       </div>
       <div class="cardContent">
         <div class="errorDescription">
-          <div>
-            ${
-              item.fehler
-                ? `<h4>Fehler: ${item.code}</h4> ${
-                    item.kategorie ? `<h5>${item.kategorie}</h5>` : ""
-                  } <p>${item.fehler}</p>`
-                : ""
-            }
-          </div>
-          <div>
-            ${item.ursache ? `<h4>Maßnahme:</h4><p>${item.ursache}</p>` : ""}
-          </div>
-          <div>
-            ${item.infos ? `<strong>Info:</strong><p>${item.infos}</p>` : ""}
-          </div>
-          <div>
-            ${item.weitere ? `<p>${item.weitere}</p>` : ""}
-          </div>
+          ${
+            item.fehler
+              ? `<h4>Fehler: ${item.code}</h4><p>${item.fehler}</p>`
+              : ""
+          }
+          ${item.ursache ? `<h4>Maßnahme:</h4><p>${item.ursache}</p>` : ""}
+          ${item.infos ? `<strong>Info:</strong><p>${item.infos}</p>` : ""}
+          ${item.weitere ? `<p>${item.weitere}</p>` : ""}
         </div>
         <div class="typImageWrapper">
-          <img class="typImage" src="${typImagePath}" alt="${
-            item.typ
-          }" onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
+          <img class="typImage" src="${typImagePath}" alt="${item.typ}"
+            onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
         </div>
-      </div>`;
-
+      </div>
+    `;
           container.appendChild(card);
         });
 
@@ -938,6 +905,21 @@
           headerEl.classList.remove("hide");
         }
         lastScrollY = window.scrollY;
+      });
+
+      // Filter-Reset-Button
+      document
+        .getElementById("resetFilterBtn")
+        .addEventListener("click", () => {
+          searchInput.value = "";
+          herstellerFilter.value = "";
+          typFilter.value = "";
+          renderDaten();
+        });
+
+      // Filter-Änderung triggert neue Darstellung
+      [searchInput, herstellerFilter, typFilter].forEach((input) => {
+        input.addEventListener("input", debounce(renderDaten, 300));
       });
     </script>
   </body>
