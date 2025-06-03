@@ -181,263 +181,263 @@ Error Ausgang / Relais nicht aktiv.",Software und Prozessor Fehler.,
 Gilgen,SLX,29,Anzeige unter WARNUNGEN.,NESTE und BATPA Stecker herausziehen und wieder einstecken oder Reset durchführen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
 Error Ausgang / Relais nicht aktiv.",Software und Prozessor Fehler.,
 Gilgen,SLX,30,Netzspannungs-Ausfall oder Netz-Überspannung,"Netzspannung überprüfen,<br>BATPA überprüfen,<br>CAN-Elemente überprüfen,<br>CAN-Kabel überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais aktiv.",Speisungs Fehler,
 Gilgen,SLX,31,30 V extern Kurzschluss / Ausfall oder zweite NESTE defekt.,"Netzspannung überprüfen,<br>BATPA überprüfen,<br>CAN-Elemente überprüfen,<br>CAN-Kabel überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais aktiv.",Speisungs Fehler,
 Gilgen,SLX,32,Netzteil defekt oder Netzausfall auf einer NESTE.,"Netzspannung überprüfen,<br>BATPA überprüfen,<br>CAN-Elemente überprüfen,<br>CAN-Kabel überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais bei Redundanten Anlagen aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais bei Redundanten Anlagen aktiv.",Speisungs Fehler,
 Gilgen,SLX,33,Überspannung auf der 30 VDC.,Schiebeflügelschwindigkeit reduzieren.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",Überspannungs Fehler ,
+Error Ausgang / Relais nicht aktiv.",Überspannungs Fehler,
 Gilgen,SLX,34,Übertemperatur bei Überspannungsbegrenzung.,Schiebeflügelgeschwindigkeit reduzieren.<br>Offenhaltezeit erhöhen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Überspannungs Fehler ,
+Error Ausgang / Relais aktiv.",Überspannungs Fehler,
 Gilgen,SLX,35,BATPA ausgefallen (im Betrieb oder beim Aufstarten nicht erkannt).,"Netzspannung überprüfen,<br>BATPA überprüfen,<br>CAN-Elemente überprüfen,<br>CAN-Kabel überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais aktiv.",Speisungs Fehler,
 Gilgen,SLX,36,BATPA für einen sicheren Betrieb zu tief entladen.,"Netzspannung überprüfen,<br>BATPA überprüfen,<br>CAN-Elemente überprüfen,<br>CAN-Kabel überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais aktiv.",Speisungs Fehler,
 Gilgen,SLX,37,"BATPA nach Netzausfall vollständig entladen, NESTE-Stecker ausgezogen ","Netzspannung überprüfen,<br>BATPA überprüfen,<br>CAN-Elemente überprüfen,<br>CAN-Kabel überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais aktiv.",Speisungs Fehler,
 Gilgen,SLX,38,Nur ein BATPA vorhanden.,Dual/Booster: zweites BATPA anschließen,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais nicht aktiv.",Speisungs Fehler,
 Gilgen,SLX,39,24 V Klemmen-Speisung Kurzschluss/Überlast.,An Klemmen angeschlossene Elemente überprüfen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Speisungs Fehler ,
+Error Ausgang / Relais aktiv.",Speisungs Fehler,
 Gilgen,SLX,40,NESTE defekt.,NESTE austauschen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,41,Zu viele Störungen auf dem EncoderKabel.,MOGET überprüfen (Encoder- und Motorstecker).,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",Hardware Fehler ,
+Error Ausgang / Relais nicht aktiv.",Hardware Fehler,
 Gilgen,SLX,42,Schiebeflügel können blockiert sein. Encoder ausgesteckt.,"Schiebeflügel überprüfen,<br>MOGET überprüfen (Encoder- und Motor-Stecker). ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",Hardware Fehler ,
+Error Ausgang / Relais  aktiv.",Hardware Fehler,
 Gilgen,SLX,43,"Fehler im Motorstromkreis:<br>
 <b>SLX-Standard</b> Not-Stopp: Tür steht still.<br>
 <b>SLX-Redundant</b> OKI: Tür öffnet und bleibt offen.<br>
 <b>SLX-Brandschutz</b> Tür schließt und verriegelt. ","MOGET überprüfen (Encoder- und Motorstecker),<br>Zuhalte kraft überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,44,"Fehler im Motorstromkreis:<br>
 <b>SLX-Standard</b> Not-Stopp: Tür steht still.<br>
 <b>SLX-Redundant</b> OKI: Tür öffnet und bleibt offen.<br>
 <b>SLX-Brandschutz</b> Tür schließt und verriegelt. ","MOGET überprüfen (Encoder- und Motorstecker),<br>Zuhalte kraft überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,45,"Fehler im Motorstromkreis:<br>
 <b>SLX-Standard</b> Not-Stopp: Tür steht still.<br>
 <b>SLX-Redundant</b> OKI: Tür öffnet und bleibt offen.<br>
 <b>SLX-Brandschutz</b> Tür schließt und verriegelt. ","MOGET überprüfen (Encoder- und Motorstecker),<br>Zuhalte kraft überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,46,"Fehler im Motorstromkreis:<br>
 <b>SLX-Standard</b> Not-Stopp: Tür steht still.<br>
 <b>SLX-Redundant</b> OKI: Tür öffnet und bleibt offen.<br>
 <b>SLX-Brandschutz</b> Tür schließt und verriegelt. ","MOGET überprüfen (Encoder- und Motorstecker),<br>Zuhalte kraft überprüfen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,47,CAN-Ausfall.,CAN-Kabel überprüfen.<br>CAN-Elemente überprüfen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,48,Fehler im CAN-Kabel oder bei zweiter NESTE.,CAN-Kabel oder NESTE überprüfen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,50,Neues Element am CAN-Bus erkannt.,Element auf Berechtigung überprüfen.<br>Reset durchführen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,60,Zu großer Strom könnte die NESTE zerstören.,Verriegelung kontrollieren.<br>Mechanische Einstellungen kontrollieren.<br>Defekte Elemente ersetzen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,61,Zu großer Strom könnte die NESTE zerstören.,Verriegelung kontrollieren.<br>Mechanische Einstellungen kontrollieren.<br>Defekte Elemente ersetzen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Hardware Fehler ,
+Error Ausgang / Relais aktiv.",Hardware Fehler,
 Gilgen,SLX,62,Motorstromrelais geöffnet wegen zu großem Strom. Fehler behebt sich nach 1 Minute.,Verriegelung kontrollieren.<br>Mechanische Einstellungen kontrollieren.<br>Defekte Elemente ersetzen.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",Hardware Fehler ,
+Error Ausgang / Relais  aktiv.",Hardware Fehler,
 Gilgen,SLX,63,Motorstromrelais geöffnet wegen zu großem Strom. Fehler behebt sich nach 1 Minute.,Verriegelung kontrollieren.<br>Mechanische Einstellungen kontrollieren.<br>Defekte Elemente ersetzen.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",Hardware Fehler ,
+Error Ausgang / Relais  aktiv.",Hardware Fehler,
 Gilgen,SLX,64,Motorstromrelais geöffnet wegen 5mal nacheinander zu großem Strom.,Verriegelung kontrollieren.<br>Mechanische Einstellungen kontrollieren.<br>Defekte Elemente ersetzen.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",Hardware Fehler ,
+Error Ausgang / Relais  aktiv.",Hardware Fehler,
 Gilgen,SLX,100,Unterschiedliche NESTE-Software-Versionen oder CAN konnte nicht gestartet werden.,Bei Anlagen mit zwei NESTE müssen beide NESTE die gleiche Software-Version aufweisen.<br>Alte MSK ersetzen.<br>CAN-Kabel und CAN-Geräte kontrollieren.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais  aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,101,NESTE-Fehler,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen.","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais  aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,102,NESTE-Fehler,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen.","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais  aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,103,NESTE-Fehler,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen.","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais  aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,104,NESTE-Fehler,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen.","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais  aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,105,Lichtschrankenfehler auf NESTE.,"Lichtschranke kontrollieren,<br>Brücke kontrollieren (evtl. einsetzen). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,106,NESTE-Fehler,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais  aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,107,NESTE-Fehler,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais  aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais  aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,108,Wenn 2 NESTE: Master/Slave-Einstellung nicht korrekt.,"DIP-Schalter 4 kontrollieren/korrigieren.<br>Master = OFF, Slave = ON ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,500,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,501,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,502,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,503,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,504,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,505,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,506,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,507,Sensor-Fehler (entsprechender Sensor bleibt angesprochen).,"Anschlüsse kontrollieren,<br>defekte Elemente gemäss fortlaufender Adressier-Tabelle (in Sensor-Anleitung) identifizieren und ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,508,Zwei Sensoren mit gleicher Adresse vorhanden,"Kontrollieren, korrigieren. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,600,Verriegelungs-Fehler,"Anschlüsse kontrollieren,<br>Adressierung kontrollieren,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,601,Verriegelungs-Fehler,"Anschlüsse kontrollieren,<br>Adressierung kontrollieren,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,602,Verriegelungs-Fehler,"Anschlüsse kontrollieren,<br>Adressierung kontrollieren,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,603,Verriegelungs-Fehler,"Anschlüsse kontrollieren,<br>Adressierung kontrollieren,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,604,Verriegelungs-Fehler,"Anschlüsse kontrollieren,<br>Adressierung kontrollieren,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,605,Kontaktsystem FLUVERI.,FLUVERI: Kontaktsystem und Tür-Zu-Position kontrollieren.<br>Bei Break-Out-Anlagen: MagCode Clip-System kontrollieren.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
-Gilgen,SLX,605,Spannungsfehler auf LAVERI F+R. ,"LAVERI: F+R Netzspannung kontrollieren, BATPA kontrollieren ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
+Gilgen,SLX,605,Spannungsfehler auf LAVERI F+R.,"LAVERI: F+R Netzspannung kontrollieren, BATPA kontrollieren ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,606,Selbsttest-Fehler auf VOPRI.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,607,Selbsttest-Fehler auf VOPRI.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,608,VOPRI und NESTE haben ungleiche Redundant-Einstellungen.,"Kontrollieren, korrigieren. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,609,Alter FLUVERI-Motorenprint.,Keine,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,610,FLUVERI hat zu große Reibung.,"Mechanische Reibung in FLUVERI kontrollieren (Schlüssel, Zylinder, Hebel, Schwenkriegel),<br>FLUVERI-Motor ersetzen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,611,Unterspannung auf VOPRI.,"Netzspannung kontrollieren,<br>BATPA kontrollieren. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,612,Software-Fehler auf VOPRI.,"VOPRI ersetzen,<br>Software-Version kontrollieren. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,618,Manuelle Verriegelung.,"Betriebsart NACHT wählen.<br>Manuelle Verriegelung entriegeln.<br>Betriebsart AUTOMAT wählen.<br>Wird nur erkannt, wenn SSW Allgemein 6 gesetzt ist. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,620,Klinken-Fehler auf LAVERI F+R oder FLUVERI manuell verriegelt.,Mechanisch korrekte Funktion der VERI kontrollieren und wiederherstellen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,621,VERI in Zwischenposition.,"FLUVERI Nach ca. 30 s wird die Steuerung die FLUVERI wieder in die Ausgangsposition fahren und der Fehler wird gelöscht (siehe Kapitel ""Optionen""). Kontaktsystem und Tür-Zu-Position überprüfen. LAVERI F+R VOPRI-Montage kontrollieren. Magnet auf Verriegelungsklinke kontrollieren. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,622,VERI kann nicht verriegeln oder entriegeln.,"Mechanische Reibungsprobleme beheben:<br>Hindernis bei Verriegelungsklinke/-haken oder zu hohe mechanische Reibung (siehe Kapitel ""Optionen"").<br>Mechanische Reibung in FLUVERI überprüfen (Schlüssel, Zylinder, Hebel, Schwenkriegel). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,623,Es fließt ein zu großer Strom.,"Mechanische Reibungsprobleme beheben:<br>Hindernis bei Verriegelungsklinke/-haken oder zu hohe mechanische Reibung (siehe Kapitel ""Optionen"").<br>Mechanische Reibung in FLUVERI überprüfen (Schlüssel, Zylinder, Hebel, Schwenkriegel). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,624,Beim Aufstarten war VERI verriegelt.,Betriebsart AUTOMAT wählen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,650,TUWI-Fehler.,TUZUK überprüfen.<br>Verriegelungsstellung überprüfen (Einbruch).,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,651,Zu-Positions-Fehler.,TUZUK überprüfen.<br>Türdichtungen überprüfen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,652,Zwei VOPRI mit gleicher Adresse vorhanden.,"Überprüfen, korrigieren ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,700,UAPI-Fehler.,"Anschlüsse kontrollieren,<br>Lichtschranke überprüfen,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,701,UAPI-Fehler.,"Anschlüsse kontrollieren,<br>Lichtschranke überprüfen,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,702,UAPI-Fehler.,"Anschlüsse kontrollieren,<br>Lichtschranke überprüfen,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,703,Nicht erlaubte UAPI-Konfiguration,DIP-Schalter auf UAPI überprüfen,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,704,UAPI-Fehler.,"Anschlüsse kontrollieren,<br>Lichtschranke überprüfen,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,705,Lichtschrankenfehler auf UAPI.,"Lichtschranke überprüfen,<br>Brücke kontrollieren (ev. einsetzen). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,706,UAPI-Fehler.,"Anschlüsse kontrollieren,<br>Lichtschranke überprüfen,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,707,UAPI-Fehler.,"Anschlüsse kontrollieren,<br>Lichtschranke überprüfen,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,708,UAPI-Schlüsselschalter Redundant.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,709,DIP-Schalter auf UAPI nicht definiert.,"DIP-Schalter auf UAPI korrekt einstellen, anschließend Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,710,Zwei UAPI mit gleicher Adresse vorhanden.,"Überprüfen, korrigieren. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,711,24 V-Speisung,Verkabelung überprüfen (24 V wird für 10 Sekunden ausgeschaltet).,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,800,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,801,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,802,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,803,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,804,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,805,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,806,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,807,C-BEDIX-Fehler.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,808,C-BEDIX-Schlüsselschalter Redundant.,"Anschlüsse kontrollieren,<br>defekte Elemente ersetzen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais bei Redundant aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,809,Zwei C-BEDIX mit gleicher Adresse vorhanden.,"Überprüfen, korrigieren. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,900,D-BEDIX-Fehler.,Verbindung zwischen Steuerung und D-BEDIX kontrollieren.<br>Abschirmung anschließen.<br>Es dürfen keine offenen Adern im Kabel vorhanden sein.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,901,D-BEDIX Kommunikations-Fehler.,Verbindung zwischen Steuerung und D-BEDIX kontrollieren.<br>Abschirmung anschließen.<br>Es dürfen keine offenen Adern im Kabel vorhanden sein.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler ,
+Error Ausgang / Relais nicht aktiv.",CAN Elemente Fehler,
 Gilgen,SLX,1000,Reset wurde ausgelöst.,(Meldung rein informativ),"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais nicht aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1001,"• Minimale Öffnungsbreite beim Einrichten nicht erreicht.<br>
 • Keine Massenmessung.<br>
 • Nach SSW-Änderung kein Reset durchgeführt. ","Hindernis entfernen,<br>Leichtgängigkeit der Schiebeflügel überprüfen / herstellen,<br>Verriegelung überprüfen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1002,Reset im Batteriebetrieb nicht möglich.,Netzstecker einstecken.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1003,Falsche NESTE-Einstellung (Master / Slave).,DIP-Schalter kontrollieren.<br>Beide NESTE müssen die gleiche Software-Version aufweisen.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1004,Ungleiche NESTE-Einstellung (Redundant).,DIP-Schalter kontrollieren.<br>Beide NESTE müssen die gleiche Software-Version aufweisen.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1005,Ungleiche NESTE-Einstellung (Booster).,DIP-Schalter kontrollieren.<br>Beide NESTE müssen die gleiche Software-Version aufweisen.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1006,Ungleiche NESTE-Einstellung (Dual).,DIP-Schalter kontrollieren.<br>Beide NESTE müssen die gleiche Software-Version aufweisen.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1007,Schiebeflügelgewicht <20 kg gemessen.,Schiebeflügel und Zahnriemenkupplung überprüfen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler ,
+Error Ausgang / Relais aktiv.",Montage- und Einstellungs-Fehler,
 Gilgen,SLX,1500,Beim Einrichten NESTE (Slave) nicht gefunden.,"Anschlüsse kontrollieren, defekte Elemente ersetzen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1501,Beim Einrichten Sensor innen Mitte nicht gefunden,"Anschlüsse kontrollieren, defekte Elemente ersetzen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1502,Beim Einrichten BATPA nicht gefunden.,"Anschlüsse kontrollieren, defekte Elemente ersetzen,<br>Reset durchführen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1510,80 % der Öffnungbreite nicht erreicht (Warnung).,"Öffnungsgeschwindigkeit erhöhen, Leichtgängigkeit der Schiebeflügel überprüfen / herstellen.<br>s KRIECHEN_NSK kontrollieren (ev. verkleinern). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais nicht aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1511,80 % der Öffnungbreite nicht erreicht (Fehler).,"Öffnungsgeschwindigkeit erhöhen, Leichtgängigkeit der Schiebeflügel überprüfen / herstellen.<br>s KRIECHEN_NSK kontrollieren (ev. verkleinern). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1512,OKI von Master nicht ausgeführt.,"Anschlüsse kontrollieren, Sensor kontrollieren. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1513,Ungleicher Türstatus (NESTE).,MOGET überprüfen (Encoder- und Motor-Stecker).<br>Mechanisches System überprüfen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1514,Umschaltung auf Betriebsart NACHT abgebrochen<br>(Meldung rein informativ),Umschaltung mittels BEDiX fertig ausführen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais nicht aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1515,Fehler Schlüsselschalter Redundant.,Anschlüsse und Verbindung zur NESTE kontrollieren.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Redundant-Fehler,
 Gilgen,SLX,1600,Testöffnung mit Notöffnungsgummiseil nicht erfolgreich.,"Gummiseil kontrollieren, mechanische Einstellungen (Türflügel, Laufwagen) überprüfen.<br>Fehler 1600 erlischt, wenn Test i.O.* ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler,
 Gilgen,SLX,1601,Testöffnung mit Notöffnungsgummiseil (4. Versuch) nicht erfolgreich oder beim Einrichten nicht erfolgreich.,"Gummiseil kontrollieren, mechanische Einstellungen (Schiebeflügel, Laufwagen) überprüfen.<br>Fataler Fehler (Tür bleibt offen). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler,
 Gilgen,SLX,1602,Notöffnungsgummiseil zu stark gespannt (im Betrieb).,Spannung verringern.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler,
 Gilgen,SLX,1603,Notöffnungsgummiseil zu stark gespannt (beim Einrichten).,Spannung verringern.<br>Fataler Fehler (Tür bleibt offen).,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische BAT-NOT-X-Fehler,
 Gilgen,SLX,1700,Die Lichte Breite des Slave ist größer als die des Master.,"Master / Slave-Einstellung ändern (siehe Kapitel ""Inbetriebnahme""). ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Dual-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Dual-Fehler,
 Gilgen,SLX,1701,Die Bewegung der beiden Flügel ist nicht mehr synchron.,"MOGET überprüfen (Encoder, Motor-Stecker). Eventuelles Hindernis entfernen.<br>Reset durchführen. ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais nicht aktiv.",Spezifische Dual-Fehler ,
+Error Ausgang / Relais nicht aktiv.",Spezifische Dual-Fehler,
 Gilgen,SLX,1802,Während der Einrichtfahrt Notbatterie nicht gefunden.,Notbatterie einstecken oder kontrollieren.,"  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Brandschutz-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Brandschutz-Fehler,
 Gilgen,SLX,1900,Ungleiche Software-Versionen.<br>Keine zweite Schleusentür gefunden.,Software-Versionen angleichen.<br>Schleusen-Verbindungskabel kontrollieren.<br>Beide Schleusentüren einschalten.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler,
 Gilgen,SLX,1901,Schleusen-Partner ist ausgefallen.,Schleusen-Verbindungskabel kontrollieren. Schleusen-Printe überprüfen (richtig eingesteckt)? Beide Schleusentüren einschalten.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler,
 Gilgen,SLX,1903,Schleusentüren weisen identische Türnummern auf.,"Schleusen-Türnummern unterschiedlich definieren<br>(Master = 0, Slave = 1). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler,
 Gilgen,SLX,1907,Fehler in CAN1.,"Schleusen-Verbindungskabel kontrollieren.<br>Schleusen-Printe überprüfen (richtig eingesteckt)?<br>Schleusen-Türnummern unterschiedlich definieren<br>(Master = 0, Slave = 1). ","<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler ,
+Error Ausgang / Relais aktiv.",Spezifische Schleusen-Fehler,
 Gilgen,SLX,2000,Mehr als 5 Behinderungen nacheinander,Hindernis entfernen.,"<span style=""color: green"">Schließung möglich.</span>. <img src=""images\symbole\nacht.webp"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Betriebsmeldungen (informativ) ,
+Error Ausgang / Relais aktiv.",Betriebsmeldungen (informativ),
 Gilgen,SLX,2001,"Mehr als 25 Verriegelungsversuche nacheinander. Fehler wird angezeigt, kein weiterer Verriegelungsversuch (verhindert das Verbrennen der Steuerung). ","Verriegelung, Verriegelungsklinke, Schiebeflügel kontrollieren/einstellen. ","  <span style=""color: red"">Schließung nicht möglich. </span><img src=""images\symbole\nacht.png"" alt=""Nachtschließung"" style=""width:25px; padding-left:5px;“ onerror=""this.style.display='none'""> <br>
-Error Ausgang / Relais aktiv.",Betriebsmeldungen (informativ) ,
+Error Ausgang / Relais aktiv.",Betriebsmeldungen (informativ),
 Gilgen,SLX,ohne,LED auf MSK leuchtet / blinkt nicht.,"• Netzspannung kontrollieren.<br>
 • Feinsicherung in NESTE kontrollieren.<br>
 • Auf MSK ist keine Software installiert.<br>
-• Service Dongle war während dem Aufstarten/Reset gesteckt.<br>",Fehlverhalten ohne Fehler-Nr. ,,
+• Service Dongle war während dem Aufstarten/Reset gesteckt.<br>",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Tür bewegt / öffnet nicht.,"• Netzausfall. <br>
 • Notbatterie entladen. <br>
 • Betriebsart HAND oder NACHT. <br>
@@ -449,7 +449,7 @@ Gilgen,SLX,ohne,Tür bewegt / öffnet nicht.,"• Netzausfall. <br>
 • NOT-ZU-Befehl aktiv. <br>
 • MSK nicht programmiert. <br>
 • MSK nicht oder falsch gesteckt. <br>
-• Bei Redundant oder Booster: Antriebe arbeiten gegeneinander. Drehrichtung überprüfen.",Fehlverhalten ohne Fehler-Nr. ,,
+• Bei Redundant oder Booster: Antriebe arbeiten gegeneinander. Drehrichtung überprüfen.",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Tür schließt nicht oder nicht vollständig.,"• Betriebsart HAND oder OFFEN. <br>
 • Schließvorgang behindert. <br>
 • Lichtschranke defekt, unterbrochen oder falsch angeschlossen. <br>
@@ -465,95 +465,95 @@ Gilgen,SLX,ohne,Tür schließt nicht oder nicht vollständig.,"• Betriebsart H
 • Gegenseitige Beeinflussung der Sensoren beachten (Adressierung gemäß Sensoranleitung). <br>
 • Offenhaltezeit zu hoch eingestellt. <br>
 • Tür hat mehrmals beim Schließen Hindernis erkannt (es wird 1 Minute in OFFEN-Position gewartet). <br>
-• Befehlszustand kann mittels BEDiX und Fehlerliste in Betriebsanleitung herausgefunden werden. ",Fehlverhalten ohne Fehler-Nr. ,,
-Gilgen,SLX,ohne,Tür öffnet oder schließt zu langsam.,• Öffnungs- bzw. Schließgeschwindigkeit falsch eingestellt.,Fehlverhalten ohne Fehler-Nr. ,,
+• Befehlszustand kann mittels BEDiX und Fehlerliste in Betriebsanleitung herausgefunden werden. ",Fehlverhalten ohne Fehler-Nr.,,
+Gilgen,SLX,ohne,Tür öffnet oder schließt zu langsam.,• Öffnungs- bzw. Schließgeschwindigkeit falsch eingestellt.,Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Tür öffnet langsam oder öffnet die letzten 500 mm langsam.,"• SIDE-SCAN hat angesprochen. CAN-Adressen der Sensoren überprüfen.<br> 
-• Hinderniserkennung hat angesprochen. ",Fehlverhalten ohne Fehler-Nr. ,,
-Gilgen,SLX,ohne,Tür öffnet zu wenig weit.,• Betriebsart AUTOMAT (Winter).,Fehlverhalten ohne Fehler-Nr. ,,
-Gilgen,SLX,ohne,Tür bleibt zu lange oder zu kurz offen.,• Falsch eingestellte Offenhaltezeit.,Fehlverhalten ohne Fehler-Nr. ,,
+• Hinderniserkennung hat angesprochen. ",Fehlverhalten ohne Fehler-Nr.,,
+Gilgen,SLX,ohne,Tür öffnet zu wenig weit.,• Betriebsart AUTOMAT (Winter).,Fehlverhalten ohne Fehler-Nr.,,
+Gilgen,SLX,ohne,Tür bleibt zu lange oder zu kurz offen.,• Falsch eingestellte Offenhaltezeit.,Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Tür macht nur kurze Bewegungen.,"• Testbetrieb eingeschaltet. <br>
 • Hinderniserkennung spricht an. <br>
 • Sensoren werden durch Türbewegung aktiviert. <br>
 • Fehlauslösung der Sensoren. <br>
 • Beschleunigungswert für dieses Flügelgewicht zu hoch eingestellt. <br>
 • Schiebeflügelgewicht zu groß <br>
-• MOGET defekt. ",Fehlverhalten ohne Fehler-Nr. ,,
+• MOGET defekt. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Türbewegung ist ruckweise.,"• Gegendruckrollen bei den Laufwagen nicht eingestellt. <br>
-• Beschleunigung oder Verzögerungswerte zu hoch eingestellt. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Beschleunigung oder Verzögerungswerte zu hoch eingestellt. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Laterale Türbewegung in der Zuposition.,"• Türdichtungen defekt. <br>
 • Schiebeflügel nicht korrekt eingestellt. <br>
 • Fixpunkt oder Bodenführung beschädigt. <br>
-• Anschläge in ZU-Position berühren sich nicht. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Anschläge in ZU-Position berühren sich nicht. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Beim Schließen reversiert die Tür dauernd.,"• Sensor spricht an (Reflektionen metallischer Objekte, Sensor ""sieht"" Schiebeflügel, Vibrationen der Verschalung). <br>
 • Reibung zu groß (Hinderniserkennung). <br>
 • Objekt im Weg (Hinderniserkennung). <br>
-• Positionsverlust durch Riemensprung. Riemenspannung überprüfen. Beschleunigungs-, Verzögerungs-, Geschwindigkeitsparameter reduzieren. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Positionsverlust durch Riemensprung. Riemenspannung überprüfen. Beschleunigungs-, Verzögerungs-, Geschwindigkeitsparameter reduzieren. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Beim Öffnen hält die Tür an und schließt wieder oder öffnet nur noch langsam.,"• Nebenschließkantensensor spricht an (Reflektionen metallischer Objekte, Sensor ""sieht"" Schiebeflügel, Vibrationen der Verschalung). <br>
 • Reibung zu Groß, Hindernis wird erkannt. <br>
-• Objekt im Weg (Hinderniserkennung). ",Fehlverhalten ohne Fehler-Nr. ,,
-Gilgen,SLX,ohne,Tür fährt manchmal in den OFFEN oder ZU-Anschlag.,"• Positionsverlust durch Riemensprung. Riemenspannung überprüfen. Beschleunigungs-, Verzögerungs-, Geschwindigkeitsparameter reduzieren. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Objekt im Weg (Hinderniserkennung). ",Fehlverhalten ohne Fehler-Nr.,,
+Gilgen,SLX,ohne,Tür fährt manchmal in den OFFEN oder ZU-Anschlag.,"• Positionsverlust durch Riemensprung. Riemenspannung überprüfen. Beschleunigungs-, Verzögerungs-, Geschwindigkeitsparameter reduzieren. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,1. Bewegung nach dem Einschalten fährt Tür in Anschlag.,"• Steuerung (MSK) wurde bereits an einer anderen Anlage eingesetzt. Reset durchführen. <br>
-• Softswitches Allgemein 7 und 8 auf 0 setzen. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Softswitches Allgemein 7 und 8 auf 0 setzen. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Beim Einrichten wird die ZU-Position nicht ganz angefahren.,"• Reibung zu groß <br>
 • Dichtungen herausgerissen. <br>
-• Schiebeflügel nicht parallel. <br>",Fehlverhalten ohne Fehler-Nr. ,,
+• Schiebeflügel nicht parallel. <br>",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Nach einem Reset keine Türbewegung.,"• Mindestens 1 Minute warten. <br>
 • Steuerung aus und wieder einschalten. <br>
 • DIP-Switch-Einstellungen (Master/Slave) nicht korrekt. <br>
 • Service Dongle ist noch eingesteckt. <br>
-• Netzausfall. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Netzausfall. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Beim Einrichten wird zuerst geöffnet.,"• Riemenmitnehmer falsch montiert. <br>
-• MOGET-Drehrichtung falsch eingestellt. ",Fehlverhalten ohne Fehler-Nr. ,,
+• MOGET-Drehrichtung falsch eingestellt. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Nach jedem Einschalten wird neu eingerichtet.,"• Schiebeflügelgewicht ist kleiner als 20 kg. <br>
 • Riemenmitnehmer kontrollieren. <br>
-• Zahnriemen korrekt spannen. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Zahnriemen korrekt spannen. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Verriegelung verriegelt nicht,"• Verriegelungsklinke hat zu wenig Spiel. <br>
 • DIP-Switch 1 auf Verriegelung ist ON. <br>
 • Bei 1-flügligen Anlagen kein Endanschlag montiert. <br>
-• Handentriegelung immer betätigt. ",Fehlverhalten ohne Fehler-Nr. ,,
-Gilgen,SLX,ohne,Verriegelung entriegelt nur.,• Bei einer nicht redundanten Anlage ist DIP-Switch 4 der Verriegelung auf ON.,Fehlverhalten ohne Fehler-Nr. ,,
+• Handentriegelung immer betätigt. ",Fehlverhalten ohne Fehler-Nr.,,
+Gilgen,SLX,ohne,Verriegelung entriegelt nur.,• Bei einer nicht redundanten Anlage ist DIP-Switch 4 der Verriegelung auf ON.,Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Verriegelung verriegelt oder entriegelt mehrmals.,"• Verriegelungsklinke hat zu wenig Spiel. <br>
 • Handentriegelung klemmt. <br>
-• Objekt zwischen der Schließkante verhindert vollständiges Schließen und Verriegeln. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Objekt zwischen der Schließkante verhindert vollständiges Schließen und Verriegeln. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Option FLUVERI: Tür verriegelt nicht und öffnet wieder,"• Schließvorgang behindert<br>
 • Schwenkriegel ausgeschwenkt<br>
-• Schiebeflügel stehen schief",Fehlverhalten ohne Fehler-Nr. ,,
+• Schiebeflügel stehen schief",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Option FLUORIERE-A: Tür öffnet nach Betätigung des Entriegelungshebels nicht automatisch,"• Motorgetriebe ist nicht freigeschaltet. <br>
-• Betriebsart NACHT wählen und 2...3 Key-Befehle auslösen",Fehlverhalten ohne Fehler-Nr. ,,
+• Betriebsart NACHT wählen und 2...3 Key-Befehle auslösen",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Sensor öffnet Tür nicht. Sensor spricht nicht an,"• Betriebsart auf NACHT oder AUSGANG<br>
 • Falsche CAN-Adresse auf Sensor eingestellt<br>
 • Sensor-Erfassungsbereich falsch eingestellt<br>
 • Sensor-Querverkehrsoptimierung eingestellt<br>
 • Sensor-Empfindlichkeit zu stark reduziert (auf Außenanwendung gestellt). <br>
-• Sensor defekt. ",Fehlverhalten ohne Fehler-Nr. ,,
+• Sensor defekt. ",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Sensor dauernd angesprochen,"• Sensor zurück setzen (Hintergrund manuell einlernen)<br>
 • Verschalung schließen und Sensor neu einlernen<br>
 • Sensor-Einstellungen überprüfen. • Reflektierende Objekte<br>
-• Bewegende Objekte in Sensornähe (Pflanzen, Luftzug, Blätter…)",Fehlverhalten ohne Fehler-Nr. ,,
+• Bewegende Objekte in Sensornähe (Pflanzen, Luftzug, Blätter…)",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,UAPI funktioniert nicht,"• DIP-Switch auf UAPI falsch eingestellt<br>
 • UAPI-Softswitches falsch gesetzt<br>
-• Anschlussschema überprüfen (Eingänge sind aktiv GND)",Fehlverhalten ohne Fehler-Nr. ,,
+• Anschlussschema überprüfen (Eingänge sind aktiv GND)",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Auf C-BEDIX kann Betriebsart nicht verändert werden,"• Betriebsart ist fix durch Schaltuhr, Schlüsselschalter, etc. auf UAPI gegeben<br>
 • C-BEDIX ist gesperrt<br>
-• CAN-Kabel fehlerhaft",Fehlverhalten ohne Fehler-Nr. ,,
+• CAN-Kabel fehlerhaft",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Keine oder nicht alle CAN Optionen funktionieren,"• CAN-Kabel fehlerhaft (Kontakte, Verbindung)<br>
-• CAN-Optionen nacheinander einstecken",Fehlverhalten ohne Fehler-Nr. ,,
+• CAN-Optionen nacheinander einstecken",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Keine Funkverbindung möglich,"• Bluetooth DIP-Switch auf NESTE falsch eingestellt<br>
 • Entfernung zum Antrieb zu groß<br>
-• BT-Print auf NESTE defekt",Fehlverhalten ohne Fehler-Nr. ,,
+• BT-Print auf NESTE defekt",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,BEDiX funktioniert nicht,"• BEDiX nicht angemeldet<br>
 • Entfernung zum Antrieb zu groß<br>
 • Notbatterie defekt oder leer<br>
 • BT-Print auf NESTE nicht oder falsch gesteckt<br>
-• Verbindung mittels Service-Dongle, Taster kurz drücken oder DIP-SW 3 freischalten",Fehlverhalten ohne Fehler-Nr. ,,
-Gilgen,SLX,ohne,Auf BEDiX kann Betriebsart nicht verändert werden,"• Betriebsart ist fix durch Schaltuhr, Schlüsselschalter, etc. auf UAPI gegeben.",Fehlverhalten ohne Fehler-Nr. ,,
+• Verbindung mittels Service-Dongle, Taster kurz drücken oder DIP-SW 3 freischalten",Fehlverhalten ohne Fehler-Nr.,,
+Gilgen,SLX,ohne,Auf BEDiX kann Betriebsart nicht verändert werden,"• Betriebsart ist fix durch Schaltuhr, Schlüsselschalter, etc. auf UAPI gegeben.",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,F-KEY öffnet die Tür nicht,"• F-KEY ist nicht angemeldet<br>
 • Entfernung zum Antrieb zu groß<br>
 • Notbatterie defekt oder leer<br>
-• BT-Print auf NESTE nicht oder falsch gesteckt",Fehlverhalten ohne Fehler-Nr. ,,
+• BT-Print auf NESTE nicht oder falsch gesteckt",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,SLX,ohne,Tür verursacht Geräusche,"• Verschmutzte Türführungen<br>
 • Schiebeflügel streifen oben oder unten<br>
-• Defekte Antriebselemente",Fehlverhalten ohne Fehler-Nr. ,,
+• Defekte Antriebselemente",Fehlverhalten ohne Fehler-Nr.,,
 Gilgen,C-BEDIX,,,,,"<h3>Betriebsart-Tasten</h3>
  <p>Das C-BEDIX besitzt folgende Betriebsart-Tasten mit integrierten grünen LED:</p>
 <img 
