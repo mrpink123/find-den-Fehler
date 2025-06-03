@@ -1,6 +1,6 @@
 {
   "name": "find den Fehler",
-  "short_name": "Fehlersuche",
+  "short_name": "find den Fehler",
   "description": "Suche nach Fehlercodes und deren Ursachen",
   "start_url": "index.html",
   "display": "standalone",
