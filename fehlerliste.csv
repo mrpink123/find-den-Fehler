@@ -25,8 +25,8 @@ Steuerung erkennt KOMBIPRI, obschon dieser nicht vorhanden ist.<br>
 <p>Funktionen der Programmschalterstellungen entsprechen dem bekannten Gilgen-Standard.</p>
 <ul>
     <li>Auf der linken Seite des BEDIS, neben den LED, sind die Funktionen symbolisch dargestellt. </li>
-    <li>Bei der momentan gewählten Funktion leuchtet die daneben platzierte LED dauernd auf. </li>
-    <li>Mit den Tasten + oder - kann die gewünschte Programmschalterstellung gewählt werden. Die entsprechende LED leuchtet. Die neue Einstellung wird nach ca. 2 Sekunden übernommen. </li>
+    <li>Bei der momentan gewählten Funktion leuchtet die daneben platzierte LED dauernd auf. </li>
+    <li>Mit den Tasten + oder - kann die gewünschte Programmschalterstellung gewählt werden. Die entsprechende LED leuchtet. Die neue Einstellung wird nach ca. 2 Sekunden übernommen. </li>
 </ul>
 <br>
 <h3>Einstellfunktionen (2. Ebene)</h3>
@@ -39,11 +39,11 @@ Mit einem Doppeltastendruck oder ohne weitere Betätigung des BEDIS während 1 M
 <h3>RESET LED 32:</h3>
 <p>Die Anlage wird neu gestartet und eingerichtet. <br>
 Wird ein RESET während des Notbatteriebetriebes eingegeben, bleibt der Antrieb stehen und die Steuerung wird ausgeschaltet.</p><br>
-<h3>Ablauf des Reset:  </h3>
+<h3>Ablauf des Reset: </h3>
 <ul><li>Test aller Hardware-Teile der Steuerung.</li>
-    <li>Alle angeschlossenen Elemente werden kontrolliert (BEDIS, VERI, BATPA).</li>
-    <li>Tür schließt bis zur ZU-Position mit einer Einrichtgeschwindigkeit von 0,075 m/s.</li>
-    <li>In den Programmstellungen NACHT und AUSGANG wird die Anlage verriegelt und bleibt solange in dieser Stellung,<br>bis ein gültiger Öffnungsbefehl (KEY oder Öffnungskontakt innen) ansteht.<br>Ist Programmstellung HAND gewählt, muss die Anlage auf AUTOMAT gestellt werden, damit der Einrichtvorgang fortgesetzt wird.<br>In den übrigen Programmstellungen erfolgt der Öffnungsbefehl automatisch.</li>
+    <li>Alle angeschlossenen Elemente werden kontrolliert (BEDIS, VERI, BATPA).</li>
+    <li>Tür schließt bis zur ZU-Position mit einer Einrichtgeschwindigkeit von 0,075 m/s.</li>
+    <li>In den Programmstellungen NACHT und AUSGANG wird die Anlage verriegelt und bleibt solange in dieser Stellung,<br>bis ein gültiger Öffnungsbefehl (KEY oder Öffnungskontakt innen) ansteht.<br>Ist Programmstellung HAND gewählt, muss die Anlage auf AUTOMAT gestellt werden, damit der Einrichtvorgang fortgesetzt wird.<br>In den übrigen Programmstellungen erfolgt der Öffnungsbefehl automatisch.</li>
 </ul>
 <h3>ÖFFNUNGSGESCHWINDIGKEIT 40...100 % LED 16</h3>
 <p>Standardeinstellung 100 % </p>
@@ -57,15 +57,13 @@ Wird ein RESET während des Notbatteriebetriebes eingegeben, bleibt der Antrieb 
 <p>Standardeinstellungen gelten nach erster Inbetriebsetzung.<br>
 Wird ein RESET durchgeführt, nachdem in der 2. Ebene Einstellungen verändert wurden, bleiben die eingestellten Werte erhalten. <br>
 Sollen nach einem RESET die Öffnungs- und Schließgeschwindigkeit sowie die Öffnungsweite (Winter) auf ihre Standardeinstellung zurückgestellt werden, muss Softswitch 18 (siehe Kapitel 5.2.3, 3. Ebene) auf ON gestellt werden. </p> ",
-"Gilgen","SLM","Reset","
-
-
+"Gilgen","SLM","Reset",,,,"
 <h3>Betriebsfunktionen (1. Ebene)</h3>
 <p>Funktionen der Programmschalterstellungen entsprechen dem bekannten Gilgen-Standard.</p>
 <ul>
     <li>Auf der linken Seite des BEDIS, neben den LED, sind die Funktionen symbolisch dargestellt. </li>
-    <li>Bei der momentan gewählten Funktion leuchtet die daneben platzierte LED dauernd auf. </li>
-    <li>Mit den Tasten + oder - kann die gewünschte Programmschalterstellung gewählt werden. Die entsprechende LED leuchtet. Die neue Einstellung wird nach ca. 2 Sekunden übernommen. </li>
+    <li>Bei der momentan gewählten Funktion leuchtet die daneben platzierte LED dauernd auf. </li>
+    <li>Mit den Tasten + oder - kann die gewünschte Programmschalterstellung gewählt werden. Die entsprechende LED leuchtet. Die neue Einstellung wird nach ca. 2 Sekunden übernommen. </li>
 </ul>
 <br>
 <h3>Einstellfunktionen (2. Ebene)</h3>
@@ -78,11 +76,11 @@ Mit einem Doppeltastendruck oder ohne weitere Betätigung des BEDIS während 1 M
 <h3>RESET LED 32:</h3>
 <p>Die Anlage wird neu gestartet und eingerichtet. <br>
 Wird ein RESET während des Notbatteriebetriebes eingegeben, bleibt der Antrieb stehen und die Steuerung wird ausgeschaltet.</p><br>
-<h3>Ablauf des Reset:  </h3>
+<h3>Ablauf des Reset: </h3>
 <ul><li>Test aller Hardware-Teile der Steuerung.</li>
-    <li>Alle angeschlossenen Elemente werden kontrolliert (BEDIS, VERI, BATPA).</li>
-    <li>Tür schließt bis zur ZU-Position mit einer Einrichtgeschwindigkeit von 0,075 m/s.</li>
-    <li>In den Programmstellungen NACHT und AUSGANG wird die Anlage verriegelt und bleibt solange in dieser Stellung,<br>bis ein gültiger Öffnungsbefehl (KEY oder Öffnungskontakt innen) ansteht.<br>Ist Programmstellung HAND gewählt, muss die Anlage auf AUTOMAT gestellt werden, damit der Einrichtvorgang fortgesetzt wird.<br>In den übrigen Programmstellungen erfolgt der Öffnungsbefehl automatisch.</li>
+    <li>Alle angeschlossenen Elemente werden kontrolliert (BEDIS, VERI, BATPA).</li>
+    <li>Tür schließt bis zur ZU-Position mit einer Einrichtgeschwindigkeit von 0,075 m/s.</li>
+    <li>In den Programmstellungen NACHT und AUSGANG wird die Anlage verriegelt und bleibt solange in dieser Stellung,<br>bis ein gültiger Öffnungsbefehl (KEY oder Öffnungskontakt innen) ansteht.<br>Ist Programmstellung HAND gewählt, muss die Anlage auf AUTOMAT gestellt werden, damit der Einrichtvorgang fortgesetzt wird.<br>In den übrigen Programmstellungen erfolgt der Öffnungsbefehl automatisch.</li>
 </ul>
 <h3>ÖFFNUNGSGESCHWINDIGKEIT 40...100 % LED 16</h3>
 <p>Standardeinstellung 100 % </p>
