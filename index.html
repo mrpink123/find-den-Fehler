@@ -752,7 +752,7 @@
             "success"
           );
         } else {
-          fetch("fehlercodes.csv")
+          fetch("fehlerliste.csv")
             .then((res) => {
               if (!res.ok) throw new Error("Nicht gefunden");
               return res.text();
