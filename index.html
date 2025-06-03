@@ -589,84 +589,6 @@
         }, timeout);
       }
 
-      // Menü
-      const csvInput = document.getElementById("csvInput");
-      const searchInput = document.getElementById("searchInput");
-      const herstellerFilter = document.getElementById("herstellerFilter");
-      const typFilter = document.getElementById("typFilter");
-      const container = document.getElementById("container");
-      let daten = [];
-
-      // Öffnet Menü bei klick
-      document.getElementById("menuToggle").addEventListener("click", () => {
-        document.getElementById("optionDropdown").classList.toggle("open");
-      });
-
-      // Öffnet Suchfenster für Fehlerlisten Datei
-      document.getElementById("csvLoadBtn").addEventListener("click", () => {
-        csvInput.click();
-        closeMenu();
-      });
-
-      // Löscht lokal gespeicherte Daten bei klick
-      document.getElementById("resetBtn").addEventListener("click", () => {
-        localStorage.removeItem("csvData");
-        localStorage.removeItem("theme");
-        showStatusMessage(
-          "Lokale Daten gelöscht – Seite wird neu geladen",
-          "success"
-        );
-        setTimeout(() => location.reload(), 1000);
-      });
-
-      // Ändert das aktuelle Theme bei klick und speichert es lokal
-      document
-        .getElementById("themeToggleBtn")
-        .addEventListener("click", () => {
-          const current = document.body.getAttribute("data-theme");
-          const newTheme = current === "dark" ? "light" : "dark";
-          document.body.setAttribute("data-theme", newTheme);
-          localStorage.setItem("theme", newTheme);
-          updateThemeAssets(newTheme);
-          showStatusMessage("Theme Umgeschaltet und Gespeichert.", "success");
-          closeMenu();
-        });
-
-      // Schließt das Menü bei klick ins leere
-      document.addEventListener("click", (e) => {
-        const menu = document.getElementById("optionDropdown");
-        const isClickInside = menu.contains(e.target);
-        if (!isClickInside) {
-          closeMenu();
-        }
-      });
-
-      // Läd gespeichertes Theme
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) {
-        document.body.setAttribute("data-theme", savedTheme);
-        updateThemeAssets(savedTheme);
-        loadData();
-      }
-
-      // Ließt Fehlerlisten Datei ein und speichert sie lokal
-      csvInput.addEventListener("change", function () {
-        const file = this.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          const text = event.target.result;
-          daten = parseCSV(text);
-          localStorage.setItem("csvData", text);
-          fillDropdowns(daten);
-          renderDaten();
-          showStatusMessage(`${file.name} erfolgreich geladen`, "success");
-          closeMenu();
-        };
-        reader.readAsText(file, "UTF-8");
-      });
-
       function debounce(fn, delay = 300) {
         let timer;
         return function (...args) {
@@ -674,11 +596,6 @@
           timer = setTimeout(() => fn.apply(this, args), delay);
         };
       }
-
-      // Rendert bei Eingaben neu
-      [searchInput, herstellerFilter, typFilter].forEach((input) => {
-        input.addEventListener("input", debounce(renderDaten, 300));
-      });
 
       // Wandelt CSV (Fehlerliste) um gibt sortierte zeilen aus
       function parseCSV(text) {
@@ -823,7 +740,6 @@
         });
       }
 
-      loadData();
       // Versucht CSV Daten aus dem lokalen Speicher zu laden
       function loadData() {
         const savedCSV = localStorage.getItem("csvData");
@@ -862,6 +778,102 @@
         document.getElementById("optionDropdown").classList.remove("open");
       }
 
+      // Menü
+      const csvInput = document.getElementById("csvInput");
+      const searchInput = document.getElementById("searchInput");
+      const herstellerFilter = document.getElementById("herstellerFilter");
+      const typFilter = document.getElementById("typFilter");
+      const container = document.getElementById("container");
+      let daten = [];
+
+      // Öffnet Menü bei klick
+      document.getElementById("menuToggle").addEventListener("click", () => {
+        document.getElementById("optionDropdown").classList.toggle("open");
+      });
+
+      // Öffnet Suchfenster für Fehlerlisten Datei
+      document.getElementById("csvLoadBtn").addEventListener("click", () => {
+        csvInput.click();
+        closeMenu();
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        Papa.parse("fehlerliste.csv", {
+          download: true,
+          header: true,
+          complete: function (results) {
+            const daten = results.data;
+          },
+          error: function (err) {
+            console.error("Fehler beim Laden der CSV:", err);
+          },
+        });
+      });
+
+      // Löscht lokal gespeicherte Daten bei klick
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        localStorage.removeItem("csvData");
+        localStorage.removeItem("theme");
+        showStatusMessage(
+          "Lokale Daten gelöscht – Seite wird neu geladen",
+          "success"
+        );
+        setTimeout(() => location.reload(), 1000);
+      });
+
+      // Ändert das aktuelle Theme bei klick und speichert es lokal
+      document
+        .getElementById("themeToggleBtn")
+        .addEventListener("click", () => {
+          const current = document.body.getAttribute("data-theme");
+          const newTheme = current === "dark" ? "light" : "dark";
+          document.body.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+          updateThemeAssets(newTheme);
+          showStatusMessage("Theme Umgeschaltet und Gespeichert.", "success");
+          closeMenu();
+        });
+
+      // Schließt das Menü bei klick ins leere
+      document.addEventListener("click", (e) => {
+        const menu = document.getElementById("optionDropdown");
+        const isClickInside = menu.contains(e.target);
+        if (!isClickInside) {
+          closeMenu();
+        }
+      });
+
+      // Läd gespeichertes Theme
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.body.setAttribute("data-theme", savedTheme);
+        updateThemeAssets(savedTheme);
+        loadData();
+      }
+
+      // Ließt Fehlerlisten Datei ein und speichert sie lokal
+      csvInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const text = event.target.result;
+          daten = parseCSV(text);
+          localStorage.setItem("csvData", text);
+          fillDropdowns(daten);
+          renderDaten();
+          showStatusMessage(`${file.name} erfolgreich geladen`, "success");
+          closeMenu();
+        };
+        reader.readAsText(file, "UTF-8");
+      });
+
+      // Rendert bei Eingaben neu
+      [searchInput, herstellerFilter, typFilter].forEach((input) => {
+        input.addEventListener("input", debounce(renderDaten, 300));
+      });
+
       // Registriert den Service Worker
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
@@ -869,6 +881,8 @@
           .then(() => console.log("✅ Service Worker registriert"))
           .catch((err) => console.error("❌ Service Worker Fehler:", err));
       }
+
+      loadData();
 
       // Scroll nach oben Button
       const scrollTopBtn = document.getElementById("scrollTopBtn");
@@ -893,19 +907,6 @@
           headerEl.classList.remove("hide");
         }
         lastScrollY = window.scrollY;
-      });
-
-      document.addEventListener("DOMContentLoaded", () => {
-        Papa.parse("fehlerliste.csv", {
-          download: true,
-          header: true,
-          complete: function (results) {
-            const daten = results.data;
-          },
-          error: function (err) {
-            console.error("Fehler beim Laden der CSV:", err);
-          },
-        });
       });
     </script>
   </body>
