@@ -898,12 +898,9 @@
       document.addEventListener("DOMContentLoaded", () => {
         Papa.parse("fehlerliste.csv", {
           download: true,
-          header: true, // falls die CSV Kopfzeilen hat
+          header: true,
           complete: function (results) {
             const daten = results.data;
-            // Beispiel: erster Eintrag in Konsole
-            console.log("Geladene Fehlerliste:", daten);
-            // TODO: hier eigene Funktion zur Anzeige aufrufen
           },
           error: function (err) {
             console.error("Fehler beim Laden der CSV:", err);
