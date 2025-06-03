@@ -21,10 +21,7 @@
 (tritt nur auf, wenn Softswitch 31 = ON).<br>
 Steuerung erkennt KOMBIPRI, obschon dieser nicht vorhanden ist.<br>
 (Softswitch 25 löschen und RESET durchführen).<br>Bei Verwendung LIFTPRI: OEM-C-Software in KLESE einsetzen.",,,
-"Gilgen","BEDIS","
-
-
-<h3>Betriebsfunktionen (1. Ebene)</h3>
+"Gilgen","BEDIS",,,,,"<h3>Betriebsfunktionen (1. Ebene)</h3>
 <p>Funktionen der Programmschalterstellungen entsprechen dem bekannten Gilgen-Standard.</p>
 <ul>
     <li>Auf der linken Seite des BEDIS, neben den LED, sind die Funktionen symbolisch dargestellt. </li>
@@ -59,7 +56,7 @@ Wird ein RESET während des Notbatteriebetriebes eingegeben, bleibt der Antrieb 
 <p>Standardeinstellung 7 Sekunden Die Wahl der Offenhaltezeit erfolgt über das Bedienungselement KEY/WAKE-UP und ist unabhängig von der gewählten Programmschalterstellung.</p>
 <p>Standardeinstellungen gelten nach erster Inbetriebsetzung.<br>
 Wird ein RESET durchgeführt, nachdem in der 2. Ebene Einstellungen verändert wurden, bleiben die eingestellten Werte erhalten. <br>
-Sollen nach einem RESET die Öffnungs- und Schließgeschwindigkeit sowie die Öffnungsweite (Winter) auf ihre Standardeinstellung zurückgestellt werden, muss Softswitch 18 (siehe Kapitel 5.2.3, 3. Ebene) auf ON gestellt werden. </p> ",,,,,
+Sollen nach einem RESET die Öffnungs- und Schließgeschwindigkeit sowie die Öffnungsweite (Winter) auf ihre Standardeinstellung zurückgestellt werden, muss Softswitch 18 (siehe Kapitel 5.2.3, 3. Ebene) auf ON gestellt werden. </p> ",
 "Gilgen","SLM","Reset","
 
 
@@ -559,7 +556,7 @@ Error Ausgang / Relais aktiv.","Betriebsmeldungen (informativ) ",
 "Gilgen","SLX","ohne","Tür verursacht Geräusche","• Verschmutzte Türführungen<br>
 • Schiebeflügel streifen oben oder unten<br>
 • Defekte Antriebselemente","Fehlverhalten ohne Fehler-Nr. ",,
-"Gilgen","C-BEDIX","<h3>Betriebsart-Tasten</h3>
+"Gilgen","C-BEDIX",,,,,"<h3>Betriebsart-Tasten</h3>
  <p>Das C-BEDIX besitzt folgende Betriebsart-Tasten mit integrierten grünen LED:</p>
 <img 
 src=""images/symbole/betriebsart-tasten.webp"" 
@@ -591,8 +588,8 @@ Betriebsart-Tasten HAND und OFFEN gleichzeitig drücken und während mind. 3 Sek
 Zur Bestätigung der Umschaltung fahren die Schiebeflügel in die entsprechende Offenposition (Daueroffen Sommer oder Winter). Diese gewählte Einstellung gilt dann für alle Betriebsarten.</p><br>
 
 <h3>Tasten sperren</h3>
-<p>SSW 1 C-BEDIX auf 1 (ON) setzen. Aktive Betriebsarten-Taste während mind. 5 Sekunden drücken. Die Sperrung wird durch ein kurzes Aufleuchten aller Tasten signalisiert. Die Aufhebung der Sperrung erfolgt durch Drücken (mind. 5 Sekunden) der aktiven Taste.</p>",,,,,
-"Gilgen","SLX","Reset","<h3>Reset</h3>
+<p>SSW 1 C-BEDIX auf 1 (ON) setzen. Aktive Betriebsarten-Taste während mind. 5 Sekunden drücken. Die Sperrung wird durch ein kurzes Aufleuchten aller Tasten signalisiert. Die Aufhebung der Sperrung erfolgt durch Drücken (mind. 5 Sekunden) der aktiven Taste.</p>",
+"Gilgen","SLX","Reset",,,,"<h3>Reset</h3>
 <p>Kurzer Doppeltastendruck Pfeiltasten (= Einstieg in Menü-Ebene).<br>
  Mittels Pfeiltaste Reset anwählen.<br>
  Mittels OK-Taste bestätigen.</p><br>
@@ -624,8 +621,8 @@ Mittels Doppeltastendruck C-Taste und Pfeiltaste rechts bestätigen.</p>
 <h3>Sommeröffnung / Winteröffnung</h3>
 <p>Kurzer Doppeltastendruck Pfeiltasten (= Einstieg in Menü-Ebene).<br>
 Mittels Pfeiltaste ? Anwählen.<br>
-Mittels OK-Taste den Wechsel bestätigen.</p>",,,,
-"Gilgen","D-BEDIX","<h3>Reset</h3>
+Mittels OK-Taste den Wechsel bestätigen.</p>",
+"Gilgen","D-BEDIX",,,,,"<h3>Reset</h3>
 <p>Kurzer Doppeltastendruck Pfeiltasten (= Einstieg in Menü-Ebene).<br>
  Mittels Pfeiltaste Reset anwählen.<br>
  Mittels OK-Taste bestätigen.</p><br>
@@ -657,7 +654,7 @@ Mittels Doppeltastendruck C-Taste und Pfeiltaste rechts bestätigen.</p>
 <h3>Sommeröffnung / Winteröffnung</h3>
 <p>Kurzer Doppeltastendruck Pfeiltasten (= Einstieg in Menü-Ebene).<br>
 Mittels Pfeiltaste ? Anwählen.<br>
-Mittels OK-Taste den Wechsel bestätigen.</p>",,,,,
+Mittels OK-Taste den Wechsel bestätigen.</p>",
 "Gilgen","SL35",101,"Encoder Fehler","Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,
@@ -2651,7 +2648,7 @@ Steuerung ersetzen.",,,
 "Gilgen","SL35",9901,"Partner Sammelfehler.","Partner Steuerung hat mindestens einen aktiven Fehler.<br>
 (nur bei Anlagen mit mehreren Mikrocontrollern / Steuerungen).",,,
 "Gilgen","SL35","Ohne
-",,,,"<h3>Fehlverhalten ohne Fehler-Nr.</h3><p>Teilweise ist es technisch nicht möglich, ein Fehlverhalten der Anlage durch eine eindeutige Fehlernummer anzuzeigen. Ein vermeintlicher Fehler kann durchaus auch ""richtige"" Ursachen haben. Aus diesem Grund wurde die nachfolgende Liste erstellt mit wahrscheinlichen oder bereits angetroffenen Fehlverhalten, deren möglichen Ursachen und den möglichen Massnahmen (Fehlerbehebung).</p><br><p>Zudem haben die blinkenden / leuchtenden LED auf der Steuerung CONTROLfolgende Bedeutung:</p><br><div style=""display:flex;flex-direction:row;flex-wrap:wrap;gap:5px;""><table style=""height:135px;min-width:350px;border: 1px solid var(--fg);border-radius:8px;border-spacing:0;""><thead style=""border:none;""><tr style=""background-color:var(--hover-bg);""><th colspan=""1"" style=""padding: 4px; border-top-left-radius: 8px;"">LED</th><th></th><th style=""width: 70%; padding: 4px; border-top-right-radius: 8px;"">Bedeutung/Massnahmen</th></tr></thead><tbody><tr style=""background-color: rgba(144, 238, 144, 0.5);""><td style=""padding: 4px; border: none;"">Grün</td><td style=""padding: 4px;"">blinkt</td><td style=""padding: 4px;"">Prozessor arbeitet.</td></tr><tr style=""background-color: rgba(156, 194, 255, 0.5);""><td style=""padding: 4px;"">Blau</td><td style=""padding: 4px;"">leuchtet</td><td style=""padding: 4px;"">Öffnungsbefehl steht an.</td></tr><tr style=""background-color: rgba(246, 255, 164, 0.5);""><td style=""padding: 4px;"">Gelb</td><td style=""padding: 4px;"">leuchtet</td><td style=""padding: 4px;"">Sicherheitselement aktiv.</td></tr><tr style=""background-color: rgba(255, 133, 133, 0.5);""><td style=""padding: 4px; border-bottom-left-radius: 8px;"">Rot</td><td style=""padding: 4px;"">blinkt</td><td style=""padding: 4px; border-bottom-right-radius: 8px;"">Fehler steht an.</td></tr></tbody></table><img src=""images/symbole/sl35-control-led.jpg"" alt=""control 35 LEDs"" style=""height: 135px; width: 350px; border: 1px solid var(--fg); border-radius: 8px;""onerror=""this.style.display='none'""/></div> ",
+","<h3>Fehlverhalten ohne Fehler-Nr.</h3><p>Teilweise ist es technisch nicht möglich, ein Fehlverhalten der Anlage durch eine eindeutige Fehlernummer anzuzeigen. Ein vermeintlicher Fehler kann durchaus auch ""richtige"" Ursachen haben. Aus diesem Grund wurde die nachfolgende Liste erstellt mit wahrscheinlichen oder bereits angetroffenen Fehlverhalten, deren möglichen Ursachen und den möglichen Massnahmen (Fehlerbehebung).</p><br><p>Zudem haben die blinkenden / leuchtenden LED auf der Steuerung CONTROLfolgende Bedeutung:</p><br><div style=""display:flex;flex-direction:row;flex-wrap:wrap;gap:5px;""><table style=""height:135px;min-width:350px;border: 1px solid var(--fg);border-radius:8px;border-spacing:0;""><thead style=""border:none;""><tr style=""background-color:var(--hover-bg);""><th colspan=""1"" style=""padding: 4px; border-top-left-radius: 8px;"">LED</th><th></th><th style=""width: 70%; padding: 4px; border-top-right-radius: 8px;"">Bedeutung/Massnahmen</th></tr></thead><tbody><tr style=""background-color: rgba(144, 238, 144, 0.5);""><td style=""padding: 4px; border: none;"">Grün</td><td style=""padding: 4px;"">blinkt</td><td style=""padding: 4px;"">Prozessor arbeitet.</td></tr><tr style=""background-color: rgba(156, 194, 255, 0.5);""><td style=""padding: 4px;"">Blau</td><td style=""padding: 4px;"">leuchtet</td><td style=""padding: 4px;"">Öffnungsbefehl steht an.</td></tr><tr style=""background-color: rgba(246, 255, 164, 0.5);""><td style=""padding: 4px;"">Gelb</td><td style=""padding: 4px;"">leuchtet</td><td style=""padding: 4px;"">Sicherheitselement aktiv.</td></tr><tr style=""background-color: rgba(255, 133, 133, 0.5);""><td style=""padding: 4px; border-bottom-left-radius: 8px;"">Rot</td><td style=""padding: 4px;"">blinkt</td><td style=""padding: 4px; border-bottom-right-radius: 8px;"">Fehler steht an.</td></tr></tbody></table><img src=""images/symbole/sl35-control-led.jpg"" alt=""control 35 LEDs"" style=""height: 135px; width: 350px; border: 1px solid var(--fg); border-radius: 8px;""onerror=""this.style.display='none'""/></div> ",,,,
 "Gilgen","SL35","ohne","LED auf CONTROL leuchtet / blinkt nicht.","<ul>
 <li>Netzspannung kontrollieren</li>
 <li>Feinsicherung auf CONTROL kontrollieren</li>
