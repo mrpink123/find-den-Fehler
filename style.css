@@ -24,7 +24,7 @@
     --shadow: rgba(255, 255, 255, 0.1);
     --bg-gradient: linear-gradient(176deg,
             var(--hover-bg) 0%,
-            rgba(90, 90, 90, 0.3) 55%,
+            rgba(90, 90, 90, 0.2) 55%,
             var(--hover-bg) 96%);
 }
 
@@ -48,7 +48,7 @@ header {
     z-index: 100;
     border-bottom: 1px solid var(--card-border);
     background: var(--bg);
-    transition: transform 0.7s ease;
+    transition: transform 0.4s ease;
 }
 
 header.hide {
@@ -58,9 +58,9 @@ header.hide {
 /* Logo */
 .logoContainer {
     display: flex;
-    flex-basis: 50px;
-    width: 50px;
-    height: 50px;
+    flex-basis: 45px;
+    width: 45px;
+    height: 45px;
     left: 0;
     gap: 1em;
 }
@@ -85,10 +85,10 @@ header.hide {
 }
 
 .logo {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     margin: 5px;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .light-logo {
@@ -117,7 +117,7 @@ header.hide {
 .inputContainer {
     display: flex;
     flex-wrap: wrap;
-    margin: 0.7em auto;
+    margin: 7px auto;
     gap: 3px;
 }
 
@@ -165,7 +165,7 @@ input:focus {
     height: 32px;
     border: 1px solid var(--card-border);
     border-radius: 8px;
-    margin: 5px;
+    margin: 6px;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 12px var(--shadow);
@@ -268,6 +268,10 @@ input:focus {
 .card p {
     margin: 0;
     font-size: 18px;
+}
+
+.card ul {
+    margin: 0;
 }
 
 /* Card - Kopfzeile */
