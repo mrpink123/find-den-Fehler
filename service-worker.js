@@ -12,6 +12,7 @@ const ASSETS_TO_CACHE = [
   "images/icons/icon-512-blank.webp",
   "images/icons/settings_dark.png",
   "images/icons/settings.png",
+  "images/icons/refresh.png",
   "images/hersteller/gilgen.png",
   "images/symbolebetriebsart-tasten.webp",
   "images/symbole/d-bedix-reset.webp",
