@@ -1,6 +1,7 @@
 const CACHE_NAME = "fehlercode-cache-v1";
 const ASSETS_TO_CACHE = [
   "index.html",
+  "style.css",
   "manifest.json",
   "fehlerliste.csv",
   "papaparse.min.js",
