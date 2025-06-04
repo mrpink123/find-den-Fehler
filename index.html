@@ -43,19 +43,19 @@
         <!-- Suche + Reset -->
         <div class="inputContainer">
           <input
-            style="flex-grow: 2;"
+            style="flex-grow: 4;"
             type="text"
             id="searchInput"
             placeholder="Suche nach Fehler-Code…"
           />
           <datalist id="codeSuggestions"></datalist>
 
-          <select id="herstellerFilter" style="flex-grow: 1;">
-            <option value="">Alle Hersteller</option>
-          </select>
+          <div style="display: flex; flex-grow: 1; gap: 3px;">
+            <select id="herstellerFilter" style="flex-grow: 2;">
+              <option value="">Alle Hersteller</option>
+            </select>
 
-          <div style="display:flex;">
-            <select id="typFilter" style="flex-grow: 1;">
+            <select id="typFilter" style="flex-grow: 2;">
               <option value="">Alle Typen</option>
             </select>
 
@@ -64,7 +64,11 @@
               class="resetFilterBtn"
               title="Filter zurücksetzen"
             >
-              <img class="settingsIcon" src="images/icons/refresh.png" alt="Filter zurücksetzen">
+              <img
+                class="settingsIcon"
+                src="images/icons/refresh.png"
+                alt="Filter zurücksetzen"
+              />
             </button>
           </div>
         </div>
@@ -72,7 +76,7 @@
         <!-- Menü -->
         <div class="menu-wrapper" id="optionDropdown">
           <!-- Menü Button -->
-          <button class="menu-toggle" id="menuToggle">
+          <button class="menu-toggle" id="menuToggle" title="Extras">
             <img
               class="theme-image settingsIcon"
               id="settingsIcon"

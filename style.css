@@ -10,7 +10,7 @@
     --hover-bg: rgb(204, 204, 204);
     --bg-gradient: linear-gradient(176deg,
             var(--hover-bg) 0%,
-            rgba(204, 204, 204, 0.5) 55%,
+            rgba(204, 204, 204, 0.3) 55%,
             var(--hover-bg) 96%);
 }
 
@@ -24,7 +24,7 @@
     --shadow: rgba(255, 255, 255, 0.1);
     --bg-gradient: linear-gradient(176deg,
             var(--hover-bg) 0%,
-            rgba(90, 90, 90, 0.6) 55%,
+            rgba(90, 90, 90, 0.3) 55%,
             var(--hover-bg) 96%);
 }
 
@@ -35,7 +35,7 @@ body {
     font-family: system-ui, sans-serif;
     margin: auto;
     padding: 0px;
-    height: 100vh;
+    min-height: 60vh;
     transition: background 0.5s, color 0.5s;
 }
 
@@ -70,7 +70,7 @@ header.hide {
 .logoText {
     display: flex;
     flex-wrap: nowrap;
-    flex-basis: 250px;
+    flex-basis: 220px;
     align-items: center;
     justify-content: center;
     margin-left: 0;
@@ -154,7 +154,7 @@ input:focus {
 /* Kopfzeile - Menü */
 .menu-wrapper {
     display: flex;
-    flex-basis: 300px;
+    flex-basis: 270px;
     align-items: center;
     justify-content: right;
 }
@@ -268,6 +268,7 @@ input:focus {
 
 .card p {
     margin: 0;
+    font-size: 18px;
 }
 
 /* Card - Kopfzeile */
@@ -332,11 +333,11 @@ input:focus {
 .resetFilterBtn {
     display: flex;
     background-color: var(--button-bg);
-    width: 25px;
+    max-width: 25px;
     height: 25px;
     border: 1px solid var(--card-border);
     border-radius: 5px;
-    margin: auto 3px;
+    margin: auto;
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 12px var(--shadow);
@@ -383,7 +384,7 @@ input:focus {
 #scrollTopBtn svg {
     height: 100%;
     width: 100%;
-  }
+}
 
 /* Benachrichtigungs Fenster */
 #statusMessage {

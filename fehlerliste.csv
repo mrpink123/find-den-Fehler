@@ -2742,53 +2742,71 @@ Gilgen,SL35,ohne,Beim Einrichten wird zuerst geöffnet,"<ul>
 <li>MOTOR Drehrichtung falsch eingestellt</li>
 </ul>",,,
 Gilgen,SL35,ohne,Nach jedem Einschalten wird neu eingerichtet,• Schiebeflügelgewicht ist kleiner als 20 kg,,,
-Gilgen,SL35,ohne,Verriegelung verriegelt nicht,"• Verriegelungsklinke hat zu wenig Spiel
-• Konfiguration nicht korrekt
-• Handentriegelung immer betätigt",,,
-Gilgen,SL35,ohne,Verriegelung verriegelt oder entriegelt mehrmals,"• Verriegelungsklinke hat zu wenig Spiel
-• Handentriegelung klemmt
-• Objekt zwischen der Schließkante verhindert vollständiges Schließen und Verriegeln. ",,,
-Gilgen,SL35,ohne,Option FLUVERI: Tür verriegelt nicht und öffnet wieder,"• FLUVERI Schließvorgang behindert
-• Schwenkriegel ausgeschwenkt
-• Schiebeflügel stehen schief
-• Schiebeflügelhöhe ungleich. ",,,
-Gilgen,SL35,ohne,Option FLUVERI-A: Tür öffnet nach Betätigung des Entriegelungshebels nicht automatisch.,"• Motorgetriebe ist nicht freigeschaltet
-• Betriebsart NACHT wählen und 2...3 Key-Befehle auslösen
-• Kontakte kontrollieren / einstellen ",,,
-Gilgen,SL35,ohne,"Sensor öffnet Tür nicht
-Sensor spricht nicht an","• Betriebsart auf NACHT oder AUSGANG
-• Falsche CAN-Adresse auf Sensor eingestellt
-• Sensor-Erfassungsbereich falsch eingestellt
-• Sensor-Querverkehrsoptimierung eingestellt
-• Sensor-Empfindlichkeit zu stark reduziert (auf Außenanwendung gestellt)
-• Sensor defekt",,,
-Gilgen,SL35,ohne,Sensor dauernd angesprochen,"• Sensor zurück setzen (Hintergrund manuell einlernen)
-• Verschalung schließen und Sensor neu einlernen
-• Sensor-Einstellungen kontrollieren
-• Reflektierende Objekte
-• Bewegende Objekte in Sensornähe (Pflanzen, Luftzug, Blätter…)",,,
-Gilgen,SL35,ohne,Auf CONTROL PANEL kann Betriebsart nicht verändert werden,"• Betriebsart ist fix durch Schaltuhr, Schlüsselschalter gegeben
-• CONTROL PANEL ist gesperrt
-• LIN Kabel fehlerhaft",,,
-Gilgen,SL35,ohne,Keine oder nicht alle CAN Optionen funktionieren,"• CAN Kabel fehlerhaft (Kontakte, Verbindung)
-• CAN Optionen nacheinander einstecken",,,
-Gilgen,SL35,ohne,CONTROL PANEL funktioniert nicht,"• CONTROL PANEL nicht eingesteckt
-• LIN Kabel fehlerhaft (Kontakte, Verbindung)",,,
-Gilgen,SL35,ohne,Tür verursacht Geräusche,"• Verschmutzte Türführungen
-• Schiebeflügel streifen oben oder unten
-• Defekte Antriebselemente",,,
-Gilgen,SL35,schließen im Fehlerfall,"Tür schließen im Fehlerfall
+Gilgen,SL35,ohne,Verriegelung verriegelt nicht,"<ul>
+<li>Verriegelungsklinke hat zu wenig Spiel</li>
+<li>Konfiguration nicht korrekt</li>
+<li>Handentriegelung immer betätigt</li>
+</ul>",,,
+Gilgen,SL35,ohne,Verriegelung verriegelt oder entriegelt mehrmals,"<ul>
+<li>Verriegelungsklinke hat zu wenig Spiel</li>
+<li>• Handentriegelung klemmt</li>
+<li>Objekt zwischen der Schließkante verhindert vollständiges Schließen und Verriegeln.</li>
+</ul>",,,
+Gilgen,SL35,ohne,Option FLUVERI: Tür verriegelt nicht und öffnet wieder,"<ul>
+<li>FLUVERI Schließvorgang behindert</li>
+<li>Schwenkriegel ausgeschwenkt</li>
+<li>Schiebeflügel stehen schief</li>
+<li>Schiebeflügelhöhe ungleich.</li>
+</ul>",,,
+Gilgen,SL35,ohne,Option FLUVERI-A: Tür öffnet nach Betätigung des Entriegelungshebels nicht automatisch.,"<ul>
+<li>Motorgetriebe ist nicht freigeschaltet</li>
+<li>Betriebsart NACHT wählen und 2...3 Key-Befehle auslösen</li>
+<li>Kontakte kontrollieren / einstellen</li>
+</ul>",,,
+Gilgen,SL35,ohne,"Sensor öffnet Tür nicht<br>
+Sensor spricht nicht an","<ul>
+<li>Betriebsart auf NACHT oder AUSGANG</li>
+<li>Falsche CAN-Adresse auf Sensor eingestellt</li>
+<li>Sensor-Erfassungsbereich falsch eingestellt</li>
+<li>Sensor-Querverkehrsoptimierung eingestellt</li>
+<li>Sensor-Empfindlichkeit zu stark reduziert (auf Außenanwendung gestellt)</li>
+<li>Sensor defekt</li>
+</ul>",,,
+Gilgen,SL35,ohne,Sensor dauernd angesprochen,"<ul>
+<li>Sensor zurück setzen (Hintergrund manuell einlernen)</li>
+<li>Verschalung schließen und Sensor neu einlernen</li>
+<li>Sensor-Einstellungen kontrollieren</li>
+</li>Reflektierende Objekte</li>
+<li>Bewegende Objekte in Sensornähe (Pflanzen, Luftzug, Blätter…)</li>
+</ul>",,,
+Gilgen,SL35,ohne,Auf CONTROL PANEL kann Betriebsart nicht verändert werden,"<ul>
+<li>Betriebsart ist fix durch Schaltuhr, Schlüsselschalter gegeben</li>
+<li>CONTROL PANEL ist gesperrt</li>
+<li>LIN Kabel fehlerhaft</li>
+</ul>",,,
+Gilgen,SL35,ohne,Keine oder nicht alle CAN Optionen funktionieren,"<ul>
+<li>CAN Kabel fehlerhaft (Kontakte, Verbindung)</li>
+<li>CAN Optionen nacheinander einstecken</li>
+</ul>",,,
+Gilgen,SL35,ohne,CONTROL PANEL funktioniert nicht,"<ul>
+<li>CONTROL PANEL nicht eingesteckt</li>
+<li>LIN Kabel fehlerhaft (Kontakte, Verbindung)</li>
+</ul>",,,
+Gilgen,SL35,ohne,Tür verursacht Geräusche,"<ul>
+<li>Verschmutzte Türführungen</li>
+<li>Schiebeflügel streifen oben oder unten</li>
+<li>Defekte Antriebselemente</li>
+</ul>",,,
+Gilgen,SL35,schließen im Fehlerfall,,,,"<h3>Tür schließen im Fehlerfall</h3>
+<p>Um im Fehlerfall die Tür zu schließen und zu verriegeln, muss wie folgt vorgegangen werden:<br>
 
-Um im Fehlerfall die Tür zu schließen und zu verriegeln, muss wie folgt vorgegangen werden:
-
-1. Betriebsart NACHT wählen
-2. Schließt sich die Tür (innerhalb ca. 60 s)?
-3. Falls nein: Tür von Hand zuschieben
-4. Verriegelt sich die Tür?
-5. Falls nein, manuell verriegeln: CARLOCK roter Hebel um 90° im Uhrzeigersinn drehen. FLUVERI             Schlüssel drehen
-6. Falls möglich, Tür stromlos machen",,,,
-Gilgen,SL35,CONTROL PANEL / Reset,"
-CONTROL PANEL 
+1. Betriebsart NACHT wählen<br>
+2. Schließt sich die Tür (innerhalb ca. 60 s)?<br>
+3. Falls nein: Tür von Hand zuschieben<br>
+4. Verriegelt sich die Tür?<br>
+5. Falls nein, manuell verriegeln: CARLOCK roter Hebel um 90° im Uhrzeigersinn drehen. FLUVERI Schlüssel drehen<br>
+6. Falls möglich, Tür stromlos machen</p>",
+Gilgen,SL35,CONTROL PANEL / Reset,"<h3>CONTROL PANEL</h3>
 
 Symbole
 Symbol invers           aktive Betriebsart
