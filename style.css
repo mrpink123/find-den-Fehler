@@ -2,13 +2,14 @@
     font-family: 'Caveat';
     src: url('fonts/Caveat-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
-    font-style: normal;
+    font-style:oblique;
 }
 
 :root {
     --bg: #f5f5f5;
     --bg-2: rgba(219, 219, 219, 0.5);
-    --fg: #222;
+    --fg: #676767;
+    --logo-color:rgb(146, 146, 146);
     --card-bg: #fefefe;
     --card-border: #b1b1b1c4;
     --button-bg: rgb(183, 183, 183);
@@ -28,6 +29,7 @@
 [data-theme="dark"] {
     --bg: #121212;
     --fg: #dfdfdf;
+    --logo-color:rgba(255, 153, 0, 0.811);
     --card-bg: #2c2c2c;
     --card-border: #7373739e;
     --button-bg: #454545;
@@ -233,7 +235,7 @@ input:focus {
 .homeCard .cardheader h3 {
     font-family: Caveat, sans-serif;
     font-size: 2em;
-    color: var(--card-bg);
+    color: var(--fg);
     padding: 0;
     margin: 0;
 }
@@ -247,15 +249,17 @@ input:focus {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    gap: 0.5em;
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 0.5em;
 }
-
 
 .homeCard .cardContent {
     display: flex;
     flex-direction: row;
+    min-height: 200px;
     gap: var(--header-space);
+    align-items: center;
 }
 
 .homeCard {
@@ -580,6 +584,8 @@ input:focus {
         width: inherit;
         min-width: 350px;
         min-height: 200px;
+        border-radius: 5px;
+        overflow: hidden;
     }
 
     .cardContent {

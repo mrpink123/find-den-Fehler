@@ -327,7 +327,7 @@ function showHomeCard() {
     </div>
     <div class="cardContent">
       <div class="homeContent">
-        <p>Gib einen Fehlercode ein oder wähle nach Typ...</p>
+        <p>Gib einen Fehlercode ein. Oder,<br>Wähle einen Typ um alle Fehler diesen Types zu sehen. Schlagwörter wie "Reset", "Schliessen" oder "ohne" sind auch möglich.</p>
       </div>
       <div id="homeMenuContainer" style="display: none;">
         <div class="menu">
