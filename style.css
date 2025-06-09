@@ -337,7 +337,7 @@ input:focus {
 }
 
 #homeResetBtn {
-    border: 2px solid var(--error);
+    border: 1px solid var(--error);
 }
 
 #homeMenuContainer button:hover {
