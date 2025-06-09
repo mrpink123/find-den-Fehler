@@ -1,30 +1,42 @@
+@font-face {
+    font-family: 'Caveat';
+    src: url('fonts/Caveat-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --bg: #f5f5f5;
+    --bg-2: rgba(219, 219, 219, 0.5);
     --fg: #222;
     --card-bg: #fefefe;
-    --card-border: #7d7d7d;
+    --card-border: #b1b1b1c4;
     --button-bg: rgb(183, 183, 183);
+    --button-bg-light: rgba(183, 183, 183, 0.25);
     --error: rgb(255, 48, 48);
     --success: #388e3c;
     --shadow: rgba(0, 0, 0, 0.1);
-    --hover-bg: rgb(204, 204, 204);
+    --hover-bg: rgba(183, 183, 183, 0.4);
     --bg-gradient: linear-gradient(176deg,
-            var(--hover-bg) 0%,
-            rgba(204, 204, 204, 0.3) 55%,
+            rgba(183, 183, 183, 0.7) 0%,
+            rgba(204, 204, 204, 0.4) 55%,
             var(--hover-bg) 96%);
+    --header-space: 4px;
+    --header-line-height: 30px;
 }
 
 [data-theme="dark"] {
     --bg: #121212;
     --fg: #dfdfdf;
     --card-bg: #2c2c2c;
-    --card-border: #737373;
+    --card-border: #7373739e;
     --button-bg: #454545;
+    --button-bg-light: rgba(97, 97, 97, 0.5);
     --hover-bg: rgb(90, 90, 90);
     --shadow: rgba(255, 255, 255, 0.1);
     --bg-gradient: linear-gradient(176deg,
             var(--hover-bg) 0%,
-            rgba(90, 90, 90, 0.2) 55%,
+            rgba(90, 90, 90, 0.4) 55%,
             var(--hover-bg) 96%);
 }
 
@@ -33,102 +45,137 @@ body {
     background: var(--bg);
     color: var(--fg);
     font-family: system-ui, sans-serif;
+    font-size: 1rem;
     margin: auto;
     padding: 0px;
     min-height: 60vh;
-    transition: background 0.5s, color 0.5s;
+    min-width: 350px;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 /* Kopfzeile */
 header {
     position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     z-index: 100;
-    border-bottom: 1px solid var(--card-border);
     background: var(--bg);
-    transition: transform 0.4s ease;
+    transition: transform 0.6s ease;
 }
 
 header.hide {
     transform: translateY(-100%);
 }
 
-/* Logo */
-.logoContainer {
+.controls {
     display: flex;
-    flex-basis: 45px;
-    width: 45px;
-    height: 45px;
+    gap: var(--header-space);
+    padding: var(--header-space);
+}
+
+/* Kopfzeile Links*/
+.headerLeft {
+    display: flex;
+    flex-basis: 150px;
     left: 0;
-    gap: 1em;
+    gap: var(--header-space);
+    justify-content: left;
+}
+
+/* Kopfzeile Mitte*/
+.headerCenter {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    gap: var(--header-space);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Kopfzeile  Rechts*/
+.headerRight {
+    display: flex;
+    flex-basis: 50px;
+    right: 0;
+    gap: var(--header-space);
+    justify-content: right;
+}
+
+/* Kopfzeile Links Inhalt*/
+.logo {
+    width: var(--header-line-height);
+    height: var(--header-line-height);
 }
 
 .logoText {
     display: flex;
+    flex-basis: 150px;
     flex-wrap: nowrap;
-    flex-basis: 220px;
-    align-items: center;
+    font-weight: 600;
+    font-size: large;
+    align-self: center;
     justify-content: center;
-    margin-left: 0;
 }
 
-.logoText h1 {
-    font-family: "Nothing You Could Do", cursive;
-    font-size: 28px;
-    color: var(--bg);
-    text-shadow: 2px 2px 5px var(--card-border);
-    padding: 0;
-    margin: 0;
-    margin-right: auto;
-}
-
-.logo {
-    width: 35px;
-    height: 35px;
-    margin: 5px;
-    opacity: 0.9;
-}
-
-.light-logo {
-    display: none;
-}
-
-.dark-logo {
-    display: block;
-}
-
-[data-theme="dark"] .light-logo {
-    display: block;
-}
-
-[data-theme="dark"] .dark-logo {
-    display: none;
-}
-
-/* Kopfzeile - Eingaben */
-.controls {
-    display: flex;
-    gap: 3px;
-    background: var(--bg-gradient);
-}
-
-.inputContainer {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 7px auto;
-    gap: 3px;
+/* Kopfzeile Mitte Inhalt*/
+.headerCenter * {
+    height: var(--header-line-height);
 }
 
 select,
 input[type="text"] {
-    padding: 4px;
-    font-size: 16px;
-    border-radius: 8px;
+    padding: 0 calc(var(--header-line-height) / 2);
+    font-size: 18px;
+    border-radius: calc(var(--header-line-height) / 2);
     border: 1px solid var(--card-border);
     background-color: var(--card-bg);
     color: var(--fg);
+}
+
+input {
+    flex-grow: 1;
+}
+
+input[type="text"] {
+    flex: 1 0 0;
+    max-height: calc(var(--header-line-height) - 2px);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.selectContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    max-height: var(--header-line-height);
+    border: 1px solid var(--card-border);
+    border-radius: calc(var(--header-line-height) / 2);
+}
+
+.searchContainer {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    max-height: var(--header-line-height);
+    border: 1px solid var(--card-border);
+    border-radius: calc(var(--header-line-height) / 2);
+}
+
+select.herstellerFilter {
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    border: none;
+    border-right: 1px solid var(--card-border);
+    flex: 1 1 0;
+    justify-self: left;
+}
+
+select.typFilter {
+    border-radius: 0px;
+    border: none;
+    flex: 1 1 0;
 }
 
 select option {
@@ -150,65 +197,45 @@ input:focus {
     outline: none;
 }
 
-/* Kopfzeile - Menü */
-.menu-wrapper {
+.resetFilterBtn {
     display: flex;
-    flex-basis: 270px;
-    align-items: center;
-    justify-content: right;
-}
-
-.menu-toggle {
-    display: flex;
-    background-color: var(--button-bg);
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    margin: 6px;
+    background-color: var(--button-bg-light);
+    border: none;
+    border-left: 1px solid var(--card-border);
+    border-bottom-right-radius: calc(var(--header-line-height) / 2);
+    border-top-right-radius: calc(var(--header-line-height) / 2);
+    padding: 0 calc(var(--header-line-height) / 2);
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 12px var(--shadow);
-    transition: transform 0.5 ease;
-    overflow: hidden;
+    transition: all 0.5 ease;
+    color: var(--fg);
 }
 
-.menu-toggle:hover {
-    filter: brightness(105%);
-    box-shadow: 0 2px 4px var(--shadow);
+.resetFilterBtn svg {
+    height: 12px;
+    width: 12px;
 }
 
-.settingsIcon {
-    height: 20px;
-    width: 20px;
-    padding: 7px;
-    transition: transform 0.8 ease;
+.resetFilterBtn:hover {
+    color: var(--error);
+    background-color: var(--hover-bg);
 }
 
-.settingsIcon:hover {
-    animation: rotateImage 5s infinite linear;
-}
-
-@keyframes rotateImage {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(359deg);
-    }
+.hover-red:hover {
+    border: 1px solid var(--error);
+    color: var(--error);
 }
 
 .menu-content {
     display: none;
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 35px;
+    top: 35px;
     background-color: var(--card-bg);
     border: 1px solid var(--card-border);
     box-shadow: 0px 8px 16px var(--shadow);
-    padding: 0;
-    border-radius: 6px;
+    padding: var(--header-space);
+    border-radius: 10px;
     z-index: 2;
     min-width: 160px;
     overflow: hidden;
@@ -224,6 +251,7 @@ input:focus {
     padding: 8px;
     background: none;
     border: none;
+    border-radius: 8px;
     text-align: left;
     font-size: 18px;
     cursor: pointer;
@@ -238,10 +266,75 @@ input:focus {
 .container {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 1em;
     margin-top: 1.5em;
     align-items: center;
 }
+
+.homeCard .cardheader h3 {
+    font-family: Caveat, sans-serif;
+    font-size: 2em;
+    color: var(--card-bg);
+    padding: 0;
+    margin: 0;
+}
+
+.logoContainer img {
+    width: 40px;
+    height: 40px;
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0;
+    margin: 0;
+}
+
+.homeCard .cardContent img {
+    max-width: 250px;
+}
+
+.homeCard .cardContent {
+    display: flex;
+    flex-direction: row;
+    gap: var(--header-space);
+}
+
+.homeCard {
+    position: fixed;
+    top: 40%;
+    margin: auto;
+    transform: translateY(-40%);
+}
+
+.menu-toggle {
+    display: flex;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--fg);
+    margin-left: auto;
+    transition: background-color 0.3s ease;
+}
+
+.menu-toggle svg {
+    height: 26px;
+    width: 26px;
+}
+
+.menu-toggle:hover {
+    background-color: var(--hover-bg);
+}
+
 
 /* Card */
 .card {
@@ -252,22 +345,17 @@ input:focus {
     border-radius: 1em;
     margin-bottom: 1em;
     width: 80vw;
-    max-width: 1000px;
+    max-width: 800px;
     min-width: 350px;
     min-height: 200px;
     box-shadow: 0 2px 12px var(--shadow);
-    transition: background 0.5s, border 0.5s;
 }
 
 .card h5,
 .card h4,
-.card h3 {
-    margin: 2px 0;
-}
-
-.card p {
-    margin: 0;
-    font-size: 18px;
+.card h3,
+.card a {
+    margin: 3px 0;
 }
 
 .card ul {
@@ -279,7 +367,7 @@ input:focus {
     display: flex;
     flex-wrap: wrap;
     background: var(--bg-gradient);
-    padding: 0.7em 0.5em 0.5em 0.5em;
+    padding: calc(var(--header-space) * 2);
     align-items: center;
     justify-content: space-between;
     border-top-left-radius: 1em;
@@ -287,6 +375,14 @@ input:focus {
     border-bottom: 1px solid var(--card-border);
     box-shadow: 0 1px 4px var(--shadow);
 }
+
+.herstellerImageContainer {
+    display: flex;
+    height: inherit;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .herstellerImage {
     max-height: 30px;
@@ -296,10 +392,10 @@ input:focus {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-height: 40px;
+    max-height: var(--header-line-height);
     justify-content: center;
     font-size: larger;
-    gap: 6px;
+    gap: var(--header-space);
 }
 
 .cardHeaderTyp :nth-child(2) {
@@ -313,7 +409,7 @@ input:focus {
 .cardContent {
     display: flex;
     flex-direction: row;
-    gap: 1em;
+    gap: var(--header-space);
     margin: 1em;
 }
 
@@ -321,48 +417,39 @@ input:focus {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.7em;
+    gap: 1em;
     justify-content: center;
 }
 
+.iconLine {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.iconLine svg {
+    height: 18px;
+    width: 18px;
+}
+
 .errorDescription p {
-    margin-left: 5px;
+    margin: 0 0 0 calc(var(--header-space) + 18px);
+}
+
+.typImageWrapper {
+    display: flex;
 }
 
 .typImage {
     max-width: 150px;
-}
-
-.resetFilterBtn {
-    display: flex;
-    background-color: var(--button-bg);
-    max-width: 25px;
-    height: 25px;
-    border: 1px solid var(--card-border);
-    border-radius: 5px;
-    margin: auto;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 12px var(--shadow);
-    transition: transform 0.5 ease;
-    overflow: hidden;
-}
-
-.resetFilterBtn img {
-    width: 12px;
-    height: 12px;
-}
-
-.resetFilterBtn:hover {
-    filter: brightness(105%);
-    box-shadow: 0 2px 4px var(--shadow);
+    margin-bottom: auto;
 }
 
 /* Scroll nach oben Button */
 #scrollTopBtn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 50px;
+    right: 15px;
     width: 40px;
     height: 40px;
     z-index: 999;
@@ -392,9 +479,9 @@ input:focus {
 /* Benachrichtigungs Fenster */
 #statusMessage {
     position: fixed;
-    top: 20px;
+    top: 15%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-50%);
     padding: 12px 20px;
     border-radius: 6px;
     font-size: 1rem;
@@ -408,7 +495,7 @@ input:focus {
 
 #statusMessage.show {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(-50%);
 }
 
 #statusMessage.success {
@@ -424,65 +511,74 @@ input:focus {
 }
 
 @media (max-width: 650px) {
+    .container {
+        margin-top: 1em;
+    }
 
-    /* Kopfzeile - Eingaben */
     .controls {
         display: grid;
         gap: 2px;
         grid-template-columns: 50px auto 50px;
-        grid-template-rows: 50px auto;
+        grid-template-rows: auto auto;
         grid-template-areas:
-            "logo logotext menue"
-            "controls controls controls";
+            "controls controls controls"
+            "menue text logo";
     }
 
     .logoContainer {
-        justify-content: left;
         grid-area: logo;
     }
 
-    .logo {
-        margin: auto;
-    }
-
     .logoText {
-        grid-area: logotext;
-        margin: auto;
+        grid-area: text;
     }
 
-    .logoText h1 {
-        margin: 0;
+    .headerRight {
+        grid-area: menue;
+        justify-self: left;
     }
 
-    .inputContainer {
+    .headerCenter {
         grid-area: controls;
-        padding: 0 6px;
-        margin: 2px 0 8px 0;
+    }
+
+    .resetFilterBtn:hover {
+        color: var(--fg);
     }
 
     .menu-wrapper {
         justify-content: right;
-        grid-area: menue;
     }
 
     .menu-toggle {
-        height: 35px;
-        width: 35px;
-        margin: auto 6px auto 0;
+        margin-right: auto;
     }
 
-    .settingsIcon {
-        width: 18px;
-        height: 18px;
+    select,
+    input[type="text"] {
+        padding: 0 calc(var(--header-line-height) / 4);
+        font-size: 16px;
     }
 
-    /* Hauptfenster */
-    .container {
-        gap: 0.5em;
-        margin-top: 1em;
+    .card {
+        margin: 0 1em 1em 1em;
+        width: inherit;
+        min-width: 350px;
+        min-height: 200px;
     }
 
-    /* Card */
+    .cardContent {
+        display: flex;
+        gap: 1em;
+        margin: 1em var(--header-space);
+        flex-direction: column-reverse;
+    }
+
+    .typImageWrapper {
+        align-items: center;
+        justify-content: center;
+    }
+
     .card {
         border-radius: 1em;
         margin-bottom: 1em;
@@ -499,14 +595,7 @@ input:focus {
     }
 
     .errorDescription {
-        gap: 0.5em;
+        gap: 1em;
     }
 
-    .errorDescription p {
-        margin-left: 3px;
-    }
-
-    .typImage {
-        max-width: 120px;
-    }
 }

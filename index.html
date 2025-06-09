@@ -3,12 +3,6 @@
   <head>
     <title>find den Fehler</title>
     <link rel="manifest" href="manifest.json" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="theme-color" content="#121212" />
@@ -23,40 +17,39 @@
     <!-- Kopfzeile -->
     <header id="siteHeader">
       <div class="controls">
-        <div class="logoContainer">
-          <img
-            src="images/icons/icon-512-blank.webp"
-            alt="Logo"
-            class="logo light-logo"
-          />
-          <img
-            src="images/icons/dark/icon-512-blank.webp"
-            alt="Logo"
-            class="logo dark-logo"
-          />
-        </div>
+        <!-- Kopfzeile Links -->
+        <div class="headerLeft"></div>
+        <!-- Kopfzeile Mitte -->
+        <div class="headerCenter">
+          <div class="searchContainer">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Suche nach Fehler-Code…"
+            />
+            <datalist id="codeSuggestions"></datalist>
+            <button
+              id="clearSearchBtn"
+              class="resetFilterBtn"
+              title="Eingabe löschen"
+            >
+              <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.707.293A1 1 0 0 0 .293 1.707L5.586 7L.293 12.293a1 1 0 1 0 1.414 1.414L7 8.414l5.293 5.293a1 1 0 0 0 1.414-1.414L8.414 7l5.293-5.293A1 1 0 0 0 12.293.293L7 5.586z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
 
-        <div class="logoText">
-          <h1>find den Fehler</h1>
-        </div>
-
-        <!-- Suche + Reset -->
-        <div class="inputContainer">
-          <input
-            style="flex-grow: 4;"
-            type="text"
-            id="searchInput"
-            placeholder="Suche nach Fehler-Code…"
-          />
-          <datalist id="codeSuggestions"></datalist>
-
-          <div style="display: flex; flex-grow: 1; gap: 3px;">
-            <select id="herstellerFilter" style="flex-grow: 2;">
+          <div class="selectContainer">
+            <select id="herstellerFilter" class="herstellerFilter">
               <option value="">Alle Hersteller</option>
             </select>
 
-            <select id="typFilter" style="flex-grow: 2;">
-              <option value="">Alle Typen</option>
+            <select id="typFilter" class="typFilter">
+              <option value="">Alle Modelle</option>
             </select>
 
             <button
@@ -64,45 +57,18 @@
               class="resetFilterBtn"
               title="Filter zurücksetzen"
             >
-              <img
-                class="settingsIcon"
-                src="images/icons/refresh.png"
-                alt="Filter zurücksetzen"
-              />
+              <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.707.293A1 1 0 0 0 .293 1.707L5.586 7L.293 12.293a1 1 0 1 0 1.414 1.414L7 8.414l5.293 5.293a1 1 0 0 0 1.414-1.414L8.414 7l5.293-5.293A1 1 0 0 0 12.293.293L7 5.586z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
             </button>
           </div>
         </div>
-
-        <!-- Menü -->
-        <div class="menu-wrapper" id="optionDropdown">
-          <!-- Menü Button -->
-          <button class="menu-toggle" id="menuToggle" title="Extras">
-            <img
-              class="theme-image settingsIcon"
-              id="settingsIcon"
-              src="images/icons/settings_dark.png"
-              alt="Menü"
-            />
-          </button>
-
-          <!-- Menü Inhalt -->
-          <div class="menu-content">
-            <button id="csvLoadBtn">📄 Fehlerliste laden</button>
-            <button id="themeToggleBtn">🌓 Dark / Light</button>
-            <button
-              id="resetBtn"
-              title="Fehlerliste und gespeicherte Daten aus dem lokalen Speicher Löschen."
-            >
-              🗑️ Zurücksetzen
-            </button>
-            <input
-              type="file"
-              id="csvInput"
-              accept=".csv"
-              style="display: none;"
-            />
-          </div>
-        </div>
+        <div class="logoText" id="trefferAnzahl"></div>
+        
       </div>
     </header>
 
@@ -111,7 +77,6 @@
 
     <!-- Scroll nach oben Button -->
     <button id="scrollTopBtn" title="Nach oben">
-      <!--  <img src="images/icons/arrow-up.png" alt="Up" /> -->
       <svg viewBox="0 0 100 100" fill="none">
         <path
           fill="currentColor"
@@ -119,349 +84,9 @@
         ></path>
       </svg>
     </button>
+    <script src="main.js" defer></script>
 
-    <!-- Funktionen -->
-    <script>
-      // Zeigt Benachrichtigungs Fenster
-      function showStatusMessage(text, type = "success", timeout = 4000) {
-        const msgBox = document.getElementById("statusMessage");
-        msgBox.innerHTML = (type === "success" ? "✅ " : "⚠️ ") + text;
-        msgBox.className = `show ${type}`;
-        setTimeout(() => {
-          msgBox.className = msgBox.className.replace("show", "");
-        }, timeout);
-      }
-
-      function debounce(fn, delay = 300) {
-        let timer;
-        return function (...args) {
-          clearTimeout(timer);
-          timer = setTimeout(() => fn.apply(this, args), delay);
-        };
-      }
-
-      // Wandelt CSV (Fehlerliste) um gibt sortierte zeilen aus
-      function parseCSV(text) {
-        const result = Papa.parse(text, {
-          header: true,
-          skipEmptyLines: true,
-        });
-        return result.data.map((row) => ({
-          hersteller: (row["Hersteller"] || "").trim(),
-          typ: (row["Typ"] || "").trim(),
-          code: (row["Code"] || "").trim(),
-          fehler: (row["Fehler"] || "").trim(),
-          ursache: (row["Maßnahme"] || "").trim(),
-          infos: (row["Info"] || "").trim(),
-          weitere: (row["Weitere"] || "").trim(),
-          kategorie: (row["Kategorie"] || "").trim(),
-        }));
-      }
-
-      function fillDropdowns(data) {
-        const selectedHersteller = herstellerFilter.value;
-        const selectedTyp = typFilter.value;
-
-        const herstellerSet = new Set();
-        const typSet = new Set();
-
-        data.forEach((d) => {
-          herstellerSet.add(d.hersteller);
-          if (!selectedHersteller || d.hersteller === selectedHersteller) {
-            typSet.add(d.typ);
-          }
-        });
-
-        herstellerFilter.innerHTML =
-          '<option value="">Alle Hersteller</option>' +
-          [...herstellerSet]
-            .sort()
-            .map((h) => `<option value="${h}">${h}</option>`)
-            .join("");
-
-        typFilter.innerHTML =
-          '<option value="">Alle Typen</option>' +
-          [...typSet]
-            .sort()
-            .map((t) => `<option value="${t}">${t}</option>`)
-            .join("");
-
-        herstellerFilter.value = selectedHersteller;
-        typFilter.value = selectedTyp;
-      }
-
-      function updateAutocompleteList(data) {
-        const datalist = document.getElementById("codeSuggestions");
-        const uniqueCodes = [
-          ...new Set(data.map((d) => d.code).filter(Boolean)),
-        ];
-        datalist.innerHTML = uniqueCodes
-          .sort()
-          .map((code) => `<option value="${code}"></option>`)
-          .join("");
-      }
-
-      function renderDaten() {
-        const suchtext = searchInput.value.trim().toLowerCase();
-        const hersteller = herstellerFilter.value.toLowerCase();
-        const typ = typFilter.value.toLowerCase();
-
-        container.innerHTML = "";
-
-        let filtered = daten;
-
-        if (suchtext) {
-          filtered = filtered.filter(
-            (item) => item.code.toLowerCase() === suchtext
-          );
-        }
-
-        if (hersteller) {
-          filtered = filtered.filter(
-            (item) => item.hersteller.toLowerCase() === hersteller
-          );
-        }
-
-        if (typ) {
-          filtered = filtered.filter((item) => item.typ.toLowerCase() === typ);
-        }
-
-        // Keine Suche, keine Filter → nichts anzeigen, aber Dropdowns mit allen Werten
-        if (!suchtext && !hersteller && !typ) {
-          fillDropdowns(daten);
-          updateAutocompleteList(daten);
-          return;
-        }
-
-        fillDropdowns(filtered);
-        updateAutocompleteList(daten);
-
-        filtered.forEach((item) => {
-          const card = document.createElement("div");
-          const typImageName =
-            item.typ.toLowerCase().replace(/\s+/g, "_") + ".png";
-          const typImagePath = `images/typen/${typImageName}`;
-          const herstellerImageName =
-            item.hersteller.toLowerCase().replace(/\s+/g, "_") + ".png";
-          const herstellerImagePath = `images/hersteller/${herstellerImageName}`;
-
-          card.className = "card";
-          card.innerHTML = `
-      <div class="cardheader">
-        <div class="herstellerImageContainer">
-          <img class="herstellerImage theme-image" src="${herstellerImagePath}"
-            data-theme-light="images/hersteller/${herstellerImageName}"
-            data-theme-dark="images/hersteller/dark/${herstellerImageName}"
-            alt="${item.hersteller}"
-            onerror="this.onerror=null; this.src='images/icons/dark/icon-512-blank.webp'"
-          >
-        </div>
-        <div class="cardHeaderTyp">
-          ${item.typ ? `<b> ${item.typ} </b>` : ""}
-          ${item.code ? `<p> ${item.code} </p>` : ""}
-        </div>
-      </div>
-      <div class="cardContent">
-        <div class="errorDescription">
-          ${
-            item.fehler
-              ? `<h4>Fehler: ${item.code}</h4><p>${item.fehler}</p>`
-              : ""
-          }
-          ${item.ursache ? `<h4>Maßnahme:</h4><p>${item.ursache}</p>` : ""}
-          ${item.infos ? `<strong>Info:</strong><p>${item.infos}</p>` : ""}
-          ${item.weitere ? `<p>${item.weitere}</p>` : ""}
-        </div>
-        <div class="typImageWrapper">
-          <img class="typImage" src="${typImagePath}" alt="${item.typ}"
-            onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
-        </div>
-      </div>
-    `;
-          container.appendChild(card);
-        });
-
-        updateThemeAssets(document.body.getAttribute("data-theme"));
-      }
-
-      // Aktuallisiert die Bilder passend zum Theme
-      function updateThemeAssets(theme) {
-        document.querySelectorAll(".theme-image").forEach((img) => {
-          const newSrc = img.getAttribute(`data-theme-${theme}`);
-          if (newSrc) img.src = newSrc;
-        });
-      }
-
-      // Versucht CSV Daten aus dem lokalen Speicher zu laden
-      function loadData() {
-        const savedCSV = localStorage.getItem("csvData");
-        if (savedCSV) {
-          daten = parseCSV(savedCSV);
-          fillDropdowns(daten);
-          renderDaten();
-          showStatusMessage(
-            "Gespeicherte Fehlercodes erfolgreich geladen.",
-            "success"
-          );
-        } else {
-          fetch("fehlerliste.csv")
-            .then((res) => {
-              if (!res.ok) throw new Error("Nicht gefunden");
-              return res.text();
-            })
-            .then((text) => {
-              daten = parseCSV(text);
-              fillDropdowns(daten);
-              renderDaten();
-              localStorage.setItem("csvData", text);
-              showStatusMessage("Fehlercodes erfolgreich geladen.", "success");
-            })
-            .catch(() => {
-              showStatusMessage(
-                "Fehlercodes konnte nicht geladen werden. Bitte unter Optionen manuell laden.",
-                "error"
-              );
-            });
-        }
-      }
-
-      // Schließt das Menü
-      function closeMenu() {
-        document.getElementById("optionDropdown").classList.remove("open");
-      }
-
-      // Menü
-      const csvInput = document.getElementById("csvInput");
-      const searchInput = document.getElementById("searchInput");
-      const herstellerFilter = document.getElementById("herstellerFilter");
-      const typFilter = document.getElementById("typFilter");
-      const container = document.getElementById("container");
-      let daten = [];
-
-      // Öffnet Menü bei klick
-      document.getElementById("menuToggle").addEventListener("click", () => {
-        document.getElementById("optionDropdown").classList.toggle("open");
-      });
-
-      // Öffnet Suchfenster für Fehlerlisten Datei
-      document.getElementById("csvLoadBtn").addEventListener("click", () => {
-        csvInput.click();
-        closeMenu();
-      });
-
-      // Löscht lokal gespeicherte Daten bei klick
-      document.getElementById("resetBtn").addEventListener("click", () => {
-        localStorage.removeItem("csvData");
-        localStorage.removeItem("theme");
-        showStatusMessage(
-          "Lokale Daten gelöscht – Seite wird neu geladen",
-          "success"
-        );
-        setTimeout(() => location.reload(), 1000);
-      });
-
-      // Ändert das aktuelle Theme bei klick und speichert es lokal
-      document
-        .getElementById("themeToggleBtn")
-        .addEventListener("click", () => {
-          const current = document.body.getAttribute("data-theme");
-          const newTheme = current === "dark" ? "light" : "dark";
-          document.body.setAttribute("data-theme", newTheme);
-          localStorage.setItem("theme", newTheme);
-          updateThemeAssets(newTheme);
-          showStatusMessage("Theme Umgeschaltet und Gespeichert.", "success");
-          closeMenu();
-        });
-
-      // Schließt das Menü bei klick ins leere
-      document.addEventListener("click", (e) => {
-        const menu = document.getElementById("optionDropdown");
-        const isClickInside = menu.contains(e.target);
-        if (!isClickInside) {
-          closeMenu();
-        }
-      });
-
-      // Läd gespeichertes Theme
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) {
-        document.body.setAttribute("data-theme", savedTheme);
-        updateThemeAssets(savedTheme);
-        loadData();
-      }
-
-      // Ließt Fehlerlisten Datei ein und speichert sie lokal
-      csvInput.addEventListener("change", function () {
-        const file = this.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function (event) {
-          const text = event.target.result;
-          daten = parseCSV(text);
-          localStorage.setItem("csvData", text);
-          fillDropdowns(daten);
-          renderDaten();
-          showStatusMessage(`${file.name} erfolgreich geladen`, "success");
-          closeMenu();
-        };
-        reader.readAsText(file, "UTF-8");
-      });
-
-      // Rendert bei Eingaben neu
-      [searchInput, herstellerFilter, typFilter].forEach((input) => {
-        input.addEventListener("input", debounce(renderDaten, 300));
-      });
-
-      // Registriert den Service Worker
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("service-worker.js")
-          .then(() => console.log("✅ Service Worker registriert"))
-          .catch((err) => console.error("❌ Service Worker Fehler:", err));
-      }
-
-      loadData();
-
-      // Scroll nach oben Button
-      const scrollTopBtn = document.getElementById("scrollTopBtn");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-          scrollTopBtn.classList.add("show");
-        } else {
-          scrollTopBtn.classList.remove("show");
-        }
-      });
-      scrollTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      // Header automatisch ein-/ausblenden beim Scrollen
-      let lastScrollY = window.scrollY;
-      const headerEl = document.getElementById("siteHeader");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > lastScrollY && window.scrollY > 80) {
-          headerEl.classList.add("hide");
-        } else {
-          headerEl.classList.remove("hide");
-        }
-        lastScrollY = window.scrollY;
-      });
-
-      // Filter-Reset-Button
-      document
-        .getElementById("resetFilterBtn")
-        .addEventListener("click", () => {
-          searchInput.value = "";
-          herstellerFilter.value = "";
-          typFilter.value = "";
-          renderDaten();
-        });
-
-      // Filter-Änderung triggert neue Darstellung
-      [searchInput, herstellerFilter, typFilter].forEach((input) => {
-        input.addEventListener("input", debounce(renderDaten, 300));
-      });
-    </script>
+    <input type="file" id="csvInput" accept=".csv" style="display: none;">
+    
   </body>
 </html>
