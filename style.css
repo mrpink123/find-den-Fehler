@@ -563,8 +563,8 @@ input:focus {
 
     #homeMenuContainer {
         flex-grow: 1;
-        display: none;
         max-width: 100%;
+        min-width: 100%;
         padding: 0;
         border: none;
         border-bottom: 1px solid var(--card-border);
