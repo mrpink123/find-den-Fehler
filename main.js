@@ -316,63 +316,80 @@ function showHomeCard() {
         <img src="images/icons/logo-512.png">
         <h3>find den Fehler</h3>
       </div>      
-      <div class="menu-wrapper" id="homeDropdown">
-        <button class="menu-toggle" id="homeMenuToggle" title="Extras">
-            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M600.704 64a32 32 0 0 1 30.464 22.208l35.2 109.376c14.784 7.232 28.928 15.36 42.432 24.512l112.384-24.192a32 32 0 0 1 34.432 15.36L944.32 364.8a32 32 0 0 1-4.032 37.504l-77.12 85.12a357.12 357.12 0 0 1 0 49.024l77.12 85.248a32 32 0 0 1 4.032 37.504l-88.704 153.6a32 32 0 0 1-34.432 15.296L708.8 803.904c-13.44 9.088-27.648 17.28-42.368 24.512l-35.264 109.376A32 32 0 0 1 600.704 960H423.296a32 32 0 0 1-30.464-22.208L357.696 828.48a351.616 351.616 0 0 1-42.56-24.64l-112.32 24.256a32 32 0 0 1-34.432-15.36L79.68 659.2a32 32 0 0 1 4.032-37.504l77.12-85.248a357.12 357.12 0 0 1 0-48.896l-77.12-85.248A32 32 0 0 1 79.68 364.8l88.704-153.6a32 32 0 0 1 34.432-15.296l112.32 24.256c13.568-9.152 27.776-17.408 42.56-24.64l35.2-109.312A32 32 0 0 1 423.232 64H600.64zm-23.424 64H446.72l-36.352 113.088l-24.512 11.968a294.113 294.113 0 0 0-34.816 20.096l-22.656 15.36l-116.224-25.088l-65.28 113.152l79.68 88.192l-1.92 27.136a293.12 293.12 0 0 0 0 40.192l1.92 27.136l-79.808 88.192l65.344 113.152l116.224-25.024l22.656 15.296a294.113 294.113 0 0 0 34.816 20.096l24.512 11.968L446.72 896h130.688l36.48-113.152l24.448-11.904a288.282 288.282 0 0 0 34.752-20.096l22.592-15.296l116.288 25.024l65.28-113.152l-79.744-88.192l1.92-27.136a293.12 293.12 0 0 0 0-40.256l-1.92-27.136l79.808-88.128l-65.344-113.152l-116.288 24.96l-22.592-15.232a287.616 287.616 0 0 0-34.752-20.096l-24.448-11.904L577.344 128zM512 320a192 192 0 1 1 0 384a192 192 0 0 1 0-384zm0 64a128 128 0 1 0 0 256a128 128 0 0 0 0-256z"
-                    fill="currentColor"
-                />
-            </svg>
-        </button>
-        <div class="menu-content">
-          <button id="homeCsvBtn">📄 Fehlerliste laden</button>
-          <button id="homeThemeBtn">🌓 Dark/Light</button>
-          <button id="homeResetBtn">🗑️ Zurücksetzen</button>
-        </div>
-      </div>
+      <button class="menu-toggle" id="homeMenuToggle" title="Extras">
+        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M600.704 64a32 32 0 0 1 30.464 22.208l35.2 109.376c14.784 7.232 28.928 15.36 42.432 24.512l112.384-24.192a32 32 0 0 1 34.432 15.36L944.32 364.8a32 32 0 0 1-4.032 37.504l-77.12 85.12a357.12 357.12 0 0 1 0 49.024l77.12 85.248a32 32 0 0 1 4.032 37.504l-88.704 153.6a32 32 0 0 1-34.432 15.296L708.8 803.904c-13.44 9.088-27.648 17.28-42.368 24.512l-35.264 109.376A32 32 0 0 1 600.704 960H423.296a32 32 0 0 1-30.464-22.208L357.696 828.48a351.616 351.616 0 0 1-42.56-24.64l-112.32 24.256a32 32 0 0 1-34.432-15.36L79.68 659.2a32 32 0 0 1 4.032-37.504l77.12-85.248a357.12 357.12 0 0 1 0-48.896l-77.12-85.248A32 32 0 0 1 79.68 364.8l88.704-153.6a32 32 0 0 1 34.432-15.296l112.32 24.256c13.568-9.152 27.776-17.408 42.56-24.64l35.2-109.312A32 32 0 0 1 423.232 64H600.64zm-23.424 64H446.72l-36.352 113.088l-24.512 11.968a294.113 294.113 0 0 0-34.816 20.096l-22.656 15.36l-116.224-25.088l-65.28 113.152l79.68 88.192l-1.92 27.136a293.12 293.12 0 0 0 0 40.192l1.92 27.136l-79.808 88.192l65.344 113.152l116.224-25.024l22.656 15.296a294.113 294.113 0 0 0 34.816 20.096l24.512 11.968L446.72 896h130.688l36.48-113.152l24.448-11.904a288.282 288.282 0 0 0 34.752-20.096l22.592-15.296l116.288 25.024l65.28-113.152l-79.744-88.192l1.92-27.136a293.12 293.12 0 0 0 0-40.256l-1.92-27.136l79.808-88.128l-65.344-113.152l-116.288 24.96l-22.592-15.232a287.616 287.616 0 0 0-34.752-20.096l-24.448-11.904L577.344 128zM512 320a192 192 0 1 1 0 384a192 192 0 0 1 0-384zm0 64a128 128 0 1 0 0 256a128 128 0 0 0 0-256z"
+                fill="currentColor"
+            />
+        </svg>
+      </button>
     </div>
     <div class="cardContent">
-      <p>Bitte geben Sie einen Fehlercode ein ...</p>
+      <div class="homeContent">
+        <p>Gib einen Fehlercode ein oder wähle nach Typ...</p>
+      </div>
+      <div id="homeMenuContainer" style="display: none;">
+        <div class="menu">
+            <button id="homeCsvBtn">
+                <svg height="200" width="200" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.78 5.841a.75.75 0 0 1-1.06 0l-1.97-1.97v7.379a.75.75 0 0 1-1.5 0V3.871l-1.97 1.97a.75.75 0 0 1-1.06-1.06l3.25-3.25L8 1l.53.53l3.25 3.25a.75.75 0 0 1 0 1.061ZM2.5 9.75a.75.75 0 0 0-1.5 0V13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9.75a.75.75 0 0 0-1.5 0V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V9.75Z" fill="currentColor" fillRule="evenodd"/>
+                </svg>
+                <p>Fehlerliste Laden</p>
+            </button>
+            <button id="homeThemeBtn">
+                <svg height="200" width="200" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M277.333 405.333v85.333h-42.667v-85.333zm99.346-58.824l60.34 60.34l-30.17 30.17l-60.34-60.34zm-241.359 0l30.17 30.17l-60.34 60.34l-30.17-30.17zM256 139.353c64.422 0 116.647 52.224 116.647 116.647c0 64.422-52.225 116.647-116.647 116.647A116.427 116.427 0 0 1 139.352 256c0-64.423 52.225-116.647 116.648-116.647m0 42.666c-40.859 0-73.981 33.123-73.981 74.062a73.76 73.76 0 0 0 21.603 52.296c13.867 13.867 32.685 21.64 52.378 21.603zm234.666 52.647v42.667h-85.333v-42.667zm-384 0v42.667H21.333v-42.667zM105.15 74.98l60.34 60.34l-30.17 30.17l-60.34-60.34zm301.7 0l30.169 30.17l-60.34 60.34l-30.17-30.17zM277.332 21.333v85.333h-42.667V21.333z" fill="currentColor" fillRule="evenodd"/>
+                </svg>
+            <p>Dark / Light Theme</p>
+            </button>
+            <button id="homeResetBtn" class="hover-red">
+                <svg height="200" width="200" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.5-.031c-1.958 0-3.531 1.627-3.531 3.594V4H4c-.551 0-1 .449-1 1v1H2v2h2v15c0 1.645 1.355 3 3 3h12c1.645 0 3-1.355 3-3V8h2V6h-1V5c0-.551-.449-1-1-1h-3.969v-.438c0-1.966-1.573-3.593-3.531-3.593h-3zm0 2.062h3c.804 0 1.469.656 1.469 1.531V4H10.03v-.438c0-.875.665-1.53 1.469-1.53zM6 8h5.125c.124.013.247.031.375.031h3c.128 0 .25-.018.375-.031H20v15c0 .563-.437 1-1 1H7c-.563 0-1-.437-1-1V8zm2 2v12h2V10H8zm4 0v12h2V10h-2zm4 0v12h2V10h-2z" fill="currentColor"/>
+                </svg>
+                <p>Lösche alle Daten aus dem lokalen Speicher. Dadurch wird auch die Fehlerliste gelöscht.!</p>
+            </button>
+        </div>
+      </div>
     </div>
   `;
     container.appendChild(homeCard);
 
+    // EventListener für den Menü-Button
     document.getElementById("homeMenuToggle")
         .addEventListener("click", e => {
-            document.getElementById("homeDropdown").classList.toggle("open");
-            e.stopPropagation();
+            const menuContainer = document.getElementById("homeMenuContainer");
+            const isVisible = menuContainer.style.display === "block";
+            menuContainer.style.display = isVisible ? "none" : "block";
+            e.stopPropagation(); // Verhindert das Schließen des Menüs durch Klick außerhalb
         });
 
     const csvInput = document.getElementById("csvInput");
+
+    // Öffnen der CSV-Datei bei Button-Klick
     document.getElementById("homeCsvBtn")
         .addEventListener("click", () => {
             if (csvInput) {
                 csvInput.click();
-                closeHomeDropdown();
             } else {
                 console.error("csvInput nicht gefunden!");
             }
         });
 
+    // Theme umschalten
     document.getElementById("homeThemeBtn")
-        .addEventListener("click", () => { toggleTheme(); closeHomeDropdown(); });
+        .addEventListener("click", () => { toggleTheme(); });
 
+    // Zurücksetzen der Daten
     document.getElementById("homeResetBtn")
-        .addEventListener("click", () => { resetData(); closeHomeDropdown(); });
+        .addEventListener("click", () => { resetData(); });
 
-    // Klick außerhalb = schließen
-    document.addEventListener("click", clickOutsideHomeMenu, { passive: true });
-
-    function clickOutsideHomeMenu(e) {
-        const menu = document.getElementById("homeDropdown");
-        if (menu && !menu.contains(e.target)) closeHomeDropdown();
-    }
-
-    function closeHomeDropdown() {
-        const menu = document.getElementById("homeDropdown");
-        if (menu) menu.classList.remove("open");
-        document.removeEventListener("click", clickOutsideHomeMenu);
+    // Entferne den Klick außerhalb des Menüs
+    function closeHomeMenu() {
+        const menuContainer = document.getElementById("homeMenuContainer");
+        if (menuContainer) {
+            menuContainer.style.display = "none"; // Menü schließen
+        }
     }
 
     // Ließt Fehlerlisten Datei ein und speichert sie lokal
@@ -388,7 +405,6 @@ function showHomeCard() {
             fillDropdowns(daten);
             renderDaten();
             showStatusMessage(`${file.name} erfolgreich geladen`, "success");
-            closeHomeDropdown();
         };
         reader.readAsText(file, "UTF-8");
     });
