@@ -1,3 +1,23 @@
+// Fallback-Speicher für Geräte ohne funktionierenden localStorage
+function getStorage() {
+    try {
+        const testKey = '__test__';
+        localStorage.setItem(testKey, '1');
+        localStorage.removeItem(testKey);
+        return localStorage;
+    } catch (e) {
+        console.warn('⚠️ localStorage nicht verfügbar. Fallback-Speicher wird verwendet.');
+        const memoryStore = {};
+        return {
+            getItem: key => memoryStore[key] || null,
+            setItem: (key, value) => { memoryStore[key] = value; },
+            removeItem: key => { delete memoryStore[key]; }
+        };
+    }
+}
+
+const storage = getStorage();
+
 // Zeigt Benachrichtigungs Fenster
 function showStatusMessage(text, type = "success", timeout = 4000) {
     const msgBox = document.getElementById("statusMessage");
@@ -272,7 +292,7 @@ function updateThemeAssets(theme) {
 
 // Versucht CSV Daten aus dem lokalen Speicher zu laden
 function loadData() {
-    const savedCSV = localStorage.getItem("csvData");
+    const savedCSV = storage.getItem("csvData");
 
     if (savedCSV) {
         daten = parseCSV(savedCSV);
@@ -292,7 +312,7 @@ function loadData() {
                 daten = parseCSV(text);
                 fillDropdowns(daten);
                 renderDaten();
-                localStorage.setItem("csvData", text);
+                storage.setItem("csvData", text);
                 showStatusMessage("Fehlercodes erfolgreich geladen.", "success");
             })
             .catch(() => {
@@ -400,7 +420,7 @@ function showHomeCard() {
         reader.onload = function (event) {
             const text = event.target.result;
             daten = parseCSV(text);
-            localStorage.setItem("csvData", text);
+            storage.setItem("csvData", text);
             fillDropdowns(daten);
             renderDaten();
             showStatusMessage(`${file.name} erfolgreich geladen`, "success");
@@ -413,14 +433,14 @@ function toggleTheme() {
     const current = document.body.getAttribute("data-theme");
     const next = current === "dark" ? "light" : "dark";
     document.body.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
+    storage.setItem("theme", next);
     updateThemeAssets(next);
     showStatusMessage("Theme umgeschaltet");
 }
 
 function resetData() {
-    localStorage.removeItem("csvData");
-    localStorage.removeItem("theme");
+    storage.removeItem("csvData");
+    storage.removeItem("theme");
     showStatusMessage("Zurückgesetzt – Seite wird neu geladen");
     setTimeout(() => location.reload(), 800);
 }
@@ -434,7 +454,7 @@ let daten = [];
 
 
 // Läd gespeichertes Theme
-const savedTheme = localStorage.getItem("theme");
+const savedTheme = storage.getItem("theme");
 if (savedTheme) {
     document.body.setAttribute("data-theme", savedTheme);
     updateThemeAssets(savedTheme);
