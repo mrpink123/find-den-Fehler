@@ -384,7 +384,6 @@ function showHomeCard() {
     document.getElementById("homeResetBtn")
         .addEventListener("click", () => { resetData(); });
 
-    // Entferne den Klick außerhalb des Menüs
     function closeHomeMenu() {
         const menuContainer = document.getElementById("homeMenuContainer");
         if (menuContainer) {
