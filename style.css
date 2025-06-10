@@ -149,7 +149,7 @@ input[type="text"] {
     flex-wrap: nowrap;
     flex-direction: row;
     max-height: var(--header-line-height);
-    border: 1px solid var(--card-border);
+    border: 2px solid var(--card-border);
     border-radius: calc(var(--header-line-height) / 2);
 }
 
@@ -159,7 +159,7 @@ input[type="text"] {
     flex-wrap: nowrap;
     flex-direction: row;
     max-height: var(--header-line-height);
-    border: 1px solid var(--card-border);
+    border: 2px solid var(--card-border);
     border-radius: calc(var(--header-line-height) / 2);
 }
 
@@ -352,7 +352,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    border: 2px solid var(--card-border);
     border-radius: 1em;
     margin-bottom: 1em;
     width: 80vw;
@@ -587,6 +587,7 @@ input:focus {
         min-width: 300px;
         width: auto;
         min-height: 200px;
+        margin: auto;
         overflow: hidden;
     }
 
