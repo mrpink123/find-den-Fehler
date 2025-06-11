@@ -68,9 +68,14 @@ function fillDropdowns(data, codeFilter = "", herstellerFilterVal = "") {
     const codeRegex = codeFilter ? new RegExp(`\\b${codeFilter}\\b`, "i") : null;
 
     data.forEach((d) => {
-        const codeMatch = !codeFilter ||
-            d.code.toLowerCase().includes(codeFilter.toLowerCase()) ||
-            (d.suchbegriffe && d.suchbegriffe.toLowerCase().includes(codeFilter.toLowerCase()));
+        let codeMatch = true;
+        if (codeFilter) {
+            const suchwoerter = codeFilter.trim().toLowerCase().split(/\s+/);
+            codeMatch = suchwoerter.every((wort) => {
+                const regex = new RegExp(`\\b${wort}\\b`, "i");
+                return regex.test(d.code) || (d.suchbegriffe && regex.test(d.suchbegriffe));
+            });
+        }
 
         if (codeMatch) {
             const herstellerKey = d.hersteller.toLowerCase();
@@ -131,6 +136,8 @@ function renderDaten() {
     const suchtext = searchInput.value.trim().toLowerCase();
     const hersteller = herstellerFilter.value.toLowerCase();
     const typ = typFilter.value.toLowerCase();
+    const suchwoerter = suchtext.split(/\s+/).filter(Boolean); // entfernt leere Einträge
+
 
     if (!suchtext && !hersteller && !typ) {
         updateAutocompleteList(daten);
@@ -146,17 +153,16 @@ function renderDaten() {
     let filtered = daten;
 
     // Immer zuerst nach Code filtern (wenn eingegeben)
-    const suchwoerter = suchtext.split(/\s+/).filter(w => w.length > 0);
-
     if (suchwoerter.length > 0) {
-        filtered = filtered.filter((item) => {
-            return suchwoerter.every((wort) => {
+        filtered = filtered.filter((item) =>
+            suchwoerter.every((wort) => {
                 const regex = new RegExp(`\\b${wort}\\b`, "i");
                 return regex.test(item.code) ||
                     (item.suchbegriffe && regex.test(item.suchbegriffe));
-            });
-        });
+            })
+        );
     }
+
 
     // Danach nach Hersteller filtern (optional)
     if (hersteller) {
@@ -445,6 +451,12 @@ function resetData() {
     setTimeout(() => location.reload(), 800);
 }
 
+function updateControlButtons() {
+    document.getElementById("clearSearchBtn").disabled = searchInput.value.trim() === "";
+    document.getElementById("resetFilterBtn").disabled =
+        herstellerFilter.value === "" && typFilter.value === "";
+}
+
 // Menü
 const searchInput = document.getElementById("searchInput");
 const herstellerFilter = document.getElementById("herstellerFilter");
@@ -472,6 +484,7 @@ if ("serviceWorker" in navigator) {
 }
 
 loadData();
+updateControlButtons();
 
 // Scroll nach oben Button
 const scrollTopBtn = document.getElementById("scrollTopBtn");
@@ -502,18 +515,22 @@ window.addEventListener("scroll", () => {
 document
     .getElementById("resetFilterBtn")
     .addEventListener("click", () => {
-        searchInput.value = "";
         herstellerFilter.value = "";
         typFilter.value = "";
         renderDaten();
+        updateControlButtons();
     });
 
 // Filter-Änderung triggert neue Darstellung
 [searchInput, herstellerFilter, typFilter].forEach((input) => {
-    input.addEventListener("input", debounce(renderDaten, 300));
+    input.addEventListener("input", debounce(() => {
+        renderDaten();
+        updateControlButtons();
+    }, 300));
 });
 
 document.getElementById("clearSearchBtn").addEventListener("click", () => {
     searchInput.value = "";
     renderDaten();
+    updateControlButtons();
 });

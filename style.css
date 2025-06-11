@@ -59,6 +59,11 @@ body {
     transition: background-color 0.5s, color 0.5s;
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* Kopfzeile */
 header {
     position: sticky;
@@ -529,6 +534,7 @@ input:focus {
 @media (max-width: 650px) {
     .container {
         margin-top: 1em;
+        min-height: fit-content;
     }
 
     .controls {
@@ -583,11 +589,8 @@ input:focus {
     }
 
     .card {
-        margin: 0;
-        min-width: 300px;
-        width: auto;
-        min-height: 200px;
-        margin: auto;
+        min-width: 98vw;
+        min-height: 100%;
         overflow: hidden;
     }
 
