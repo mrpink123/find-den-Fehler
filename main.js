@@ -57,6 +57,7 @@ function parseCSV(text) {
         weitere: (row["Weitere"] || "").trim(),
         kategorie: (row["Kategorie"] || "").trim(),
         link: (row["Link"] || "").trim(),
+        typImage: (row["TypBild"] || "").trim(),
     }));
 }
 
@@ -199,8 +200,6 @@ function renderDaten() {
         const card = document.createElement("div");
         card.className = "card";
 
-        const typImageName = item.typ.toLowerCase().replace(/\s+/g, "_") + ".png";
-        const typImagePath = `images/typen/${typImageName}`;
         const herstellerImageName = item.hersteller.toLowerCase().replace(/\s+/g, "_") + ".png";
         const herstellerImagePath = `images/hersteller/${herstellerImageName}`;
 
@@ -276,9 +275,7 @@ function renderDaten() {
                         </div>
                     ` : ""}
                 </div>
-                <div class="typImageWrapper">
-                    <img class="typImage" src="${typImagePath}" alt="${item.typ}" onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
-                </div>
+                ${item.typImage ? `<div class="typImageWrapper">${item.typImage}</div>` : ""}
             </div>
         `;
 
@@ -452,8 +449,8 @@ function resetData() {
 }
 
 function updateControlButtons() {
-    document.getElementById("clearSearchBtn").disabled = searchInput.value.trim() === "";
-    document.getElementById("resetFilterBtn").disabled =
+    document.getElementById("btnClearSearch").disabled = searchInput.value.trim() === "";
+    document.getElementById("btnResetFilters").disabled =
         herstellerFilter.value === "" && typFilter.value === "";
 }
 
@@ -513,7 +510,7 @@ window.addEventListener("scroll", () => {
 
 // Filter-Reset-Button
 document
-    .getElementById("resetFilterBtn")
+    .getElementById("btnResetFilters")
     .addEventListener("click", () => {
         herstellerFilter.value = "";
         typFilter.value = "";
@@ -529,7 +526,7 @@ document
     }, 300));
 });
 
-document.getElementById("clearSearchBtn").addEventListener("click", () => {
+document.getElementById("btnClearSearch").addEventListener("click", () => {
     searchInput.value = "";
     renderDaten();
     updateControlButtons();

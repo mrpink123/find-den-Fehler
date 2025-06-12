@@ -23,6 +23,7 @@
             rgba(204, 204, 204, 0.4) 55%,
             var(--hover-bg) 96%);
     --header-space: 4px;
+    --card-content-space: 10px 0;
     --header-line-height: 30px;
 }
 
@@ -202,7 +203,7 @@ input:focus {
     outline: none;
 }
 
-.resetFilterBtn {
+.btnResetFilters {
     display: flex;
     background-color: var(--button-bg-light);
     border: none;
@@ -216,12 +217,12 @@ input:focus {
     color: var(--fg);
 }
 
-.resetFilterBtn svg {
+.btnResetFilters svg {
     height: 12px;
     width: 12px;
 }
 
-.resetFilterBtn:hover {
+.btnResetFilters:hover {
     color: var(--error);
     background-color: var(--hover-bg);
 }
@@ -231,6 +232,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    margin: 1em 2px;
     min-height: 80vh;
     align-items: center;
     justify-content: center;
@@ -442,6 +444,10 @@ input:focus {
     justify-content: center;
 }
 
+.errorDescriptionItem:last-of-type {
+    margin-top: auto;
+}
+
 .iconLine {
     display: flex;
     align-items: center;
@@ -532,6 +538,10 @@ input:focus {
 }
 
 @media (max-width: 650px) {
+    body{
+        font-size: 0.9em;
+    }
+
     .container {
         margin-top: 1em;
         min-height: fit-content;
@@ -564,7 +574,7 @@ input:focus {
         grid-area: controls;
     }
 
-    .resetFilterBtn:hover {
+    .btnResetFilters:hover {
         color: var(--fg);
     }
 
