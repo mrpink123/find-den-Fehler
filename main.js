@@ -484,7 +484,7 @@ if ("serviceWorker" in navigator) {
 }
 
 loadData();
-// updateControlButtons();
+updateControlButtons();
 
 // Scroll nach oben Button
 const scrollTopBtn = document.getElementById("scrollTopBtn");
@@ -518,14 +518,14 @@ document
         herstellerFilter.value = "";
         typFilter.value = "";
         renderDaten();
-        // updateControlButtons();
+        updateControlButtons();
     });
 
 // Filter-Änderung triggert neue Darstellung
 [searchInput, herstellerFilter, typFilter].forEach((input) => {
     input.addEventListener("input", debounce(() => {
         renderDaten();
-        // updateControlButtons();
+        updateControlButtons();
     }, 300));
 });
 
@@ -534,5 +534,5 @@ document.getElementById("btnClearSearch").addEventListener("click", () => {
     typFilter.value = ""; // wichtig
     fillDropdowns(daten, "", herstellerFilter.value.trim().toLowerCase());
     renderDaten();
-    // updateControlButtons();
+    updateControlButtons();
 });
