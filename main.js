@@ -344,7 +344,7 @@ function showHomeCard() {
     homeCard.innerHTML = `
     <div class="cardheader">
       <div class="logoContainer">
-        <img src="images/icons/logo-512.png">
+        <svg class="icon-logo"><use href="#icon-logo"></use></svg> 
         <h3>find den Fehler</h3>
       </div>      
       <button class="menu-toggle" id="homeMenuToggle" title="Extras">
@@ -353,7 +353,9 @@ function showHomeCard() {
     </div>
     <div class="cardContent">
       <div class="homeContent">
-        <div id="searchContainerHome"></div>
+        <div>
+                      
+        </div>
         <p>Gib einen Fehlercode ein. Oder,<br>Wähle einen Typ um alle Fehler diesen Types zu sehen. Schlagwörter wie "Reset", "Schliessen" oder "ohne" sind auch möglich.</p>
       </div>
       <div id="homeMenuContainer">
@@ -367,7 +369,7 @@ function showHomeCard() {
             <p>Dark / Light Theme</p>
             </button>
             <button id="homeResetBtn">
-                <svg class="button-icon"><use href="#icon-trash"></use></svg>             
+                <svg class="button-icon"><use href="#icon-trash"></use></svg>
                 <p>Lösche alle Daten aus dem lokalen Speicher. Dadurch wird auch die Fehlerliste gelöscht.!</p>
             </button>
         </div>
