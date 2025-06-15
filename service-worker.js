@@ -13,19 +13,19 @@ const ASSETS_TO_CACHE = [
   "images/hersteller/gilgen.png",
   "images/hersteller/dark/gilgen.png",
   "images/symbole/betriebsart-tasten.webp",
-  "images/symbole/d-bedix-reset.webp",
   "images/symbole/nacht.png",
   "images/symbole/nacht.webp",
-  "images/symbole/sl35-control-led.jpg",
-  "images/typen/bedis.png",
+  "images/symbole/SL-35-control-led.jpg",
   "images/typen/c-bedix.png",
-  "images/typen/Control-Panel.png",
-  "images/typen/d-bedix.png",
   "images/typen/fd-10.png",
   "images/typen/sl-35.png",
   "images/typen/slm-red.png",
   "images/typen/slm.png",
-  "images/typen/slx.png"
+  "images/typen/slx.png",
+  "details/reset_sl-35.html",
+  "details/reset_mit_d-bedix.html",
+  "details/reset_mit_c-bedix.html",
+  "details/reset_mit_bedis.html",
 ];
 
 self.addEventListener("install", (event) => {

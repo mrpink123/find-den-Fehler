@@ -203,7 +203,7 @@ input:focus {
     outline: none;
 }
 
-.btnResetFilters {
+.btnReset {
     display: flex;
     background-color: var(--button-bg-light);
     border: none;
@@ -217,14 +217,15 @@ input:focus {
     color: var(--fg);
 }
 
-.btnResetFilters svg {
-    height: 12px;
-    width: 12px;
-}
-
-.btnResetFilters:hover {
+.btnReset:hover {
     color: var(--error);
     background-color: var(--hover-bg);
+}
+
+.btnReset svg {
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
 }
 
 /* Hauptfenster */
@@ -270,7 +271,7 @@ input:focus {
 
 .homeCard {
     margin: 0;
-    transition: all 0.5s ease;
+    transition: all 0.7s ease;
 }
 
 .menu-toggle {
@@ -289,10 +290,20 @@ input:focus {
     transition: background-color 0.3s ease;
 }
 
-.menu-toggle svg {
-    height: 26px;
-    width: 26px;
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  vertical-align: middle;
 }
+
+.icon-small {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  vertical-align: middle;
+}
+
 
 .menu-toggle:hover {
     background-color: var(--hover-bg);
@@ -323,7 +334,6 @@ input:focus {
     position: relative;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
     width: 100%;
     color: var(--fg);
     background-color: var(--button-bg-light);
@@ -333,15 +343,20 @@ input:focus {
     padding: 0 50px;
     align-items: center;
     justify-content: center;
-    text-align: center;
     transition: all 0.2s ease;
 }
 
-.menu button svg {
-    position: absolute;
-    left: 1em;
-    width: 20px;
-    height: 20px;
+.button-icon {
+  position: absolute;
+  left: 1em;
+  width: 2em;
+  height: 2em;
+  color: var(--fg);
+  opacity: 0.7;
+}
+
+.button-text {
+  pointer-events: none; 
 }
 
 #homeResetBtn {
@@ -362,8 +377,8 @@ input:focus {
     border: 2px solid var(--card-border);
     border-radius: 1em;
     margin-bottom: 1em;
-    width: 80vw;
-    max-width: 800px;
+    width: 90vw;
+    max-width: 1000px;
     min-width: 350px;
     min-height: 200px;
     box-shadow: 0 0px 5px var(--shadow);
@@ -454,17 +469,14 @@ input:focus {
     gap: 4px;
 }
 
-.iconLine svg {
-    height: 18px;
-    width: 18px;
-}
-
 .errorDescription p {
     margin: 0 0 0 calc(var(--header-space) + 18px);
 }
 
 .typImageWrapper {
-    display: flex;
+    flex: 1;
+    text-align: center;
+    padding: 1em;
 }
 
 .typImage {
@@ -537,8 +549,58 @@ input:focus {
     border: 1px solid var(--error);
 }
 
+.detailsContainer {
+    font-size: 0.95em;
+}
+
+.detailsContainer h1,
+h2,
+h3 {
+    margin: 0;
+    padding: 0.5em 0 0 0.2em;
+}
+
+.detailsContainer p {
+    margin-left: 0.5em;
+}
+
+.detailsContainer ul {
+    margin-left: 1.7em;
+    padding: 0 0 0.2em 0;
+}
+
+.detailsContainer h1 {
+    font-size: 1.4em;
+    text-align: center;
+}
+
+.detailsContainer h2 {
+    font-size: 1.2em;
+}
+
+.detailsContainer h3 {
+    font-size: 1.1em;
+}
+
+.topContainer {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 1em;
+    justify-items: center;
+}
+
+.topContainer .textBoxSmall {
+    flex: 3 2 400px; 
+    align-content: center;
+}
+
+.topContainer .typImageWrapper img {
+    width: 200px;
+    justify-self: center;
+}
+
 @media (max-width: 650px) {
-    body{
+    body {
         font-size: 0.9em;
     }
 
@@ -572,6 +634,7 @@ input:focus {
 
     .headerCenter {
         grid-area: controls;
+        inset: 0;
     }
 
     .btnResetFilters:hover {
