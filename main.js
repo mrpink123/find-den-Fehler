@@ -344,35 +344,42 @@ function showHomeCard(hinweisText = null) {
     <div class="cardheader">
       <div class="logoContainer">
         <h3>find den Fehler</h3>
-      </div>      
+      </div>
+
       <button class="menu-toggle" id="homeMenuToggle" title="Extras">
         <svg class="icon"><use href="#icon-menu"></use></svg>
       </button>
     </div>
+
     <div class="cardContent">
       <div class="homeContent">
         <div>
-            <svg class="icon-logo"><use href="#icon-logo"></use></svg> 
+          <svg class="icon-logo"><use href="#icon-logo"></use></svg>
         </div>
         <div>
-            <p id="homeMessage">${hinweisText || "Gib einen Fehlercode ein. Oder,<br>Wähle einen Typ um alle Fehler diesen Types zu sehen. Schlagwörter wie \"Reset\", \"Schliessen\" oder \"ohne\" sind auch möglich."}</p>
-      </div>
+          <p id="homeMessage">
+            ${hinweisText || "Gib einen Fehlercode ein. Oder, <br>Wähle einen Typ um alle Fehler diesen Types zu sehen. Schlagwörter wie 'Reset', 'Schliessen' oder 'ohne' sind auch möglich."}
+          </p>
         </div>
       </div>
+
       <div id="homeMenuContainer">
         <div class="menu">
-            <button id="homeCsvBtn">
-                <svg class="button-icon"><use href="#icon-upload"></use></svg>
-                <p>Fehlerliste Laden</p>
-            </button>
-            <button id="homeThemeBtn">
-                <svg class="button-icon"><use href="#icon-theme"></use></svg>            
+          <button id="homeCsvBtn">
+            <svg class="button-icon"><use href="#icon-upload"></use></svg>
+            <p>Fehlerliste Laden</p>
+          </button>
+          <button id="homeThemeBtn">
+            <svg class="button-icon"><use href="#icon-theme"></use></svg>
             <p>Dark / Light Theme</p>
-            </button>
-            <button id="homeResetBtn">
-                <svg class="button-icon"><use href="#icon-trash"></use></svg>
-                <p>Lösche alle Daten aus dem lokalen Speicher. Dadurch wird auch die Fehlerliste gelöscht.!</p>
-            </button>
+          </button>
+          <button id="homeResetBtn">
+            <svg class="button-icon"><use href="#icon-trash"></use></svg>
+            <p>
+              Lösche alle Daten aus dem lokalen Speicher. Dadurch wird auch die
+              Fehlerliste gelöscht.!
+            </p>
+          </button>
         </div>
       </div>
     </div>
