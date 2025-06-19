@@ -24,7 +24,7 @@
             var(--hover-bg) 96%);
     --header-space: 4px;
     --card-content-space: 10px 0;
-    --header-line-height: 30px;
+    --header-line-height: 40px;
 }
 
 [data-theme="dark"] {
@@ -43,21 +43,13 @@
             var(--hover-bg) 96%);
 }
 
-/* Body */
-html,
 body {
-    height: 100%;
-    margin: 0;
-}
-
-body {
-    position: relative;
     background: var(--bg);
     color: var(--fg);
     font-family: system-ui, sans-serif;
     font-size: 1rem;
-    min-height: 100vh;
-    transition: background-color 0.5s, color 0.5s;
+    margin: 0;
+    transition: background-color 0.4s, color 0.4s;
 }
 
 button:disabled {
@@ -71,7 +63,7 @@ header {
     inset: 0;
     z-index: 100;
     background: var(--bg);
-    transition: transform 0.6s ease;
+    transition: transform 0.5s ease;
 }
 
 header.hide {
@@ -106,10 +98,9 @@ header.hide {
     flex-basis: 50px;
 }
 
-/* Kopfzeile Links Inhalt*/
 .icon-logo {
-    width: 40px;
-    height: 40px;
+    width: 7em;
+    height: 7em;
 }
 
 .logoText {
@@ -122,17 +113,12 @@ header.hide {
     justify-content: center;
 }
 
-/* Kopfzeile Mitte Inhalt*/
-.headerCenter * {
-    height: var(--header-line-height);
-}
-
 select,
 input[type="text"] {
     padding: 0 calc(var(--header-line-height) / 2);
-    font-size: 18px;
+    font-size: 1.2em;
     border-radius: calc(var(--header-line-height) / 2);
-    border: 1px solid var(--card-border);
+    border: none;
     background-color: var(--card-bg);
     color: var(--fg);
 }
@@ -143,20 +129,9 @@ input {
 
 input[type="text"] {
     flex: 1 0 0;
-    max-height: calc(var(--header-line-height) - 2px);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right: none;
-}
-
-.selectContainer {
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    max-height: var(--header-line-height);
-    border: 2px solid var(--card-border);
-    border-radius: calc(var(--header-line-height) / 2);
 }
 
 .searchContainer {
@@ -165,7 +140,7 @@ input[type="text"] {
     flex-wrap: nowrap;
     flex-direction: row;
     max-height: var(--header-line-height);
-    border: 2px solid var(--card-border);
+    border: 1px solid var(--card-border);
     border-radius: calc(var(--header-line-height) / 2);
 }
 
@@ -222,12 +197,6 @@ input:focus {
     background-color: var(--hover-bg);
 }
 
-.btnReset svg {
-    width: 14px;
-    height: 14px;
-    pointer-events: none;
-}
-
 /* Hauptfenster */
 .container {
     display: flex;
@@ -245,11 +214,6 @@ input:focus {
     color: var(--logo-fg);
     padding: 0;
     margin: auto;
-}
-
-.logoContainer img {
-    width: 40px;
-    height: 40px;
 }
 
 .logoContainer {
@@ -271,6 +235,7 @@ input:focus {
 .homeCard {
     margin: 0;
     transition: all 0.7s ease;
+    user-select: none;
 }
 
 .menu-toggle {
@@ -290,29 +255,41 @@ input:focus {
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
-  vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    vertical-align: middle;
 }
 
 .icon-small {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-  vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    vertical-align: middle;
 }
-
 
 .menu-toggle:hover {
     background-color: var(--hover-bg);
 }
 
 .homeContent {
+    display: flex;
     flex-grow: 1;
+    flex-wrap: wrap;
     padding-right: 1rem;
     justify-items: center;
+    justify-content: center;
     align-items: center;
+}
+
+.homeContent>div:first-child {
+    text-align: center;
+    flex-basis: 25%;
+    margin: 1em;
+}
+
+.homeContent>div:last-child {
+    flex-basis: 70%;
 }
 
 #homeMenuContainer {
@@ -346,16 +323,16 @@ input:focus {
 }
 
 .button-icon {
-  position: absolute;
-  left: 1em;
-  width: 1.8em;
-  height: 1.8em;
-  color: var(--fg);
-  opacity: 0.7;
+    position: absolute;
+    left: 1em;
+    width: 1.8em;
+    height: 1.8em;
+    color: var(--fg);
+    opacity: 0.7;
 }
 
 .button-text {
-  pointer-events: none; 
+    pointer-events: none;
 }
 
 #homeResetBtn {
@@ -589,7 +566,7 @@ h3 {
 }
 
 .topContainer .textBoxSmall {
-    flex: 3 2 400px; 
+    flex: 3 2 400px;
     align-content: center;
 }
 
@@ -689,5 +666,14 @@ h3 {
     .errorDescription {
         gap: 1em;
     }
+
+    .homeContent {
+        padding: 0;
+    }
+
+    .homeContent>div:last-child {
+        flex-grow: 1;
+    }
+
 
 }
