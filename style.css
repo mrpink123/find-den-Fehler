@@ -116,15 +116,11 @@ header.hide {
 select,
 input[type="text"] {
     padding: 0 calc(var(--header-line-height) / 2);
-    font-size: 1.2em;
+    font-size: 1.1em;
     border-radius: calc(var(--header-line-height) / 2);
     border: none;
     background-color: var(--card-bg);
     color: var(--fg);
-}
-
-input {
-    flex-grow: 1;
 }
 
 input[type="text"] {
