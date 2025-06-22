@@ -1387,7 +1387,7 @@ Gilgen,SL-35,ohne,,Tür verursacht Geräusche,"<ul>
 <li>Defekte Antriebselemente</li>
 </ul>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,schließen im Fehlerfall,schließen schliessen,,,,"<h3>Tür schließen im Fehlerfall</h3>
+Gilgen,SL-35,schließen im Fehlerfall,schließen schliessen zu,,,,"<h3>Tür schließen im Fehlerfall</h3>
 <p>Um im Fehlerfall die Tür zu schließen und zu verriegeln, muss wie folgt vorgegangen werden:<br>
 
 1. Betriebsart NACHT wählen<br>
@@ -2013,4 +2013,4 @@ Record,STA-16,"LED 1, 2, 3, 4",,Parameterspeicher defekt ,Service anrufen,,LED-N
 Record,STA-16,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60 sec aktiv ,SSK-Kontakt wieder lösen ,,LED-Nr Status: 61,Tür bleibt offen ,,images/typen/bde-e.png,
 Record,STA-16,"LED 1, 2, 3, 4, 5",,BDE hat keine Priorität ,Übergeordnete Betriebsart löschen ,Warnung,LED-Nr Status: 62,Übergeordnete Betriebsart steht an ,,images/typen/bde-e.png,
 Record,STA-16,"LED 1, 2, 3, 4, 5, 6",,Kollision (nur bei 24V Version) ,Service anrufen,Warnung,LED-Nr Status: 63,Tür funktioniert ,,images/typen/bde-e.png,
-Record,STA-16,Notöffnung ,Not-auf not oeffnen öffnen ,,,,,,,,details/notauf_sta16.html
+Record,STA-16,Notöffnung ,"notauf, not, oeffnen ",,,,,,,,details/notauf_sta16.html

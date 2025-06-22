@@ -122,6 +122,7 @@ input[type="text"] {
     border: none;
     background-color: var(--card-bg);
     color: var(--fg);
+    height: var(--header-line-height);
 }
 
 input[type="text"] {
@@ -130,6 +131,38 @@ input[type="text"] {
     border-bottom-right-radius: 0;
     border-right: none;
 }
+
+.autocomplete-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+#searchInput,
+#searchHint {
+    font-size: 1.1em;
+    font-family: inherit;
+    padding: 0 calc(var(--header-line-height) / 2);
+    width: 100%;
+    box-sizing: border-box;
+    height: var(--header-line-height);
+}
+
+#searchHint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #999;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#searchInput {
+    position: relative;
+    background: transparent;
+    z-index: 1;
+}
+
 
 .searchContainer {
     display: flex;
@@ -637,7 +670,6 @@ h3 {
     select,
     input[type="text"] {
         padding: 0 calc(var(--header-line-height) / 4);
-        font-size: 16px;
     }
 
     .card {

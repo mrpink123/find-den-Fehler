@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="theme-color" content="#121212" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <script src="papaparse.min.js"></script>
   </head>
 
@@ -23,11 +26,15 @@
         <!-- Kopfzeile Mitte -->
         <div class="headerCenter">
           <div class="searchContainer">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Suche nach Fehler-Code…"
-            />
+            <div class="autocomplete-wrapper">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Suche nach Fehler-Code…"
+                autocomplete="off"
+              />
+              <input type="text" id="searchHint" readonly tabindex="-1" />
+            </div>
             <button
               id="btnClearSearch"
               class="btnReset"

@@ -24,7 +24,7 @@ function showStatusMessage(text, type = "success", timeout = 4000) {
 }
 
 // Debounce Funktion
-function debounce(fn, delay = 300) {
+function debounce(fn, delay = 400) {
   let timer;
   return function (...args) {
     clearTimeout(timer);
@@ -480,11 +480,26 @@ function updateAutocompleteList(data) {
   const datalist = document.getElementById("codeSuggestions");
   if (!datalist) return;
 
-  const uniqueCodes = [...new Set(data.map(d => d.code).filter(Boolean))];
-  datalist.innerHTML = uniqueCodes
-    .sort()
-    .map(code => `<option value="${code}"></option>`)
-    .join("");
+  const codeSet = new Set();
+  const begriffeSet = new Set();
+
+  data.forEach(d => {
+    if (d.code) codeSet.add(d.code);
+    if (d.suchbegriffe) {
+      d.suchbegriffe
+        .split(/\s*,\s*/) // Trenne bei Komma
+        .map(s => s.trim())
+        .filter(Boolean)
+        .forEach(s => begriffeSet.add(s));
+    }
+  });
+
+  // Kombinieren & sortieren
+  const combined = [...codeSet, ...begriffeSet].sort((a, b) =>
+    a.localeCompare(b, "de", { sensitivity: "base" })
+  );
+
+  datalist.innerHTML = combined.map(w => `<option value="${w}"></option>`).join("");
 }
 
 // SVG ins DOM laden
@@ -502,6 +517,7 @@ const searchInput = document.getElementById("searchInput");
 const herstellerFilter = document.getElementById("herstellerFilter");
 const typFilter = document.getElementById("typFilter");
 const container = document.getElementById("container");
+const searchHint = document.getElementById("searchHint");
 let daten = [];
 
 // Theme anwenden
@@ -541,11 +557,16 @@ let ticking = false;
 
 function onScroll() {
   const currentY = window.scrollY;
-  if (currentY > lastScrollY && currentY > 80) {
-    headerEl.classList.add("hide");
-  } else if (currentY < lastScrollY - 6) {
+
+  // Immer sichtbar, wenn ganz oben
+  if (currentY <= 0) {
     headerEl.classList.remove("hide");
+  } else if (currentY > lastScrollY && currentY > 80) {
+    headerEl.classList.add("hide"); // Nach unten scrollen → ausblenden
+  } else if (currentY < lastScrollY - 6) {
+    headerEl.classList.remove("hide"); // Nach oben scrollen → einblenden
   }
+
   lastScrollY = currentY;
   ticking = false;
 }
@@ -567,6 +588,7 @@ function updateControlButtons() {
 // Suche zurücksetzen
 document.getElementById("btnClearSearch").addEventListener("click", () => {
   searchInput.value = "";
+  searchHint.value = "";
   renderDaten();
   updateControlButtons();
 });
@@ -585,6 +607,44 @@ document.getElementById("btnResetFilters").addEventListener("click", () => {
     renderDaten();
     updateControlButtons();
   }, 300));
+});
+
+// Autocomplete für Codes
+searchInput.addEventListener("input", () => {
+  const val = searchInput.value.trim().toLowerCase();
+  if (!val) {
+    searchHint.value = "";
+    return;
+  }
+
+  const match = daten.find(d => {
+    const code = d.code?.toLowerCase() || "";
+    const begriffe = d.suchbegriffe?.toLowerCase().split(/\s*,\s*/).filter(Boolean) || [];
+
+    // Treffer bei Code oder einem beliebigen Suchbegriff
+    return code.startsWith(val) || begriffe.some(w => w.startsWith(val));
+  });
+
+  if (match) {
+    const code = match.code || "";
+    const codeLower = code.toLowerCase();
+
+    // Wenn das eingegebene Wort Teil des Codes ist → nutze code
+    if (codeLower.startsWith(val)) {
+      searchHint.value = searchInput.value + code.slice(val.length);
+    } else {
+      // Ansonsten finde ersten passenden Suchbegriff
+      const begriffe = match.suchbegriffe?.split(/\s*,\s*/).filter(Boolean) || [];
+      const wort = begriffe.find(w => w.toLowerCase().startsWith(val));
+      if (wort) {
+        searchHint.value = searchInput.value + wort.slice(val.length);
+      } else {
+        searchHint.value = "";
+      }
+    }
+  } else {
+    searchHint.value = "";
+  }
 });
 
 // Start
