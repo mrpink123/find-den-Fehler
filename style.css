@@ -16,6 +16,7 @@
     --button-bg-light: rgba(183, 183, 183, 0.25);
     --error: rgb(255, 48, 48);
     --success: #388e3c;
+    --info: #386d8e;
     --shadow: rgba(0, 0, 0, 0.1);
     --hover-bg: rgba(183, 183, 183, 0.4);
     --bg-gradient: linear-gradient(176deg,
@@ -519,6 +520,12 @@ input:focus {
     background-color: #ffcdd2;
     color: var(--error);
     border: 1px solid var(--error);
+}
+
+#statusMessage.info {
+    background-color: #ffcdd2;
+    color: var(--info);
+    border: 1px solid var(--info);
 }
 
 .detailsContainer {
