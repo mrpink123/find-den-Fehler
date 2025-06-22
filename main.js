@@ -54,73 +54,77 @@ function parseCSV(text) {
   }));
 }
 
-function fillDropdowns(data, codeFilter = "", herstellerFilterVal = "", typFilterVal = "") {
-  const allHerstellerLabels = new Map();
-  const allTypLabels = new Map();
-  const herstellerCounts = {};
-  const typCounts = {};
+function fillDropdowns(data, suchwoerter = [], herstellerFilterVal = "", typFilterVal = "") {
+  const herstellerMap = new Map(); // herstellerKey → Originalname
+  const typMap = new Map(); // typKey → Originalname
 
-  const codeRegex = codeFilter ? new RegExp(`\\b${codeFilter}\\b`, "i") : null;
+  const herstellerTreffer = new Map(); // herstellerKey → Anzahl Treffer
+  const typTreffer = new Map(); // typKey → Anzahl Treffer
 
-  // Alle Hersteller und Typen sammeln (alle, unabhängig von Filter)
-  daten.forEach(item => {
-    const herstellerKey = item.hersteller?.toLowerCase() || "";
-    const typKey = item.typ?.toLowerCase() || "";
-
-    if (herstellerKey && !allHerstellerLabels.has(herstellerKey)) {
-      allHerstellerLabels.set(herstellerKey, item.hersteller);
-    }
-    if (typKey && !allTypLabels.has(typKey)) {
-      allTypLabels.set(typKey, item.typ);
-    }
-
-    // Hersteller zählen – unabhängig vom Filter
-    herstellerCounts[herstellerKey] ??= { label: item.hersteller, count: 0 };
-  });
-
-  // Typen zählen – abhängig von Filter
+  // Alle Hersteller + Typen merken
   data.forEach(item => {
-    const herstellerKey = item.hersteller?.toLowerCase() || "";
-    const typKey = item.typ?.toLowerCase() || "";
-    const codeMatch = !codeRegex ||
-      codeRegex.test(item.code) ||
-      (item.suchbegriffe && codeRegex.test(item.suchbegriffe));
+    const hKey = item.hersteller?.toLowerCase() || "";
+    const tKey = item.typ?.toLowerCase() || "";
 
-    const herstellerMatch = !herstellerFilterVal || herstellerKey === herstellerFilterVal;
-
-    if (codeMatch && herstellerMatch && typKey) {
-      typCounts[typKey] ??= { label: item.typ, count: 0 };
-      typCounts[typKey].count++;
-    }
-
-    // Hersteller zählen nur, wenn Treffer für aktuellen Filter
-    if (codeMatch) {
-      herstellerCounts[herstellerKey].count++;
-    }
+    if (!herstellerMap.has(hKey)) herstellerMap.set(hKey, item.hersteller);
+    if (!typMap.has(tKey)) typMap.set(tKey, item.typ);
   });
 
-  // HERSTELLER Dropdown (immer komplett anzeigen)
+  // Treffer zählen (alle Kombinationen mit Suchtext + optional Hersteller)
+  const filtered = filterDaten(data, suchwoerter, "", ""); // kein Filter aktiv
+
+  filtered.forEach(item => {
+    const hKey = item.hersteller?.toLowerCase() || "";
+    const tKey = item.typ?.toLowerCase() || "";
+
+    herstellerTreffer.set(hKey, (herstellerTreffer.get(hKey) || 0) + 1);
+  });
+
+  // Hersteller-Dropdown aufbauen
   herstellerFilter.innerHTML =
     '<option value="">Alle Hersteller</option>' +
-    Array.from(allHerstellerLabels.entries())
+    [...herstellerMap.entries()]
       .sort((a, b) => a[1].localeCompare(b[1]))
-      .map(([key, label]) => {
-        const count = herstellerCounts[key]?.count || 0;
-        return `<option value="${key}">${label} (${count})</option>`;
-      })
+      .map(([key, label]) =>
+        `<option value="${key}">${label} (${herstellerTreffer.get(key) || 0})</option>`
+      )
       .join("");
 
-  // TYP Dropdown (gefiltert)
+  // ---- Typen ----
+  // Alle Typen zum gewählten Hersteller (oder global wenn leer)
+  const typenDesHerstellers = new Map();
+
+  data.forEach(item => {
+    const hKey = item.hersteller?.toLowerCase() || "";
+    const tKey = item.typ?.toLowerCase() || "";
+
+    const passtZumHersteller = !herstellerFilterVal || hKey === herstellerFilterVal;
+    if (passtZumHersteller && !typenDesHerstellers.has(tKey)) {
+      typenDesHerstellers.set(tKey, item.typ);
+    }
+  });
+
+  // Treffer für Typen zählen (Suchtext + Herstellerfilter)
+  const filteredForTyp = filterDaten(data, suchwoerter, herstellerFilterVal, "");
+
+  filteredForTyp.forEach(item => {
+    const key = item.typ?.toLowerCase() || "";
+    typTreffer.set(key, (typTreffer.get(key) || 0) + 1);
+  });
+
+  // Typ-Dropdown aufbauen
   typFilter.innerHTML =
     '<option value="">Alle Typen</option>' +
-    Object.values(typCounts)
-      .sort((a, b) => a.label.localeCompare(b.label))
-      .map(val => `<option value="${val.label.toLowerCase()}">${val.label} (${val.count})</option>`)
+    [...typenDesHerstellers.entries()]
+      .sort((a, b) => a[1].localeCompare(b[1]))
+      .map(([key, label]) =>
+        `<option value="${key}">${label} (${typTreffer.get(key) || 0})</option>`
+      )
       .join("");
 
-  // Wiederherstellen der Auswahl
-  herstellerFilter.value = herstellerFilterVal;
-  typFilter.value = typFilterVal;
+  // Auswahl wiederherstellen
+  herstellerFilter.value = herstellerFilterVal || "";
+  typFilter.value = typFilterVal || "";
 }
 
 function updateAutocompleteList(data) {
@@ -128,6 +132,25 @@ function updateAutocompleteList(data) {
   if (!datalist) return;
   const codes = [...new Set(data.map((d) => d.code).filter(Boolean))];
   datalist.innerHTML = codes.sort().map((c) => `<option value="${c}"></option>`).join("");
+}
+
+function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
+  return data.filter(item => {
+    const code = item.code?.toLowerCase() || "";
+    const suchbegriffe = item.suchbegriffe?.toLowerCase() || "";
+    const itemHersteller = item.hersteller?.toLowerCase() || "";
+    const itemTyp = item.typ?.toLowerCase() || "";
+
+    const matchesSuchtext = suchwoerter.every(w => {
+      const regex = new RegExp(`\\b${w}\\b`, "i");
+      return regex.test(code) || regex.test(suchbegriffe);
+    });
+
+    const matchesHersteller = !hersteller || itemHersteller === hersteller;
+    const matchesTyp = !typ || itemTyp === typ;
+
+    return matchesSuchtext && matchesHersteller && matchesTyp;
+  });
 }
 
 function renderFehlerItem(code, kategorie, text) {
@@ -170,68 +193,110 @@ function renderLinkItem(link) {
     </div>`;
 }
 
+function renderCard(item) {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const typImagePath = item.typImage?.trim() || "";
+  const herstellerImageName = item.hersteller.toLowerCase().replace(/\s+/g, "_") + ".png";
+  const herstellerImagePath = `images/hersteller/${herstellerImageName}`;
+
+  card.innerHTML = `
+    <div class="cardheader">
+      <div class="herstellerImageContainer">
+        <img class="herstellerImage theme-image" src="${herstellerImagePath}"
+             data-theme-light="images/hersteller/${herstellerImageName}"
+             data-theme-dark="images/hersteller/dark/${herstellerImageName}"
+             alt="${item.hersteller}"
+             onerror="this.onerror=null; this.src='images/icons/icon-512.webp'">
+      </div>
+      <div class="cardHeaderTyp">
+        ${item.typ ? `<b>${item.typ}</b>` : ""}
+        ${item.code ? `<p>${item.code}</p>` : ""}
+      </div>
+    </div>
+    <div class="cardContent">
+      <div class="errorDescription">
+        ${item.fehler ? renderFehlerItem(item.code, item.kategorie, item.fehler) : ""}
+        ${item.ursache ? renderUrsacheItem(item.ursache) : ""}
+        ${item.infos ? renderInfoItem(item.infos) : ""}
+        ${item.weitere ? `<div class="errorDescriptionItem"><p>${item.weitere}</p></div>` : ""}
+        <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
+        ${item.link ? renderLinkItem(item.link) : ""}
+      </div>
+      ${typImagePath ? `
+        <div class="typImageWrapper">
+          <img class="typImage" src="${typImagePath}" alt="${item.typ}" 
+               onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
+        </div>` : ""}
+    </div>
+  `;
+
+  // Details nachladen
+  if (item.details) {
+    fetch(item.details)
+      .then(res => res.ok ? res.text() : Promise.reject("Fehler beim Laden"))
+      .then(html => {
+        const detailsDiv = card.querySelector(".detailsContainer");
+        detailsDiv.innerHTML = html;
+      })
+      .catch(() => {
+        const detailsDiv = card.querySelector(".detailsContainer");
+        if (detailsDiv) detailsDiv.innerHTML = `<em>Details konnten nicht geladen werden.</em>`;
+      });
+  } else {
+    const detailsDiv = card.querySelector(".detailsContainer");
+    if (detailsDiv) detailsDiv.remove();
+  }
+
+  return card;
+}
+
 function renderDaten() {
   const suchtext = searchInput.value.trim().toLowerCase();
   const suchwoerter = suchtext.split(/\s+/).filter(w => w.length > 0);
   const hersteller = herstellerFilter.value.trim().toLowerCase();
   const typ = typFilter.value.trim().toLowerCase();
-  const codeFilter = suchwoerter.length > 0 ? suchtext : "";
 
-  const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ;
+  const keineFilter = suchwoerter.length === 0 && !hersteller && !typ;
   const trefferAnzahl = document.getElementById("trefferAnzahl");
   container.innerHTML = "";
 
-  if (keineFilterAktiv) {
+  if (keineFilter) {
     updateAutocompleteList(daten);
-    fillDropdowns(daten, codeFilter, hersteller, typ);
+    fillDropdowns(daten);
     trefferAnzahl.textContent = "";
     showHomeCard();
     return;
   }
 
-  // Daten filtern
-  const filtered = daten.filter(item => {
-    const itemCode = item.code?.toLowerCase() || "";
-    const itemSuchbegriffe = item.suchbegriffe?.toLowerCase() || "";
-    const itemHersteller = item.hersteller?.toLowerCase() || "";
-    const itemTyp = item.typ?.toLowerCase() || "";
+  const gefiltert = filterDaten(daten, suchwoerter, hersteller, typ);
 
-    const matchesSuchtext = suchwoerter.every(w => {
-      const regex = new RegExp(`\\b${w}\\b`, "i");
-      return regex.test(itemCode) || regex.test(itemSuchbegriffe);
-    });
-
-    const matchesHersteller = !hersteller || itemHersteller === hersteller;
-    const matchesTyp = !typ || itemTyp === typ;
-
-    return matchesSuchtext && matchesHersteller && matchesTyp;
-  });
-
-  if (filtered.length === 0) {
+  if (gefiltert.length === 0) {
     updateAutocompleteList(daten);
-    fillDropdowns(daten, codeFilter, hersteller, typ); // Trefferanzahl 0, aber Filteroptionen sichtbar
+    fillDropdowns(daten, suchwoerter, hersteller, typ);
     trefferAnzahl.textContent = "";
     showHomeCard("Keine Treffer gefunden.");
     return;
   }
 
-  fillDropdowns(filtered, codeFilter, hersteller, typ); // Nur gültige Filteroptionen anzeigen
+  fillDropdowns(gefiltert, suchwoerter, hersteller, typ);
   updateAutocompleteList(daten);
-  trefferAnzahl.textContent = `${filtered.length} Treffer`;
+  trefferAnzahl.textContent = `${gefiltert.length} Treffer`;
 
-  filtered.forEach(item => {
+  gefiltert.forEach(item => {
     const card = document.createElement("div");
     card.className = "card";
 
     const typImagePath = item.typImage?.trim() || "";
-    const herstellerImageName = item.hersteller.toLowerCase().replace(/\s+/g, "_") + ".png";
+    const herstellerImageName = item.hersteller?.toLowerCase().replace(/\s+/g, "_") + ".png";
     const herstellerImagePath = `images/hersteller/${herstellerImageName}`;
 
     card.innerHTML = `
       <div class="cardheader">
         <div class="herstellerImageContainer">
           <img class="herstellerImage theme-image" src="${herstellerImagePath}"
-               data-theme-light="images/hersteller/${herstellerImageName}"
+               data-theme-light="${herstellerImagePath}"
                data-theme-dark="images/hersteller/dark/${herstellerImageName}"
                alt="${item.hersteller}"
                onerror="this.onerror=null; this.src='images/icons/icon-512.webp'">
@@ -252,27 +317,23 @@ function renderDaten() {
         </div>
         ${typImagePath ? `
           <div class="typImageWrapper">
-            <img class="typImage" src="${typImagePath}" alt="${item.typ}" 
+            <img class="typImage" src="${typImagePath}" alt="${item.typ}"
                  onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
           </div>` : ""}
       </div>
     `;
-
     container.appendChild(card);
 
-    // Externe HTML-Details laden
     if (item.details) {
       fetch(item.details)
         .then(res => res.ok ? res.text() : Promise.reject("Fehler beim Laden"))
         .then(html => {
           const detailsDiv = card.querySelector(".detailsContainer");
-          detailsDiv.innerHTML = html;
+          if (detailsDiv) detailsDiv.innerHTML = html;
         })
         .catch(() => {
           const detailsDiv = card.querySelector(".detailsContainer");
-          if (detailsDiv) {
-            detailsDiv.innerHTML = `<em>Details konnten nicht geladen werden.</em>`;
-          }
+          if (detailsDiv) detailsDiv.innerHTML = `<em>Details konnten nicht geladen werden.</em>`;
         });
     } else {
       const detailsDiv = card.querySelector(".detailsContainer");
@@ -503,7 +564,14 @@ function updateControlButtons() {
     herstellerFilter.value === "" && typFilter.value === "";
 }
 
-// 🔄 Setzt die Filters zurück (aber NICHT die Sucheingabe!)
+// Suche zurücksetzen
+document.getElementById("btnClearSearch").addEventListener("click", () => {
+  searchInput.value = "";
+  renderDaten();
+  updateControlButtons();
+});
+
+// Filter zurücksetzen
 document.getElementById("btnResetFilters").addEventListener("click", () => {
   herstellerFilter.value = "";
   typFilter.value = "";
@@ -511,17 +579,10 @@ document.getElementById("btnResetFilters").addEventListener("click", () => {
   updateControlButtons();
 });
 
-// 🔄 Löscht die Sucheingabe (aber NICHT die Filterauswahl!)
-document.getElementById("btnClearSearch").addEventListener("click", () => {
-  searchInput.value = "";
-  renderDaten(); // verwendet weiterhin herstellerFilter und typFilter
-  updateControlButtons();
-});
-
-// 🔁 Aktualisiert die Anzeige bei Änderungen an den Eingabefeldern
-[searchInput, herstellerFilter, typFilter].forEach((el) => {
-  el.addEventListener("input", debounce(() => {
-    renderDaten(); // alles wird aktualisiert
+// Reaktion auf jede Eingabe
+[searchInput, herstellerFilter, typFilter].forEach(input => {
+  input.addEventListener("input", debounce(() => {
+    renderDaten();
     updateControlButtons();
   }, 300));
 });

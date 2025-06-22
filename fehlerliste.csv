@@ -2013,4 +2013,4 @@ Record,STA-16,"LED 1, 2, 3, 4",,Parameterspeicher defekt ,Service anrufen,,LED-N
 Record,STA-16,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60 sec aktiv ,SSK-Kontakt wieder lösen ,,LED-Nr Status: 61,Tür bleibt offen ,,images/typen/bde-e.png,
 Record,STA-16,"LED 1, 2, 3, 4, 5",,BDE hat keine Priorität ,Übergeordnete Betriebsart löschen ,Warnung,LED-Nr Status: 62,Übergeordnete Betriebsart steht an ,,images/typen/bde-e.png,
 Record,STA-16,"LED 1, 2, 3, 4, 5, 6",,Kollision (nur bei 24V Version) ,Service anrufen,Warnung,LED-Nr Status: 63,Tür funktioniert ,,images/typen/bde-e.png,
-Record,STA-16,Notöffnung ,öffnen Stromausfall notauf ,,,,,,,,details/notauf_sta16.html
+Record,STA-16,Notöffnung ,Not-auf not oeffnen öffnen ,,,,,,,,details/notauf_sta16.html
