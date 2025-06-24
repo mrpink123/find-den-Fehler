@@ -1,0 +1,75 @@
+<div>
+  <h3>Fehlverhalten ohne Fehler-Nr.</h3>
+  <p>
+    Teilweise ist es technisch nicht möglich, ein Fehlverhalten der Anlage durch
+    eine eindeutige Fehlernummer anzuzeigen. Ein vermeintlicher Fehler kann
+    durchaus auch "richtige" Ursachen haben. Aus diesem Grund wurde
+    die nachfolgende Liste erstellt mit wahrscheinlichen oder
+    bereits angetroffenen Fehlverhalten, deren möglichen Ursachen und den
+    möglichen Massnahmen (Fehlerbehebung).
+  </p>
+  <br />
+  <p>
+    Zudem haben die blinkenden / leuchtenden LED auf der Steuerung
+    CONTROLfolgende Bedeutung:
+  </p>
+  <br />
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px;">
+    <table
+      style="
+        height: 135px;
+        min-width: 350px;
+        border: 1px solid var(--fg);
+        border-radius: 8px;
+        border-spacing: 0;
+      "
+    >
+      <thead style="border: none;">
+        <tr style="background-color: var(--hover-bg);">
+          <th colspan="1" style="padding: 4px; border-top-left-radius: 8px;">
+            LED
+          </th>
+          <th></th>
+          <th style="width: 70%; padding: 4px; border-top-right-radius: 8px;">
+            Bedeutung/Massnahmen
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: rgba(144, 238, 144, 0.5);">
+          <td style="padding: 4px; border: none;">Grün</td>
+          <td style="padding: 4px;">blinkt</td>
+          <td style="padding: 4px;">Prozessor arbeitet.</td>
+        </tr>
+        <tr style="background-color: rgba(156, 194, 255, 0.5);">
+          <td style="padding: 4px;">Blau</td>
+          <td style="padding: 4px;">leuchtet</td>
+          <td style="padding: 4px;">Öffnungsbefehl steht an.</td>
+        </tr>
+        <tr style="background-color: rgba(246, 255, 164, 0.5);">
+          <td style="padding: 4px;">Gelb</td>
+          <td style="padding: 4px;">leuchtet</td>
+          <td style="padding: 4px;">Sicherheitselement aktiv.</td>
+        </tr>
+        <tr style="background-color: rgba(255, 133, 133, 0.5);">
+          <td style="padding: 4px; border-bottom-left-radius: 8px;">Rot</td>
+          <td style="padding: 4px;">blinkt</td>
+          <td style="padding: 4px; border-bottom-right-radius: 8px;">
+            Fehler steht an.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <img
+      src="images/symbole/SL-35-control-led.jpg"
+      alt="control 35 LEDs"
+      style="
+        height: 135px;
+        width: 350px;
+        border: 1px solid var(--fg);
+        border-radius: 8px;
+      "
+      onerror="this.style.display='none'"
+    />
+  </div>
+</div>

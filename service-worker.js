@@ -28,6 +28,7 @@ const ASSETS_TO_CACHE = [
   "images/typen/slm.png",
   "images/typen/slx.png",
   "details/reset_sl-35.html",
+  "details/ohne_fehler_sl35.html",
   "details/reset_mit_d-bedix.html",
   "details/reset_mit_c-bedix.html",
   "details/reset_mit_bedis.html",
