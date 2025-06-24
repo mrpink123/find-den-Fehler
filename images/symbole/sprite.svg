@@ -2305,7 +2305,7 @@
             <path transform="matrix(.1,0,0,-.1,0,842)" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="miter" fill="none" stroke="currentColor" d="M1482.6 2639.6H1515"/>
         </symbol>
 
-        <symbol id="menue_sl35" viewBox="357.3721 664.839 136 108">
+        <symbol id="menue_sl35" viewBox="357.3721 664.839 236 108">
             <defs>
             <clipPath id="clip_0">
             <path transform="matrix(.1,0,0,-.1,0,841.92007)" d="M4424.4 314.398H5245.201V510H4424.4Z" clip-rule="evenodd"/>
