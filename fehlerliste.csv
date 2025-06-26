@@ -1,21 +1,21 @@
 hersteller,typ,code,suchbegriffe,fehler,ursache,info,weitere,kategorie,link,typbild,details
-Gilgen,SLM,1,ANTE,ANTE 1 defekt.,"Überprüfen, ob NOT-AUS-Brücke gesteckt. Wenn ja, ANTE 1 ersetzen. ",,,,"
+Gilgen,SLM,1,,ANTE 1 defekt.,"Überprüfen, ob NOT-AUS-Brücke gesteckt. Wenn ja, ANTE 1 ersetzen. ",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,3,ANTE,ANTE 1 beim Lernen behindert. Weg kleiner als 230 mm.,Tür wird durch ein Hindernis in AUF-Richtung blockiert. Hindernis entfernen und RESET durchführen.,,,,"
+Gilgen,SLM,3,,ANTE 1 beim Lernen behindert. Weg kleiner als 230 mm.,Tür wird durch ein Hindernis in AUF-Richtung blockiert. Hindernis entfernen und RESET durchführen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,4,ANTE,ANTE 1 beim Lernen überlaufen. Weg größer als 9'800 mm.,Einrichtweg größer als 9'800 mm. Riemen und ANTE-Getriebe überprüfen.,,,,"
+Gilgen,SLM,4,,ANTE 1 beim Lernen überlaufen. Weg größer als 9'800 mm.,Einrichtweg größer als 9'800 mm. Riemen und ANTE-Getriebe überprüfen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,5,ANTE,ANTE 1 Reibung zu groß Fahrtwiderstand zu groß.,"Kontrolle Bodenführung, Gegendruckrollen, Riemenspannung und Türflügelgewichte. ",,,,"
+Gilgen,SLM,5,,ANTE 1 Reibung zu groß Fahrtwiderstand zu groß.,"Kontrolle Bodenführung, Gegendruckrollen, Riemenspannung und Türflügelgewichte. ",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,6,ANTE,ANTE 2 defekt.,"Überprüfen, ob NOT-AUS-Brücke gesteckt. Wenn ja, ANTE 2 ersetzen. ",,,,"
+Gilgen,SLM,6,,ANTE 2 defekt.,"Überprüfen, ob NOT-AUS-Brücke gesteckt. Wenn ja, ANTE 2 ersetzen. ",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,7,ANTE,ANTE 2 beim Lernen behindert. Weg kleiner als 230 mm.,Tür wird wahrscheinlich durch ein Hindernis blockiert. Hindernis entfernen.,,,,"
+Gilgen,SLM,7,,ANTE 2 beim Lernen behindert. Weg kleiner als 230 mm.,Tür wird wahrscheinlich durch ein Hindernis blockiert. Hindernis entfernen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,8,ANTE,ANTE 2 beim Lernen überlaufen. Weg größer als 9'800 mm.,Einrichtweg größer als 9'800 mm. Riemen und ANTE-Getriebe überprüfen.,,,,"
+Gilgen,SLM,8,,ANTE 2 beim Lernen überlaufen. Weg größer als 9'800 mm.,Einrichtweg größer als 9'800 mm. Riemen und ANTE-Getriebe überprüfen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,9,ANTE,ANTE 2 Reibung zu groß Fahrtwiderstand zu groß.,"Kontrolle Bodenführung, Gegendruckrollen, Riemenspannung und Türflügelgewichte. ",,,,"
+Gilgen,SLM,9,,ANTE 2 Reibung zu groß Fahrtwiderstand zu groß.,"Kontrolle Bodenführung, Gegendruckrollen, Riemenspannung und Türflügelgewichte. ",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
-Gilgen,SLM,10,KLESE,KLESE defekt.,Software ersetzen. eventuell KLESE ersetzen.,,,,"
+Gilgen,SLM,10,,KLESE defekt.,Software ersetzen. eventuell KLESE ersetzen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
 Gilgen,SLM,11,,Kurzschluss bei 24 V. Externer Anschluss oder KLESE.,24 V-Speisung auf KLESE wurde überlastet oder kurzgeschlossen. Nach 10 Sekunden versucht die Steuerung die 24 V-Speisung erneut einzuschalten.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,
@@ -735,81 +735,81 @@ Gilgen,SLX,Reset mit C-BEDIX,Reset c-bedix slx,,,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/OGJYpBtIdgxj"" target=""_blank""style=""color: var(--fg);"">SLX Betreiberhandbuch</a> ",,details/reset_mit_c-bedix.html
 Gilgen,SLX,Reset mit D-BEDIX,Reset d-bedix slx,,,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/OGJYpBtIdgxj"" target=""_blank""style=""color: var(--fg);"">SLX Betreiberhandbuch</a>",,details/reset_mit_d-bedix.html
-Gilgen,SL-35,E0101,0101,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0101,101,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0102,0102,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0102,102,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0103,0103,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0103,103,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0104,0104,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0104,104,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0105,0105,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0105,105,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0106,0106,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0106,106,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0107,0107,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0107,107,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0108,0108,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0108,108,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0109,0109,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0109,109,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0110,0110,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0110,110,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0111,0111,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0111,111,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0112,0112,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0112,112,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0113,0113,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0113,113,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0114,0114,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
+Gilgen,SL-35,E0114,114,Encoder Fehler,"Encoder Kabel kontrollieren.<br>
 Motor ersetzen.<br>
 Steuerung ersetzen.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0401,0401,Falsche Lichte Breite eingelernt.,"Mechanische Funktion der Tür kontrollieren.<br>
+Gilgen,SL-35,E0401,401,Falsche Lichte Breite eingelernt.,"Mechanische Funktion der Tür kontrollieren.<br>
 Teach durchführen.",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0402,0402,"Tür wurde während dem Teach manuell bewegt.<br>
+Gilgen,SL-35,E0402,402,"Tür wurde während dem Teach manuell bewegt.<br>
 Wenn CO48: Im Menü wurde CO48 nicht ausgewählt","Teach durchführen.<br>
 CO48 auswählen.",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0403,0403,Eingelernter Zuhaltestrom für CO48 Betrieb ist zu hoch (>2 A).,"Gummiseil entspannen.<br>
+Gilgen,SL-35,E0403,403,Eingelernter Zuhaltestrom für CO48 Betrieb ist zu hoch (>2 A).,"Gummiseil entspannen.<br>
 Teach durchführen.",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0404,0404,Position Fehler.,Motor und Getriebe kontrollieren.,,,,"
+Gilgen,SL-35,E0404,404,Position Fehler.,Motor und Getriebe kontrollieren.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0665,0665,Software Fehler.,Reboot durchführen.,,,,"
+Gilgen,SL-35,E0665,665,Software Fehler.,Reboot durchführen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0666,0666,Software Fehler.,Reboot durchführen.,,,,"
+Gilgen,SL-35,E0666,666,Software Fehler.,Reboot durchführen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0701,0701,Gummiseiltest fehlgeschlagen.,Test wird automatisch wiederholt.,,,,"
+Gilgen,SL-35,E0701,701,Gummiseiltest fehlgeschlagen.,Test wird automatisch wiederholt.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
-Gilgen,SL-35,E0702,0702,Gummiseiltest zu oft fehlgeschlagen.,"Gummiseil kontrollieren / ersetzen.<br>
+Gilgen,SL-35,E0702,702,Gummiseiltest zu oft fehlgeschlagen.,"Gummiseil kontrollieren / ersetzen.<br>
 Reboot durchführen.",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,
 Gilgen,SL-35,E1001,1001,Einrichten erforderlich.,"Teach durchführen.<br>
@@ -2018,3 +2018,38 @@ Record,STA-16,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60 sec aktiv,SSK-Kon
 Record,STA-16,"LED 1, 2, 3, 4, 5",,BDE hat keine Priorität,Übergeordnete Betriebsart löschen,Warnung,LED-Nr Status: 62,Übergeordnete Betriebsart steht an,,images/typen/bde-e.png,
 Record,STA-16,"LED 1, 2, 3, 4, 5, 6",,Kollision (nur bei 24V Version),Service anrufen,Warnung,LED-Nr Status: 63,Tür funktioniert,,images/typen/bde-e.png,
 Record,STA-16,Notöffnung,"notauf, not, oeffnen ",,,,,,,,details/notauf_sta16.html
+Record,STA-19,LED 5 ,,Handverriegelt ,,Warnung,LED-Nr Status: 02,,,images/typen/bde-e.png,
+Record,STA-19,"LED 5, 6",,AKI - Sensor länger als 60s aktiv ,,,LED-Nr Status: 03,,,images/typen/bde-e.png,
+Record,STA-19,LED 4,,Handbetrieb ,,Warnung,LED-Nr Status: 04,,,images/typen/bde-e.png,
+Record,STA-19,"LED 4, 6",,AKA - Sensor länger als 60s aktiv ,,,LED-Nr Status: 05,,,images/typen/bde-e.png,
+Record,STA-19,"LED 4, 5",,Entriegelungsfehler ,,,LED-Nr Status: 06,,,images/typen/bde-e.png,
+Record,STA-19,"LED 3, 6",,Falsche oder keine Batterie vorhanden ,,,LED-Nr Status: 09,,,images/typen/bde-e.png,
+Record,STA-19,"LED 3, 5",,Verriegelungsfehler ,,,LED-Nr Status: 10,,,images/typen/bde-e.png,
+Record,STA-19,"LED 3, 4",,Batterie defekt (Spannung zu tief) ,,Warnung,LED-Nr Status: 12,,,images/typen/bde-e.png,
+Record,STA-19,"LED 3, 4, 5",,Verriegelungsarbeitskontakt defekt ,,,LED-Nr Status: 14,,,images/typen/bde-e.png,
+Record,STA-19,"LED 2, 5",,Kurzschluss am Verriegelungsarbeitskontakt oder Verriegelungsoffenschalter defekt ,,,LED-Nr Status: 18,,,images/typen/bde-e.png,
+Record,STA-19,"LED 2, 4",,CO48 Gummiseil Bruch ,,nur bei CO48-Anlagen ,LED-Nr Status: 20,,,images/typen/bde-e.png,
+Record,STA-19,"LED 2, 3, 4, 5, 6",,NOT-AUS Taste betätigt ,,,LED-Nr Status: 31,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 6",,Fehler ELS1 ,,,LED-Nr Status: 33,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 5",,Fehler ELS2,,,LED-Nr Status: 34,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 4, 6",,Fehlerhafter Motorstrom ,,,LED-Nr Status: 37,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 4, 5",,Übertemperatur Motor ,,,LED-Nr Status: 38,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 4, 5, 6",,Überlast auf +24V Speisung ,,,LED-Nr Status: 39,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 3, 6",,Motor - Thermofühler defekt ,,,LED-Nr Status: 41,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 3, 5, 6",,Inkrementalgeber defekt ,,,LED-Nr Status: 43,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 3, 4",,Motorstrom - Zeitprodukt groß ,,Warnung,LED-Nr Status: 44,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 3, 4, 6",,Motorstrom - Zeitprodukt zu groß ,,,LED-Nr Status: 45,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 3, 4, 5",,Steuergerät defekt ,,,LED-Nr Status: 46,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 3, 4, 5, 6",,Ext. Sicherheit länger als 60s aktiv ,,,LED-Nr Status: 47,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2",,NSK oder SÖK aktiv ,,,LED-Nr Status: 48,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 6",,Alarm CO48 Ventouse ,,nur bei CO48-Anlagen ,LED-Nr Status: 49,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 5",,Watchdog Fehler ,,,LED-Nr Status: 50,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 5, 6",,Software Versionsfehler ,,,LED-Nr Status: 51,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 4, 6",,Unterbruch Motor ,,,LED-Nr Status: 53,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 4, 5",,Eichlauf ,,Warnung,LED-Nr Status: 54,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 4, 5, 6",,Netzausfall ,,,LED-Nr Status: 55,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 3",,Bremse Defekt ,,,LED-Nr Status: 56,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 3, 5, 6",,ELS - Sensor länger als 60s aktiv ,,,LED-Nr Status: 59,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 3, 4",,Parameterspeicher defekt (EEPROM) ,,,LED-Nr Status: 60,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60s aktiv ,,,LED-Nr Status: 61,,,images/typen/bde-e.png,
+Record,STA-19,"LED 1, 2, 3, 4, 8",,BDE hat keine Priorität ,,Warnung,LED-Nr Status: 62,,,images/typen/bde-e.png,
