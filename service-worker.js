@@ -1,4 +1,4 @@
-const CACHE_NAME = "fehlercode-cache-v1.0.1";
+const CACHE_NAME = "fehlercode-cache-v1.0.2";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",
@@ -27,6 +27,7 @@ const ASSETS_TO_CACHE = [
   "images/typen/slm-red.png",
   "images/typen/slm.png",
   "images/typen/slx.png",
+  "details/notauf_sta16.html",
   "details/reset_sl-35.html",
   "details/ohne_fehler_sl35.html",
   "details/reset_mit_d-bedix.html",
