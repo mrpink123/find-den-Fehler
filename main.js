@@ -32,6 +32,13 @@ function debounce(fn, delay = 400) {
   };
 }
 
+function escapeRegExp(string) {
+  if (typeof string !== "string") {
+    string = String(string || "");
+  }
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function parseCSV(text) {
   const result = Papa.parse(text, { header: true, skipEmptyLines: true });
   if (result.errors.length > 0) {
@@ -54,77 +61,86 @@ function parseCSV(text) {
   }));
 }
 
-function fillDropdowns(data, suchwoerter = [], herstellerFilterVal = "", typFilterVal = "") {
-  const herstellerMap = new Map(); // herstellerKey → Originalname
-  const typMap = new Map(); // typKey → Originalname
+function applyFiltersFromHash() {
+  const hash = new URLSearchParams(window.location.hash.slice(1));
 
-  const herstellerTreffer = new Map(); // herstellerKey → Anzahl Treffer
-  const typTreffer = new Map(); // typKey → Anzahl Treffer
+  const code = hash.get("code") || "";
+  const hersteller = (hash.get("hersteller") || "").toLowerCase();
+  const typ = (hash.get("typ") || "").toLowerCase();
 
-  // Alle Hersteller + Typen merken
+  searchInput.value = code;
+  herstellerFilter.value = hersteller;
+  typFilter.value = typ;
+
+  renderDaten();
+}
+
+function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedTyp = "") {
+  const herstellerMap = new Map(); // key → label
+  const typMap = new Map();        // key → label
+  const herstellerTreffer = new Map(); // key → count
+  const typTreffer = new Map();        // key → count
+
+  const codeRegex = codeFilter ? new RegExp(`\\b${escapeRegExp(codeFilter)}\\b`, "i") : null;
+
+  // Alle Hersteller + Typen merken (aus Gesamt-Daten)
+  daten.forEach(item => {
+    const hKey = item.hersteller?.toLowerCase() || "";
+    const tKey = item.typ?.toLowerCase() || "";
+
+    if (hKey && !herstellerMap.has(hKey)) herstellerMap.set(hKey, item.hersteller);
+    if (tKey && !typMap.has(tKey)) typMap.set(tKey, item.typ);
+  });
+
+  // Treffer zählen (Code muss matchen)
   data.forEach(item => {
     const hKey = item.hersteller?.toLowerCase() || "";
     const tKey = item.typ?.toLowerCase() || "";
 
-    if (!herstellerMap.has(hKey)) herstellerMap.set(hKey, item.hersteller);
-    if (!typMap.has(tKey)) typMap.set(tKey, item.typ);
+    const codeMatch = !codeRegex ||
+      codeRegex.test(item.code) ||
+      (item.suchbegriffe && codeRegex.test(item.suchbegriffe));
+
+    if (!codeMatch) return;
+
+    if (hKey) herstellerTreffer.set(hKey, (herstellerTreffer.get(hKey) || 0) + 1);
+    if (tKey) typTreffer.set(tKey, (typTreffer.get(tKey) || 0) + 1);
   });
 
-  // Treffer zählen (alle Kombinationen mit Suchtext + optional Hersteller)
-  const filtered = filterDaten(data, suchwoerter, "", ""); // kein Filter aktiv
+  // Hersteller Dropdown
+  const herstellerOptions = ['<option value="">Alle Hersteller</option>'];
+  for (const [key, label] of Array.from(herstellerMap.entries()).sort((a, b) => (a[1] || "").localeCompare(b[1] || ""))) {
+    const count = herstellerTreffer.get(key);
+    const labelWithCount = count > 0 ? `${label} (${count})` : label;
+    herstellerOptions.push(`<option value="${key}" ${key === selectedHersteller ? "selected" : ""}>${labelWithCount}</option>`);
+  }
+  herstellerFilter.innerHTML = herstellerOptions.join("");
 
-  filtered.forEach(item => {
-    const hKey = item.hersteller?.toLowerCase() || "";
-    const tKey = item.typ?.toLowerCase() || "";
+  // Typen Dropdown
+  const typOptions = ['<option value="">Alle Typen</option>'];
+  const selectedHerstellerKey = selectedHersteller.toLowerCase();
 
-    herstellerTreffer.set(hKey, (herstellerTreffer.get(hKey) || 0) + 1);
-  });
+  for (const [typKey, label] of Array.from(typMap.entries()).sort((a, b) => (a[1] || "").localeCompare(b[1] || ""))) {
+    const gehörtZumHersteller = !selectedHersteller || daten.some(d =>
+      d.typ.toLowerCase() === typKey &&
+      d.hersteller.toLowerCase() === selectedHerstellerKey
+    );
 
-  // Hersteller-Dropdown aufbauen
-  herstellerFilter.innerHTML =
-    '<option value="">Alle Hersteller</option>' +
-    [...herstellerMap.entries()]
-      .sort((a, b) => a[1].localeCompare(b[1]))
-      .map(([key, label]) =>
-        `<option value="${key}">${label} (${herstellerTreffer.get(key) || 0})</option>`
-      )
-      .join("");
+    if (!gehörtZumHersteller) continue;
 
-  // ---- Typen ----
-  // Alle Typen zum gewählten Hersteller (oder global wenn leer)
-  const typenDesHerstellers = new Map();
+    const count = typTreffer.get(typKey);
+    const labelWithCount = count > 0 ? `${label} (${count})` : label;
+    typOptions.push(`<option value="${typKey}" ${typKey === selectedTyp ? "selected" : ""}>${labelWithCount}</option>`);
+  }
 
-  data.forEach(item => {
-    const hKey = item.hersteller?.toLowerCase() || "";
-    const tKey = item.typ?.toLowerCase() || "";
+  typFilter.innerHTML = typOptions.join("");
 
-    const passtZumHersteller = !herstellerFilterVal || hKey === herstellerFilterVal;
-    if (passtZumHersteller && !typenDesHerstellers.has(tKey)) {
-      typenDesHerstellers.set(tKey, item.typ);
-    }
-  });
-
-  // Treffer für Typen zählen (Suchtext + Herstellerfilter)
-  const filteredForTyp = filterDaten(data, suchwoerter, herstellerFilterVal, "");
-
-  filteredForTyp.forEach(item => {
-    const key = item.typ?.toLowerCase() || "";
-    typTreffer.set(key, (typTreffer.get(key) || 0) + 1);
-  });
-
-  // Typ-Dropdown aufbauen
-  typFilter.innerHTML =
-    '<option value="">Alle Typen</option>' +
-    [...typenDesHerstellers.entries()]
-      .sort((a, b) => a[1].localeCompare(b[1]))
-      .map(([key, label]) =>
-        `<option value="${key}">${label} (${typTreffer.get(key) || 0})</option>`
-      )
-      .join("");
-
-  // Auswahl wiederherstellen
-  herstellerFilter.value = herstellerFilterVal || "";
-  typFilter.value = typFilterVal || "";
+  // Sicherstellen: Wenn der aktuell gewählte Typ nicht mehr passt → zurücksetzen
+  const typIsValid = [...typMap.keys()].some(t =>
+    t === selectedTyp &&
+    (!selectedHersteller || daten.some(d => d.typ.toLowerCase() === t && d.hersteller.toLowerCase() === selectedHerstellerKey))
+  );
+  if (!typIsValid) typFilter.value = "";
 }
 
 function updateAutocompleteList(data) {
@@ -142,8 +158,9 @@ function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
     const itemTyp = item.typ?.toLowerCase() || "";
 
     const matchesSuchtext = suchwoerter.every(w => {
-      const regex = new RegExp(`\\b${w}\\b`, "i");
-      return regex.test(code) || regex.test(suchbegriffe);
+      const regex = new RegExp(`\\b${w.normalize("NFD").replace(/\p{Diacritic}/gu, "")}\\b`, "i");
+      return regex.test(code.normalize("NFD").replace(/\p{Diacritic}/gu, "")) ||
+        regex.test(suchbegriffe.normalize("NFD").replace(/\p{Diacritic}/gu, ""));
     });
 
     const matchesHersteller = !hersteller || itemHersteller === hersteller;
@@ -257,46 +274,67 @@ function renderDaten() {
   const suchwoerter = suchtext.split(/\s+/).filter(w => w.length > 0);
   const hersteller = herstellerFilter.value.trim().toLowerCase();
   const typ = typFilter.value.trim().toLowerCase();
-
-  const keineFilter = suchwoerter.length === 0 && !hersteller && !typ;
+  const codeFilter = suchwoerter.length > 0 ? suchtext : "";
   const trefferAnzahl = document.getElementById("trefferAnzahl");
+  const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ;
   container.innerHTML = "";
 
-  if (keineFilter) {
+  // Keine aktiven Filter → HomeCard zeigen
+  if (keineFilterAktiv) {
+    history.replaceState(null, "", location.pathname); // ⬅️ Reset URL (entfernt #hash)
     updateAutocompleteList(daten);
-    fillDropdowns(daten);
+    fillDropdowns(daten, "", "", "");
     trefferAnzahl.textContent = "";
     showHomeCard();
     return;
   }
 
-  const gefiltert = filterDaten(daten, suchwoerter, hersteller, typ);
+  // Daten filtern
+  const filtered = daten.filter(item => {
+    const itemCode = item.code?.toLowerCase() || "";
+    const itemSuchbegriffe = item.suchbegriffe?.toLowerCase() || "";
+    const itemHersteller = item.hersteller?.toLowerCase() || "";
+    const itemTyp = item.typ?.toLowerCase() || "";
 
-  if (gefiltert.length === 0) {
+    const matchesSuchtext = suchwoerter.every(w => {
+      const regex = new RegExp(`\\b${w}\\b`, "i");
+      return regex.test(itemCode) || regex.test(itemSuchbegriffe);
+    });
+
+    const matchesHersteller = !hersteller || itemHersteller === hersteller;
+    const matchesTyp = !typ || itemTyp === typ;
+
+    return matchesSuchtext && matchesHersteller && matchesTyp;
+  });
+
+  // Keine Treffer → HomeCard mit Hinweis
+  if (filtered.length === 0) {
     updateAutocompleteList(daten);
-    fillDropdowns(daten, suchwoerter, hersteller, typ);
+    fillDropdowns(daten, codeFilter, hersteller, typ);
     trefferAnzahl.textContent = "";
     showHomeCard("Keine Treffer gefunden.");
     return;
   }
 
-  fillDropdowns(gefiltert, suchwoerter, hersteller, typ);
+  // Treffer anzeigen
+  fillDropdowns(filtered, codeFilter, hersteller, typ);
   updateAutocompleteList(daten);
-  trefferAnzahl.textContent = `${gefiltert.length} Treffer`;
+  updateURLHash(suchtext, hersteller, typ);
+  trefferAnzahl.textContent = `${filtered.length} Treffer`;
 
-  gefiltert.forEach(item => {
+  filtered.forEach(item => {
     const card = document.createElement("div");
     card.className = "card";
 
     const typImagePath = item.typImage?.trim() || "";
-    const herstellerImageName = item.hersteller?.toLowerCase().replace(/\s+/g, "_") + ".png";
+    const herstellerImageName = item.hersteller.toLowerCase().replace(/\s+/g, "_") + ".png";
     const herstellerImagePath = `images/hersteller/${herstellerImageName}`;
 
     card.innerHTML = `
       <div class="cardheader">
         <div class="herstellerImageContainer">
           <img class="herstellerImage theme-image" src="${herstellerImagePath}"
-               data-theme-light="${herstellerImagePath}"
+               data-theme-light="images/hersteller/${herstellerImageName}"
                data-theme-dark="images/hersteller/dark/${herstellerImageName}"
                alt="${item.hersteller}"
                onerror="this.onerror=null; this.src='images/icons/icon-512.webp'">
@@ -317,19 +355,21 @@ function renderDaten() {
         </div>
         ${typImagePath ? `
           <div class="typImageWrapper">
-            <img class="typImage" src="${typImagePath}" alt="${item.typ}"
+            <img class="typImage" src="${typImagePath}" alt="${item.typ}" 
                  onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
           </div>` : ""}
       </div>
     `;
+
     container.appendChild(card);
 
+    // Details laden
     if (item.details) {
       fetch(item.details)
         .then(res => res.ok ? res.text() : Promise.reject("Fehler beim Laden"))
         .then(html => {
           const detailsDiv = card.querySelector(".detailsContainer");
-          if (detailsDiv) detailsDiv.innerHTML = html;
+          detailsDiv.innerHTML = html;
         })
         .catch(() => {
           const detailsDiv = card.querySelector(".detailsContainer");
@@ -354,26 +394,31 @@ function updateThemeAssets(theme) {
 function loadData() {
   const savedCSV = storage.getItem("csvData");
 
-  if (savedCSV) {
-    daten = parseCSV(savedCSV);
-    fillDropdowns(daten);
+  const finishLoad = (text) => {
+    daten = parseCSV(text);
+    storage.setItem("csvData", text);
+    updateAutocompleteList(daten);
+
+    const hersteller = herstellerFilter.value.trim().toLowerCase();
+    const typ = typFilter.value.trim().toLowerCase();
+    fillDropdowns(daten, "", hersteller, typ);
+
     renderDaten();
-    showStatusMessage("Gespeicherte Fehlercodes erfolgreich geladen.", "success");
+    showStatusMessage("Fehlercodes erfolgreich geladen.", "success");
+  };
+
+  if (savedCSV) {
+    finishLoad(savedCSV);
   } else {
     fetch("fehlerliste.csv")
       .then(res => {
         if (!res.ok) throw new Error("Fehlerliste nicht gefunden");
         return res.text();
       })
-      .then(text => {
-        daten = parseCSV(text);
-        storage.setItem("csvData", text);
-        fillDropdowns(daten);
-        renderDaten();
-        showStatusMessage("Fehlercodes erfolgreich geladen.", "success");
-      })
+      .then(finishLoad)
       .catch(() => {
-        showHomeCard("⚠️ Fehlerliste konnte nicht geladen werden.");
+        showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+        showHomeCard();
       });
   }
 }
@@ -580,33 +625,54 @@ window.addEventListener("scroll", () => {
 
 // 🔁 Aktualisiert die Steuerungs-Buttons (Sichtbarkeit / Aktivierung)
 function updateControlButtons() {
-  document.getElementById("btnClearSearch").disabled = searchInput.value.trim() === "";
-  document.getElementById("btnResetFilters").disabled =
-    herstellerFilter.value === "" && typFilter.value === "";
+  const hasText = searchInput.value.trim() !== "";
+  const hasFilter = herstellerFilter.value !== "" || typFilter.value !== "";
+  document.getElementById("btnClearSearch").disabled = !hasText;
+  document.getElementById("btnResetFilters").disabled = !hasFilter;
 }
 
-// Suche zurücksetzen
+function updateURLHash() {
+  const params = new URLSearchParams();
+  const code = searchInput.value.trim();
+  const hersteller = herstellerFilter.value.trim();
+  const typ = typFilter.value.trim();
+
+  if (code) params.set("code", code);
+  if (hersteller) params.set("hersteller", hersteller);
+  if (typ) params.set("typ", typ);
+
+  const newHash = params.toString();
+  history.replaceState(null, "", newHash ? `#${newHash}` : location.pathname);
+}
+
+function resetHash() {
+  history.replaceState(null, "", location.pathname);
+}
+
+// Eingabeänderung löst Debounce aus
+[searchInput, herstellerFilter, typFilter].forEach((input) => {
+  input.addEventListener("input", debounce(() => {
+    updateURLHash();
+    renderDaten();
+    updateControlButtons();
+  }, 200));
+});
+
+// Suchfeld leeren (Button)
 document.getElementById("btnClearSearch").addEventListener("click", () => {
   searchInput.value = "";
   searchHint.value = "";
+  resetHash();
   renderDaten();
   updateControlButtons();
 });
 
-// Filter zurücksetzen
+// Filter-Reset-Button
 document.getElementById("btnResetFilters").addEventListener("click", () => {
   herstellerFilter.value = "";
   typFilter.value = "";
   renderDaten();
   updateControlButtons();
-});
-
-// Reaktion auf jede Eingabe
-[searchInput, herstellerFilter, typFilter].forEach(input => {
-  input.addEventListener("input", debounce(() => {
-    renderDaten();
-    updateControlButtons();
-  }, 300));
 });
 
 // Autocomplete für Codes
@@ -647,6 +713,15 @@ searchInput.addEventListener("input", () => {
   }
 });
 
+function parseURLHash() {
+  const params = new URLSearchParams(window.location.hash.slice(1));
+  searchInput.value = decodeURIComponent(params.get("code") || "");
+  herstellerFilter.value = decodeURIComponent(params.get("hersteller") || "");
+  typFilter.value = decodeURIComponent(params.get("typ") || "");
+}
+parseURLHash();
+
 // Start
 loadData();
 updateControlButtons();
+applyFiltersFromHash();

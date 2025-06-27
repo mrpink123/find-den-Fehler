@@ -678,24 +678,18 @@ h3 {
         overflow: hidden;
     }
 
-    .cardContent {
-        display: flex;
-        gap: 1em;
-        margin: 1em var(--header-space);
-        flex-direction: column-reverse;
-    }
-
     .typImageWrapper {
         align-items: center;
         justify-content: center;
     }
 
     .cardContent {
+        display: flex;
         flex-wrap: wrap;
         flex-direction: column-reverse;
         align-items: center;
-        gap: 0, 5em;
-        margin: 1em 0.5em;
+        gap: 0.5em;
+        margin: 1em var(--header-space);
     }
 
     .errorDescription {
