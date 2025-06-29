@@ -23,6 +23,30 @@ function showStatusMessage(text, type = "success", timeout = 4000) {
   setTimeout(() => (box.className = ""), timeout);
 }
 
+function checkForPWAUpdate() {
+  if (!('serviceWorker' in navigator)) return;
+
+  navigator.serviceWorker.getRegistration().then(reg => {
+    if (reg && reg.waiting) {
+      storage.setItem("pwaUpdateAvailable", "true");
+      showHomeCard(null, true);
+    }
+
+    reg?.addEventListener("updatefound", () => {
+      const newWorker = reg.installing;
+      newWorker?.addEventListener("statechange", () => {
+        if (
+          newWorker.state === "installed" &&
+          navigator.serviceWorker.controller
+        ) {
+          storage.setItem("pwaUpdateAvailable", "true");
+          showHomeCard(null, true);
+        }
+      });
+    });
+  });
+}
+
 // Debounce Funktion
 function debounce(fn, delay = 400) {
   let timer;
@@ -277,6 +301,8 @@ function renderDaten() {
   const codeFilter = suchwoerter.length > 0 ? suchtext : "";
   const trefferAnzahl = document.getElementById("trefferAnzahl");
   const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ;
+  const updateHinweis = storage.getItem("pwaUpdateAvailable") === "true";
+
   container.innerHTML = "";
 
   // Keine aktiven Filter → HomeCard zeigen
@@ -285,7 +311,7 @@ function renderDaten() {
     updateAutocompleteList(daten);
     fillDropdowns(daten, "", "", "");
     trefferAnzahl.textContent = "";
-    showHomeCard();
+    showHomeCard(null, updateHinweis);
     return;
   }
 
@@ -423,7 +449,7 @@ function loadData() {
   }
 }
 
-function showHomeCard(hinweisText = null) {
+function showHomeCard(hinweisText = null, updateHinweis = false) {
   container.innerHTML = "";
 
   const homeCard = document.createElement("div");
@@ -437,12 +463,13 @@ function showHomeCard(hinweisText = null) {
         <svg class="icon"><use href="#icon-menu"></use></svg>
       </button>
     </div>
+    <div id="updateInfoContainer"></div>
     <div class="cardContent">
       <div class="homeContent">
-        <div>
-          <svg class="icon-logo"><use href="#icon-logo"></use></svg>
+        <div class="logo-box">
+          <svg><use href="#logo"></use></svg>
         </div>
-        <div>
+        <div class="homeText">
           <p id="homeMessage">
             ${hinweisText || `Gib einen Fehlercode ein. Oder,<br>Wähle einen Typ um alle Fehler diesen Types zu sehen. Schlagwörter wie "Reset", "Schliessen" oder "ohne" sind auch möglich.`}
           </p>
@@ -464,9 +491,32 @@ function showHomeCard(hinweisText = null) {
           </button>
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
+
   container.appendChild(homeCard);
+
+  // ⬇ Optionales Update-Hinweis-Div einfügen
+  if (updateHinweis) {
+    const updateInfo = document.createElement("div");
+    updateInfo.className = "updateInfo";
+    updateInfo.innerHTML = `
+      <p><strong>🔄 Eine neue Version ist verfügbar.</strong></p>
+      <button id="btnReload">
+        <svg class="button-icon"><use href="#icon-update"></use></svg>
+        <p>Jetzt aktualisieren</p>
+      </button>
+    `;
+    document.getElementById("updateInfoContainer").appendChild(updateInfo);
+
+    // Button-Listener
+    const reloadBtn = document.getElementById("btnReload");
+    if (reloadBtn) {
+      reloadBtn.addEventListener("click", () => {
+        storage.removeItem("pwaUpdateAvailable");
+        location.reload(true);
+      });
+    }
+  }
 
   document.getElementById("homeMenuToggle")?.addEventListener("click", (e) => {
     const menu = document.getElementById("homeMenuContainer");
@@ -572,14 +622,15 @@ if (savedTheme) {
   updateThemeAssets(savedTheme);
 }
 
-// Service Worker
+// Service Worker registrieren und auf Update prüfen
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js").then(reg => {
     reg.onupdatefound = () => {
       const newWorker = reg.installing;
       newWorker.onstatechange = () => {
         if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-          showStatusMessage("🔄 Neue Version verfügbar. Seite neu laden.", "info");
+          storage.setItem("pwaUpdateAvailable", "true");
+          showHomeCard(null, true);
         }
       };
     };
@@ -725,3 +776,5 @@ parseURLHash();
 loadData();
 updateControlButtons();
 applyFiltersFromHash();
+checkForPWAUpdate();
+
