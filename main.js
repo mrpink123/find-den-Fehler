@@ -330,7 +330,7 @@ function renderDaten() {
 
   // Anzeige der Cards
   if (filtered.length > 100) {
-    showStatusMessage("Große Liste wird geladen…", "info", 3000);
+    showStatusMessage("Große Liste wird geladen…", "info", 1500);
     renderDatenLazy(filtered);
   } else {
     filtered.forEach(item => renderCard(item));
