@@ -327,13 +327,12 @@ input:focus {
 }
 
 .homeContent>div:last-child {
-    flex-basis: 50%;
+    flex-basis: 40%;
 }
 
 #homeMenuContainer {
     flex-grow: 1;
     flex-basis: 50%;
-    max-width: 50%;
     display: none;
     padding-left: 1rem;
     border-left: 1px solid var(--card-border);
@@ -647,35 +646,44 @@ h3 {
 .updateInfo {
     display: flex;
     flex-wrap: wrap;
-    background: var(--highlight);
-    padding: 0 0.3em;
-    margin: 0.5em;
+    min-height: 50px;
+    background: var(--bg-gradient);
     border-radius: 8px;
-    text-align: center;
-    align-items: center;
-    justify-content: space-between;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    justify-content:right;
     color: var(--fg);
-    border: 1px solid var(--card-border);
 }
 
 .updateInfo button {
-    width: fit-content;
-    margin: 0.5em 0;
-    background-color: var(--button-bg);
+    display: flex;
+    padding: 0;
+    height: 40px;
+    max-width: 40px;
+    background: var(--bg-2);
+    border: none;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: var(--fg);
+    margin: 0.5rem;
+    transition: background-color 0.4s ease;
 }
 
 .updateInfo button:hover {
-    background-color: var(--bg-2);
-    box-shadow: 0 0 4px var(--shadow);
+    background-color: var(--hover-bg);
 }
 
-.updateInfo button p {
-    margin-left: 20px;
+.updateInfo button svg {
+    padding-top: 2px;
+    height: 30px;
+    aspect-ratio: 1;
+    fill: currentColor;
+    vertical-align: middle;
 }
 
-.updateInfo p {
-    min-width: fit-content;
-}
 
 @media (max-width: 650px) {
     body {

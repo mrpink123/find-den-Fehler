@@ -18,6 +18,7 @@ const storage = getStorage();
 
 function showStatusMessage(text, type = "success", timeout = 4000) {
   const box = document.getElementById("statusMessage");
+  if (!box) return;
   box.innerHTML = (type === "success" ? "✅ " : "⚠️ ") + text;
   box.className = `show ${type}`;
   setTimeout(() => (box.className = ""), timeout);
@@ -413,7 +414,6 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
         <svg class="icon"><use href="#icon-menu"></use></svg>
       </button>
     </div>
-    <div id="updateInfoContainer"></div>
     <div class="cardContent">
       <div class="homeContent">
         <div class="logo-box">
@@ -441,7 +441,9 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
           </button>
         </div>
       </div>
-    </div>`;
+    </div>
+    <div id="updateInfoContainer"></div>    
+    `;
 
   container.appendChild(homeCard);
 
@@ -451,14 +453,12 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
     updateDiv.className = "updateInfo";
     updateDiv.innerHTML = `
       <p>🔄 Eine neue Version ist verfügbar.</p>
-      <button id="applyUpdateBtn">
-        <svg class="button-icon"><use href="#icon-update"></use></svg>
-        <p>Jetzt aktualisieren</p>
+      <button id="applyUpdateBtn" title="Jetzt aktualisieren">
+        <svg><use href="#icon-update"></use></svg>
       </button>
     `;
 
     document.getElementById("updateInfoContainer").appendChild(updateDiv);
-
     document.getElementById("applyUpdateBtn").addEventListener("click", () => {
       window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
     });
@@ -555,12 +555,11 @@ function showUpdateButton() {
 
     const updateDiv = document.createElement("div");
     updateDiv.id = "updateMessage";
-    updateDiv.className = "updateNotice";
+    updateDiv.className = "updateInfo";
     updateDiv.innerHTML = `
       <p>🔄 Eine neue Version ist verfügbar.</p>
-      <button id="applyUpdateBtn">
+      <button id="applyUpdateBtn" title="Jetzt aktualisieren">
         <svg class="button-icon"><use href="#icon-update"></use></svg>
-        <p>Jetzt aktualisieren</p>
       </button>
     `;
 
@@ -714,7 +713,7 @@ function resetHash() {
 document.getElementById("btnClearSearch").addEventListener("click", () => {
   searchInput.value = "";
   searchHint.value = "";
-  resetHash();
+  updateURLHash();
   renderDaten();
   updateControlButtons();
 });
@@ -723,6 +722,7 @@ document.getElementById("btnClearSearch").addEventListener("click", () => {
 document.getElementById("btnResetFilters").addEventListener("click", () => {
   herstellerFilter.value = "";
   typFilter.value = "";
+  updateURLHash();
   renderDaten();
   updateControlButtons();
 });
