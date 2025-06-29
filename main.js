@@ -273,13 +273,14 @@ function renderCard(item) {
     </div>
   `;
 
-  // Details nachladen
+  container.appendChild(card);
+
   if (item.details) {
     fetch(item.details)
       .then(res => res.ok ? res.text() : Promise.reject("Fehler beim Laden"))
       .then(html => {
         const detailsDiv = card.querySelector(".detailsContainer");
-        detailsDiv.innerHTML = html;
+        if (detailsDiv) detailsDiv.innerHTML = html;
       })
       .catch(() => {
         const detailsDiv = card.querySelector(".detailsContainer");
@@ -289,8 +290,6 @@ function renderCard(item) {
     const detailsDiv = card.querySelector(".detailsContainer");
     if (detailsDiv) detailsDiv.remove();
   }
-
-  return card;
 }
 
 function renderDaten() {
@@ -299,41 +298,22 @@ function renderDaten() {
   const hersteller = herstellerFilter.value.trim().toLowerCase();
   const typ = typFilter.value.trim().toLowerCase();
   const codeFilter = suchwoerter.length > 0 ? suchtext : "";
-  const trefferAnzahl = document.getElementById("trefferAnzahl");
-  const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ;
-  const updateHinweis = storage.getItem("pwaUpdateAvailable") === "true";
 
+  const trefferAnzahl = document.getElementById("trefferAnzahl");
   container.innerHTML = "";
 
-  // Keine aktiven Filter → HomeCard zeigen
+  const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ;
+
   if (keineFilterAktiv) {
-    history.replaceState(null, "", location.pathname); // ⬅️ Reset URL (entfernt #hash)
     updateAutocompleteList(daten);
-    fillDropdowns(daten, "", "", "");
+    fillDropdowns(daten);
     trefferAnzahl.textContent = "";
-    showHomeCard(null, updateHinweis);
+    showHomeCard();
     return;
   }
 
-  // Daten filtern
-  const filtered = daten.filter(item => {
-    const itemCode = item.code?.toLowerCase() || "";
-    const itemSuchbegriffe = item.suchbegriffe?.toLowerCase() || "";
-    const itemHersteller = item.hersteller?.toLowerCase() || "";
-    const itemTyp = item.typ?.toLowerCase() || "";
+  const filtered = filterDaten(daten, suchwoerter, hersteller, typ);
 
-    const matchesSuchtext = suchwoerter.every(w => {
-      const regex = new RegExp(`\\b${w}\\b`, "i");
-      return regex.test(itemCode) || regex.test(itemSuchbegriffe);
-    });
-
-    const matchesHersteller = !hersteller || itemHersteller === hersteller;
-    const matchesTyp = !typ || itemTyp === typ;
-
-    return matchesSuchtext && matchesHersteller && matchesTyp;
-  });
-
-  // Keine Treffer → HomeCard mit Hinweis
   if (filtered.length === 0) {
     updateAutocompleteList(daten);
     fillDropdowns(daten, codeFilter, hersteller, typ);
@@ -342,70 +322,18 @@ function renderDaten() {
     return;
   }
 
-  // Treffer anzeigen
-  fillDropdowns(filtered, codeFilter, hersteller, typ);
+  // Autocomplete und Dropdowns aktualisieren
   updateAutocompleteList(daten);
-  updateURLHash(suchtext, hersteller, typ);
+  fillDropdowns(daten, codeFilter, hersteller, typ);
   trefferAnzahl.textContent = `${filtered.length} Treffer`;
 
-  filtered.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    const typImagePath = item.typImage?.trim() || "";
-    const herstellerImageName = item.hersteller.toLowerCase().replace(/\s+/g, "_") + ".png";
-    const herstellerImagePath = `images/hersteller/${herstellerImageName}`;
-
-    card.innerHTML = `
-      <div class="cardheader">
-        <div class="herstellerImageContainer">
-          <img class="herstellerImage theme-image" src="${herstellerImagePath}"
-               data-theme-light="images/hersteller/${herstellerImageName}"
-               data-theme-dark="images/hersteller/dark/${herstellerImageName}"
-               alt="${item.hersteller}"
-               onerror="this.onerror=null; this.src='images/icons/icon-512.webp'">
-        </div>
-        <div class="cardHeaderTyp">
-          ${item.typ ? `<b>${item.typ}</b>` : ""}
-          ${item.code ? `<p>${item.code}</p>` : ""}
-        </div>
-      </div>
-      <div class="cardContent">
-        <div class="errorDescription">
-          ${item.fehler ? renderFehlerItem(item.code, item.kategorie, item.fehler) : ""}
-          ${item.ursache ? renderUrsacheItem(item.ursache) : ""}
-          ${item.infos ? renderInfoItem(item.infos) : ""}
-          ${item.weitere ? `<div class="errorDescriptionItem"><p>${item.weitere}</p></div>` : ""}
-          <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
-          ${item.link ? renderLinkItem(item.link) : ""}
-        </div>
-        ${typImagePath ? `
-          <div class="typImageWrapper">
-            <img class="typImage" src="${typImagePath}" alt="${item.typ}" 
-                 onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
-          </div>` : ""}
-      </div>
-    `;
-
-    container.appendChild(card);
-
-    // Details laden
-    if (item.details) {
-      fetch(item.details)
-        .then(res => res.ok ? res.text() : Promise.reject("Fehler beim Laden"))
-        .then(html => {
-          const detailsDiv = card.querySelector(".detailsContainer");
-          detailsDiv.innerHTML = html;
-        })
-        .catch(() => {
-          const detailsDiv = card.querySelector(".detailsContainer");
-          if (detailsDiv) detailsDiv.innerHTML = `<em>Details konnten nicht geladen werden.</em>`;
-        });
-    } else {
-      const detailsDiv = card.querySelector(".detailsContainer");
-      if (detailsDiv) detailsDiv.remove();
-    }
-  });
+  // Anzeige der Cards
+  if (filtered.length > 100) {
+    showStatusMessage("Große Liste wird geladen…", "info", 3000);
+    renderDatenLazy(filtered);
+  } else {
+    filtered.forEach(item => renderCard(item));
+  }
 
   updateThemeAssets(document.body.getAttribute("data-theme"));
 }
@@ -447,6 +375,24 @@ function loadData() {
         showHomeCard();
       });
   }
+}
+
+function renderDatenLazy(filtered) {
+  let index = 0;
+  const chunkSize = 20;
+
+  function renderChunk(deadline) {
+    while (index < filtered.length && (deadline.timeRemaining() > 0 || deadline.didTimeout)) {
+      const item = filtered[index++];
+      renderCard(item);
+    }
+
+    if (index < filtered.length) {
+      requestIdleCallback(renderChunk);
+    }
+  }
+
+  requestIdleCallback(renderChunk);
 }
 
 function showHomeCard(hinweisText = null, updateHinweis = false) {
