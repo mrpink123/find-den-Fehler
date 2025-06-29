@@ -441,28 +441,25 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
 
   container.appendChild(homeCard);
 
-  // ⬇ Optionales Update-Hinweis-Div einfügen
-  if (updateHinweis) {
-    const updateInfo = document.createElement("div");
-    updateInfo.className = "updateInfo";
-    updateInfo.innerHTML = `
-      <p><strong>🔄 Eine neue Version ist verfügbar.</strong></p>
-      <button id="btnReload">
+  if (window.updateReadyWorker) {
+    const updateDiv = document.createElement("div");
+    updateDiv.id = "updateMessage";
+    updateDiv.className = "updateInfo";
+    updateDiv.innerHTML = `
+      <p>🔄 Eine neue Version ist verfügbar.</p>
+      <button id="applyUpdateBtn">
         <svg class="button-icon"><use href="#icon-update"></use></svg>
         <p>Jetzt aktualisieren</p>
       </button>
     `;
-    document.getElementById("updateInfoContainer").appendChild(updateInfo);
 
-    // Button-Listener
-    const reloadBtn = document.getElementById("btnReload");
-    if (reloadBtn) {
-      reloadBtn.addEventListener("click", () => {
-        storage.removeItem("pwaUpdateAvailable");
-        location.reload(true);
-      });
-    }
+    document.getElementById("updateInfoContainer").appendChild(updateDiv);
+
+    document.getElementById("applyUpdateBtn").addEventListener("click", () => {
+      window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
+    });
   }
+
 
   document.getElementById("homeMenuToggle")?.addEventListener("click", (e) => {
     const menu = document.getElementById("homeMenuContainer");
@@ -543,6 +540,46 @@ function updateAutocompleteList(data) {
   datalist.innerHTML = combined.map(w => `<option value="${w}"></option>`).join("");
 }
 
+function showUpdateButton() {
+  // Falls die HomeCard bereits angezeigt wird, sofort einfügen
+  const homeCard = document.querySelector(".homeCard");
+  if (homeCard) {
+    const homeContent = homeCard.querySelector(".homeContent");
+
+    // Nicht doppelt einfügen
+    if (document.getElementById("updateMessage")) return;
+
+    const updateDiv = document.createElement("div");
+    updateDiv.id = "updateMessage";
+    updateDiv.className = "updateNotice";
+    updateDiv.innerHTML = `
+      <p>🔄 Eine neue Version ist verfügbar.</p>
+      <button id="applyUpdateBtn">
+        <svg class="button-icon"><use href="#icon-update"></use></svg>
+        <p>Jetzt aktualisieren</p>
+      </button>
+    `;
+
+    document.getElementById("updateInfoContainer").appendChild(updateDiv);
+
+    document.getElementById("applyUpdateBtn").addEventListener("click", () => {
+      if (window.updateReadyWorker) {
+        window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
+      }
+    });
+  } else {
+    // Wenn HomeCard noch nicht angezeigt wird, später erneut versuchen
+    const retry = () => {
+      if (document.querySelector(".homeCard")) {
+        showUpdateButton();
+      } else {
+        setTimeout(retry, 300);
+      }
+    };
+    retry();
+  }
+}
+
 // SVG ins DOM laden
 fetch("images/symbole/sprite.svg")
   .then(res => res.text())
@@ -571,15 +608,22 @@ if (savedTheme) {
 // Service Worker registrieren und auf Update prüfen
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js").then(reg => {
+    // Neue Version entdeckt
     reg.onupdatefound = () => {
       const newWorker = reg.installing;
       newWorker.onstatechange = () => {
         if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-          storage.setItem("pwaUpdateAvailable", "true");
-          showHomeCard(null, true);
+          // Neue Version steht bereit
+          window.updateReadyWorker = newWorker;
+          showUpdateButton();
         }
       };
     };
+  });
+
+  // Neue SW aktiv? → Seite neu laden
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    window.location.reload();
   });
 }
 

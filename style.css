@@ -322,16 +322,17 @@ input:focus {
 
 .homeContent>div:first-child {
     text-align: center;
-    flex-basis: 25%;
+    flex-basis: 40%;
     margin: 1em;
 }
 
 .homeContent>div:last-child {
-    flex-basis: 60%;
+    flex-basis: 50%;
 }
 
 #homeMenuContainer {
     flex-grow: 1;
+    flex-basis: 50%;
     max-width: 50%;
     display: none;
     padding-left: 1rem;

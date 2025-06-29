@@ -1,4 +1,4 @@
-const CACHE_NAME = "fehlercode-cache-v1.0.2";
+const CACHE_NAME = "fehlercode-cache-v1.0.3";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",
@@ -37,21 +37,23 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return Promise.all(
-        ASSETS_TO_CACHE.map((url) =>
-          cache.add(url).catch((err) => {
-            console.warn("Fehler beim Caching:", url, err);
-          })
-        )
-      );
-    })
-  );
+  // Sofort aktivieren
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  // Alte Caches können hier ggf. entfernt werden
+  console.log("Service Worker aktiviert");
 });
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => response || fetch(event.request))
-  );
+  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
 });
+
+// Nachricht vom Haupt-Thread empfangen
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
