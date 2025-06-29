@@ -323,8 +323,8 @@ function renderDaten() {
   }
 
   // Autocomplete und Dropdowns aktualisieren
-  updateAutocompleteList(daten);
-  fillDropdowns(daten, codeFilter, hersteller, typ);
+  updateAutocompleteList(filtered);
+  fillDropdowns(filtered, codeFilter, hersteller, typ);
   trefferAnzahl.textContent = `${filtered.length} Treffer`;
 
   // Anzeige der Cards
@@ -392,7 +392,11 @@ function renderDatenLazy(filtered) {
     }
   }
 
-  requestIdleCallback(renderChunk);
+  const ric = window.requestIdleCallback || function (cb) {
+    setTimeout(() => cb({ timeRemaining: () => 50, didTimeout: false }), 1);
+  };
+
+  ric(renderChunk);
 }
 
 function showHomeCard(hinweisText = null, updateHinweis = false) {
@@ -582,12 +586,19 @@ function showUpdateButton() {
 
 // SVG ins DOM laden
 fetch("images/symbole/sprite.svg")
-  .then(res => res.text())
+  .then(res => {
+    if (!res.ok) throw new Error("SVG konnte nicht geladen werden");
+    return res.text();
+  })
   .then(svg => {
     const div = document.createElement("div");
     div.style.display = "none";
     div.innerHTML = svg;
     document.body.appendChild(div);
+  })
+  .catch(err => {
+    console.warn("SVG-Sprite konnte nicht geladen werden:", err);
+    showStatusMessage("SVG-Symbole konnten nicht geladen werden.", "error");
   });
 
 // Elemente & Daten
@@ -696,7 +707,7 @@ function resetHash() {
     updateURLHash();
     renderDaten();
     updateControlButtons();
-  }, 200));
+  }, 400));
 });
 
 // Suchfeld leeren (Button)
