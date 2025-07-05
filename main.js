@@ -464,7 +464,6 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
     });
   }
 
-
   document.getElementById("homeMenuToggle")?.addEventListener("click", (e) => {
     const menu = document.getElementById("homeMenuContainer");
     menu.style.display = menu.style.display === "block" ? "none" : "block";
@@ -705,7 +704,7 @@ function resetHash() {
   input.addEventListener("input", debounce(() => {
     updateURLHash();
     renderDaten();
-    updateControlButtons();
+    // updateControlButtons();
   }, 400));
 });
 
@@ -715,7 +714,7 @@ document.getElementById("btnClearSearch").addEventListener("click", () => {
   searchHint.value = "";
   updateURLHash();
   renderDaten();
-  updateControlButtons();
+  // updateControlButtons();
 });
 
 // Filter-Reset-Button
@@ -724,7 +723,7 @@ document.getElementById("btnResetFilters").addEventListener("click", () => {
   typFilter.value = "";
   updateURLHash();
   renderDaten();
-  updateControlButtons();
+  // updateControlButtons();
 });
 
 // Autocomplete für Codes
@@ -775,7 +774,7 @@ parseURLHash();
 
 // Start
 loadData();
-updateControlButtons();
+// updateControlButtons();
 applyFiltersFromHash();
 checkForPWAUpdate();
 
