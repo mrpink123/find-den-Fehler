@@ -617,12 +617,10 @@ if (savedTheme) {
 // Service Worker registrieren und auf Update prüfen
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js").then(reg => {
-    // Neue Version entdeckt
     reg.onupdatefound = () => {
       const newWorker = reg.installing;
       newWorker.onstatechange = () => {
         if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-          // Neue Version steht bereit
           window.updateReadyWorker = newWorker;
           showUpdateButton();
         }
@@ -630,8 +628,11 @@ if ("serviceWorker" in navigator) {
     };
   });
 
-  // Neue SW aktiv? → Seite neu laden
+  // Nur nach Button-Klick reloaden!
+  let refreshing = false;
   navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (refreshing) return;
+    refreshing = true;
     window.location.reload();
   });
 }
