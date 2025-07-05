@@ -28,6 +28,8 @@ function checkForPWAUpdate() {
   if (!('serviceWorker' in navigator)) return;
 
   navigator.serviceWorker.getRegistration().then(reg => {
+    if (reg) reg.update();
+
     if (reg && reg.waiting) {
       storage.setItem("pwaUpdateAvailable", "true");
       showHomeCard(null, true);
