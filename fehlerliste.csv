@@ -2076,29 +2076,72 @@ Record,STA-19 Red,"LED 2, 3, 5, 6",,Fehler REDVerriegelungstest,Service anrufen,
 Record,STA-19 Red,"LED 2, 3, 4",,Kontaktkleben Relais beim Redundanztest,Service anrufen,,LED-Nr Status: 28,Kontaktkleben Relais,,images/typen/bde-e.png,
 Record,STA-19 Red,"LED 2, 3, 4, 5, 6",,NOT-AUF Taste betätigt,NOT-AUF Taste lösen,,LED-Nr Status: 31,Tür bleibt stehen,,images/typen/bde-e.png,
 Record,STA-19 Red,"LED 1, 6",,"Fehler Lichtstrahl (ELS) 1, evtl. verschmutzt ",Linsen-Scheibchen des Lichtstrahls abwischen,,LED-Nr Status: 33,Tür bleibt offen,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 5",,"Fehler Lichtstrahl (ELS) 2, evtl. verschmutzt ",Linsen-Scheibchen des Lichtstrahls abwischen,,LED-Nr Status: 34,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 4, 6",,Fehlerhafter Motorstrom ,Service anrufen,,LED-Nr Status: 37,Tür bleibt stehen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 4, 5",,Übertemperatur Motor 1 ,"Zuwarten, bis Motor wieder abgekühlt ist ? ",,LED-Nr Status: 38,Tür öffnet mit langer Offenhaltezeit und schliesst ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 4, 5, 6",,Überlast auf +24V Speisung ,Service anrufen,,LED-Nr Status: 39,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3",,Übertemperatur Motor 2 ,"Zuwarten, bis Motor wieder abgekühlt ist ? ",,LED-Nr Status: 40,Tür öffnet mit langer Offenhaltezeit und schliesst ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3, 6",,Motor 1- Thermofühler defekt ,Service anrufen,,LED-Nr Status: 41,Tür öffnet mit langer Offenhaltezeit und schliesst ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3, 5",,Motor 2 - Thermofühler defekt ,Service anrufen,,LED-Nr Status: 42,Tür öffnet mit langer Offenhaltezeit und schliesst ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3, 5, 6",,Inkrementalgeber defekt ,Service anrufen,,LED-Nr Status: 43,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3, 4",,Motorstrom - Zeitprodukt groß ,"Zuwarten, bis Motor wieder abgekühlt ist ? ",Warnung,LED-Nr Status: 44,Tür öffnet mit 5s Offenhaltezeit und schließt ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3, 4, 6",,Motorstrom - Zeitprodukt groß ,"Zuwarten, bis Motor wieder abgekühlt ist ? ",,LED-Nr Status: 45,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3, 4, 5",,Steuergerät defekt ,Service anrufen,,LED-Nr Status: 46,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 3, 4, 5, 6",,Ext. Sicherheitssensor länger als 60 sec aktiv ,Evtl. Hindernis aus dem Überwachungsbereich des Sensors entfernen ,,LED-Nr Status: 47,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2",,SÖK aktiv ,Kontakt wieder lösen ,,LED-Nr Status: 48,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 5",,Steuergerät defekt ,Service anrufen,,LED-Nr Status: 50,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 5, 6",,Software Versionsfehler ,Service anrufen,,LED-Nr Status: 51,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 4, 6",,Unterbruch Motor 1 ,Service anrufen,,LED-Nr Status: 53,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 4, 5",,Eichlauf ,3 - 4 Öffnungszyklen auslösen ,Warnung,LED-Nr Status: 54,Tür ruckt evtl. während dem Öffnen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 4, 5, 6",,Netzausfall ,Netz wieder zuschalten ,,LED-Nr Status: 55,Batteriebetrieb ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 3, 6",,Unterbruch Motor 2 ,Service anrufen,,LED-Nr Status: 57,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 3, 5, 6",,ELS - Sensor länger als 60 sec aktiv ,Linsen-Scheibchen des Lichtstrahls abwischen ,,LED-Nr Status: 59,Tür bleibt offen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 3, 4",,Parameterspeicher defekt ,Service anrufen,,LED-Nr Status: 60,Tür bleibt stehen ,,images/typen/bde-e.png,
-Record,STA-19 Red,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60 sec aktiv ,SSK-Kontakt wieder lösen ,,LED-Nr Status: 61,Tür bleibt offen ,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 5",,"Fehler Lichtstrahl (ELS) 2, evtl. verschmutzt ",Linsen-Scheibchen des Lichtstrahls abwischen,,LED-Nr Status: 34,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 4, 6",,Fehlerhafter Motorstrom,Service anrufen,,LED-Nr Status: 37,Tür bleibt stehen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 4, 5",,Übertemperatur Motor 1,"Zuwarten, bis Motor wieder abgekühlt ist ? ",,LED-Nr Status: 38,Tür öffnet mit langer Offenhaltezeit und schliesst,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 4, 5, 6",,Überlast auf +24V Speisung,Service anrufen,,LED-Nr Status: 39,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3",,Übertemperatur Motor 2,"Zuwarten, bis Motor wieder abgekühlt ist ? ",,LED-Nr Status: 40,Tür öffnet mit langer Offenhaltezeit und schliesst,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3, 6",,Motor 1- Thermofühler defekt,Service anrufen,,LED-Nr Status: 41,Tür öffnet mit langer Offenhaltezeit und schliesst,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3, 5",,Motor 2 - Thermofühler defekt,Service anrufen,,LED-Nr Status: 42,Tür öffnet mit langer Offenhaltezeit und schliesst,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3, 5, 6",,Inkrementalgeber defekt,Service anrufen,,LED-Nr Status: 43,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3, 4",,Motorstrom - Zeitprodukt groß,"Zuwarten, bis Motor wieder abgekühlt ist ? ",Warnung,LED-Nr Status: 44,Tür öffnet mit 5s Offenhaltezeit und schließt,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3, 4, 6",,Motorstrom - Zeitprodukt groß,"Zuwarten, bis Motor wieder abgekühlt ist ? ",,LED-Nr Status: 45,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3, 4, 5",,Steuergerät defekt,Service anrufen,,LED-Nr Status: 46,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 3, 4, 5, 6",,Ext. Sicherheitssensor länger als 60 sec aktiv,Evtl. Hindernis aus dem Überwachungsbereich des Sensors entfernen,,LED-Nr Status: 47,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2",,SÖK aktiv,Kontakt wieder lösen,,LED-Nr Status: 48,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 5",,Steuergerät defekt,Service anrufen,,LED-Nr Status: 50,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 5, 6",,Software Versionsfehler,Service anrufen,,LED-Nr Status: 51,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 4, 6",,Unterbruch Motor 1,Service anrufen,,LED-Nr Status: 53,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 4, 5",,Eichlauf,3 - 4 Öffnungszyklen auslösen,Warnung,LED-Nr Status: 54,Tür ruckt evtl. während dem Öffnen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 4, 5, 6",,Netzausfall,Netz wieder zuschalten,,LED-Nr Status: 55,Batteriebetrieb,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 3, 6",,Unterbruch Motor 2,Service anrufen,,LED-Nr Status: 57,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 3, 5, 6",,ELS - Sensor länger als 60 sec aktiv,Linsen-Scheibchen des Lichtstrahls abwischen,,LED-Nr Status: 59,Tür bleibt offen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 3, 4",,Parameterspeicher defekt,Service anrufen,,LED-Nr Status: 60,Tür bleibt stehen,,images/typen/bde-e.png,
+Record,STA-19 Red,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60 sec aktiv,SSK-Kontakt wieder lösen,,LED-Nr Status: 61,Tür bleibt offen,,images/typen/bde-e.png,
 Record,STA-19 Red,Reset mit BDE-E,Reset STA-19 Red,,,,,,,,details/reset_mit_bde-e.html
 Record,STA-19 Red,Notöffnung,"notauf, not, oeffnen ",,,,,,,,details/notauf_sta19red.html
-Record,STA-19 Red,schließen im Fehlerfall,schließen schliessen zu,,,,"<h3>Schließen im Fehlerfall</h3><br><ul><li>Bei einigen anstehenden Störungen kann die Türe mit dem Schalter BDE-V verriegelt werden.</li><li>Bei Störungen an der Sensorik kann die Türe wie folgt trotzdem verriegelt werden: Türe trotz anstehendem Sensorikalarm mittels Schalter BDE-V auf verriegelt schalten. Türflügel von Hand zuschieben. Sobald die Türflügel in ZU-Stellung sind, verriegelt die Türe automatisch. Eine Wiederöffnung ist mit SSK möglich. SSK funktioniert weiterhin. Sobald die Türe nicht mehr verriegelt ist, steht der Alarm weiterhin an.</li></ul> ",,,images/typen/bde-e.png,
+Record,STA-19 Red,schließen im Fehlerfall,schließen schliessen zu,,,,"<h3>Schließen im Fehlerfall</h3><br><ul><li>Bei einigen anstehenden Störungen kann die Türe mit dem Schalter BDE-V verriegelt werden.</li><li>Bei Störungen an der Sensorik kann die Türe wie folgt trotzdem verriegelt werden: Türe trotz anstehendem Sensorikalarm mittels Schalter BDE-V auf verriegelt schalten. Türflügel von Hand zuschieben. Sobald die Türflügel in ZU-Stellung sind, verriegelt die Türe automatisch. Eine Wiederöffnung ist mit SSK möglich. SSK funktioniert weiterhin. Sobald die Türe nicht mehr verriegelt ist, steht der Alarm weiterhin an.</li></ul> ",,,images/symbole/BDE-E/bde-e.svg,
 Record,STA-19 Red,BDE-E,,,,,,,,,details/bde-e.html
+Dorma,ES 200-2D,E: 0,E0,Kein Fehler im Speicher ,,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 1,E1,Hindernis ,Quittiert sich selbst ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 2,E2,Verriegelung ,Programmschalter: Umschalten auf AUS ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 3,E3,Programmschalter ,Programmschalter: Umschalten auf AUS ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 4,E4,Lichtschranke ,Programmschalter: Umschalten auf AUS ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 5,E5,Inkrementalgeber ,Quittiert sich selbst ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 6,E6,Akku ,Programmschalter: Umschalten auf AUS ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 7,E7,System ,Netzreset durchführen ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,EEPROM ,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 8,E8,NOT-AUS betätigt ,NOT-AUS entriegeln ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: 9,E9,Lernfahrt-Parameter ,Programmschalter: Umschalten auf AUS ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: A,eA,Motor ,Quittiert sich selbs ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: c,ec,Krafttest ,Quittiert sich selbs ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: d,ed,Überstrom ,Programmschalter: Umschalten auf AUS ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: F,eF,DCW ,Netzreset und Werkseinstellung durchführen ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: H,eH,FDT,Programmschalter: Umschalten auf AUS ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,E: L,eL,Relaistest ,Netzreset durchführen ,"Die Anzeige Der Fehlercodes befindet sich auf der Steuerung. <br>
+<img src=""images\symbole\dorma_fehler_anzeige.png"" alt=""Fehler Anzeige"" style=""max-width:300px; padding-left:5px;“ onerror=""this.style.display='none'""> ",,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,Lernfahrt / Werkseinstellung wird nicht durchgeführt - die Tür fährt in die OFFEN-Position ,Lichtschranken / Sicherheitssensorik betätigt ,,Sicherheitsanschlußklemmen überbrücken ,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,Tür läuft ruckartig und unkontrolliert ,Stecker nicht richtig aufgesteckt Kabel an Inkrementalgeber defekt ,,Stecker richtig aufstecken. Kabel austauschen. ,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,Tür bleibt nach turnusmäßigen Selbsttest ( alle 4 Std) in OFFEN-Position stehen. ,Akku nicht voll geladen oder verbraucht ,,Akku wechseln. ,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,"Tür steht offen, in allen Programmschalterstellungen ",Lichtschranken (LS) ,,LS-Funktion anhand der LED’s am GM prüfen. LS reinigen LS austauschen ,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,"Tür steht offen, in allen Programmschalterstellungen ",NOT-AUS - Schalter ,,"Eingänge am Stecker brücken. Wenn Störung dadurch beseitigt, NOT-AUS - Schalter kontrollieren, ggf. austauschen, mit PDA prüfen. ",,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,"Tür steht offen, in den Programmschalterstellungen AUTOMATIC, AUSGANG und TEILOFFEN ",Melder gibt Dauerimpuls. ,,Radarmelder abklemmen. Wenn Störung dadurch beseitigt: Radarmelder austauschen. ,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,GM zeigt Fehler “1” (Hindernis) bei der Inbetriebnahme an Lernfahrt wurde noch nicht durchgeführt (keine Türgewichtsermittlung). ,,,Lernfahrt durchführen ,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,GM zeigt Fehler “1” (Hindernis) bei der Inbetriebnahme an Lernfahrt wurde noch nicht durchgeführt (keine Türgewichtsermittlung). ,"Die Hinderniserkennung ist für diese Türanlage (z.B. schmale, hohe und schwere Türflügel) zu empfindlich. ",,"Anpassen der Hinderniserkennung dieser Türanlage über die Einstellungen Kraftbegrenzung (AUF, ZU) und Hinderniszeit über den PDA. ",,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,"Tür öffnet nicht in den Programmschalterstellungen: AUTOMATIC, AUSGANG, und TEILOFFEN ",Außenmelder ,,Stecker für Impulsgeber abziehen und Eingang brücken. Ist die Störung beseitigt: Versorgungsspannung (27 V) am GM und Melder prüfen. Ist diese in OK: Melder prüfen & ggf. austauschen. ,,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,"Tür öffnet nicht in den Programmschalterstellungen: AUTOMATIC, AUSGANG, und TEILOFFEN ",Innenmelder,,"Stecker für Impulsgeber abziehen. Öffnet die Tür, Versorgungsspannung (27 V) am GM und Melder prüfen. Ist diese OK: Melder prüfen und ggf. austauschen. Prüfen ob eigensicherer Melder mit Ruhestromprinzip eingesetzt ist. ",,,images/typen/dorma_es200_bde.svg,
+Dorma,ES 200-2D,ohne,,Unangenehme Laufgeräusche ,Schraube drückt auf Laufrolle. Falsche Schraube bei der Riemenanbindung ,,Schraube ersetzen oder kürzen ,,,images/typen/dorma_es200_bde.svg,
