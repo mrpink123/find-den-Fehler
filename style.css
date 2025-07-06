@@ -354,8 +354,7 @@ input:focus {
     gap: 0.5rem;
 }
 
-.menu button,
-.updateInfo button {
+.menu button {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -411,6 +410,7 @@ input:focus {
     max-width: 1000px;
     min-width: 350px;
     min-height: 200px;
+    overflow: hidden;
     box-shadow: 0 0px 5px var(--shadow);
     transition: all 0.2s ease-in-out;
 }
@@ -433,13 +433,10 @@ input:focus {
 /* Card - Kopfzeile */
 .cardheader {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     background: var(--bg-gradient);
-    padding: 4px;
     align-items: center;
     justify-content: space-between;
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em;
     border-bottom: 1px solid var(--card-border);
     box-shadow: 0 1px 4px var(--shadow);
 }
@@ -447,30 +444,45 @@ input:focus {
 .herstellerImageContainer {
     display: flex;
     height: inherit;
+    min-width: fit-content;
     align-items: center;
     justify-content: center;
+    vertical-align: middle;
+    margin: 1px 5px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 
 .herstellerImage {
     max-height: 30px;
+    max-width: 120px;
+    padding: 1px;
+    margin: 1px;
 }
 
 .cardHeaderTyp {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-height: var(--header-line-height);
-    justify-content: center;
-    font-size: larger;
-    gap: var(--header-space);
+    flex-direction: column-reverse;
+    width: 100%;
+    margin-right: 5px;
 }
 
 .cardHeaderTyp :nth-child(2) {
     color: var(--error);
+    margin-left: auto;
+    font-size: small;
     font-weight: 700;
-    font-size: medium;
-    align-self: flex-end;
+}
+
+.cardHeaderTyp :nth-child(1) {
+    margin-right: auto;
+}
+
+.cardHeaderTyp * {
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
 }
 
 /* Card - Inhalt */
@@ -666,32 +678,35 @@ h3 {
 }
 
 .updateInfo button {
+    position: relative;
     display: flex;
     padding: 0;
     height: 40px;
-    max-width: 40px;
-    background: var(--bg-2);
+    width: 40px;
+    cursor: pointer;
+    background-color: var(--button-bg-light);
     border: none;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
     text-align: center;
+    vertical-align: middle;
     overflow: hidden;
     color: var(--fg);
     margin: 0.5rem;
     transition: background-color 0.4s ease;
 }
 
+
 .updateInfo button:hover {
     background-color: var(--hover-bg);
 }
 
 .updateInfo button svg {
-    padding-top: 2px;
+    position: relative;
     height: 30px;
     aspect-ratio: 1;
     fill: currentColor;
-    vertical-align: middle;
 }
 
 
