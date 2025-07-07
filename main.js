@@ -103,24 +103,25 @@ function applyFiltersFromHash() {
 }
 
 function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedTyp = "") {
-  const herstellerMap = new Map(); // key → label
-  const typMap = new Map();        // key → label
-  const herstellerTreffer = new Map(); // key → count
-  const typTreffer = new Map();        // key → count
+  const herstellerMap = new Map();
+  const typMap = new Map();
+  const herstellerTreffer = new Map();
+  const typTreffer = new Map();
 
   const codeRegex = codeFilter ? new RegExp(`\\b${escapeRegExp(codeFilter)}\\b`, "i") : null;
+  const selectedHerstellerKey = selectedHersteller.toLowerCase();
+  const selectedTypKey = selectedTyp.toLowerCase();
 
-  // Alle Hersteller + Typen merken (aus Gesamt-Daten)
+  // Alle Hersteller und Typen sammeln
   daten.forEach(item => {
     const hKey = item.hersteller?.toLowerCase() || "";
     const tKey = item.typ?.toLowerCase() || "";
-
-    if (hKey && !herstellerMap.has(hKey)) herstellerMap.set(hKey, item.hersteller);
-    if (tKey && !typMap.has(tKey)) typMap.set(tKey, item.typ);
+    if (!herstellerMap.has(hKey)) herstellerMap.set(hKey, item.hersteller);
+    if (!typMap.has(tKey)) typMap.set(tKey, item.typ);
   });
 
-  // Treffer zählen (Code muss matchen)
-  data.forEach(item => {
+  // Treffer zählen
+  daten.forEach(item => {
     const hKey = item.hersteller?.toLowerCase() || "";
     const tKey = item.typ?.toLowerCase() || "";
 
@@ -130,44 +131,96 @@ function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedT
 
     if (!codeMatch) return;
 
-    if (hKey) herstellerTreffer.set(hKey, (herstellerTreffer.get(hKey) || 0) + 1);
-    if (tKey) typTreffer.set(tKey, (typTreffer.get(tKey) || 0) + 1);
+    herstellerTreffer.set(hKey, (herstellerTreffer.get(hKey) || 0) + 1);
+    typTreffer.set(tKey, (typTreffer.get(tKey) || 0) + 1);
   });
 
-  // Hersteller Dropdown
   const herstellerOptions = ['<option value="">Alle Hersteller</option>'];
-  for (const [key, label] of Array.from(herstellerMap.entries()).sort((a, b) => (a[1] || "").localeCompare(b[1] || ""))) {
-    const count = herstellerTreffer.get(key);
-    const labelWithCount = count > 0 ? `${label} (${count})` : label;
-    herstellerOptions.push(`<option value="${key}" ${key === selectedHersteller ? "selected" : ""}>${labelWithCount}</option>`);
+  const herstellerMitTreffern = [];
+  const herstellerOhneTreffer = [];
+
+  for (const [key, label] of herstellerMap.entries()) {
+    const count = herstellerTreffer.get(key) || 0;
+    const selected = key === selectedHerstellerKey;
+
+    const option = {
+      key,
+      label,
+      count,
+      selected
+    };
+
+    if (count > 0) {
+      herstellerMitTreffern.push(option);
+    } else {
+      herstellerOhneTreffer.push(option);
+    }
   }
+
+  herstellerMitTreffern.sort((a, b) => a.count - b.count || a.label.localeCompare(b.label));
+  herstellerOhneTreffer.sort((a, b) => a.label.localeCompare(b.label));
+
+  [...herstellerMitTreffern, ...herstellerOhneTreffer].forEach(({ key, label, count, selected }) => {
+    const showLabel = count > 0 ? `${label} (${count})` : label;
+    const sel = selected ? "selected" : "";
+    const dis = count === 0 ? "disabled" : "";
+    herstellerOptions.push(`<option value="${key}" ${sel} ${dis}>${showLabel}</option>`);
+  });
+
   herstellerFilter.innerHTML = herstellerOptions.join("");
 
-  // Typen Dropdown
-  const typOptions = ['<option value="">Alle Typen</option>'];
-  const selectedHerstellerKey = selectedHersteller.toLowerCase();
 
-  for (const [typKey, label] of Array.from(typMap.entries()).sort((a, b) => (a[1] || "").localeCompare(b[1] || ""))) {
+  // Typ-Dropdown: zwei Gruppen → [Treffer > 0], [Treffer = 0]
+  const withTreffer = [];
+  const withoutTreffer = [];
+
+  for (const [typKey, label] of typMap.entries()) {
+    const count = typTreffer.get(typKey) || 0;
+
+    // Gehört dieser Typ zum gewählten Hersteller?
     const gehörtZumHersteller = !selectedHersteller || daten.some(d =>
-      d.typ.toLowerCase() === typKey &&
-      d.hersteller.toLowerCase() === selectedHerstellerKey
+      d.typ?.toLowerCase() === typKey &&
+      d.hersteller?.toLowerCase() === selectedHerstellerKey
     );
 
     if (!gehörtZumHersteller) continue;
 
-    const count = typTreffer.get(typKey);
-    const labelWithCount = count > 0 ? `${label} (${count})` : label;
-    typOptions.push(`<option value="${typKey}" ${typKey === selectedTyp ? "selected" : ""}>${labelWithCount}</option>`);
+    const option = {
+      key: typKey,
+      label,
+      count,
+      selected: typKey === selectedTypKey
+    };
+
+    if (count > 0) {
+      withTreffer.push(option);
+    } else {
+      withoutTreffer.push(option);
+    }
   }
+
+  // Sortiere beide Gruppen
+  withTreffer.sort((a, b) => a.count - b.count || a.label.localeCompare(b.label));
+  withoutTreffer.sort((a, b) => a.label.localeCompare(b.label));
+
+  // Baue Dropdown
+  const typOptions = ['<option value="">Alle Typen</option>'];
+
+  [...withTreffer, ...withoutTreffer].forEach(({ key, label, count, selected }) => {
+    const showLabel = count > 0 ? `${label} (${count})` : label;
+    const sel = selected ? "selected" : "";
+    const dis = count === 0 ? "disabled" : "";
+    typOptions.push(`<option value="${key}" ${sel} ${dis}>${showLabel}</option>`);
+  });
 
   typFilter.innerHTML = typOptions.join("");
 
-  // Sicherstellen: Wenn der aktuell gewählte Typ nicht mehr passt → zurücksetzen
-  const typIsValid = [...typMap.keys()].some(t =>
-    t === selectedTyp &&
+  // Auswahl prüfen
+  const typExists = [...typMap.keys()].some(t =>
+    t === selectedTypKey &&
     (!selectedHersteller || daten.some(d => d.typ.toLowerCase() === t && d.hersteller.toLowerCase() === selectedHerstellerKey))
   );
-  if (!typIsValid) typFilter.value = "";
+  if (!typExists) typFilter.value = "";
 }
 
 function updateAutocompleteList(data) {
@@ -248,11 +301,12 @@ function renderCard(item) {
   card.innerHTML = `
     <div class="cardheader">
       <div class="herstellerImageContainer">
+
         <img class="herstellerImage theme-image" src="${herstellerImagePath}"
              data-theme-light="images/hersteller/${herstellerImageName}"
              data-theme-dark="images/hersteller/dark/${herstellerImageName}"
              alt="${item.hersteller}"
-             onerror="this.onerror=null; this.src='images/icons/icon-512.webp'">
+             onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
       </div>
       <div class="cardHeaderTyp">
         ${item.typ ? `<b>${item.typ}</b>` : ""}
@@ -410,7 +464,6 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
   homeCard.innerHTML = `
     <div class="cardheader">
       <div class="logoContainer">
-        <h3>find den Fehler</h3>
       </div>
       <button class="menu-toggle" id="homeMenuToggle" title="Extras">
         <svg class="icon"><use href="#icon-menu"></use></svg>
