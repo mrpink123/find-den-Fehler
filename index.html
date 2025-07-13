@@ -15,18 +15,20 @@
   </head>
 
   <body data-theme="light">
-    <!-- Benachrichtigungs Fenster -->
-    <div id="statusMessage" class="hidden"></div>
     <datalist id="codeSuggestions"></datalist>
 
     <!-- Kopfzeile -->
-    <header id="siteHeader">
-      <div class="controls">
-        <!-- Kopfzeile Links -->
-        <div class="headerLeft"></div>
-        <!-- Kopfzeile Mitte -->
-        <div class="headerCenter">
-          <div class="searchContainer">
+    <header id="siteHeader" class="transition-03">
+      <div class="headerContent">
+        <div class="logo-sm highlight">
+          <svg><use href="#logo"></use></svg>
+        </div>
+
+        <div class="InputContainer">
+          <div class="searchContainer searchBox">
+            <div class="icon-search">
+              <svg><use href="#icon-search"></use></svg>
+            </div>
             <div class="autocomplete-wrapper">
               <input
                 type="text"
@@ -38,33 +40,37 @@
             </div>
             <button
               id="btnClearSearch"
-              class="btnReset"
+              class="transition-03"
               title="Eingabe löschen"
             >
-              <svg class="icon-small"><use href="#icon-x"></use></svg>
+              <svg class="icon"><use href="#icon-trash"></use></svg>
             </button>
           </div>
 
           <div class="searchContainer">
-            <select id="herstellerFilter" class="herstellerFilter">
+            <select id="herstellerFilter">
               <option value="">Alle Hersteller</option>
             </select>
 
-            <select id="typFilter" class="typFilter">
+            <select id="typFilter">
               <option value="">Alle Modelle</option>
             </select>
 
             <button
               id="btnResetFilters"
-              class="btnReset"
+              class="transition-03"
               title="Filter zurücksetzen"
             >
-              <svg class="icon-small"><use href="#icon-x"></use></svg>
+              <svg class="icon"><use href="#icon-trash"></use></svg>
             </button>
           </div>
         </div>
-        <div class="logoText" id="trefferAnzahl"></div>
+
+        <div id="trefferAnzahl"></div>
       </div>
+
+      <!-- Benachrichtigungs Fenster -->
+      <div id="statusMessage" class="hidden"></div>
     </header>
 
     <!-- Hauptfenster -->
@@ -74,8 +80,17 @@
     <button id="scrollTopBtn" title="Nach oben">
       <svg class="icon"><use href="#icon-scrollTop"></use></svg>
     </button>
-    <script src="main.js" defer></script>
+
+    <!-- Modal für Typ-Bild -->
+    <div id="typImageModal" class="modal" style="display: none;">
+      <div class="modalContent">
+        <button id="modalCloseBtn" title="Schließen">×</button>
+        <img id="modalImage" src="" alt="Typbild" />
+        <div id="modalExtraContent"></div>
+      </div>
+    </div>
 
     <input type="file" id="csvInput" accept=".csv" style="display: none;" />
+    <script src="main.js" defer></script>
   </body>
 </html>

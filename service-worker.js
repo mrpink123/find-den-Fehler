@@ -1,4 +1,4 @@
-const CACHE_NAME = "fehlercode-cache-v1.0.7";
+const CACHE_NAME = "fehlercode-cache-v1.1.0";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",
@@ -7,21 +7,22 @@ const ASSETS_TO_CACHE = [
   "fehlerliste.csv",
   "papaparse.min.js",
   "service-worker.js",
+
   "images/icons/icon-192.png",
   "images/icons/icon-512.png",
   "images/icons/logo-512.png",
-  "images/hersteller/dorma.png",
-  "images/hersteller/gilgen.png",
-  "images/hersteller/dark/dorma.png",
-  "images/hersteller/dark/gilgen.png",
-  "images/hersteller/record.png",
-  "images/hersteller/dark/record.png",
+
   "images/symbole/betriebsart-tasten.webp",
   "images/symbole/nacht.png",
   "images/symbole/nacht.webp",
   "images/symbole/SL-35-control-led.jpg",
   "images/symbole/BDE-E/bde-e.svg",
   "images/symbole/dorma_fehler_anzeige.png",
+  "images/symbole/sprite.svg",
+  "images/symbole/sta19_entriegeln1.png",
+  "images/symbole/sta19_entriegeln2.png",
+  "images/symbole/sta19_verschalung_auf.png",
+  
   "images/typen/bde-e.png",
   "images/typen/bde-m.png",
   "images/typen/c-bedix.png",
@@ -33,6 +34,7 @@ const ASSETS_TO_CACHE = [
   "images/typen/slm.png",
   "images/typen/slx.png",
   "images/typen/sta-15.png",
+
   "details/bde-e.html",
   "details/notauf_sta16.html",
   "details/notauf_sta19red.html",
@@ -41,27 +43,39 @@ const ASSETS_TO_CACHE = [
   "details/reset_mit_d-bedix.html",
   "details/reset_mit_c-bedix.html",
   "details/reset_mit_bedis.html",
-  "fonts/Caveat-VariableFont_wght.ttf"
 ];
 
+// Installation – Cache aufbauen
 self.addEventListener("install", (event) => {
-  // Sofort aktivieren
-  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE);
+    })
+  );
 });
 
+// Aktivierung – alte Caches löschen
 self.addEventListener("activate", (event) => {
-  // Alte Caches können hier ggf. entfernt werden
-  console.log("Service Worker aktiviert");
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+      );
+    })
+  );
+  self.clients.claim();
 });
 
+// Fetch – zuerst online, fallback auf Cache
 self.addEventListener("fetch", (event) => {
-  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+  event.respondWith(
+    fetch(event.request).catch(() => caches.match(event.request))
+  );
 });
 
-// Nachricht vom Haupt-Thread empfangen
+// Nachrichten vom Client
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });
-

@@ -1,3 +1,6 @@
+window.APP_VERSION = "Unbekannt";
+let currentRenderSessionId = 0;
+
 // Fallback für localStorage
 function getStorage() {
   try {
@@ -19,9 +22,9 @@ const storage = getStorage();
 function showStatusMessage(text, type = "success", timeout = 4000) {
   const box = document.getElementById("statusMessage");
   if (!box) return;
-  box.innerHTML = (type === "success" ? "✅ " : "⚠️ ") + text;
+  box.innerHTML = text;
   box.className = `show ${type}`;
-  setTimeout(() => (box.className = ""), timeout);
+  setTimeout(() => (box.className = "hidden"), timeout);
 }
 
 function checkForPWAUpdate() {
@@ -69,7 +72,7 @@ function escapeRegExp(string) {
 function parseCSV(text) {
   const result = Papa.parse(text, { header: true, skipEmptyLines: true });
   if (result.errors.length > 0) {
-    showStatusMessage("Fehler beim Parsen der CSV-Datei", "error");
+    showStatusMessage("⚠️ Fehler beim Parsen der CSV-Datei", "error");
     return [];
   }
   return result.data.map((row) => ({
@@ -85,21 +88,8 @@ function parseCSV(text) {
     link: row.link?.trim() || "",
     typImage: row.typbild?.trim() || "",
     details: row.details?.trim() || "",
+    modal: row.modal?.trim() || "",
   }));
-}
-
-function applyFiltersFromHash() {
-  const hash = new URLSearchParams(window.location.hash.slice(1));
-
-  const code = hash.get("code") || "";
-  const hersteller = (hash.get("hersteller") || "").toLowerCase();
-  const typ = (hash.get("typ") || "").toLowerCase();
-
-  searchInput.value = code;
-  herstellerFilter.value = hersteller;
-  typFilter.value = typ;
-
-  renderDaten();
 }
 
 function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedTyp = "") {
@@ -223,13 +213,6 @@ function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedT
   if (!typExists) typFilter.value = "";
 }
 
-function updateAutocompleteList(data) {
-  const datalist = document.getElementById("codeSuggestions");
-  if (!datalist) return;
-  const codes = [...new Set(data.map((d) => d.code).filter(Boolean))];
-  datalist.innerHTML = codes.sort().map((c) => `<option value="${c}"></option>`).join("");
-}
-
 function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
   return data.filter(item => {
     const code = item.code?.toLowerCase() || "";
@@ -254,7 +237,7 @@ function renderFehlerItem(code, kategorie, text) {
   return `
     <div class="errorDescriptionItem">
       <div class="iconLine">
-        <svg class="icon-small"><use href="#icon-fehler"></use></svg>
+        <svg class="icon small"><use href="#icon-fehler"></use></svg>
         <h4>Fehler: ${code}</h4> ${kategorie ? `<b>(${kategorie})</b>` : ""}
       </div>
       <p>${text}</p>
@@ -264,7 +247,7 @@ function renderUrsacheItem(text) {
   return `
     <div class="errorDescriptionItem">
       <div class="iconLine">
-        <svg class="icon-small"><use href="#icon-ursache"></use></svg>
+        <svg class="icon small"><use href="#icon-ursache"></use></svg>
         <h4>Maßnahme:</h4>
       </div>
       <p>${text}</p>
@@ -274,7 +257,7 @@ function renderInfoItem(text) {
   return `
     <div class="errorDescriptionItem">
       <div class="iconLine">
-        <svg class="icon-small"><use href="#icon-info"></use></svg>
+        <svg class="icon small"><use href="#icon-info"></use></svg>
         <strong>Info:</strong>
       </div>
       <p>${text}</p>
@@ -284,7 +267,7 @@ function renderLinkItem(link) {
   return `
     <div class="errorDescriptionItem">
       <div class="iconLine">
-        <svg class="icon-small"><use href="#icon-hilfe"></use></svg>
+        <svg class="icon small"><use href="#icon-hilfe"></use></svg>
         <h4>${link}</h4>
       </div>
     </div>`;
@@ -294,19 +277,13 @@ function renderCard(item) {
   const card = document.createElement("div");
   card.className = "card";
 
+  const herstellerId = item.hersteller?.toLowerCase().replace(/\s+/g, "_") || "";
   const typImagePath = item.typImage?.trim() || "";
-  const herstellerImageName = item.hersteller.toLowerCase().replace(/\s+/g, "_") + ".png";
-  const herstellerImagePath = `images/hersteller/${herstellerImageName}`;
 
   card.innerHTML = `
     <div class="cardheader">
       <div class="herstellerImageContainer">
-
-        <img class="herstellerImage theme-image" src="${herstellerImagePath}"
-             data-theme-light="images/hersteller/${herstellerImageName}"
-             data-theme-dark="images/hersteller/dark/${herstellerImageName}"
-             alt="${item.hersteller}"
-             onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
+        <svg class="herstellerImage"><use href="#${herstellerId}"></use></svg>
       </div>
       <div class="cardHeaderTyp">
         ${item.typ ? `<b>${item.typ}</b>` : ""}
@@ -322,22 +299,48 @@ function renderCard(item) {
         <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
         ${item.link ? renderLinkItem(item.link) : ""}
       </div>
-      ${typImagePath ? `
-        <div class="typImageWrapper">
-          <img class="typImage" src="${typImagePath}" alt="${item.typ}" 
-               onerror="this.onerror=null; this.src='images/icons/icon-512.png'">
-        </div>` : ""}
     </div>
   `;
 
-  container.appendChild(card);
+  const cardContent = card.querySelector(".cardContent");
 
+  // Typbild mit optionalem Modal
+  if (typImagePath) {
+    const typImageWrapper = document.createElement("div");
+    typImageWrapper.className = "typImageWrapper";
+
+    const typImage = document.createElement("img");
+    typImage.className = "typImage";
+    typImage.src = typImagePath;
+    typImage.alt = item.typ;
+    typImage.onerror = () => {
+      typImage.onerror = null;
+      typImage.src = "images/icons/icon-512.png";
+    };
+
+    if (item.modal) {
+      typImage.classList.add("clickable");
+      typImage.addEventListener("click", () => {
+        openTypImageModal(null, item.typ, item.modal);
+      });
+
+      const overlay = document.createElement("div");
+      overlay.className = "imageOverlayText";
+      overlay.textContent = "Klicken für Infos";
+      typImageWrapper.appendChild(overlay);
+    }
+
+    typImageWrapper.appendChild(typImage);
+    cardContent.appendChild(typImageWrapper);
+  }
+
+  // Details laden
   if (item.details) {
     fetch(item.details)
       .then(res => res.ok ? res.text() : Promise.reject("Fehler beim Laden"))
       .then(html => {
         const detailsDiv = card.querySelector(".detailsContainer");
-        if (detailsDiv) detailsDiv.innerHTML = html;
+        detailsDiv.innerHTML = html;
       })
       .catch(() => {
         const detailsDiv = card.querySelector(".detailsContainer");
@@ -347,6 +350,87 @@ function renderCard(item) {
     const detailsDiv = card.querySelector(".detailsContainer");
     if (detailsDiv) detailsDiv.remove();
   }
+
+  return card;
+}
+
+function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
+  const modalOverlay = document.createElement("div");
+  modalOverlay.className = "modalOverlay";
+
+  const modalContent = document.createElement("div");
+  modalContent.className = "modalContent";
+  modalContent.addEventListener("click", e => e.stopPropagation());
+
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "modalCloseBtn";
+  closeBtn.innerHTML = `<svg class="icon small"><use href="#icon-x"></use></svg>`;
+  closeBtn.addEventListener("click", () => closeModal());
+
+  // Optionaler Titel
+  if (typ) {
+    const title = document.createElement("h3");
+    title.className = "modalTitle";
+    title.textContent = typ;
+    modalContent.appendChild(title);
+  }
+
+  // Optional: HTML laden
+  if (htmlPath) {
+    fetch(htmlPath)
+      .then(res => res.ok ? res.text() : Promise.reject("Fehler beim Laden"))
+      .then(html => {
+        const htmlWrapper = document.createElement("div");
+        htmlWrapper.className = "modalHtmlContent";
+        htmlWrapper.innerHTML = html;
+        modalContent.appendChild(htmlWrapper);
+      })
+      .catch(() => {
+        const error = document.createElement("p");
+        error.textContent = "❌ Fehler beim Laden des Inhalts.";
+        modalContent.appendChild(error);
+      });
+  }
+
+  modalContent.appendChild(closeBtn);
+  modalOverlay.appendChild(modalContent);
+  document.body.appendChild(modalOverlay);
+
+  // ESC-Taste zum Schließen
+  function onKeyDown(e) {
+    if (e.key === "Escape") closeModal();
+  }
+  document.addEventListener("keydown", onKeyDown);
+
+  // Overlay-Klick zum Schließen
+  modalOverlay.addEventListener("click", closeModal);
+
+  // Modal schließen + Cleanup
+  function closeModal() {
+    document.removeEventListener("keydown", onKeyDown);
+    if (modalOverlay.parentNode) {
+      modalOverlay.parentNode.removeChild(modalOverlay);
+    }
+  }
+}
+
+document.getElementById("modalCloseBtn")?.addEventListener("click", () => {
+  document.getElementById("typImageModal").style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  const modal = document.getElementById("typImageModal");
+  if (e.target === modal) modal.style.display = "none";
+});
+
+function escapeHTML(str) {
+  return (str || "").replace(/[&<>"']/g, tag => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[tag]);
 }
 
 function renderDaten() {
@@ -361,6 +445,10 @@ function renderDaten() {
 
   const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ;
 
+  // Neue Session-ID setzen für Lazy-Abbruch
+  const thisRenderSession = Date.now();
+  currentRenderSessionId = thisRenderSession;
+
   if (keineFilterAktiv) {
     updateAutocompleteList(daten);
     fillDropdowns(daten);
@@ -373,23 +461,24 @@ function renderDaten() {
 
   if (filtered.length === 0) {
     updateAutocompleteList(daten);
-    fillDropdowns(daten, codeFilter, hersteller, typ);
+    fillDropdowns(filtered, codeFilter, hersteller, typ);
     trefferAnzahl.textContent = "";
     showHomeCard("Keine Treffer gefunden.");
     return;
   }
 
-  // Autocomplete und Dropdowns aktualisieren
   updateAutocompleteList(filtered);
   fillDropdowns(filtered, codeFilter, hersteller, typ);
   trefferAnzahl.textContent = `${filtered.length} Treffer`;
 
-  // Anzeige der Cards
+  // Kartenanzeige
   if (filtered.length > 100) {
-    showStatusMessage("Liste wird geladen…", "info", 1000);
-    renderDatenLazy(filtered);
+    renderDatenLazy(filtered, thisRenderSession);
   } else {
-    filtered.forEach(item => renderCard(item));
+    filtered.forEach(item => {
+      const card = renderCard(item);
+      container.appendChild(card);
+    });
   }
 
   updateThemeAssets(document.body.getAttribute("data-theme"));
@@ -405,30 +494,24 @@ function updateThemeAssets(theme) {
 function loadData() {
   const savedCSV = storage.getItem("csvData");
 
-  const finishLoad = (text) => {
-    daten = parseCSV(text);
-    storage.setItem("csvData", text);
-    updateAutocompleteList(daten);
-
-    const hersteller = herstellerFilter.value.trim().toLowerCase();
-    const typ = typFilter.value.trim().toLowerCase();
-    fillDropdowns(daten, "", hersteller, typ);
-
-    renderDaten();
-    showStatusMessage("Fehlercodes erfolgreich geladen.", "success");
-  };
-
   if (savedCSV) {
-    finishLoad(savedCSV);
+    daten = parseCSV(savedCSV);
+    fillDropdowns(daten);
+    renderDaten();
   } else {
     fetch("fehlerliste.csv")
       .then(res => {
         if (!res.ok) throw new Error("Fehlerliste nicht gefunden");
         return res.text();
       })
-      .then(finishLoad)
+      .then(text => {
+        daten = parseCSV(text);
+        storage.setItem("csvData", text);
+        fillDropdowns(daten);
+        renderDaten();
+      })
       .catch(() => {
-        showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+        showStatusMessage("⚠️ Fehlerliste konnte nicht geladen werden", "error");
         showHomeCard();
       });
   }
@@ -437,14 +520,25 @@ function loadData() {
 function renderDatenLazy(filtered) {
   let index = 0;
   const chunkSize = 20;
+  let lazyRenderCancelled = false;
+
+  // Globale Abbruchfunktion verfügbar machen
+  window.cancelLazyRender = () => { lazyRenderCancelled = true; };
+
+  const container = document.getElementById("container");
 
   function renderChunk(deadline) {
+    if (lazyRenderCancelled) return;
+
     while (index < filtered.length && (deadline.timeRemaining() > 0 || deadline.didTimeout)) {
       const item = filtered[index++];
-      renderCard(item);
+      const card = renderCard(item);
+      if (card instanceof HTMLElement) {
+        container.appendChild(card);
+      }
     }
 
-    if (index < filtered.length) {
+    if (index < filtered.length && !lazyRenderCancelled) {
       requestIdleCallback(renderChunk);
     }
   }
@@ -456,22 +550,24 @@ function renderDatenLazy(filtered) {
   ric(renderChunk);
 }
 
-function showHomeCard(hinweisText = null, updateHinweis = false) {
+function showHomeCard(hinweisText = null) {
+  if (!container) return;
+
   container.innerHTML = "";
 
   const homeCard = document.createElement("div");
-  homeCard.className = "card homeCard";
+  homeCard.className = "card homeCard transition-03";
   homeCard.innerHTML = `
     <div class="cardheader">
-      <div class="logoContainer">
-      </div>
-      <button class="menu-toggle" id="homeMenuToggle" title="Extras">
+      <div class="cardHeaderContent"></div>
+      <button class="btnMenuToggle transition-03" id="homeMenuToggle" title="Extras">
         <svg class="icon"><use href="#icon-menu"></use></svg>
       </button>
     </div>
+    
     <div class="cardContent">
       <div class="homeContent">
-        <div class="logo-box">
+        <div class="logo-box highlight">
           <svg><use href="#logo"></use></svg>
         </div>
         <div class="homeText">
@@ -479,8 +575,11 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
             ${hinweisText || `Gib einen Fehlercode ein. Oder,<br>Wähle einen Typ um alle Fehler diesen Types zu sehen. Schlagwörter wie "Reset", "Schliessen" oder "ohne" sind auch möglich.`}
           </p>
         </div>
+
+       
+
       </div>
-      <div id="homeMenuContainer">
+      <div id="homeMenuContainer" class="hide">
         <div class="menu">
           <button id="homeCsvBtn">
             <svg class="button-icon"><use href="#icon-upload"></use></svg>
@@ -492,51 +591,48 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
           </button>
           <button id="homeResetBtn">
             <svg class="button-icon"><use href="#icon-trash"></use></svg>
-            <p>Alle Daten aus dem lokalen Speicher löschen</p>
+            <p>lokale Daten löschen</p>
           </button>
         </div>
+        <p class="appVersion">v<span id="appVersionText">wird geladen…</span></p>
       </div>
     </div>
-    <div id="updateInfoContainer"></div>    
-    `;
+    <div id="updateInfoContainer"></div>
+  `;
 
-  container.appendChild(homeCard);
+  if (container) container.appendChild(homeCard);
 
   if (window.updateReadyWorker) {
-    const updateDiv = document.createElement("div");
-    updateDiv.id = "updateMessage";
-    updateDiv.className = "updateInfo";
-    updateDiv.innerHTML = `
-      <p>🔄 Eine neue Version ist verfügbar.</p>
-      <button id="applyUpdateBtn" title="Jetzt aktualisieren">
-        <svg><use href="#icon-update"></use></svg>
-      </button>
-    `;
-
-    document.getElementById("updateInfoContainer").appendChild(updateDiv);
-    document.getElementById("applyUpdateBtn").addEventListener("click", () => {
-      window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
-    });
+    showUpdateButton();
   }
 
   document.getElementById("homeMenuToggle")?.addEventListener("click", (e) => {
     const menu = document.getElementById("homeMenuContainer");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    menu.className = menu.className === "show" ? "hide" : "show";
     e.stopPropagation();
+  });
+
+  document.addEventListener("click", (e) => {
+    const menu = document.getElementById("homeMenuContainer");
+    const toggle = document.getElementById("homeMenuToggle");
+
+    if (menu?.className === "show") {
+      if (
+        !menu.contains(e.target) &&
+        !toggle.contains(e.target)
+      ) {
+        menu.className = "hide";
+      }
+    }
   });
 
   const csvInput = document.getElementById("csvInput");
   document.getElementById("homeCsvBtn")?.addEventListener("click", () => {
-    if (csvInput) csvInput.click();
+    csvInput?.click();
   });
 
-  document.getElementById("homeThemeBtn")?.addEventListener("click", () => {
-    toggleTheme();
-  });
-
-  document.getElementById("homeResetBtn")?.addEventListener("click", () => {
-    resetData();
-  });
+  document.getElementById("homeThemeBtn")?.addEventListener("click", toggleTheme);
+  document.getElementById("homeResetBtn")?.addEventListener("click", resetData);
 
   csvInput?.addEventListener("change", function () {
     const file = this.files[0];
@@ -549,10 +645,12 @@ function showHomeCard(hinweisText = null, updateHinweis = false) {
       storage.setItem("csvData", text);
       fillDropdowns(daten);
       renderDaten();
-      showStatusMessage(`${file.name} erfolgreich geladen`, "success");
+      showStatusMessage(`✅ ${file.name} erfolgreich geladen`, "success");
     };
     reader.readAsText(file, "UTF-8");
   });
+
+  updateAppVersionInUI();
 }
 
 function toggleTheme() {
@@ -561,14 +659,18 @@ function toggleTheme() {
   document.body.setAttribute("data-theme", next);
   storage.setItem("theme", next);
   updateThemeAssets(next);
-  showStatusMessage("Theme umgeschaltet");
 }
 
 function resetData() {
   storage.removeItem("csvData");
   storage.removeItem("theme");
-  showStatusMessage("Zurückgesetzt – Seite wird neu geladen");
-  setTimeout(() => location.reload(), 800);
+
+  sessionStorage.setItem("appReset", "1");
+  showStatusMessage("Zurückgesetzt – Seite wird neu geladen", "info", 1200);
+
+  setTimeout(() => {
+    location.reload();
+  }, 2000);
 }
 
 // Autocomplete
@@ -602,7 +704,6 @@ function showUpdateButton() {
   // Falls die HomeCard bereits angezeigt wird, sofort einfügen
   const homeCard = document.querySelector(".homeCard");
   if (homeCard) {
-    const homeContent = homeCard.querySelector(".homeContent");
 
     // Nicht doppelt einfügen
     if (document.getElementById("updateMessage")) return;
@@ -611,9 +712,10 @@ function showUpdateButton() {
     updateDiv.id = "updateMessage";
     updateDiv.className = "updateInfo";
     updateDiv.innerHTML = `
-      <p>🔄 Eine neue Version ist verfügbar.</p>
+      <p>Eine neue Version ist verfügbar.</p>
       <button id="applyUpdateBtn" title="Jetzt aktualisieren">
-        <svg class="button-icon"><use href="#icon-update"></use></svg>
+        <svg><use href="#icon-update"></use></svg>
+        <p>Jetzt aktualisieren</p>
       </button>
     `;
 
@@ -622,6 +724,8 @@ function showUpdateButton() {
     document.getElementById("applyUpdateBtn").addEventListener("click", () => {
       if (window.updateReadyWorker) {
         window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
+        sessionStorage.setItem("updateInstalled", "1");
+        location.reload(true);
       }
     });
   } else {
@@ -637,23 +741,6 @@ function showUpdateButton() {
   }
 }
 
-// SVG ins DOM laden
-fetch("images/symbole/sprite.svg")
-  .then(res => {
-    if (!res.ok) throw new Error("SVG konnte nicht geladen werden");
-    return res.text();
-  })
-  .then(svg => {
-    const div = document.createElement("div");
-    div.style.display = "none";
-    div.innerHTML = svg;
-    document.body.appendChild(div);
-  })
-  .catch(err => {
-    console.warn("SVG-Sprite konnte nicht geladen werden:", err);
-    showStatusMessage("SVG-Symbole konnten nicht geladen werden.", "error");
-  });
-
 // Elemente & Daten
 const searchInput = document.getElementById("searchInput");
 const herstellerFilter = document.getElementById("herstellerFilter");
@@ -662,35 +749,98 @@ const container = document.getElementById("container");
 const searchHint = document.getElementById("searchHint");
 let daten = [];
 
-// Theme anwenden
-const savedTheme = storage.getItem("theme");
-if (savedTheme) {
-  document.body.setAttribute("data-theme", savedTheme);
-  updateThemeAssets(savedTheme);
+// Version aus Service Worker extrahieren
+function getAppVersionFromServiceWorker() {
+  return fetch("service-worker.js")
+    .then(res => res.text())
+    .then(text => {
+      const match = text.match(/CACHE_NAME\s*=\s*["']fehlercode-cache-v([\d.]+)["']/);
+      return match ? match[1] : null;
+    })
+    .catch(() => null);
 }
 
-// Service Worker registrieren und auf Update prüfen
+// Zeigt die Version z.B. auf der HomeCard an
+function updateAppVersionInUI() {
+  const el = document.getElementById("appVersionText");
+  if (el && window.APP_VERSION) {
+    el.textContent = window.APP_VERSION;
+  }
+}
+
+function showImageModal(imageSrc, text = "", linkText = "", linkTarget = "") {
+  const modal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalText = document.getElementById("modalText");
+
+  modalImage.src = imageSrc;
+  modalText.innerHTML = `
+    <p>${text}</p>
+    ${linkText && linkTarget ? `<p><a href="${linkTarget}">${linkText}</a></p>` : ""}
+  `;
+
+  modal.classList.remove("hidden");
+}
+
+// Schließen-Button
+document.getElementById("modalClose")?.addEventListener("click", () => {
+  document.getElementById("imageModal").classList.add("hidden");
+});
+
+// Klick außerhalb schließt ebenfalls
+document.getElementById("imageModal")?.addEventListener("click", (e) => {
+  if (e.target.id === "imageModal") {
+    e.currentTarget.classList.add("hidden");
+  }
+});
+
+// Service Worker Registrierung + Update-Erkennung
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js").then(reg => {
-    reg.onupdatefound = () => {
+    reg.addEventListener("updatefound", () => {
       const newWorker = reg.installing;
-      newWorker.onstatechange = () => {
-        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+
+      newWorker.addEventListener("statechange", () => {
+        if (
+          newWorker.state === "installed" &&
+          navigator.serviceWorker.controller
+        ) {
+          // Neue Version erkannt → Button einblenden
           window.updateReadyWorker = newWorker;
-          showUpdateButton();
+          window.updateAvailable = true;
+
+          if (typeof showUpdateButton === "function") {
+            showUpdateButton();
+          }
         }
-      };
-    };
+      });
+    });
   });
 
-  // Nur nach Button-Klick reloaden!
-  let refreshing = false;
+  // SW übernimmt Kontrolle → reloaden und Marker setzen
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (refreshing) return;
-    refreshing = true;
-    window.location.reload();
+    if (window.updateAvailable) {
+      sessionStorage.setItem("updateInstalled", "1");
+      location.reload();
+    }
   });
 }
+
+// Nach Seiten-Reload: Erfolgsmeldung bei Update
+if (sessionStorage.getItem("updateInstalled") === "1") {
+  getAppVersionFromServiceWorker().then(version => {
+    window.APP_VERSION = version || "Unbekannt";
+    showStatusMessage(`✅ Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`, "success");
+    updateAppVersionInUI?.();
+    sessionStorage.removeItem("updateInstalled");
+  });
+}
+
+// Initiale Version setzen
+getAppVersionFromServiceWorker().then(version => {
+  window.APP_VERSION = version || "Unbekannt";
+  updateAppVersionInUI();
+});
 
 // Scroll-Button
 const scrollTopBtn = document.getElementById("scrollTopBtn");
@@ -710,7 +860,7 @@ function onScroll() {
   const currentY = window.scrollY;
 
   // Immer sichtbar, wenn ganz oben
-  if (currentY <= 0) {
+  if (currentY <= 5) {
     headerEl.classList.remove("hide");
   } else if (currentY > lastScrollY && currentY > 80) {
     headerEl.classList.add("hide"); // Nach unten scrollen → ausblenden
@@ -729,7 +879,7 @@ window.addEventListener("scroll", () => {
   }
 }, { passive: true });
 
-// 🔁 Aktualisiert die Steuerungs-Buttons (Sichtbarkeit / Aktivierung)
+// Aktualisiert die Steuerungs-Buttons (Sichtbarkeit / Aktivierung)
 function updateControlButtons() {
   const hasText = searchInput.value.trim() !== "";
   const hasFilter = herstellerFilter.value !== "" || typFilter.value !== "";
@@ -739,9 +889,9 @@ function updateControlButtons() {
 
 function updateURLHash() {
   const params = new URLSearchParams();
-  const code = searchInput.value.trim();
-  const hersteller = herstellerFilter.value.trim();
-  const typ = typFilter.value.trim();
+  const code = searchInput.value.trim().toLowerCase();
+  const hersteller = herstellerFilter.value.trim().toLowerCase();
+  const typ = typFilter.value.trim().toLowerCase();
 
   if (code) params.set("code", code);
   if (hersteller) params.set("hersteller", hersteller);
@@ -760,7 +910,7 @@ function resetHash() {
   input.addEventListener("input", debounce(() => {
     updateURLHash();
     renderDaten();
-    // updateControlButtons();
+    updateControlButtons();
   }, 400));
 });
 
@@ -770,7 +920,7 @@ document.getElementById("btnClearSearch").addEventListener("click", () => {
   searchHint.value = "";
   updateURLHash();
   renderDaten();
-  // updateControlButtons();
+  updateControlButtons();
 });
 
 // Filter-Reset-Button
@@ -779,7 +929,7 @@ document.getElementById("btnResetFilters").addEventListener("click", () => {
   typFilter.value = "";
   updateURLHash();
   renderDaten();
-  // updateControlButtons();
+  updateControlButtons();
 });
 
 // Autocomplete für Codes
@@ -821,16 +971,81 @@ searchInput.addEventListener("input", () => {
 });
 
 function parseURLHash() {
-  const params = new URLSearchParams(window.location.hash.slice(1));
-  searchInput.value = decodeURIComponent(params.get("code") || "");
-  herstellerFilter.value = decodeURIComponent(params.get("hersteller") || "");
-  typFilter.value = decodeURIComponent(params.get("typ") || "");
+  if (!location.hash.startsWith("#")) return { code: "", hersteller: "", typ: "" };
+
+  const hash = location.hash.substring(1);
+  const params = new URLSearchParams(hash);
+
+  return {
+    code: params.get("code") || "",
+    hersteller: params.get("hersteller") || "",
+    typ: params.get("typ") || "",
+  };
 }
-parseURLHash();
+
+async function initApp() {
+  // Theme laden
+  const savedTheme = storage.getItem("theme");
+  if (savedTheme) {
+    document.body.setAttribute("data-theme", savedTheme);
+    updateThemeAssets(savedTheme);
+  }
+
+  // SVG-Sprite einbinden
+  fetch("images/symbole/sprite.svg")
+    .then(res => res.text())
+    .then(svg => {
+      const div = document.createElement("div");
+      div.style.display = "none";
+      div.innerHTML = svg;
+      document.body.appendChild(div);
+    });
+
+  // App-Version aus dem Service Worker holen
+  try {
+    const version = await getAppVersionFromServiceWorker();
+    window.APP_VERSION = version || "Unbekannt";
+  } catch (err) {
+    console.warn("Konnte App-Version nicht abrufen:", err);
+    window.APP_VERSION = "Unbekannt";
+  }
+
+  updateAppVersionInUI();
+
+  if (sessionStorage.getItem("appUpdated") === "1") {
+    getAppVersionFromServiceWorker().then(version => {
+      const appVersion = version || "Unbekannt";
+      window.APP_VERSION = appVersion; // Nur sicherheitshalber setzen
+      showStatusMessage(`✅ Update auf Version ${appVersion} erfolgreich durchgeführt.`, "success");
+      sessionStorage.removeItem("appUpdated");
+    });
+  }
+
+  // Daten laden (lokal oder per fetch)
+  await loadData();
+
+  // Initiale Filter aus URL (Hash) lesen
+  const { code = "", hersteller = "", typ = "" } = parseURLHash() || {};
+
+  // Suchfeld setzen
+  if (code) searchInput.value = code;
+  if (hersteller) herstellerFilter.value = hersteller;
+  if (typ) typFilter.value = typ;
+
+  if (sessionStorage.getItem("appReset") === "1") {
+    sessionStorage.removeItem("appReset");
+    showStatusMessage("App wurde zurückgesetzt. Standarddaten werden geladen.", "info");
+  }
+  // Initiale Anzeige
+  renderDaten();
+
+  // Button-Zustände aktualisieren
+  updateControlButtons();
+
+  // PWA-Update prüfen
+  checkForPWAUpdate();
+}
+
 
 // Start
-loadData();
-// updateControlButtons();
-applyFiltersFromHash();
-checkForPWAUpdate();
-
+initApp();
