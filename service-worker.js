@@ -22,7 +22,7 @@ const ASSETS_TO_CACHE = [
   "images/symbole/sta19_entriegeln1.png",
   "images/symbole/sta19_entriegeln2.png",
   "images/symbole/sta19_verschalung_auf.png",
-  
+
   "images/typen/bde-e.png",
   "images/typen/bde-m.png",
   "images/typen/c-bedix.png",
@@ -75,7 +75,17 @@ self.addEventListener("fetch", (event) => {
 
 // Nachrichten vom Client
 self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
+  if (event.data && event.data.type === "GET_VERSION") {
+    const versionMatch = CACHE_NAME.match(/fehlercode-cache-v([\d.]+)/);
+    const version = versionMatch ? versionMatch[1] : "Unbekannt";
+
+    event.ports[0].postMessage({
+      type: "APP_VERSION",
+      version
+    });
+  }
+
+  if (event.data?.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });

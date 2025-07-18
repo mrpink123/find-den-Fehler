@@ -1,51 +1,55 @@
-window.APP_VERSION = "Unbekannt";
-let currentRenderSessionId = 0;
-
-// Fallback für localStorage
+// ==== Lokaler Speicher mit Fallback ====
 function getStorage() {
   try {
-    const test = "__test__";
-    localStorage.setItem(test, "1");
-    localStorage.removeItem(test);
+    const testKey = "__test__";
+    localStorage.setItem(testKey, "1");
+    localStorage.removeItem(testKey);
     return localStorage;
   } catch {
-    const fallback = {};
+    const memoryStore = {};
     return {
-      getItem: (k) => fallback[k] || null,
-      setItem: (k, v) => (fallback[k] = v),
-      removeItem: (k) => delete fallback[k],
+      getItem: (key) => memoryStore[key] || null,
+      setItem: (key, value) => (memoryStore[key] = value),
+      removeItem: (key) => delete memoryStore[key],
     };
   }
 }
 const storage = getStorage();
 
-function showStatusMessage(text, type = "success", timeout = 4000) {
-  const box = document.getElementById("statusMessage");
-  if (!box) return;
-  box.innerHTML = text;
-  box.className = `show ${type}`;
-  setTimeout(() => (box.className = "hidden"), timeout);
+// ==== Benachrichtigung ====
+function showStatusMessage(text, type = "info", timeout = 4000) {
+  const msgBox = document.getElementById("statusMessage");
+  msgBox.innerHTML = (type === "success" ? "✅" : type === "error" ? "❌" : "ℹ️") + " " + text;
+  msgBox.className = `show ${type}`;
+  setTimeout(() => {
+    msgBox.className = msgBox.className.replace("show", "");
+  }, timeout);
 }
 
+// ==== PWA-Update prüfen ====
 function checkForPWAUpdate() {
-  if (!('serviceWorker' in navigator)) return;
+  if (!("serviceWorker" in navigator)) return;
 
   navigator.serviceWorker.getRegistration().then(reg => {
-    if (reg) reg.update();
+    if (!reg) return;
 
-    if (reg && reg.waiting) {
-      storage.setItem("pwaUpdateAvailable", "true");
+    reg.update();
+
+    if (reg.waiting) {
+      window.updateStatus.available = true;
+      window.updateStatus.worker = reg.waiting;
       showHomeCard(null, true);
     }
 
-    reg?.addEventListener("updatefound", () => {
+    reg.addEventListener("updatefound", () => {
       const newWorker = reg.installing;
       newWorker?.addEventListener("statechange", () => {
         if (
           newWorker.state === "installed" &&
           navigator.serviceWorker.controller
         ) {
-          storage.setItem("pwaUpdateAvailable", "true");
+          window.updateStatus.available = true;
+          window.updateStatus.worker = newWorker;
           showHomeCard(null, true);
         }
       });
@@ -53,8 +57,8 @@ function checkForPWAUpdate() {
   });
 }
 
-// Debounce Funktion
-function debounce(fn, delay = 400) {
+// ==== Debounce Funktion ====
+function debounce(fn, delay = 500) {
   let timer;
   return function (...args) {
     clearTimeout(timer);
@@ -62,6 +66,7 @@ function debounce(fn, delay = 400) {
   };
 }
 
+// ==== Escape-RegEx für sichere Suchbegriffe ====
 function escapeRegExp(string) {
   if (typeof string !== "string") {
     string = String(string || "");
@@ -72,26 +77,107 @@ function escapeRegExp(string) {
 function parseCSV(text) {
   const result = Papa.parse(text, { header: true, skipEmptyLines: true });
   if (result.errors.length > 0) {
-    showStatusMessage("⚠️ Fehler beim Parsen der CSV-Datei", "error");
+    showStatusMessage("Fehler beim Parsen der CSV-Datei", "error");
     return [];
   }
-  return result.data.map((row) => ({
-    hersteller: row.hersteller?.trim() || "",
-    typ: row.typ?.trim() || "",
-    code: row.code?.trim() || "",
-    suchbegriffe: row.suchbegriffe?.trim() || "",
-    fehler: row.fehler?.trim() || "",
-    ursache: row.ursache?.trim() || "",
-    infos: row.info?.trim() || "",
-    weitere: row.weitere?.trim() || "",
-    kategorie: row.kategorie?.trim() || "",
-    link: row.link?.trim() || "",
-    typImage: row.typbild?.trim() || "",
-    details: row.details?.trim() || "",
-    modal: row.modal?.trim() || "",
+  return result.data.filter(row => row.Hersteller?.toLowerCase() !== "csvversion" && row.Code).map((row) => ({
+    hersteller: row.Hersteller?.trim() || "",
+    typ: row.Typ?.trim() || "",
+    code: row.Code?.trim() || "",
+    suchbegriffe: row.Suchbegriffe?.trim() || "",
+    fehler: row.Fehler?.trim() || "",
+    ursache: row.Ursache?.trim() || "",
+    infos: row.Info?.trim() || "",
+    weitere: row.Weitere?.trim() || "",
+    kategorie: row.Kategorie?.trim() || "",
+    link: row.Link?.trim() || "",
+    typImage: row.TypBild?.trim() || "",
+    details: row.Details?.trim() || "",
+    modal: row.Modal?.trim() || "",
+    csvVersion: row.CsvVersion?.trim() || "",
   }));
 }
 
+// ==== CSV-Version aus der CSV auslesen ====
+function extractCSVVersion(csvText) {
+  try {
+    const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+    const rowWithVersion = parsed.data.find(row => row?.CsvVersion);
+    return rowWithVersion?.CsvVersion?.trim() || null;
+  } catch {
+    return null;
+  }
+}
+
+// ==== Globale Variablen ====
+const searchInput = document.getElementById("searchInput");
+const herstellerFilter = document.getElementById("herstellerFilter");
+const typFilter = document.getElementById("typFilter");
+const container = document.getElementById("container");
+const searchHint = document.getElementById("searchHint");
+let currentRenderSessionId = 0;
+let daten = [];
+window.APP_VERSION = "Unbekannt";
+window.CSV_VERSION = "Unbekannt";
+window.updateStatus = {
+  available: false,
+  worker: null,
+  buttonShown: false
+};
+
+// ==== App-Version aus Service Worker extrahieren ====
+function getAppVersionFromServiceWorker() {
+  return fetch("service-worker.js")
+    .then((res) => res.text())
+    .then((text) => {
+      const match = text.match(/CACHE_NAME\s*=\s*["']fehlercode-cache-v([\d.]+)["']/);
+      return match ? match[1] : null;
+    })
+    .catch(() => null);
+}
+
+async function getAppVersionFromActiveSW() {
+  if (navigator.serviceWorker?.controller) {
+    return sendVersionRequest();
+  }
+
+  return new Promise((resolve) => {
+    navigator.serviceWorker.addEventListener("controllerchange", async () => {
+      const version = await sendVersionRequest();
+      resolve(version);
+    });
+  });
+
+  function sendVersionRequest() {
+    return new Promise((resolve) => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = (event) => {
+        if (event.data?.type === "APP_VERSION") {
+          resolve(event.data.version || "Unbekannt");
+        } else {
+          resolve("Unbekannt");
+        }
+      };
+      navigator.serviceWorker.controller?.postMessage(
+        { type: "GET_VERSION" },
+        [channel.port2]
+      );
+    });
+  }
+}
+
+// ==== UI-Versionen aktualisieren ====
+function updateAppVersionInUI() {
+  const versionEl = document.getElementById("appVersionText");
+  if (versionEl) versionEl.textContent = window.APP_VERSION || "Unbekannt";
+}
+
+function updateCSVVersionInUI() {
+  const csvVersionEl = document.getElementById("csvVersionText");
+  if (csvVersionEl) csvVersionEl.textContent = window.CSV_VERSION || "Unbekannt";
+}
+
+// ==== Dropdown Menüs befüllen ====
 function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedTyp = "") {
   const herstellerMap = new Map();
   const typMap = new Map();
@@ -213,6 +299,7 @@ function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedT
   if (!typExists) typFilter.value = "";
 }
 
+// ==== Filterlogik ====
 function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
   return data.filter(item => {
     const code = item.code?.toLowerCase() || "";
@@ -233,6 +320,7 @@ function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
   });
 }
 
+// ==== Rendern der fehlerbeschreibung Items ====
 function renderFehlerItem(code, kategorie, text) {
   return `
     <div class="errorDescriptionItem">
@@ -243,6 +331,7 @@ function renderFehlerItem(code, kategorie, text) {
       <p>${text}</p>
     </div>`;
 }
+
 function renderUrsacheItem(text) {
   return `
     <div class="errorDescriptionItem">
@@ -253,6 +342,7 @@ function renderUrsacheItem(text) {
       <p>${text}</p>
     </div>`;
 }
+
 function renderInfoItem(text) {
   return `
     <div class="errorDescriptionItem">
@@ -263,6 +353,7 @@ function renderInfoItem(text) {
       <p>${text}</p>
     </div>`;
 }
+
 function renderLinkItem(link) {
   return `
     <div class="errorDescriptionItem">
@@ -273,6 +364,7 @@ function renderLinkItem(link) {
     </div>`;
 }
 
+// ==== Fehler Card rendern ====
 function renderCard(item) {
   const card = document.createElement("div");
   card.className = "card";
@@ -354,9 +446,13 @@ function renderCard(item) {
   return card;
 }
 
+// ==== Modal erstellen ====
 function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
   const modalOverlay = document.createElement("div");
   modalOverlay.className = "modalOverlay";
+
+  const modalHeader = document.createElement("div");
+  modalHeader.className = "modalHeader"
 
   const modalContent = document.createElement("div");
   modalContent.className = "modalContent";
@@ -364,15 +460,17 @@ function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
 
   const closeBtn = document.createElement("button");
   closeBtn.className = "modalCloseBtn";
+  closeBtn.title = "schließen"
   closeBtn.innerHTML = `<svg class="icon small"><use href="#icon-x"></use></svg>`;
   closeBtn.addEventListener("click", () => closeModal());
+
 
   // Optionaler Titel
   if (typ) {
     const title = document.createElement("h3");
     title.className = "modalTitle";
     title.textContent = typ;
-    modalContent.appendChild(title);
+    modalHeader.appendChild(title);
   }
 
   // Optional: HTML laden
@@ -392,7 +490,8 @@ function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
       });
   }
 
-  modalContent.appendChild(closeBtn);
+  modalHeader.appendChild(closeBtn);
+  modalContent.appendChild(modalHeader);
   modalOverlay.appendChild(modalContent);
   document.body.appendChild(modalOverlay);
 
@@ -414,6 +513,18 @@ function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
   }
 }
 
+// Schließen-Button
+document.getElementById("modalClose")?.addEventListener("click", () => {
+  document.getElementById("imageModal").classList.add("hidden");
+});
+
+// Klick außerhalb schließt ebenfalls
+document.getElementById("imageModal")?.addEventListener("click", (e) => {
+  if (e.target.id === "imageModal") {
+    e.currentTarget.classList.add("hidden");
+  }
+});
+
 document.getElementById("modalCloseBtn")?.addEventListener("click", () => {
   document.getElementById("typImageModal").style.display = "none";
 });
@@ -423,6 +534,7 @@ window.addEventListener("click", (e) => {
   if (e.target === modal) modal.style.display = "none";
 });
 
+// ==== Sonderzeichen filtern ====
 function escapeHTML(str) {
   return (str || "").replace(/[&<>"']/g, tag => ({
     "&": "&amp;",
@@ -433,6 +545,7 @@ function escapeHTML(str) {
   })[tag]);
 }
 
+// ==== Rendert gefilterte Cards ====
 function renderDaten() {
   const suchtext = searchInput.value.trim().toLowerCase();
   const suchwoerter = suchtext.split(/\s+/).filter(w => w.length > 0);
@@ -480,10 +593,10 @@ function renderDaten() {
       container.appendChild(card);
     });
   }
-
   updateThemeAssets(document.body.getAttribute("data-theme"));
 }
 
+// ==== Theme-Abhängige Assets aktualisieren ====
 function updateThemeAssets(theme) {
   document.querySelectorAll(".theme-image").forEach((img) => {
     const newSrc = img.getAttribute(`data-theme-${theme}`);
@@ -491,54 +604,61 @@ function updateThemeAssets(theme) {
   });
 }
 
-function loadData() {
+// ==== App-Daten laden ====
+async function loadData() {
   const savedCSV = storage.getItem("csvData");
+  const savedVersion = storage.getItem("csvVersion");
 
   if (savedCSV) {
-    daten = parseCSV(savedCSV);
+    const version = extractCSVVersion(savedCSV);
+    if (version && version === savedVersion) {
+      window.CSV_VERSION = version;
+      daten = parseCSV(savedCSV);
+      fillDropdowns(daten);
+      renderDaten();
+      updateCSVVersionInUI();
+      return;
+    }
+  }
+
+  try {
+    const response = await fetch("fehlerliste.csv");
+    if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
+    const text = await response.text();
+    const version = extractCSVVersion(text);
+    if (version) {
+      storage.setItem("csvVersion", version);
+      window.CSV_VERSION = version;
+    } else {
+      window.CSV_VERSION = "Unbekannt";
+    }
+
+    storage.setItem("csvData", text);
+    daten = parseCSV(text);
     fillDropdowns(daten);
     renderDaten();
-  } else {
-    fetch("fehlerliste.csv")
-      .then(res => {
-        if (!res.ok) throw new Error("Fehlerliste nicht gefunden");
-        return res.text();
-      })
-      .then(text => {
-        daten = parseCSV(text);
-        storage.setItem("csvData", text);
-        fillDropdowns(daten);
-        renderDaten();
-      })
-      .catch(() => {
-        showStatusMessage("⚠️ Fehlerliste konnte nicht geladen werden", "error");
-        showHomeCard();
-      });
+    updateCSVVersionInUI();
+  } catch {
+    showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+    showHomeCard();
   }
 }
 
-function renderDatenLazy(filtered) {
+// ==== Rendert in abschnitten ====
+function renderDatenLazy(filtered, sessionId) {
   let index = 0;
-  const chunkSize = 20;
-  let lazyRenderCancelled = false;
-
-  // Globale Abbruchfunktion verfügbar machen
-  window.cancelLazyRender = () => { lazyRenderCancelled = true; };
-
-  const container = document.getElementById("container");
 
   function renderChunk(deadline) {
-    if (lazyRenderCancelled) return;
+    // Session-Abbruch prüfen
+    if (sessionId !== currentRenderSessionId) return;
 
     while (index < filtered.length && (deadline.timeRemaining() > 0 || deadline.didTimeout)) {
       const item = filtered[index++];
       const card = renderCard(item);
-      if (card instanceof HTMLElement) {
-        container.appendChild(card);
-      }
+      container.appendChild(card);
     }
 
-    if (index < filtered.length && !lazyRenderCancelled) {
+    if (index < filtered.length && sessionId === currentRenderSessionId) {
       requestIdleCallback(renderChunk);
     }
   }
@@ -550,6 +670,7 @@ function renderDatenLazy(filtered) {
   ric(renderChunk);
 }
 
+// ==== Rendert die Home Card ====
 function showHomeCard(hinweisText = null) {
   if (!container) return;
 
@@ -575,9 +696,6 @@ function showHomeCard(hinweisText = null) {
             ${hinweisText || `Gib einen Fehlercode ein. Oder,<br>Wähle einen Typ um alle Fehler diesen Types zu sehen. Schlagwörter wie "Reset", "Schliessen" oder "ohne" sind auch möglich.`}
           </p>
         </div>
-
-       
-
       </div>
       <div id="homeMenuContainer" class="hide">
         <div class="menu">
@@ -594,7 +712,11 @@ function showHomeCard(hinweisText = null) {
             <p>lokale Daten löschen</p>
           </button>
         </div>
-        <p class="appVersion">v<span id="appVersionText">wird geladen…</span></p>
+        <div class="versionContainer">
+          <p class="version">App: <span id="appVersionText">lade…</span></p>
+          <p class="version">Fehlerliste: <span id="csvVersionText"> lade…</span></p>
+        </div>
+        
       </div>
     </div>
     <div id="updateInfoContainer"></div>
@@ -645,14 +767,16 @@ function showHomeCard(hinweisText = null) {
       storage.setItem("csvData", text);
       fillDropdowns(daten);
       renderDaten();
-      showStatusMessage(`✅ ${file.name} erfolgreich geladen`, "success");
+      showStatusMessage(`${file.name} erfolgreich geladen`, "success");
     };
     reader.readAsText(file, "UTF-8");
   });
 
   updateAppVersionInUI();
+  updateCSVVersionInUI();
 }
 
+// ==== Toggle zwischen Light / Dark Theme ====
 function toggleTheme() {
   const current = document.body.getAttribute("data-theme");
   const next = current === "dark" ? "light" : "dark";
@@ -661,154 +785,62 @@ function toggleTheme() {
   updateThemeAssets(next);
 }
 
+// ==== Filter zurücksetzen ====
 function resetData() {
   storage.removeItem("csvData");
+  storage.removeItem("csvVersion");
   storage.removeItem("theme");
-
   sessionStorage.setItem("appReset", "1");
-  showStatusMessage("Zurückgesetzt – Seite wird neu geladen", "info", 1200);
-
-  setTimeout(() => {
-    location.reload();
-  }, 2000);
+  showStatusMessage("Zurückgesetzt – lade neu");
+  setTimeout(() => location.reload(), 800);
 }
 
-// Autocomplete
+// ==== Autocomplete aktualisieren ====
 function updateAutocompleteList(data) {
   const datalist = document.getElementById("codeSuggestions");
   if (!datalist) return;
-
-  const codeSet = new Set();
-  const begriffeSet = new Set();
-
-  data.forEach(d => {
-    if (d.code) codeSet.add(d.code);
-    if (d.suchbegriffe) {
-      d.suchbegriffe
-        .split(/\s*,\s*/) // Trenne bei Komma
-        .map(s => s.trim())
-        .filter(Boolean)
-        .forEach(s => begriffeSet.add(s));
-    }
-  });
-
-  // Kombinieren & sortieren
-  const combined = [...codeSet, ...begriffeSet].sort((a, b) =>
-    a.localeCompare(b, "de", { sensitivity: "base" })
-  );
-
-  datalist.innerHTML = combined.map(w => `<option value="${w}"></option>`).join("");
+  const uniqueCodes = [...new Set(data.map((d) => d.code).filter(Boolean))];
+  datalist.innerHTML = uniqueCodes
+    .sort()
+    .map((code) => `<option value="${code}"></option>`)
+    .join("");
 }
 
+// ==== Service Worker Update-Button einblenden ====
 function showUpdateButton() {
-  // Falls die HomeCard bereits angezeigt wird, sofort einfügen
-  const homeCard = document.querySelector(".homeCard");
-  if (homeCard) {
+  if (window.updateStatus.buttonShown) return;
 
-    // Nicht doppelt einfügen
-    if (document.getElementById("updateMessage")) return;
+  const container = document.getElementById("updateInfoContainer");
+  if (!container || !window.updateStatus.available) return;
 
-    const updateDiv = document.createElement("div");
-    updateDiv.id = "updateMessage";
-    updateDiv.className = "updateInfo";
-    updateDiv.innerHTML = `
-      <p>Eine neue Version ist verfügbar.</p>
-      <button id="applyUpdateBtn" title="Jetzt aktualisieren">
-        <svg><use href="#icon-update"></use></svg>
-        <p>Jetzt aktualisieren</p>
-      </button>
-    `;
-
-    document.getElementById("updateInfoContainer").appendChild(updateDiv);
-
-    document.getElementById("applyUpdateBtn").addEventListener("click", () => {
-      if (window.updateReadyWorker) {
-        window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
-        sessionStorage.setItem("updateInstalled", "1");
-        location.reload(true);
-      }
-    });
-  } else {
-    // Wenn HomeCard noch nicht angezeigt wird, später erneut versuchen
-    const retry = () => {
-      if (document.querySelector(".homeCard")) {
-        showUpdateButton();
-      } else {
-        setTimeout(retry, 300);
-      }
-    };
-    retry();
-  }
-}
-
-// Elemente & Daten
-const searchInput = document.getElementById("searchInput");
-const herstellerFilter = document.getElementById("herstellerFilter");
-const typFilter = document.getElementById("typFilter");
-const container = document.getElementById("container");
-const searchHint = document.getElementById("searchHint");
-let daten = [];
-
-// Version aus Service Worker extrahieren
-function getAppVersionFromServiceWorker() {
-  return fetch("service-worker.js")
-    .then(res => res.text())
-    .then(text => {
-      const match = text.match(/CACHE_NAME\s*=\s*["']fehlercode-cache-v([\d.]+)["']/);
-      return match ? match[1] : null;
-    })
-    .catch(() => null);
-}
-
-// Zeigt die Version z.B. auf der HomeCard an
-function updateAppVersionInUI() {
-  const el = document.getElementById("appVersionText");
-  if (el && window.APP_VERSION) {
-    el.textContent = window.APP_VERSION;
-  }
-}
-
-function showImageModal(imageSrc, text = "", linkText = "", linkTarget = "") {
-  const modal = document.getElementById("imageModal");
-  const modalImage = document.getElementById("modalImage");
-  const modalText = document.getElementById("modalText");
-
-  modalImage.src = imageSrc;
-  modalText.innerHTML = `
-    <p>${text}</p>
-    ${linkText && linkTarget ? `<p><a href="${linkTarget}">${linkText}</a></p>` : ""}
+  const updateDiv = document.createElement("div");
+  updateDiv.id = "updateMessage";
+  updateDiv.className = "updateInfo";
+  updateDiv.innerHTML = `
+    <p>🔄 Eine neue Version ist verfügbar.</p>
+    <button id="applyUpdateBtn" title="Jetzt aktualisieren">
+      <svg><use href="#icon-update"></use></svg>
+      <p>Jetzt aktualisieren</p>
+    </button>
   `;
 
-  modal.classList.remove("hidden");
+  container.appendChild(updateDiv);
+  window.updateStatus.buttonShown = true;
+
+  document.getElementById("applyUpdateBtn")?.addEventListener("click", () => {
+    window.updateStatus.worker?.postMessage({ type: "SKIP_WAITING" });
+  });
 }
 
-// Schließen-Button
-document.getElementById("modalClose")?.addEventListener("click", () => {
-  document.getElementById("imageModal").classList.add("hidden");
-});
-
-// Klick außerhalb schließt ebenfalls
-document.getElementById("imageModal")?.addEventListener("click", (e) => {
-  if (e.target.id === "imageModal") {
-    e.currentTarget.classList.add("hidden");
-  }
-});
-
-// Service Worker Registrierung + Update-Erkennung
+// ==== Service Worker Registrierung + Update-Erkennung ====
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js").then(reg => {
     reg.addEventListener("updatefound", () => {
       const newWorker = reg.installing;
-
       newWorker.addEventListener("statechange", () => {
-        if (
-          newWorker.state === "installed" &&
-          navigator.serviceWorker.controller
-        ) {
-          // Neue Version erkannt → Button einblenden
+        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
           window.updateReadyWorker = newWorker;
           window.updateAvailable = true;
-
           if (typeof showUpdateButton === "function") {
             showUpdateButton();
           }
@@ -817,41 +849,40 @@ if ("serviceWorker" in navigator) {
     });
   });
 
-  // SW übernimmt Kontrolle → reloaden und Marker setzen
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (window.updateAvailable) {
+    if (window.updateStatus.available) {
       sessionStorage.setItem("updateInstalled", "1");
+      localStorage.removeItem("csvData");
       location.reload();
     }
   });
 }
 
-// Nach Seiten-Reload: Erfolgsmeldung bei Update
+// ==== Nach Seiten-Reload: Erfolgsmeldung bei Update ====
 if (sessionStorage.getItem("updateInstalled") === "1") {
+  sessionStorage.removeItem("updateInstalled");
+
   getAppVersionFromServiceWorker().then(version => {
     window.APP_VERSION = version || "Unbekannt";
-    showStatusMessage(`✅ Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`, "success");
-    updateAppVersionInUI?.();
-    sessionStorage.removeItem("updateInstalled");
+    updateAppVersionInUI();
+    showStatusMessage(`Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`, "success");
   });
 }
+if (window.updateStatus.available && !window.updateStatus.buttonShown) {
+  showUpdateButton();
+}
 
-// Initiale Version setzen
-getAppVersionFromServiceWorker().then(version => {
-  window.APP_VERSION = version || "Unbekannt";
-  updateAppVersionInUI();
-});
-
-// Scroll-Button
+// ==== Scroll-Top-Button ====
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 window.addEventListener("scroll", () => {
   scrollTopBtn.classList.toggle("show", window.scrollY > 300);
 }, { passive: true });
+
 scrollTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Header Hide/Show
+// ==== Header Hide/Show ====
 let lastScrollY = window.scrollY;
 const headerEl = document.getElementById("siteHeader");
 let ticking = false;
@@ -983,6 +1014,7 @@ function parseURLHash() {
   };
 }
 
+// ==== App starten ====
 async function initApp() {
   // Theme laden
   const savedTheme = storage.getItem("theme");
@@ -991,7 +1023,7 @@ async function initApp() {
     updateThemeAssets(savedTheme);
   }
 
-  // SVG-Sprite einbinden
+  // SVG-Symbole laden
   fetch("images/symbole/sprite.svg")
     .then(res => res.text())
     .then(svg => {
@@ -1001,51 +1033,43 @@ async function initApp() {
       document.body.appendChild(div);
     });
 
-  // App-Version aus dem Service Worker holen
-  try {
-    const version = await getAppVersionFromServiceWorker();
-    window.APP_VERSION = version || "Unbekannt";
-  } catch (err) {
-    console.warn("Konnte App-Version nicht abrufen:", err);
-    window.APP_VERSION = "Unbekannt";
-  }
-
+  // Alte Version (vor Update) anzeigen
+  const initialVersion = await getAppVersionFromActiveSW();
+  window.APP_VERSION = initialVersion || "Unbekannt";
   updateAppVersionInUI();
 
-  if (sessionStorage.getItem("appUpdated") === "1") {
-    getAppVersionFromServiceWorker().then(version => {
-      const appVersion = version || "Unbekannt";
-      window.APP_VERSION = appVersion; // Nur sicherheitshalber setzen
-      showStatusMessage(`✅ Update auf Version ${appVersion} erfolgreich durchgeführt.`, "success");
-      sessionStorage.removeItem("appUpdated");
-    });
+  // Erfolgreiches Update nach Reload?
+  if (sessionStorage.getItem("updateInstalled") === "1") {
+    sessionStorage.removeItem("updateInstalled");
+
+    // Neue Version vom jetzt aktiven SW holen
+    const updatedVersion = await getAppVersionFromActiveSW();
+    window.APP_VERSION = updatedVersion || "Unbekannt";
+    updateAppVersionInUI();
+
+    showStatusMessage(`Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`, "success");
   }
 
-  // Daten laden (lokal oder per fetch)
+  // Fehlerliste laden
   await loadData();
 
-  // Initiale Filter aus URL (Hash) lesen
+  // URL-Hash lesen (Filter setzen)
   const { code = "", hersteller = "", typ = "" } = parseURLHash() || {};
-
-  // Suchfeld setzen
   if (code) searchInput.value = code;
   if (hersteller) herstellerFilter.value = hersteller;
   if (typ) typFilter.value = typ;
 
+  // Reset-Hinweis anzeigen 
   if (sessionStorage.getItem("appReset") === "1") {
     sessionStorage.removeItem("appReset");
-    showStatusMessage("App wurde zurückgesetzt. Standarddaten werden geladen.", "info");
+    showStatusMessage("App wurde zurückgesetzt. Standarddaten wurden geladen.", "info");
   }
-  // Initiale Anzeige
+
+  // Daten anzeigen
   renderDaten();
-
-  // Button-Zustände aktualisieren
   updateControlButtons();
-
-  // PWA-Update prüfen
   checkForPWAUpdate();
 }
-
 
 // Start
 initApp();
