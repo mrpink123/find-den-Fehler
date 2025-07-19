@@ -485,7 +485,7 @@ function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
       })
       .catch(() => {
         const error = document.createElement("p");
-        error.textContent = "❌ Fehler beim Laden des Inhalts.";
+        error.textContent = "Fehler beim Laden des Inhalts.";
         modalContent.appendChild(error);
       });
   }
@@ -956,6 +956,17 @@ document.getElementById("btnClearSearch").addEventListener("click", () => {
 
 // Filter-Reset-Button
 document.getElementById("btnResetFilters").addEventListener("click", () => {
+  herstellerFilter.value = "";
+  typFilter.value = "";
+  updateURLHash();
+  renderDaten();
+  updateControlButtons();
+});
+
+// ==== Filter und Suche leeren bei klick auf logo ====
+document.getElementById("logo-sm")?.addEventListener("click", () => {
+  searchInput.value = "";
+  searchHint.value = "";
   herstellerFilter.value = "";
   typFilter.value = "";
   updateURLHash();

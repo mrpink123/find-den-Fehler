@@ -189,6 +189,7 @@ header.hide {
     width: 120px;
     margin-right: auto;
     justify-content: left;
+    cursor: pointer;
 }
 
 .logo-sm svg {
