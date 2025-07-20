@@ -33,7 +33,7 @@
     --border: #7373739e;
     --button: #454545;
     --hover: rgb(90, 90, 90);
-    --shadow: rgba(255, 255, 255, 0.1);
+    --shadow: rgba(255, 255, 255, 0.2);
     --bg-gradient: linear-gradient(176deg,
             var(--hover) 0%,
             rgba(90, 90, 90, 0.4) 55%,
@@ -77,6 +77,29 @@ body {
 .highlight {
     color: var(--highlight);
 }
+
+button {
+    display: flex;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: var(--fg);
+    background-color: var(--button);
+    border: 1px solid var(--border);
+    box-shadow: 0px 0px 3px 0px var(--shadow);
+    -webkit-box-shadow: 0px 0px 3px 0px var(--shadow);
+    -moz-box-shadow: 0px 0px 3px 0px var(--shadow);
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--hover);
+    box-shadow: 1px 1px 3px 0px var(--shadow);
+    -webkit-box-shadow: 1px 1px 3px 0px var(--shadow);
+    -moz-box-shadow: 1px 1px 3px 0px var(--shadow);
+}
+
 
 /* Scroll nach oben Button */
 #scrollTopBtn {
@@ -283,6 +306,8 @@ header.hide {
     background-color: var(--card-bg);
     border-radius: 50%;
     color: var(--error);
+    border: none;
+    box-shadow: none;
 }
 
 .searchContainer button,
@@ -373,7 +398,7 @@ input:focus {
     overflow: hidden;
     box-shadow: 0 0px 5px var(--border);
     animation: fadeIn 0.5s ease;
-    transition: all 0.5s ease-in-out;
+    transition: 0.5s;
 }
 
 /* Card - Kopfzeile */
@@ -400,9 +425,9 @@ input:focus {
     height: 38px;
     padding: 5px;
     border-radius: 50%;
-    color: var(--fg);
+    border: none;
+    box-shadow: none;
     overflow: hidden;
-    background: transparent;
 }
 
 .btnMenuToggle svg {
@@ -411,7 +436,8 @@ input:focus {
 }
 
 .btnMenuToggle:hover {
-    background-color: var(--highlight);
+    box-shadow: none;
+    background-color: var(--hover);
 }
 
 .herstellerImageContainer {
@@ -544,12 +570,16 @@ input:focus {
     display: flex;
     width: fit-content;
     height: fit-content;
-    margin: 1em;
+    margin-top: 1em;
+    padding: 1em;
+    padding-bottom: 75px;
 }
 
 .typImage {
     max-width: 150px;
     max-height: fit-content;
+    z-index: 1;
+    background: var(--card-bg);
 }
 
 .errorDescription {
@@ -710,6 +740,7 @@ h3 {
     height: 40px;
     margin: 0.2rem;
     border: none;
+    box-shadow: none;
     border-radius: 50%;
     cursor: pointer;
     color: var(--error);
@@ -742,21 +773,23 @@ h3 {
     padding: 0;
 }
 
-
 .modalHtmlContent p {
     margin: 0.4rem;
 }
 
+.modalHtmlContent ul {
+    margin: 0 1.7rem;
+}
+
 .typImageWrapper .imageOverlayText {
     position: absolute;
-    bottom: 0;
+    bottom: 45px;
     left: 0;
     right: 0;
     height: 18px;
     margin: 0.05rem 1rem;
-    background: #000000a7;
+    background: #0000005e;
     color: #ffffff;
-    opacity: 0.6;
     padding: 0;
     font-size: 0.8em;
     text-align: center;
@@ -764,15 +797,39 @@ h3 {
     pointer-events: none;
     font-weight: 400;
     z-index: 100;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
 }
 
-.typImage.clickable {
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.typImageWrapper:hover .typinfos {
+    transform: translateY(100%);
+    opacity: 1;
 }
 
-.typImage.clickable:hover {
-    transform: scale(1.03);
+.typImageWrapper:hover .imageOverlayText {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+.typImage {
+    transition: all 0.5s ease;
+}
+
+.typImageWrapper.clickable:hover .typImage {
+    transform: scale(1.1) translateY(-12px);
+}
+
+.typinfos {
+    position: absolute;
+    display: flex;
+    gap: 3px;
+    bottom: 75px;
+    flex-direction: column;
+    height: fit-content;
+    width: 150px;
+    transition: all 0.5s ease;
+    padding: 3px;
+    opacity: 0;
 }
 
 /* Splash-Screen Hintergrund */
@@ -798,7 +855,7 @@ h3 {
     height: 122px;
     transform-origin: center;
     overflow: visible;
-    animation: fadeIn 0.6s ease-in ;
+    animation: fadeIn 0.6s ease-in;
     color: var(--highlight);
     animation: bounce 3s ease-in-out infinite;
 }
@@ -816,78 +873,103 @@ h3 {
 .loading-text span:nth-child(2) {
     animation-delay: 0.1s;
 }
+
 .loading-text span:nth-child(3) {
     animation-delay: 0.2s;
 }
+
 .loading-text span:nth-child(4) {
     animation-delay: 0.3s;
 }
+
 .loading-text span:nth-child(5) {
     width: .3rem;
 }
+
 .loading-text span:nth-child(6) {
     animation-delay: 0.4s;
 }
+
 .loading-text span:nth-child(7) {
     animation-delay: 0.5s;
 }
+
 .loading-text span:nth-child(8) {
     animation-delay: 0.6s;
 }
+
 .loading-text span:nth-child(9) {
     animation-delay: 0.7s;
 }
+
 .loading-text span:nth-child(10) {
     animation-delay: 0.8s;
 }
+
 .loading-text span:nth-child(11) {
     animation-delay: 0.9s;
 }
+
 .loading-text span:nth-child(12) {
     animation-delay: 1s;
 }
+
 .loading-text span:nth-child(13) {
     animation-delay: 1.1s;
 }
+
 .loading-text span:nth-child(14) {
     animation-delay: 1.2s;
 }
+
 .loading-text span:nth-child(15) {
     animation-delay: 1.3s;
 }
 
 #app {
-    animation: fadeIn 0.7s ease-in ;
+    animation: fadeIn 0.7s ease-in;
     opacity: 1;
 }
 
 @keyframes bounce {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .5; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
 }
 
 @keyframes opacity {
-  0% { 
-    opacity: 0.5;
- }
+    0% {
+        opacity: 0.5;
+    }
 }
 
 @keyframes animate {
-  from{font-size:.5em}
-  to{font-size:1em}
+    from {
+        font-size: .5em
+    }
+
+    to {
+        font-size: 1em
+    }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
+    from {
+        opacity: 0;
+    }
 }
 
 @keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 @keyframes rotation {
@@ -989,9 +1071,6 @@ h3 {
         border-radius: 0.5rem;
     }
 
-    .btnMenuToggle:hover {
-        background-color: transparent;
-    }
 
     .homeCard .cardContent {
         justify-content: center;

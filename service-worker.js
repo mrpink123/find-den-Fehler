@@ -1,10 +1,9 @@
-const CACHE_NAME = "fehlercode-cache-v1.1.1";
+const CACHE_NAME = "fehlercode-cache-v1.1.2";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",
   "style.css",
   "manifest.json",
-  "fehlerliste.csv",
   "papaparse.min.js",
   "service-worker.js",
 

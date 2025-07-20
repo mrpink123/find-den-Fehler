@@ -1,9 +1,9 @@
 window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("splash-screen").style.display = "none";
-      document.getElementById("app").style.display = "block";
-    }, 2500); 
-  });
+  setTimeout(() => {
+    document.getElementById("splash-screen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  }, 2500);
+});
 
 // ==== Lokaler Speicher mit Fallback ====
 function getStorage() {
@@ -100,7 +100,12 @@ function parseCSV(text) {
     link: row.Link?.trim() || "",
     typImage: row.TypBild?.trim() || "",
     details: row.Details?.trim() || "",
-    modal: row.Modal?.trim() || "",
+    modal: (row.Modal || "").split("|").map(entry => {
+      const [label, url] = entry.split(":");
+      return { label: label?.trim() || "", url: url?.trim() || "" };
+    })
+      .filter(entry => entry.label && entry.url),
+
     csvVersion: row.CsvVersion?.trim() || "",
   }));
 }
@@ -417,16 +422,30 @@ function renderCard(item) {
       typImage.src = "images/icons/icon-512.png";
     };
 
-    if (item.modal) {
-      typImage.classList.add("clickable");
-      typImage.addEventListener("click", () => {
-        openTypImageModal(null, item.typ, item.modal);
-      });
+    if (Array.isArray(item.modal) && item.modal.length > 0) {
+      typImageWrapper.classList.add("clickable");
+
+      const typInfos = document.createElement("div");
+      typInfos.className = "typinfos";
+      typImageWrapper.appendChild(typInfos);
 
       const overlay = document.createElement("div");
       overlay.className = "imageOverlayText";
       overlay.textContent = "Klicken für Infos";
       typImageWrapper.appendChild(overlay);
+
+      const buttons = item.modal.map(entry => `
+    <button class="modalBtn" data-url="${entry.url}" title="${entry.label}">
+      ${entry.label}
+    </button>
+  `).join("");
+      typInfos.innerHTML += ` ${buttons} `;
+      typInfos.querySelectorAll(".modalBtn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const url = btn.getAttribute("data-url");
+          if (url) openTypImageModal(null, item.typ, url);
+        });
+      });
     }
 
     typImageWrapper.appendChild(typImage);
