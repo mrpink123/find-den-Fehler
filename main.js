@@ -2,7 +2,7 @@ window.addEventListener("load", () => {
     setTimeout(() => {
       document.getElementById("splash-screen").style.display = "none";
       document.getElementById("app").style.display = "block";
-    }, 2500); // dauert etwas länger als die CSS-Animation
+    }, 2500); 
   });
 
 // ==== Lokaler Speicher mit Fallback ====
