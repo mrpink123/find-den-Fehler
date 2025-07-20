@@ -1,3 +1,10 @@
+window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("splash-screen").style.display = "none";
+      document.getElementById("app").style.display = "block";
+    }, 2500); // dauert etwas länger als die CSS-Animation
+  });
+
 // ==== Lokaler Speicher mit Fallback ====
 function getStorage() {
   try {
@@ -563,8 +570,8 @@ function renderDaten() {
   currentRenderSessionId = thisRenderSession;
 
   if (keineFilterAktiv) {
-    updateAutocompleteList(daten);
     fillDropdowns(daten);
+    updateAutocompleteList(daten);
     trefferAnzahl.textContent = "";
     showHomeCard();
     return;
@@ -607,16 +614,14 @@ function updateThemeAssets(theme) {
 // ==== App-Daten laden ====
 async function loadData() {
   const savedCSV = storage.getItem("csvData");
-  const savedVersion = storage.getItem("csvVersion");
+  const savedCSVVersion = storage.getItem("csvVersion");
 
   if (savedCSV) {
-    const version = extractCSVVersion(savedCSV);
-    if (version && version === savedVersion) {
-      window.CSV_VERSION = version;
+    const currentVersion = extractCSVVersion(savedCSV);
+    if (currentVersion && currentVersion === savedCSVVersion) {
+      window.CSV_VERSION = currentVersion;
       daten = parseCSV(savedCSV);
       fillDropdowns(daten);
-      renderDaten();
-      updateCSVVersionInUI();
       return;
     }
   }
@@ -624,22 +629,21 @@ async function loadData() {
   try {
     const response = await fetch("fehlerliste.csv");
     if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
+
     const text = await response.text();
     const version = extractCSVVersion(text);
+
     if (version) {
       storage.setItem("csvVersion", version);
       window.CSV_VERSION = version;
-    } else {
-      window.CSV_VERSION = "Unbekannt";
     }
 
     storage.setItem("csvData", text);
     daten = parseCSV(text);
     fillDropdowns(daten);
-    renderDaten();
-    updateCSVVersionInUI();
-  } catch {
+  } catch (err) {
     showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+    daten = [];
     showHomeCard();
   }
 }
@@ -974,7 +978,7 @@ document.getElementById("logo-sm")?.addEventListener("click", () => {
   updateControlButtons();
 });
 
-// Autocomplete für Codes
+// ==== Autocomplete für Codes ====
 searchInput.addEventListener("input", () => {
   const val = searchInput.value.trim().toLowerCase();
   if (!val) {
@@ -1044,7 +1048,7 @@ async function initApp() {
       document.body.appendChild(div);
     });
 
-  // Alte Version (vor Update) anzeigen
+  // Aktive App Version anzeigen
   const initialVersion = await getAppVersionFromActiveSW();
   window.APP_VERSION = initialVersion || "Unbekannt";
   updateAppVersionInUI();

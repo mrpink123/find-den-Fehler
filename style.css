@@ -650,13 +650,9 @@ h3 {
     flex-wrap: wrap;
     min-height: fit-content;
     background: var(--bg-gradient);
-    border-radius: 8px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
     vertical-align: middle;
-    color: var(--fg);
     gap: 0.5rem;
 }
 
@@ -667,7 +663,7 @@ h3 {
 }
 
 .updateInfo button {
-    border-radius: 8px 8px 1rem;
+    border-radius: 8px;
 }
 
 
@@ -785,6 +781,56 @@ h3 {
 
 .typImage.clickable:hover {
     transform: scale(1.03);
+}
+
+/* Splash-Screen Hintergrund */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    animation: fadeOut 0.5s ease-out forwards;
+    animation-delay: 2.2s;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    z-index: 9999;
+}
+
+/* Logo-Größe und Regenbogenfilter */
+#splash-logo {
+    width: 400px;
+    height: 122px;
+    transform-origin: center;
+    overflow: visible;
+    animation: fadeIn 0.6s ease-in ;
+    color: var(--fg);
+}
+
+.loading-text {
+    font-weight: 800;
+}
+
+#app {
+    animation: fadeIn 0.7s ease-in ;
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @media (max-width: 650px) {
