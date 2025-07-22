@@ -188,7 +188,7 @@ svg {
 header {
     position: sticky;
     inset: 0;
-    z-index: 100;
+    z-index: 500;
     display: flex;
     flex-direction: column;
     align-items: center;
