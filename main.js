@@ -2,7 +2,7 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("splash-screen").style.display = "none";
     document.getElementById("app").style.display = "block";
-  }, 2500);
+  }, 1500);
 });
 
 // ==== Lokaler Speicher mit Fallback ====
@@ -31,37 +31,6 @@ function showStatusMessage(text, type = "info", timeout = 4000) {
   setTimeout(() => {
     msgBox.className = msgBox.className.replace("show", "");
   }, timeout);
-}
-
-// ==== PWA-Update prüfen ====
-function checkForPWAUpdate() {
-  if (!("serviceWorker" in navigator)) return;
-
-  navigator.serviceWorker.getRegistration().then(reg => {
-    if (!reg) return;
-
-    reg.update();
-
-    if (reg.waiting) {
-      window.updateStatus.available = true;
-      window.updateStatus.worker = reg.waiting;
-      showHomeCard(null, true);
-    }
-
-    reg.addEventListener("updatefound", () => {
-      const newWorker = reg.installing;
-      newWorker?.addEventListener("statechange", () => {
-        if (
-          newWorker.state === "installed" &&
-          navigator.serviceWorker.controller
-        ) {
-          window.updateStatus.available = true;
-          window.updateStatus.worker = newWorker;
-          showHomeCard(null, true);
-        }
-      });
-    });
-  });
 }
 
 // ==== Debounce Funktion ====
@@ -149,20 +118,23 @@ function getAppVersionFromServiceWorker() {
 }
 
 async function getAppVersionFromActiveSW() {
+  // Wenn bereits ein aktiver Controller vorhanden ist → sofort versuchen
   if (navigator.serviceWorker?.controller) {
     return sendVersionRequest();
   }
 
+  // Ansonsten auf Übernahme des neuen SW warten
   return new Promise((resolve) => {
-    navigator.serviceWorker.addEventListener("controllerchange", async () => {
-      const version = await sendVersionRequest();
-      resolve(version);
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      sendVersionRequest().then(resolve);
     });
   });
 
   function sendVersionRequest() {
     return new Promise((resolve) => {
       const channel = new MessageChannel();
+
+      // Antwort vom Service Worker empfangen
       channel.port1.onmessage = (event) => {
         if (event.data?.type === "APP_VERSION") {
           resolve(event.data.version || "Unbekannt");
@@ -170,10 +142,16 @@ async function getAppVersionFromActiveSW() {
           resolve("Unbekannt");
         }
       };
-      navigator.serviceWorker.controller?.postMessage(
-        { type: "GET_VERSION" },
-        [channel.port2]
-      );
+
+      // Anfrage senden
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage(
+          { type: "GET_VERSION" },
+          [channel.port2]
+        );
+      } else {
+        resolve("Unbekannt");
+      }
     });
   }
 }
@@ -435,12 +413,12 @@ function renderCard(item) {
       typImageWrapper.appendChild(overlay);
 
       const buttons = item.modal.map(entry => `
-    <button class="modalBtn" data-url="${entry.url}" title="${entry.label}">
+    <button class="btn" data-url="${entry.url}" title="${entry.label}">
       ${entry.label}
     </button>
   `).join("");
       typInfos.innerHTML += ` ${buttons} `;
-      typInfos.querySelectorAll(".modalBtn").forEach(btn => {
+      typInfos.querySelectorAll(".btn").forEach(btn => {
         btn.addEventListener("click", () => {
           const url = btn.getAttribute("data-url");
           if (url) openTypImageModal(null, item.typ, url);
@@ -632,39 +610,45 @@ function updateThemeAssets(theme) {
 
 // ==== App-Daten laden ====
 async function loadData() {
+  let csvText = null;
+  let csvVersion = null;
+
+  // Versuch: Lokale Daten aus dem Speicher laden 
   const savedCSV = storage.getItem("csvData");
   const savedCSVVersion = storage.getItem("csvVersion");
 
-  if (savedCSV) {
-    const currentVersion = extractCSVVersion(savedCSV);
-    if (currentVersion && currentVersion === savedCSVVersion) {
-      window.CSV_VERSION = currentVersion;
-      daten = parseCSV(savedCSV);
-      fillDropdowns(daten);
+  if (savedCSV && savedCSVVersion) {
+    csvText = savedCSV;
+    csvVersion = savedCSVVersion;
+  } else {
+    // Kein lokaler Cache → per Fetch laden 
+    try {
+      const response = await fetch("fehlerliste.csv", { cache: "no-store" });
+      if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
+
+      csvText = await response.text();
+      csvVersion = extractCSVVersion(csvText) || "Unbekannt";
+
+      // Nur speichern, wenn sinnvoll
+      if (csvText && csvVersion) {
+        storage.setItem("csvData", csvText);
+        storage.setItem("csvVersion", csvVersion);
+      }
+    } catch (err) {
+      showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+      daten = [];
+      window.CSV_VERSION = "Unbekannt";
+      updateCSVVersionInUI?.();
+      showHomeCard();
       return;
     }
   }
 
-  try {
-    const response = await fetch("fehlerliste.csv");
-    if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
-
-    const text = await response.text();
-    const version = extractCSVVersion(text);
-
-    if (version) {
-      storage.setItem("csvVersion", version);
-      window.CSV_VERSION = version;
-    }
-
-    storage.setItem("csvData", text);
-    daten = parseCSV(text);
-    fillDropdowns(daten);
-  } catch (err) {
-    showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
-    daten = [];
-    showHomeCard();
-  }
+  // --- Wenn CSV-Daten erfolgreich vorliegen ---
+  daten = parseCSV(csvText);
+  window.CSV_VERSION = csvVersion || "Unbekannt";
+  fillDropdowns(daten);
+  updateCSVVersionInUI?.();
 }
 
 // ==== Rendert in abschnitten ====
@@ -722,15 +706,15 @@ function showHomeCard(hinweisText = null) {
       </div>
       <div id="homeMenuContainer" class="hide">
         <div class="menu">
-          <button id="homeCsvBtn">
+          <button id="homeCsvBtn" class="btn">
             <svg class="button-icon"><use href="#icon-upload"></use></svg>
             <p>Fehlerliste Laden</p>
           </button>
-          <button id="homeThemeBtn">
+          <button id="homeThemeBtn" class="btn">
             <svg class="button-icon"><use href="#icon-theme"></use></svg>
             <p>Dark / Light Theme</p>
           </button>
-          <button id="homeResetBtn">
+          <button id="homeResetBtn" class="btn">
             <svg class="button-icon"><use href="#icon-trash"></use></svg>
             <p>lokale Daten löschen</p>
           </button>
@@ -746,10 +730,6 @@ function showHomeCard(hinweisText = null) {
   `;
 
   if (container) container.appendChild(homeCard);
-
-  if (window.updateReadyWorker) {
-    showUpdateButton();
-  }
 
   document.getElementById("homeMenuToggle")?.addEventListener("click", (e) => {
     const menu = document.getElementById("homeMenuContainer");
@@ -795,8 +775,12 @@ function showHomeCard(hinweisText = null) {
     reader.readAsText(file, "UTF-8");
   });
 
+  // Versionen aktualisieren
   updateAppVersionInUI();
   updateCSVVersionInUI();
+
+  // Hinweis für verfügbares Update anzeigen (wenn nötig)
+  showUnifiedUpdateNotice();
 }
 
 // ==== Toggle zwischen Light / Dark Theme ====
@@ -829,70 +813,180 @@ function updateAutocompleteList(data) {
     .join("");
 }
 
-// ==== Service Worker Update-Button einblenden ====
-function showUpdateButton() {
-  if (window.updateStatus.buttonShown) return;
+function showUnifiedUpdateNotice() {
+  // Wenn bereits App-Update durchgeführt wurde → Hinweis nicht mehr zeigen
+  if (sessionStorage.getItem("updateInstalled") === "1") return;
 
   const container = document.getElementById("updateInfoContainer");
-  if (!container || !window.updateStatus.available) return;
+  if (!container) return;
 
-  const updateDiv = document.createElement("div");
-  updateDiv.id = "updateMessage";
-  updateDiv.className = "updateInfo";
-  updateDiv.innerHTML = `
-    <p>🔄 Eine neue Version ist verfügbar.</p>
-    <button id="applyUpdateBtn" title="Jetzt aktualisieren">
+  let notice = document.getElementById("updateMessage");
+
+  const showCsv = window.csvUpdateAvailable;
+  const showApp = window.updateAvailable;
+
+  if (!showCsv && !showApp) {
+    if (notice) notice.remove();
+    return;
+  }
+
+  const title = showCsv && showApp
+    ? "Neue Version von App & Fehlerliste verfügbar."
+    : showApp
+      ? "Neue App-Version verfügbar."
+      : "Neue Fehlerliste verfügbar.";
+
+  const btnLabel = showCsv && showApp
+    ? "Jetzt alles aktualisieren"
+    : showApp
+      ? "App aktualisieren"
+      : "Fehlerliste aktualisieren";
+
+  const html = `
+    <p>${title}</p>
+    <button id="applyUpdateBtn" class="btn" title="${btnLabel}">
       <svg><use href="#icon-update"></use></svg>
-      <p>Jetzt aktualisieren</p>
+      <p>${btnLabel}</p>
     </button>
   `;
 
-  container.appendChild(updateDiv);
-  window.updateStatus.buttonShown = true;
+  if (notice) {
+    notice.innerHTML = html;
+  } else {
+    notice = document.createElement("div");
+    notice.id = "updateMessage";
+    notice.className = "updateInfo";
+    notice.innerHTML = html;
+    container.appendChild(notice);
+  }
 
   document.getElementById("applyUpdateBtn")?.addEventListener("click", () => {
-    window.updateStatus.worker?.postMessage({ type: "SKIP_WAITING" });
+    // Fenster schließen
+    document.getElementById("updateMessage")?.remove();
+
+    // Kombiniertes Update
+    if (showCsv && showApp) {
+      sessionStorage.setItem("appUpdatePending", "1");
+      applyCsvUpdate(false);
+      applyAppUpdate();
+    }
+
+    // Nur CSV
+    else if (showCsv) {
+      applyCsvUpdate(true);
+    }
+
+    // Nur App
+    else if (showApp) {
+      applyAppUpdate();
+    }
+  });
+}
+
+function applyCsvUpdate(reload = true) {
+  const appUpdatePending = sessionStorage.getItem("appUpdatePending") === "1";
+
+  if (appUpdatePending) {
+    sessionStorage.setItem("updateInstalled", "1");
+  }
+
+  if (window.NEW_CSV?.text && window.NEW_CSV?.version) {
+    storage.setItem("csvData", window.NEW_CSV.text);
+    storage.setItem("csvVersion", window.NEW_CSV.version);
+    window.CSV_VERSION = window.NEW_CSV.version;
+    window.csvUpdateAvailable = false;
+    window.NEW_CSV = null;
+
+    sessionStorage.setItem("csvUpdated", "1");
+
+    if (reload) {
+      location.reload();
+    } else {
+      if (typeof loadData === "function") loadData();
+      if (typeof showHomeCard === "function") showHomeCard();
+    }
+  }
+}
+
+function applyAppUpdate() {
+  if (window.updateReadyWorker) {
+    sessionStorage.setItem("updateInstalled", "1");
+    window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
+  }
+}
+
+async function checkForUpdates() {
+  let csvUpdated = false;
+
+  // --- CSV-Update prüfen ---
+  try {
+    const response = await fetch("fehlerliste.csv", { cache: "no-store" });
+    if (!response.ok) throw new Error("Fehlerliste nicht erreichbar");
+
+    const text = await response.text();
+    const newVersion = extractCSVVersion(text);
+    const currentVersion = storage.getItem("csvVersion");
+
+    if (newVersion && newVersion !== currentVersion) {
+      window.csvUpdateAvailable = true;
+      window.NEW_CSV = { version: newVersion, text };
+      csvUpdated = true;
+    }
+  } catch (err) {
+    console.warn("Keine neue CSV erkannt:", err);
+  }
+
+  // --- App-Update prüfen ---
+  if (!("serviceWorker" in navigator)) {
+    if (csvUpdated) showUnifiedUpdateNotice();
+    return;
+  }
+
+  navigator.serviceWorker.getRegistration().then((reg) => {
+    if (reg) reg.update();
+
+    const maybeShowNotice = () => {
+      // Nur wenn nicht bereits Update durchgeführt wurde
+      if (!sessionStorage.getItem("updateInstalled") &&
+          (window.updateAvailable || window.csvUpdateAvailable)) {
+        showUnifiedUpdateNotice();
+      }
+    };
+
+    if (reg?.waiting) {
+      window.updateReadyWorker = reg.waiting;
+      window.updateAvailable = true;
+      maybeShowNotice();
+    }
+
+    reg?.addEventListener("updatefound", () => {
+      const newWorker = reg.installing;
+      newWorker?.addEventListener("statechange", () => {
+        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+          window.updateReadyWorker = newWorker;
+          window.updateAvailable = true;
+          maybeShowNotice();
+        }
+      });
+    });
+
+    if (csvUpdated) maybeShowNotice();
   });
 }
 
 // ==== Service Worker Registrierung + Update-Erkennung ====
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js").then(reg => {
-    reg.addEventListener("updatefound", () => {
-      const newWorker = reg.installing;
-      newWorker.addEventListener("statechange", () => {
-        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-          window.updateReadyWorker = newWorker;
-          window.updateAvailable = true;
-          if (typeof showUpdateButton === "function") {
-            showUpdateButton();
-          }
-        }
-      });
-    });
+    console.log("[SW] registriert:", reg.scope);
+  }).catch(err => {
+    console.warn("[SW] Registrierung fehlgeschlagen:", err);
   });
 
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (window.updateStatus.available) {
-      sessionStorage.setItem("updateInstalled", "1");
-      localStorage.removeItem("csvData");
+    if (window.updateAvailable) {
       location.reload();
     }
   });
-}
-
-// ==== Nach Seiten-Reload: Erfolgsmeldung bei Update ====
-if (sessionStorage.getItem("updateInstalled") === "1") {
-  sessionStorage.removeItem("updateInstalled");
-
-  getAppVersionFromServiceWorker().then(version => {
-    window.APP_VERSION = version || "Unbekannt";
-    updateAppVersionInUI();
-    showStatusMessage(`Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`, "success");
-  });
-}
-if (window.updateStatus.available && !window.updateStatus.buttonShown) {
-  showUpdateButton();
 }
 
 // ==== Scroll-Top-Button ====
@@ -1067,42 +1161,66 @@ async function initApp() {
       document.body.appendChild(div);
     });
 
-  // Aktive App Version anzeigen
-  const initialVersion = await getAppVersionFromActiveSW();
-  window.APP_VERSION = initialVersion || "Unbekannt";
+  // App-Version laden
+  const currentVersion = await getAppVersionFromActiveSW();
+  window.APP_VERSION = currentVersion || "Unbekannt";
   updateAppVersionInUI();
 
-  // Erfolgreiches Update nach Reload?
-  if (sessionStorage.getItem("updateInstalled") === "1") {
-    sessionStorage.removeItem("updateInstalled");
+  // Nach CSV-Version im Cache schauen
+  const cachedCsv = storage.getItem("csvData");
+  if (cachedCsv) {
+    const version = extractCSVVersion(cachedCsv);
+    window.CSV_VERSION = version || "Unbekannt";
+    updateCSVVersionInUI?.();
+  }
 
-    // Neue Version vom jetzt aktiven SW holen
-    const updatedVersion = await getAppVersionFromActiveSW();
-    window.APP_VERSION = updatedVersion || "Unbekannt";
-    updateAppVersionInUI();
+  // Erfolgreiche Updates erkennen und melden
+  const appWasUpdated = sessionStorage.getItem("updateInstalled") === "1";
+  const csvWasUpdated = sessionStorage.getItem("csvUpdated") === "1";
+  sessionStorage.removeItem("updateInstalled");
+  sessionStorage.removeItem("csvUpdated");
+  sessionStorage.removeItem("appUpdatePending");
 
-    showStatusMessage(`Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`, "success");
+  if (appWasUpdated && csvWasUpdated) {
+    showStatusMessage(
+      `App & Fehlerliste wurden erfolgreich aktualisiert ( v${window.APP_VERSION} / v${window.CSV_VERSION} ).`,
+      "success"
+    );
+  } else if (appWasUpdated) {
+    showStatusMessage(
+      `Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`,
+      "success"
+    );
+  } else if (csvWasUpdated) {
+    showStatusMessage(
+      `Fehlerliste erfolgreich aktualisiert auf v${window.CSV_VERSION}`,
+      "success"
+    );
   }
 
   // Fehlerliste laden
   await loadData();
 
-  // URL-Hash lesen (Filter setzen)
+  // CSV-Version ggf. nochmal aktualisieren (wird nach fetch gesetzt)
+  updateCSVVersionInUI?.();
+
+  // Nach Updates suchen
+  checkForUpdates();
+
+  // Filter aus URL anwenden
   const { code = "", hersteller = "", typ = "" } = parseURLHash() || {};
   if (code) searchInput.value = code;
   if (hersteller) herstellerFilter.value = hersteller;
   if (typ) typFilter.value = typ;
 
-  // Reset-Hinweis anzeigen 
   if (sessionStorage.getItem("appReset") === "1") {
     sessionStorage.removeItem("appReset");
     showStatusMessage("App wurde zurückgesetzt. Standarddaten wurden geladen.", "info");
   }
 
-  // Daten anzeigen
+  // Ansicht anzeigen
   renderDaten();
   updateControlButtons();
-  checkForPWAUpdate();
 }
 
 // Start
