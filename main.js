@@ -83,8 +83,8 @@ function parseCSV(text) {
 function extractCSVVersion(csvText) {
   try {
     const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
-    const rowWithVersion = parsed.data.find(row => row?.CsvVersion);
-    return rowWithVersion?.CsvVersion?.trim() || null;
+    const row = parsed.data.find(row => row?.CsvVersion);
+    return row?.CsvVersion?.trim() || null;
   } catch {
     return null;
   }
@@ -100,33 +100,16 @@ let currentRenderSessionId = 0;
 let daten = [];
 window.APP_VERSION = "Unbekannt";
 window.CSV_VERSION = "Unbekannt";
-window.updateStatus = {
-  available: false,
-  worker: null,
-  buttonShown: false
-};
-
-// ==== App-Version aus Service Worker extrahieren ====
-function getAppVersionFromServiceWorker() {
-  return fetch("service-worker.js")
-    .then((res) => res.text())
-    .then((text) => {
-      const match = text.match(/CACHE_NAME\s*=\s*["']fehlercode-cache-v([\d.]+)["']/);
-      return match ? match[1] : null;
-    })
-    .catch(() => null);
-}
 
 async function getAppVersionFromActiveSW() {
-  // Wenn bereits ein aktiver Controller vorhanden ist → sofort versuchen
   if (navigator.serviceWorker?.controller) {
     return sendVersionRequest();
   }
 
-  // Ansonsten auf Übernahme des neuen SW warten
   return new Promise((resolve) => {
-    navigator.serviceWorker.addEventListener("controllerchange", () => {
-      sendVersionRequest().then(resolve);
+    navigator.serviceWorker.addEventListener("controllerchange", async () => {
+      const version = await sendVersionRequest();
+      resolve(version);
     });
   });
 
@@ -134,7 +117,6 @@ async function getAppVersionFromActiveSW() {
     return new Promise((resolve) => {
       const channel = new MessageChannel();
 
-      // Antwort vom Service Worker empfangen
       channel.port1.onmessage = (event) => {
         if (event.data?.type === "APP_VERSION") {
           resolve(event.data.version || "Unbekannt");
@@ -143,15 +125,10 @@ async function getAppVersionFromActiveSW() {
         }
       };
 
-      // Anfrage senden
-      if (navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage(
-          { type: "GET_VERSION" },
-          [channel.port2]
-        );
-      } else {
-        resolve("Unbekannt");
-      }
+      navigator.serviceWorker.controller?.postMessage(
+        { type: "GET_VERSION" },
+        [channel.port2]
+      );
     });
   }
 }
@@ -163,8 +140,8 @@ function updateAppVersionInUI() {
 }
 
 function updateCSVVersionInUI() {
-  const csvVersionEl = document.getElementById("csvVersionText");
-  if (csvVersionEl) csvVersionEl.textContent = window.CSV_VERSION || "Unbekannt";
+  const el = document.getElementById("csvVersionText");
+  if (el) el.textContent = window.CSV_VERSION || "Unbekannt";
 }
 
 // ==== Dropdown Menüs befüllen ====
@@ -610,45 +587,38 @@ function updateThemeAssets(theme) {
 
 // ==== App-Daten laden ====
 async function loadData() {
-  let csvText = null;
-  let csvVersion = null;
-
-  // Versuch: Lokale Daten aus dem Speicher laden 
   const savedCSV = storage.getItem("csvData");
   const savedCSVVersion = storage.getItem("csvVersion");
 
   if (savedCSV && savedCSVVersion) {
-    csvText = savedCSV;
-    csvVersion = savedCSVVersion;
-  } else {
-    // Kein lokaler Cache → per Fetch laden 
-    try {
-      const response = await fetch("fehlerliste.csv", { cache: "no-store" });
-      if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
-
-      csvText = await response.text();
-      csvVersion = extractCSVVersion(csvText) || "Unbekannt";
-
-      // Nur speichern, wenn sinnvoll
-      if (csvText && csvVersion) {
-        storage.setItem("csvData", csvText);
-        storage.setItem("csvVersion", csvVersion);
-      }
-    } catch (err) {
-      showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
-      daten = [];
-      window.CSV_VERSION = "Unbekannt";
-      updateCSVVersionInUI?.();
-      showHomeCard();
-      return;
-    }
+    window.CSV_VERSION = savedCSVVersion;
+    daten = parseCSV(savedCSV);
+    fillDropdowns(daten);
+    updateCSVVersionInUI?.();
+    return;
   }
 
-  // --- Wenn CSV-Daten erfolgreich vorliegen ---
-  daten = parseCSV(csvText);
-  window.CSV_VERSION = csvVersion || "Unbekannt";
-  fillDropdowns(daten);
-  updateCSVVersionInUI?.();
+  try {
+    const response = await fetch("fehlerliste.csv", { cache: "no-store" });
+    if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
+
+    const text = await response.text();
+    const version = extractCSVVersion(text) || "Unbekannt";
+
+    storage.setItem("csvData", text);
+    storage.setItem("csvVersion", version);
+
+    window.CSV_VERSION = version;
+    daten = parseCSV(text);
+    fillDropdowns(daten);
+    updateCSVVersionInUI?.();
+  } catch (err) {
+    showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+    daten = [];
+    window.CSV_VERSION = "Unbekannt";
+    updateCSVVersionInUI?.();
+    showHomeCard();
+  }
 }
 
 // ==== Rendert in abschnitten ====
@@ -798,8 +768,8 @@ function resetData() {
   storage.removeItem("csvVersion");
   storage.removeItem("theme");
   sessionStorage.setItem("appReset", "1");
-  showStatusMessage("Zurückgesetzt – lade neu");
-  setTimeout(() => location.reload(), 800);
+  showStatusMessage("lade neu");
+  setTimeout(() => location.reload(), 500);
 }
 
 // ==== Autocomplete aktualisieren ====
@@ -814,8 +784,9 @@ function updateAutocompleteList(data) {
 }
 
 function showUnifiedUpdateNotice() {
-  // Wenn bereits App-Update durchgeführt wurde → Hinweis nicht mehr zeigen
-  if (sessionStorage.getItem("updateInstalled") === "1") return;
+  if (sessionStorage.getItem("updateInstalled") || window.updateNoticeInProgress) {
+    return;
+  }
 
   const container = document.getElementById("updateInfoContainer");
   if (!container) return;
@@ -861,39 +832,29 @@ function showUnifiedUpdateNotice() {
   }
 
   document.getElementById("applyUpdateBtn")?.addEventListener("click", () => {
-    // Fenster schließen
-    document.getElementById("updateMessage")?.remove();
+    const notice = document.getElementById("updateMessage");
+    if (notice) notice.remove();
 
-    // Kombiniertes Update
+    window.updateNoticeInProgress = true;
+
     if (showCsv && showApp) {
+      applyCsvUpdate(false); 
       sessionStorage.setItem("appUpdatePending", "1");
-      applyCsvUpdate(false);
-      applyAppUpdate();
-    }
-
-    // Nur CSV
-    else if (showCsv) {
+      applyAppUpdate();     
+    } else if (showCsv) {
       applyCsvUpdate(true);
-    }
-
-    // Nur App
-    else if (showApp) {
+    } else if (showApp) {
       applyAppUpdate();
     }
   });
 }
 
 function applyCsvUpdate(reload = true) {
-  const appUpdatePending = sessionStorage.getItem("appUpdatePending") === "1";
-
-  if (appUpdatePending) {
-    sessionStorage.setItem("updateInstalled", "1");
-  }
-
-  if (window.NEW_CSV?.text && window.NEW_CSV?.version) {
+  if (window.NEW_CSV?.text && window.NEW_CSV.version) {
     storage.setItem("csvData", window.NEW_CSV.text);
     storage.setItem("csvVersion", window.NEW_CSV.version);
     window.CSV_VERSION = window.NEW_CSV.version;
+
     window.csvUpdateAvailable = false;
     window.NEW_CSV = null;
 
@@ -902,26 +863,33 @@ function applyCsvUpdate(reload = true) {
     if (reload) {
       location.reload();
     } else {
-      if (typeof loadData === "function") loadData();
-      if (typeof showHomeCard === "function") showHomeCard();
+      loadData();
+      showHomeCard();
     }
   }
 }
 
 function applyAppUpdate() {
   if (window.updateReadyWorker) {
-    sessionStorage.setItem("updateInstalled", "1");
+    sessionStorage.setItem("appUpdatePending", "1");
+    window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
+  }
+}
+
+function applyAppUpdate() {
+  if (window.updateReadyWorker) {
+    sessionStorage.setItem("appUpdatePending", "1");
     window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
   }
 }
 
 async function checkForUpdates() {
-  let csvUpdated = false;
+  let updateNoticePending = false;
 
-  // --- CSV-Update prüfen ---
+  // CSV-Update prüfen
   try {
     const response = await fetch("fehlerliste.csv", { cache: "no-store" });
-    if (!response.ok) throw new Error("Fehlerliste nicht erreichbar");
+    if (!response.ok) throw new Error("Keine Verbindung zur CSV-Datei");
 
     const text = await response.text();
     const newVersion = extractCSVVersion(text);
@@ -930,15 +898,15 @@ async function checkForUpdates() {
     if (newVersion && newVersion !== currentVersion) {
       window.csvUpdateAvailable = true;
       window.NEW_CSV = { version: newVersion, text };
-      csvUpdated = true;
+      updateNoticePending = true;
     }
-  } catch (err) {
-    console.warn("Keine neue CSV erkannt:", err);
+  } catch {
+    console.warn("Keine neue CSV erkannt.");
   }
 
-  // --- App-Update prüfen ---
+  // App-Update prüfen
   if (!("serviceWorker" in navigator)) {
-    if (csvUpdated) showUnifiedUpdateNotice();
+    if (updateNoticePending) showUnifiedUpdateNotice();
     return;
   }
 
@@ -946,9 +914,7 @@ async function checkForUpdates() {
     if (reg) reg.update();
 
     const maybeShowNotice = () => {
-      // Nur wenn nicht bereits Update durchgeführt wurde
-      if (!sessionStorage.getItem("updateInstalled") &&
-          (window.updateAvailable || window.csvUpdateAvailable)) {
+      if ((window.updateAvailable || window.csvUpdateAvailable) && !sessionStorage.getItem("updateInstalled") && !window.updateNoticeInProgress) {
         showUnifiedUpdateNotice();
       }
     };
@@ -962,7 +928,10 @@ async function checkForUpdates() {
     reg?.addEventListener("updatefound", () => {
       const newWorker = reg.installing;
       newWorker?.addEventListener("statechange", () => {
-        if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+        if (
+          newWorker.state === "installed" &&
+          navigator.serviceWorker.controller
+        ) {
           window.updateReadyWorker = newWorker;
           window.updateAvailable = true;
           maybeShowNotice();
@@ -970,7 +939,9 @@ async function checkForUpdates() {
       });
     });
 
-    if (csvUpdated) maybeShowNotice();
+    if (updateNoticePending) {
+      maybeShowNotice();
+    }
   });
 }
 
@@ -983,7 +954,8 @@ if ("serviceWorker" in navigator) {
   });
 
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (window.updateAvailable) {
+    if (sessionStorage.getItem("appUpdatePending") === "1") {
+      sessionStorage.setItem("updateInstalled", "1");
       location.reload();
     }
   });
@@ -1151,7 +1123,7 @@ async function initApp() {
     updateThemeAssets(savedTheme);
   }
 
-  // SVG-Symbole laden
+  // SVG-Symbole einfügen
   fetch("images/symbole/sprite.svg")
     .then(res => res.text())
     .then(svg => {
@@ -1161,64 +1133,60 @@ async function initApp() {
       document.body.appendChild(div);
     });
 
-  // App-Version laden
-  const currentVersion = await getAppVersionFromActiveSW();
-  window.APP_VERSION = currentVersion || "Unbekannt";
-  updateAppVersionInUI();
+  // Vorinitialisierung von Versionen
+  window.APP_VERSION = "Unbekannt";
+  window.CSV_VERSION = "Unbekannt";
 
-  // Nach CSV-Version im Cache schauen
-  const cachedCsv = storage.getItem("csvData");
-  if (cachedCsv) {
-    const version = extractCSVVersion(cachedCsv);
-    window.CSV_VERSION = version || "Unbekannt";
-    updateCSVVersionInUI?.();
-  }
-
-  // Erfolgreiche Updates erkennen und melden
-  const appWasUpdated = sessionStorage.getItem("updateInstalled") === "1";
-  const csvWasUpdated = sessionStorage.getItem("csvUpdated") === "1";
-  sessionStorage.removeItem("updateInstalled");
-  sessionStorage.removeItem("csvUpdated");
-  sessionStorage.removeItem("appUpdatePending");
-
-  if (appWasUpdated && csvWasUpdated) {
-    showStatusMessage(
-      `App & Fehlerliste wurden erfolgreich aktualisiert ( v${window.APP_VERSION} / v${window.CSV_VERSION} ).`,
-      "success"
-    );
-  } else if (appWasUpdated) {
-    showStatusMessage(
-      `Update auf Version ${window.APP_VERSION} erfolgreich durchgeführt.`,
-      "success"
-    );
-  } else if (csvWasUpdated) {
-    showStatusMessage(
-      `Fehlerliste erfolgreich aktualisiert auf v${window.CSV_VERSION}`,
-      "success"
-    );
+  // App-Version aus Service Worker
+  const initialAppVersion = await getAppVersionFromActiveSW();
+  if (initialAppVersion) {
+    window.APP_VERSION = initialAppVersion;
+    updateAppVersionInUI?.();
   }
 
   // Fehlerliste laden
   await loadData();
 
-  // CSV-Version ggf. nochmal aktualisieren (wird nach fetch gesetzt)
+  // CSV-Version-UI aktualisieren
   updateCSVVersionInUI?.();
 
-  // Nach Updates suchen
+  // Erfolgsnachricht(en) nach Update
+  const appWasUpdated = sessionStorage.getItem("updateInstalled") === "1";
+  const csvWasUpdated = sessionStorage.getItem("csvUpdated") === "1";
+
+  if (appWasUpdated && csvWasUpdated) {
+    showStatusMessage(
+      `App & Fehlerliste wurden erfolgreich aktualisiert (v${window.APP_VERSION} / v${window.CSV_VERSION}).`,
+      "success"
+    );
+  } else if (appWasUpdated) {
+    showStatusMessage(`Update auf App-Version ${window.APP_VERSION} erfolgreich durchgeführt.`, "success");
+  } else if (csvWasUpdated) {
+    showStatusMessage(`Fehlerliste erfolgreich aktualisiert auf v${window.CSV_VERSION}`, "success");
+  }
+
+  // Session-Marker bereinigen
+  sessionStorage.removeItem("updateInstalled");
+  sessionStorage.removeItem("csvUpdated");
+  sessionStorage.removeItem("appUpdatePending");
+  window.updateNoticeInProgress = false;
+
+  // Nach Updates suchen (falls neue CSV/SW vorhanden)
   checkForUpdates();
 
-  // Filter aus URL anwenden
+  // URL-Hash auslesen
   const { code = "", hersteller = "", typ = "" } = parseURLHash() || {};
   if (code) searchInput.value = code;
   if (hersteller) herstellerFilter.value = hersteller;
   if (typ) typFilter.value = typ;
 
+  // Reset-Hinweis anzeigen
   if (sessionStorage.getItem("appReset") === "1") {
     sessionStorage.removeItem("appReset");
     showStatusMessage("App wurde zurückgesetzt. Standarddaten wurden geladen.", "info");
   }
 
-  // Ansicht anzeigen
+  // Inhalte anzeigen
   renderDaten();
   updateControlButtons();
 }
