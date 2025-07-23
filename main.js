@@ -79,6 +79,24 @@ function parseCSV(text) {
   }));
 }
 
+function validateCSVHeaders(csvText, requiredHeaders = ["Hersteller", "Typ", "Code", "Fehler", "CsvVersion"]) {
+  try {
+    const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+    const headers = parsed.meta.fields || [];
+
+    const missing = requiredHeaders.filter(header => !headers.includes(header));
+    if (missing.length > 0) {
+      console.warn("Fehlende Pflichtspalten in CSV:", missing);
+      return { valid: false, missing };
+    }
+
+    return { valid: true, headers };
+  } catch (err) {
+    console.error("CSV Parsing fehlgeschlagen:", err);
+    return { valid: false, error: err };
+  }
+}
+
 // ==== CSV-Version aus der CSV auslesen ====
 function extractCSVVersion(csvText) {
   try {
@@ -599,26 +617,37 @@ async function loadData() {
   }
 
   try {
-    const response = await fetch("fehlerliste.csv", { cache: "no-store" });
-    if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
+  const response = await fetch("fehlerliste.csv", { cache: "no-store" });
+  if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
 
-    const text = await response.text();
-    const version = extractCSVVersion(text) || "Unbekannt";
+  const text = await response.text();
 
-    storage.setItem("csvData", text);
-    storage.setItem("csvVersion", version);
-
-    window.CSV_VERSION = version;
-    daten = parseCSV(text);
-    fillDropdowns(daten);
-    updateCSVVersionInUI?.();
-  } catch (err) {
-    showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+  const validation = validateCSVHeaders(text);
+  if (!validation.valid) {
+    showStatusMessage("Die Fehlerliste ist ungültig oder beschädigt. Bitte korrigieren.", "error");
     daten = [];
     window.CSV_VERSION = "Unbekannt";
     updateCSVVersionInUI?.();
     showHomeCard();
+    return;
   }
+
+  const version = extractCSVVersion(text) || "Unbekannt";
+
+  storage.setItem("csvData", text);
+  storage.setItem("csvVersion", version);
+
+  window.CSV_VERSION = version;
+  daten = parseCSV(text);
+  fillDropdowns(daten);
+  updateCSVVersionInUI?.();
+} catch (err) {
+  showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
+  daten = [];
+  window.CSV_VERSION = "Unbekannt";
+  updateCSVVersionInUI?.();
+  showHomeCard();
+}
 }
 
 // ==== Rendert in abschnitten ====
