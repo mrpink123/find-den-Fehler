@@ -386,6 +386,9 @@ function renderCard(item) {
     const typImageWrapper = document.createElement("div");
     typImageWrapper.className = "typImageWrapper";
 
+    const typImageContainer = document.createElement("div");
+    typImageContainer.className = "typImageContainer";
+
     const typImage = document.createElement("img");
     typImage.className = "typImage";
     typImage.src = typImagePath;
@@ -404,8 +407,8 @@ function renderCard(item) {
 
       const overlay = document.createElement("div");
       overlay.className = "imageOverlayText";
-      overlay.textContent = "Klicken für Infos";
-      typImageWrapper.appendChild(overlay);
+      overlay.textContent = "mehr Infos";
+      typImageContainer.appendChild(overlay);
 
       const buttons = item.modal.map(entry => `
     <button class="btn" data-url="${entry.url}" title="${entry.label}">
@@ -420,8 +423,8 @@ function renderCard(item) {
         });
       });
     }
-
-    typImageWrapper.appendChild(typImage);
+    typImageContainer.appendChild(typImage)
+    typImageWrapper.appendChild(typImageContainer);
     cardContent.appendChild(typImageWrapper);
   }
 
@@ -669,7 +672,7 @@ function showHomeCard(hinweisText = null) {
   homeCard.innerHTML = `
     <div class="cardheader">
       <div class="cardHeaderContent"></div>
-      <button class="btnMenuToggle transition-03" id="homeMenuToggle" title="Extras">
+      <button class="btnMenuToggle highlight transition-03" id="homeMenuToggle" title="Extras">
         <svg class="icon"><use href="#icon-menu"></use></svg>
       </button>
     </div>
@@ -687,22 +690,22 @@ function showHomeCard(hinweisText = null) {
       </div>
       <div id="homeMenuContainer" class="hide">
         <div class="menu">
-          <button id="homeCsvBtn" class="btn">
+          <button id="homeCsvBtn" class="btn highlight">
             <svg class="button-icon"><use href="#icon-upload"></use></svg>
             <p>Fehlerliste Laden</p>
           </button>
-          <button id="homeThemeBtn" class="btn">
+          <button id="homeThemeBtn" class="btn highlight">
             <svg class="button-icon"><use href="#icon-theme"></use></svg>
             <p>Dark / Light Theme</p>
           </button>
-          <button id="homeResetBtn" class="btn">
+          <button id="homeResetBtn" class="btn highlight">
             <svg class="button-icon"><use href="#icon-trash"></use></svg>
             <p>lokale Daten löschen</p>
           </button>
         </div>
         <div class="versionContainer">
-          <p class="version">App: <span id="appVersionText">lade…</span></p>
-          <p class="version">Fehlerliste: <span id="csvVersionText"> lade…</span></p>
+          <p class="version highlight">App: <span id="appVersionText">lade…</span></p>
+          <p class="version highlight">Fehlerliste: <span id="csvVersionText"> lade…</span></p>
         </div>
         
       </div>
