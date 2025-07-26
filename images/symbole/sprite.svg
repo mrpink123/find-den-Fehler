@@ -3009,28 +3009,7 @@
             </g>
         </symbol>
 
-        <symbol id="gilgen_cp_btn_r" viewBox="0 0 101.99181 101.80408" > 
-            <g 
-                style="display:inline"
-                transform="translate(-159.99999,-206.60482)">
-                <g 
-                transform="translate(123.2415)"
-                style="display:inline">
-                    <rect
-                        style="display:inline;fill:var(--border);fill-opacity:1;fill-rule:evenodd;stroke:var(--fg);stroke-width:3;stroke-dasharray:none;stroke-opacity:1"
-                        width="98.991806"
-                        height="98.804085"
-                        x="38.258484"
-                        y="208.10483"
-                        ry="7.6054149" 
-                    />
-                    <path
-                        d="m 62.240922,227.45703 v 59.36133 H 74.1335 c 0,0 -0.20033,-24.43159 0,-24.43359 12.33514,-0.10779 11.173054,0.79887 26.58398,24.33398 0.10951,0.16724 14.68945,-0.0163 14.58985,-0.19922 -12.19634,-22.39375 -20.253908,-25.92383 -20.253908,-25.92383 0,0 16.171988,0.84753 15.957028,-16.44922 -0.14987,-12.06003 -8.72622,-16.68945 -20.457028,-16.68945 z M 74.1335,238.5 h 17.089844 c 0,0 7.33184,-8.4e-4 7.345703,6.79492 0.01478,7.24541 -7.345703,7.29492 -7.345703,7.29492 L 74.1335,252.24023 Z"
-                        style="fill:var(--bg);stroke:var(--fg);stroke-width:3;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:0;paint-order:fill markers stroke"
-                    />
-                </g>
-            </g>
-        </symbol>
+        
 
         <symbol id="gilgen_cp_btn_back" viewBox="0 0 101.99181 101.80408" > 
             <g 
