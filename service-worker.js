@@ -1,4 +1,4 @@
-const CACHE_NAME = "fehlercode-cache-v1.1.2";
+const CACHE_NAME = "fehlercode-cache-v1.1.3";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",
@@ -22,6 +22,7 @@ const ASSETS_TO_CACHE = [
   "images/symbole/sta19_entriegeln2.png",
   "images/symbole/sta19_verschalung_auf.png",
 
+  "images/typen/bde_sta-15.svg",
   "images/typen/bde-e.png",
   "images/typen/bde-m.png",
   "images/typen/c-bedix.png",
@@ -35,13 +36,16 @@ const ASSETS_TO_CACHE = [
   "images/typen/sta-15.png",
 
   "details/bde-e.html",
+  "details/bedienung_fd20_tasten.html",
   "details/notauf_sta16.html",
   "details/notauf_sta19red.html",
-  "details/reset_sl-35.html",
   "details/ohne_fehler_sl35.html",
-  "details/reset_mit_d-bedix.html",
-  "details/reset_mit_c-bedix.html",
   "details/reset_mit_bedis.html",
+  "details/reset_mit_c-bedix.html",
+  "details/reset_mit_d-bedix.html",
+  "details/reset_sl-35.html",
+  "details/schliessen_sl35.html",
+  "details/schliessen_sta19.html",
 ];
 
 // Installation – Cache aufbauen
