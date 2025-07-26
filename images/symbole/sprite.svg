@@ -3099,8 +3099,20 @@
             </g>
         </symbol>
 
-        <symbol id="gilgen_prg_automat" viewBox="0 0 55.779339 40.064297">
+        <symbol 
+            id="gilgen_prg_automat" 
+            viewBox="0 0 55.779339 40.064297" 
+            width="55.779339mm"
+            height="40.064297mm"
+            version="1.1"
+            id="svg1"
+            xml:space="preserve"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:svg="http://www.w3.org/2000/svg"
+            >
+            <defs id="defs1" />
             <g
+                id="layer1"
                 transform="translate(-73.847657,-84.871217)">
                 <path
                     style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill:var(--fg);fill-opacity:1;stroke-linecap:square;stroke-miterlimit:3;paint-order:markers fill stroke;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
