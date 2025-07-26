@@ -1,4 +1,4 @@
-const CACHE_NAME = "fehlercode-cache-v1.1.3";
+const CACHE_NAME = "fehlercode-cache-v1.1.2";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",

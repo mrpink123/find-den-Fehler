@@ -447,9 +447,10 @@ function renderCard(item) {
 
 // ==== Modal erstellen ====
 function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
+  document.body.classList.add("modal-open");
   const modalOverlay = document.createElement("div");
   modalOverlay.className = "modalOverlay";
-
+  document.body.classList.add("modal-open");
   const modalHeader = document.createElement("div");
   modalHeader.className = "modalHeader"
 
@@ -505,33 +506,14 @@ function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
 
   // Modal schließen + Cleanup
   function closeModal() {
+    document.body.classList.remove("modal-open");
     document.removeEventListener("keydown", onKeyDown);
     if (modalOverlay.parentNode) {
       modalOverlay.parentNode.removeChild(modalOverlay);
+      document.body.classList.remove("modal-open");
     }
   }
 }
-
-// Schließen-Button
-document.getElementById("modalClose")?.addEventListener("click", () => {
-  document.getElementById("imageModal").classList.add("hidden");
-});
-
-// Klick außerhalb schließt ebenfalls
-document.getElementById("imageModal")?.addEventListener("click", (e) => {
-  if (e.target.id === "imageModal") {
-    e.currentTarget.classList.add("hidden");
-  }
-});
-
-document.getElementById("modalCloseBtn")?.addEventListener("click", () => {
-  document.getElementById("typImageModal").style.display = "none";
-});
-
-window.addEventListener("click", (e) => {
-  const modal = document.getElementById("typImageModal");
-  if (e.target === modal) modal.style.display = "none";
-});
 
 // ==== Sonderzeichen filtern ====
 function escapeHTML(str) {
@@ -617,37 +599,37 @@ async function loadData() {
   }
 
   try {
-  const response = await fetch("fehlerliste.csv", { cache: "no-store" });
-  if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
+    const response = await fetch("fehlerliste.csv", { cache: "no-store" });
+    if (!response.ok) throw new Error("Fehlerliste konnte nicht geladen werden");
 
-  const text = await response.text();
+    const text = await response.text();
 
-  const validation = validateCSVHeaders(text);
-  if (!validation.valid) {
-    showStatusMessage("Die Fehlerliste ist ungültig oder beschädigt. Bitte korrigieren.", "error");
+    const validation = validateCSVHeaders(text);
+    if (!validation.valid) {
+      showStatusMessage("Die Fehlerliste ist ungültig oder beschädigt. Bitte korrigieren.", "error");
+      daten = [];
+      window.CSV_VERSION = "Unbekannt";
+      updateCSVVersionInUI?.();
+      showHomeCard();
+      return;
+    }
+
+    const version = extractCSVVersion(text) || "Unbekannt";
+
+    storage.setItem("csvData", text);
+    storage.setItem("csvVersion", version);
+
+    window.CSV_VERSION = version;
+    daten = parseCSV(text);
+    fillDropdowns(daten);
+    updateCSVVersionInUI?.();
+  } catch (err) {
+    showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
     daten = [];
     window.CSV_VERSION = "Unbekannt";
     updateCSVVersionInUI?.();
     showHomeCard();
-    return;
   }
-
-  const version = extractCSVVersion(text) || "Unbekannt";
-
-  storage.setItem("csvData", text);
-  storage.setItem("csvVersion", version);
-
-  window.CSV_VERSION = version;
-  daten = parseCSV(text);
-  fillDropdowns(daten);
-  updateCSVVersionInUI?.();
-} catch (err) {
-  showStatusMessage("Fehlercodes konnten nicht geladen werden. Bitte manuell laden.", "error");
-  daten = [];
-  window.CSV_VERSION = "Unbekannt";
-  updateCSVVersionInUI?.();
-  showHomeCard();
-}
 }
 
 // ==== Rendert in abschnitten ====
@@ -867,9 +849,9 @@ function showUnifiedUpdateNotice() {
     window.updateNoticeInProgress = true;
 
     if (showCsv && showApp) {
-      applyCsvUpdate(false); 
+      applyCsvUpdate(false);
       sessionStorage.setItem("appUpdatePending", "1");
-      applyAppUpdate();     
+      applyAppUpdate();
     } else if (showCsv) {
       applyCsvUpdate(true);
     } else if (showApp) {
@@ -895,13 +877,6 @@ function applyCsvUpdate(reload = true) {
       loadData();
       showHomeCard();
     }
-  }
-}
-
-function applyAppUpdate() {
-  if (window.updateReadyWorker) {
-    sessionStorage.setItem("appUpdatePending", "1");
-    window.updateReadyWorker.postMessage({ type: "SKIP_WAITING" });
   }
 }
 

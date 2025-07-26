@@ -1,0 +1,245 @@
+<div style="padding: 0.5rem;">
+  <div style="display: flex; flex-wrap: wrap; align-items: center;">
+    <span style="flex: 2; min-width: 270px;">
+      <h1>Bedienung</h1>
+      <h3>Hauptschalter</h3>
+      <p style="margin: 0.5rem;">
+        Der Antrieb wird mit einem eingebauten Hauptschalter (A) ausgeliefert.
+        Mit diesem kann die Stromversorgung zum Antrieb unterbrochen werden. Ist
+        dies der Fall, wird der Türflügel aus jeder Position mittels Federkraft
+        geschlossen (Invers = Federöffnung, sofern nicht verriegelt). Die
+        Motordämpfung bewirkt eine kontrollierte Schliessung (Invers = Öffnung).
+      </p>
+    </span>
+    <div
+      style="
+        width: 250px;
+        height: 270px;
+        overflow: hidden;
+        padding: 1rem;
+        margin: auto;
+        background-color: var(--bg);
+        border:1px solid var(--border);
+        border-radius: 1rem;
+      "
+    >
+      <svg>
+        <use href="#gilgen_fd20_tasten" />
+      </svg>
+    </div>
+  </div>
+
+  <span>
+    <h3>Programmwahltaster</h3>
+    <p style="margin: 0.5rem;">
+      Der Antrieb wird mit einem eingebauten Programmwahltaster (B)
+      ausgeliefert. An diesem können die Betriebsarten AUTOMAT, NACHT, OFFEN,
+      HAND und AUSGANG gewählt werden. Die aktuell gewählte Betriebsart ist an
+      der leuchtenden Taste erkennbar. <br />
+    </p>
+    <div
+      style="
+        padding: 0.7rem;
+        border: 3px solid var(--info);
+        border-radius: 100vh;
+        margin: 1rem auto;
+        width: fit-content;
+      "
+    >
+      <p>
+        👉🏻 Hinweis: Bei einem anstehenden fatalen Fehler leuchte alle Tasten
+        kurz auf
+      </p>
+    </div>
+  </span>
+  <span>
+    <b>Tastensperre</b> (3 Varianten)
+    <div
+      style="
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        margin: 0.5rem;
+        gap: 0.5rem;
+      "
+    >
+      <p>1</p>
+      <p>
+        <b>Fix</b><br />
+        Eine Programmstellung wurde fix voreingestellt. Diese kann nur über
+        einen externen Programmschalter oder eine Schaltuhr übersteuert werden.
+      </p>
+      <p>2</p>
+      <p>
+        <b>Toggle</b><br />
+        Sperren: <br />
+        Aktive Programmtaste während mindestens 5 Sekunden drücken. Die Sperrung
+        wird durch ein kurzes Piepsen signalisiert. <br />
+        Entsperren: <br />
+        Aktive Programmtaste während mindestens 5 Sekunden drücken. Die
+        Aufhebung wird durch ein zweimaliges kurzes Piepsen signalisiert.
+      </p>
+      <p>3</p>
+      <p>
+        <b>Time</b><br />
+        Sperren: <br />
+        Nach 5 Minuten ohne Betätigung der Programmtasten werden diese
+        automatisch gesperrt. <br />
+        Entsperren: <br />
+        Aktive Programmtaste während mindestens 5 Sekunden drücken. Die
+        Aufhebung wird duch ein zweimaliges kurzes Piepsen signalisiert.
+      </p>
+    </div>
+  </span>
+  <span>
+    <h3>Betriebsarten</h3>
+    <p style="margin: 1rem auto; width: fit-content; text-align: center;">
+      Folgende Betriebsarten sind mittels Programmwahltaster anwählbar:
+    </p>
+
+    <table
+      style="max-width: 700px; margin: 0.5rem auto;"
+    >
+      <tbody>
+        <tr>
+          <td
+            style="
+              width: 70px;
+              height: 60px;
+              min-height: 50px;
+              border: 1px solid var(--fg);
+              border-top-left-radius: 1rem;
+              padding: 0.5rem;
+            "
+          >
+            <svg>
+              <use href="#gilgen_prg_automat" />
+            </svg>
+          </td>
+          <td style="border: 1px solid var(--fg); padding: 1rem; border-top-right-radius: 1rem;">
+            <b>AUTOMAT</b> <br />
+            <p>
+              Automatische Öffnung über Öffnungselemente innen/aussen + Key.
+              Automatische Schliessung nach Ablauf der einstellbaren
+              Offenhaltezeit.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              width: 70px;
+              height: 60px;
+              min-height: 50px;
+              border: 1px solid var(--fg);
+              padding: 0.5rem;
+            "
+          >
+            <svg>
+              <use href="#gilgen_prg_nacht" />
+            </svg>
+          </td>
+          <td style="border: 1px solid var(--fg); padding: 1rem;">
+            <b>NACHT</b><br />
+            <p>
+              Der Türflügel öffnet nur noch über das Öffnungselement Key
+              (Schlüsselschalter aussen).
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              width: 70px;
+              height: 60px;
+              min-height: 50px;
+              border: 1px solid var(--fg);
+              padding: 0.5rem;
+            "
+          >
+            <svg>
+              <use href="#gilgen_prg_offen" />
+            </svg>
+          </td>
+          <td style="border: 1px solid var(--fg); padding: 1rem;">
+            <b>OFFEN</b>
+            <p>
+              Der Türflügel öffnet automatisch und bleibt in der OFFEN-Position
+              stehen.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              width: 70px;
+              height: 60px;
+              min-height: 50px;
+              border: 1px solid var(--fg);
+              padding: 0.5rem;
+            "
+          >
+            <svg>
+              <use href="#gilgen_prg_hand" />
+            </svg>
+          </td>
+          <td style="border: 1px solid var(--fg); padding: 1rem;">
+            <b>HAND</b> <br />
+            <p>
+              Der Antrieb und die Bedienungselemente sind ausgeschaltet. Der
+              Türflügel kann von Hand geöffnet werden. Der Türflügel wird aus
+              jeder Position mittels Federkraft geschlossen (Invers =
+              Federöffnung, sofern nicht verriegelt).
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              width: 70px;
+              height: 60px;
+              min-height: 50px;
+              border: 1px solid var(--fg);
+              padding: 0.5rem;
+            "
+          >
+            <svg>
+              <use href="#gilgen_prg_ausgang" />
+            </svg>
+          </td>
+          <td style="border: 1px solid var(--fg); padding: 1rem;">
+            <b>AUSGANG</b>
+            <p>
+              Der Türflügel öffnet nur noch über die Öffnungselemente innen und
+              Key
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style="
+              width: 150px;
+              height: 60px;
+              min-height: 50px;
+              border: 1px solid var(--fg);
+              padding: 0.5rem;
+              border-bottom-left-radius: 1rem;
+            "
+          >
+            <svg>
+              <use href="#gilgen_prg_teach" />
+            </svg>
+          </td>
+          <td style="border: 1px solid var(--fg); padding: 1rem; border-bottom-right-radius: 1rem;">
+            <b>Einlernvorgang (Teach)</b>
+            <p>
+              Türflügel ganz schliessen (Invers = öffnen). Tasten HAND und
+              AUSGANG gleichzeitig (mind. 5 Sekunden lang) drücken. Alle
+              anstehenden Fehler werden gelöscht und es wird ein Einlernvorgang
+              (Teach) durchgeführt.
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </span>
+</div>

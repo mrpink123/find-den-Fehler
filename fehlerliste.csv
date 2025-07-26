@@ -1,5 +1,5 @@
 Hersteller,Typ,Code,Suchbegriffe,Fehler,Ursache,Info,Weitere,Kategorie,Link,TypBild,Details,Modal,,,,CsvVersion
-CsvVersion,,,,,,,,,,,,,,,,1.0.2
+CsvVersion,,,,,,,,,,,,,,,,1.0.3
 Gilgen,SLM,1,,ANTE 1 defekt.,"Überprüfen, ob NOT-AUS-Brücke gesteckt. Wenn ja, ANTE 1 ersetzen. ",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,,Reset mit Bedis:details/reset_mit_bedis.html,,,,
 Gilgen,SLM,3,,ANTE 1 beim Lernen behindert. Weg kleiner als 230 mm.,Tür wird durch ein Hindernis in AUF-Richtung blockiert. Hindernis entfernen und RESET durchführen.,,,,"
@@ -1705,252 +1705,252 @@ Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/02,0102 102 e01-02 e0102,"
 Kanal B verloren ","<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/03,0103 103 e0103 e0103,Kanal A + B verloren,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/04,0104 104 e01-04 e0104,Kurzschluss A + B,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/05,0105 105 e01-05 e0105,Störungen,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während der Fahrt.</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/06,0106 106 e01-06 e0106,Motorkabel falsch gesteckt,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/07,0107 107 e01-07 e0107,Kein Kanal A,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/08,0108 108 e01-08 e0108,Kein Kanal B,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/09,0109 109 e01-09 e0109,Kein Kanal A + B,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/10,0110 110 e01-10 e0110,Kurzschluss A + B,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X106 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor dem Anfahren</p>",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/11,0111 111 e01-11 e0111,Fehlfunktion,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X103 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<b>Prüfzeitpunkt:</b>
-Während Test",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während Test",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E01/12,0112 112 e01-12 e0112,Fehlfunktion,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Tür blockiert.<br>
 Kontrolle ob Jumper auf X103 vorhanden ist.</p>",<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<b>Prüfzeitpunkt:</b>
-Während Test",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während Test",Encoder,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E02/01,0201 201 e02-01 e0201,Strom zu hoch,Motorkabel prüfen. <br> Kontrolle ob Jumper auf X106 vorhanden ist.,<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Vor dem Anfahren</p",Motorstrom,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor dem Anfahren</p",Motorstrom,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E02/02,0202 202 e02-02 e0202,Strom zu tief <br> Jumper fehlt,Motorkabel prüfen. <br> Kontrolle ob Jumper auf X106 vorhanden ist.,<p>Handbetrieb mit Wiederanlauf-Versuch</p>,"<p><b>Prüfzeitpunkt:</b>
-Vor dem Anfahren</p",Motorstrom,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor dem Anfahren</p",Motorstrom,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E03/01,0301 e03-01 e0301,Test einmal fehlgeschlagen,"Antrieb auf Betriebsart HAND stellen und vorsichtig prüfen, ob Tür mit Dämpfung schliesst. <br> Wenn nein, Hardware ersetzen. <br> Wenn ja, Reibung des Türflügels und Schliessfeder-Vorspannung kontrollieren/ korrigieren. ",Warnung,"<b>Prüfzeitpunkt:</b>
 Vor dem Zufahren nach
 dem Aufstarten und danach
-alle 24 h",Dämpfung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+alle 24 h",Dämpfung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E03/02,0302 e03-02 e0302,"Test zweimal fehlgeschlagen. <br>
  Dämpfung defekt oder Öffnung über Herzkurven-Spitz hinaus. ","Antrieb auf Betriebsart HAND stellen und vorsichtig prüfen, ob Tür mit Dämpfung schliesst. <br> Wenn nein, Hardware ersetzen. <br> Wenn ja, Reibung des Türflügels und Schliessfeder-Vorspannung kontrollieren/ korrigieren. ","<p style=""color: red"">Fataler Fehler</p> <br> Antrieb läuft weiter. Summer aktiv. ","<b>Prüfzeitpunkt:</b>
 Vor dem Zufahren nach
 dem Aufstarten und danach
-alle 24 h",Dämpfung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+alle 24 h",Dämpfung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E04/01,0401 401 e04-01 e0401,In Offen-Position erkannt,"Verbindung und Schaltpunkt des Referenzschalters prüfen<br>
 Referenzschalter muss in Zu-Position betätigt sein. (Schaltkontakt offen)","<p style=""color: red"">Fataler Fehler</p>","<b>Prüfzeitpunkt:</b>
-Offenposition",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Offenposition",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E04/02,0402 402 e04-02 e0402,In Zu-Position nicht erkannt,"Verbindung und Schaltpunkt des Referenzschalters prüfen<br>
 Referenzschalter muss in Zu-Position betätigt sein. (Schaltkontakt offen)",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Vor 1. Einlernfahrt",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor 1. Einlernfahrt",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E04/03,0403 403 e04-03 e0403,In Offen-Position nicht erkannt,"Verbindung und Schaltpunkt des Referenzschalters prüfen<br>
 Referenzschalter muss in Zu-Position betätigt sein. (Schaltkontakt offen)",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Vor 1. Einlernfahrt",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor 1. Einlernfahrt",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E04/04,0404 e04-04 e0404,Invers-Anwendung: In Offen-Position nicht erkannt,"Verbindung und Schaltpunkt des Referenzschalters prüfen<br>
 Referenzschalter muss in Zu-Position betätigt sein. (Schaltkontakt offen)",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Vor 1. Einlernfahrt",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor 1. Einlernfahrt",Referenzschalter,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E05/00,0500 500 e05-00 e0500,"Überlastung der Steuerung.<br>
 Maximale Leistung wird begrenzt.",Reibung des Türflügels und Schließfeder Vorspannung kontrollieren / korrigieren,Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Permanent",Leistungsbegrenzung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Leistungsbegrenzung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-10,E05/20,0520 520 e05-20 e0520,"Überlastung der Steuerung.<br>
 Maximale Leistung wird begrenzt.",Reibung des Türflügels und Schließfeder Vorspannung kontrollieren / korrigieren,Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Permanent",Leistungsbegrenzung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Leistungsbegrenzung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E10/01,1001 e10-01 e1001,"Parameter Ao, Rod oder dAxis geändert",Teach durchführen,Handbetrieb mit Wiederanlauf-Versuch,"<b>Prüfzeitpunkt:</b>
-Bei Änderung der Antriebskonfiguration ",Fullteach erforderlich,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Bei Änderung der Antriebskonfiguration ",Fullteach erforderlich,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E10/02,1002 e10-02 e1002,Minimaler Öffnungswinkel nicht erreicht,Verriegelung/Elektroschloss kontrollieren,Handbetrieb mit Wiederanlauf-Versuch,"<b>Prüfzeitpunkt:</b>
-Während dem Teach",Fullteach erforderlich,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Während dem Teach",Fullteach erforderlich,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E11/01,1101 e11-01 e1101,Parameter Vo geändert,"Ganzer, unbehinderter Öffnungszyklus durchführen",Warnung,"<b>Prüfzeitpunkt:</b>
-Bei Änderung der Fahrparameter",Halfteach erforderlich (Opening),"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Bei Änderung der Fahrparameter",Halfteach erforderlich (Opening),"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E11/02,1102 e11-02 e1102,Parameter Vc oder FSlam geändert,"Ganzer, unbehinderter Schließzyklus durchführen",Warnung,"<b>Prüfzeitpunkt:</b>
-Bei Änderung der Fahrparameter",Halfteach erforderlich (Closing),"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Bei Änderung der Fahrparameter",Halfteach erforderlich (Closing),"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-10,E12/03,1203 e12-03 e1203,"
 Antrieb drückt gegen Offenanschlag oder Hindernis<br>
 Eventuell Federspannung zu groß.","Öffnungswinkel Ao reduzieren. <br>
  Federspannung verringern. ","<p style=""color: red"">Fataler Fehler</p>","<b>Prüfzeitpunkt:</b>
 Offen-Position Teach 3 (E11)","Stromverbrauch beim Teach in Offen-Position zu hoch > 5 A
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E14/01,1401 e14-01 e1401,"Türflügel hängt in Verriegelung / Elektroschloss <br>
 Rückmeldung: Elektroschloss ELFb schaltet nicht","Funktion von Verriegelung / Elektroschloss überprüfen <br>
 Rückmeldung: Elektroschloss ELFb überprüfen",Handbetrieb mit Wiederanlauf-Versuch,"<b>Prüfzeitpunkt:</b>
 Beim Öffnen aus Zu Position ","Verriegelung / Elektroschloss
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E14/02,1402 e14-02 e1402,Invers-Betrieb hat keine Verriegelung oder Zuhaltekraft Fch ist nicht eingestellt,Zuhaltekraft Fch einstellen / erhöhen.,Warnung,"<b>Prüfzeitpunkt:</b>
 Am Schluss des Teach","Verriegelung / Elektroschloss
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E15/01,1501 e15-01 e1501,Zu viele Hindernisse in Folge aufgetreten,"Anlage überprüfen. <br>
 Hindernis entfernen. <br>
 Türflügel in Zielposition bringen.","Handbetrieb mit Wiederanlauf-Versuch 
 Antrieb setzt sich selber für eine bestimmte Zeit still
 Wiederanlauf nach 60 s","<b>Prüfzeitpunkt:</b>
-Permanent",Hindernis in Öffnungsrichtung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Hindernis in Öffnungsrichtung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E15/02,1502 e15-02 e1502,Zu viele Hindernisse in Folge aufgetreten,"Anlage überprüfen. <br>
 Hindernis entfernen. <br>
 Türflügel in Zielposition bringen.","Handbetrieb mit Wiederanlauf-Versuch 
 Antrieb setzt sich selber für eine bestimmte Zeit still
 Wiederanlauf nach 60 s","<b>Prüfzeitpunkt:</b>
-Permanent",Hindernis in Schließrichtung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Hindernis in Schließrichtung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E16/01,1601 e16-01 e1601,Temperatur auf Endstufe hat 81 °C erreicht,Einsatzgrenzen beachten,"Antrieb setzt sich selber für eine bestimmte Zeit still
 Antrieb läuft reduziert ","<b>Prüfzeitpunkt:</b>
-Permanent",Temperatur,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Temperatur,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E16/02,1602 e16-02 e1602,Temperatur auf Endstufe hat 91 °C erreicht,Einsatzgrenzen beachten,"Antrieb setzt sich selber für eine bestimmte Zeit still
 Antrieb steht still","<b>Prüfzeitpunkt:</b>
-Permanent",Temperatur,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Temperatur,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E20/01,2001 e20-01 e2001,SER Testsignal erfolglos,"SER Kurzschluss gegen Ground <br>
 Verkabelung Sensor oder Brücke prüfen",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Vor der Schließung ",SER Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor der Schließung ",SER Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E20/02,2002 e20-02 e2002,SER zu langsam,"SER reagiert zu langsam <br>
 Verkabelung Sensor prüfen <br>
 Verpolung Testsignal prüfen",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Vor der Schließung ",SER Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor der Schließung ",SER Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E21/01,2101 e21-01 e2101,SES Testsignal erfolglos,"SES Kurzschluss gegen Ground <br>
 Verkabelung Sensor oder Brücke prüfen",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Vor der Öffnung",SES Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor der Öffnung",SES Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E21/02,2102 e21-02 e2102,SES zu langsam,"SES reagiert zu langsam <br>
 Verkabelung Sensor prüfen <br>
 Verpolung Testsignal prüfen. ",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Vor der Öffnung",SES Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Vor der Öffnung",SES Test,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E22/01,2201 e22-01 e2201,EMY Eingang auf 24 V,"Brücke EMY prüfen <br>
 Verkabelung EMY prüfen",Handbetrieb mit Wiederanlauf-Versuch,"<b>Prüfzeitpunkt:</b>
 Permanent","EMY Test
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E22/02,2202 e22-02 e2202,Fehlfunktion EMY Eingang,"Brücke EMY prüfen <br>
 Verkabelung EMY prüfen",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
 Permanent","EMY Test
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E30/01,3001 e30-01 e3001,30V zu tief,"Netzausfall <br>
 Überlast Motor <br>
 Einspeisung prüfen <br>
 Hardware ersetzen ",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
 Permanent","30V Fehler
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E30/02,3002 e30-02 e3002,30V zu hoch,"Netzausfall <br>
 Überlast Motor <br>
 Einspeisung prüfen <br>
 Hardware ersetzen ",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
 Permanent","31V Fehler
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E30/03,3003 e30-03 e3003,Fehler beim Einschalten,"Netzausfall <br>
 Überlast Motor <br>
 Einspeisung prüfen <br>
 Hardware ersetzen ",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
 Permanent","32V Fehler
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E31/01,3101 e31-01 e3101,Fehler beim Einschalten,"Überlast 24 VDC auf Klemmen X101, X104, X108, X110, X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
 
 Wiederanlauf nach 10 s ","<b>Prüfzeitpunkt:</b>
 Permanent","24V Generell
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E31/02,3102 e31-02 e3102,Über / Unterspannung,"Überlast 24 VDC auf Klemmen X101, X104, X108, X110, X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
 
 Wiederanlauf nach 10 s ","<b>Prüfzeitpunkt:</b>
 Permanent","24V Generell
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E32/01,3201 e32-01 e3201,Über / Unterspannung,"Überlast, Kurzschluss 24 VDC auf Klemmen X108 oder X110 ","Antrieb setzt sich selber für eine bestimmte Zeit still
 
 Wiederanlauf nach 10 s ","<b>Prüfzeitpunkt:</b>
-Permanent",24V Safety,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",24V Safety,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E33/01,3301 e3301 e3301,"Fehler: 
 Über / Unterspannung ","Überlast, Kurzschluss 24 VDC auf Klemme X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
 
 Wiederanlauf nach 10 s ","<b>Prüfzeitpunkt:</b>
 Permanent","24V E-Lock
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E33/02,3302 e33-02 e3302,"Vorwarnung: 
 Über / Unterspannung ","Überlast, Kurzschluss 24 VDC auf Klemme X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
 
 Wiederanlauf nach 10 s ","<b>Prüfzeitpunkt:</b>
 Permanent","24V E-Lock
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E34/01,3401 e34-01 e3401,Über / Unterspannung,"Überlast, Kurzschluss Fremdspeisung CAN ","Antrieb setzt sich selber für eine bestimmte Zeit still
 
 Wiederanlauf nach 10 s ","<b>Prüfzeitpunkt:</b>
 Permanent","24V CAN
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E50 01...99,E50 50,Unerwartetes Hard oder Software Ereignis,"Antrieb aus / einschalten <br>
 Factory Reset durchführen <br>
 Software Update durchführen <br>
 Hersteller informieren. ","Warnung oder
 Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler","<b>Prüfzeitpunkt:</b>
 Permanent","Systemfehler
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E51/01...99,E51 51,Unerwartetes Hard oder Software Ereignis,"Antrieb aus / einschalten <br>
 Factory Reset durchführen <br>
 Software Update durchführen <br>
 Hersteller informieren. ","Warnung oder
 Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler","<b>Prüfzeitpunkt:</b>
 Permanent","Systemfehler
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E52/01...99,E52 52,Unerwartetes Hard oder Software Ereignis,"Antrieb aus / einschalten <br>
 Factory Reset durchführen <br>
 Software Update durchführen <br>
 Hersteller informieren. ","Warnung oder
 Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler","<b>Prüfzeitpunkt:</b>
 Permanent","Systemfehler
-","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+","<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E60/00,E60-00 e6000 6000,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
 Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ",Warnung,"<b>Prüfzeitpunkt:</b>
-Permanent",Relaisprint 0,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Relaisprint 0,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E60/10,E60-10 e6010 6010,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
 Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ",Warnung,"<b>Prüfzeitpunkt:</b>
-Permanent",Relaisprint 1,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Relaisprint 1,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E60/20,E60-20 e6020 6020,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
 Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ",Warnung,"<b>Prüfzeitpunkt:</b>
-Permanent",Funkprint,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Funkprint,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E60/30,E60-30 e6030 6030,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
 Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ",Antrieb setzt sich selber für eine bestimmte Zeit still,"<b>Prüfzeitpunkt:</b>
-Permanent",Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E70/xx,E70 70,Adresse xx zweimal vorhanden,Schließfolge- oder Schleusen-Rolle korrekt definieren,Warnung,"<b>Prüfzeitpunkt:</b>
-Permanent",Bus-Einstellung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Bus-Einstellung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Gilgen,FD-20,E71/01,E71-01 e7101 7101,Keine Verbindung,"Klemmen verbinden, kontrollieren oder ersetzen. <br> 
 Kontrollieren ob alle Teilnehmer eingeschaltet sind. ",Warnung,"<b>Prüfzeitpunkt:</b>
-Permanent",Verbindung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,,,,,
+Permanent",Verbindung,"<a href=""https://media.gilgendoorsystems.com/download/nocrFfLgxhVs"" target=""_blank""style=""color: var(--fg);"">FD-20 Betreiberhandbuch</a> ",images/typen/fd-20.png,,Bedienung:details/bedienung_fd20_tasten.html,,,,
 Record,STA-15,ohne,,"Tür bewegt sich nicht, keine Leuchtdiode auf Bedienungseinheit leuchtet ","Netzspannung nicht vorhanden (Leuchtdiode 4 auf Steuergerät im Antrieb leuchtet nicht) <br>
 Sicherung überprüfen, Netzzuführung überprüfen. ",,,,,images/typen/bde_sta-15.svg,,,,,,
 Record,STA-15,ohne,,"Tür bewegt sich nicht, eine Leuchtdiode auf Bedienungseinheit leuchtet ","Falsche Betriebsart, Störung der Elektronik <br>
@@ -2099,7 +2099,6 @@ Record,STA-19 Red,"LED 1, 2, 3, 6",,Unterbruch Motor 2,Service anrufen,,LED-Nr S
 Record,STA-19 Red,"LED 1, 2, 3, 5, 6",,ELS - Sensor länger als 60 sec aktiv,Linsen-Scheibchen des Lichtstrahls abwischen,,LED-Nr Status: 59,Tür bleibt offen,,images/typen/bde-e.png,,BDE + Reset:details/bde-e.html | Notöffnung:details/notauf_sta19red.html | Not Schliessen:details/schliessen_sta19.html,,,,
 Record,STA-19 Red,"LED 1, 2, 3, 4",,Parameterspeicher defekt,Service anrufen,,LED-Nr Status: 60,Tür bleibt stehen,,images/typen/bde-e.png,,BDE + Reset:details/bde-e.html | Notöffnung:details/notauf_sta19red.html | Not Schliessen:details/schliessen_sta19.html,,,,
 Record,STA-19 Red,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60 sec aktiv,SSK-Kontakt wieder lösen,,LED-Nr Status: 61,Tür bleibt offen,,images/typen/bde-e.png,,BDE + Reset:details/bde-e.html | Notöffnung:details/notauf_sta19red.html | Not Schliessen:details/schliessen_sta19.html,,,,
-Record,STA-19 Red,Reset mit BDE-E,Reset STA-19 Red,,,,,,,,details/reset_mit_bde-e.html,,,,,
 Record,STA-19 Red,Notöffnung,"notauf, not, oeffnen ",,,,,,,,details/notauf_sta19red.html,,,,,
 Record,STA-19 Red,schließen im Fehlerfall,schließen schliessen zu,,,,"<h3>Schließen im Fehlerfall</h3><br><ul><li>Bei einigen anstehenden Störungen kann die Türe mit dem Schalter BDE-V verriegelt werden.</li><li>Bei Störungen an der Sensorik kann die Türe wie folgt trotzdem verriegelt werden: Türe trotz anstehendem Sensorikalarm mittels Schalter BDE-V auf verriegelt schalten. Türflügel von Hand zuschieben. Sobald die Türflügel in ZU-Stellung sind, verriegelt die Türe automatisch. Eine Wiederöffnung ist mit SSK möglich. SSK funktioniert weiterhin. Sobald die Türe nicht mehr verriegelt ist, steht der Alarm weiterhin an.</li></ul> ",,,images/symbole/BDE-E/bde-e.svg,,,,,,
 Record,STA-19 Red,BDE-E,,,,,,,,,details/bde-e.html,,,,,
