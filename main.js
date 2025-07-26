@@ -1136,7 +1136,7 @@ async function initApp() {
       div.innerHTML = svg;
       document.body.appendChild(div);
     });
-
+  
   // Vorinitialisierung von Versionen
   window.APP_VERSION = "Unbekannt";
   window.CSV_VERSION = "Unbekannt";
