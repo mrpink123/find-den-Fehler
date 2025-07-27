@@ -311,7 +311,7 @@ function renderFehlerItem(code, kategorie, text) {
     <div style="max-width: 500px;">
       <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
         <div style="display: flex;">
-          <svg style="width: 24px; height: fit-content; margin-top: 7px; margin-bottom: auto;" viewBox="0 0 128 128">
+          <svg style="width: 24px; height: 24px; margin-top: 7px; margin-bottom: auto;" viewBox="0 0 128 128">
             <path d="M9.6 114.26L64 20.03l54.41 94.23z" fill="#fcc21b" />
             <g fill="#2f2f2f">
               <path
@@ -340,7 +340,7 @@ function renderUrsacheItem(text) {
   <div style="max-width: 500px;">
     <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
       <div style="display: flex;">
-        <svg style="width: 24px; height: fit-content; margin-top: 7px" viewBox="0 0 72 72">
+        <svg style="width: 24px; height: 24px; margin-top: 7px" viewBox="0 0 72 72">
               <path d="M35.71 64.65c4.779 0 7.509-2.244 8.156-5.151h-16.31c.647 2.907 3.376 5.151 8.155 5.151z" fill="#fff"/>
               <path d="M45.5 10.41s-12.23-3.457-18.2 1.269c-5.969 4.726-7.651 15.6-7.651 15.6c.585 2.213 4.226 8.493 4.226 8.493c.54.911 2.253 7.981 3.249 11.86h17.17c.866-2.845 4.35-13.65 4.805-14.71c.584-1.363 1.58-4.016 2.083-5.017c1.21-2.409.538-4.455.538-7.027c0-5.487-1.902-7.726-6.221-10.47z" fill="#fff600"/>
               <path d="M35.71 7.202c-8.532 0-16.5 6.752-16.5 15.28c0 1.079-.264 4.491 1.217 4.491c0 0 2.393-7.825 8.362-12.55s15.52-3.725 15.52-3.725c-.664-2.045-5.55-3.499-8.596-3.499z" fill="#fff"/>
@@ -369,7 +369,7 @@ function renderInfoItem(text) {
     <div style="max-width: 500px;">
       <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
         <div style="display: flex;">
-          <svg style="width: 24px; height: fit-content; margin-top: 7px" viewBox="0 0 1024 1024">
+          <svg style="width: 24px; height: 24px; margin-top: 7px" viewBox="0 0 1024 1024">
             <path
               d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z"
               fill="var(--fg)"
