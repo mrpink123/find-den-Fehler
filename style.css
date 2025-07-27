@@ -13,7 +13,6 @@
     --border: #b1b1b1c4;
     --button: rgb(231, 231, 231);
     --hover: rgb(218, 218, 218);
-    --highlight1: rgb(66 192 227);
     --highlight: rgb(160, 160, 160);
     --shadow: rgba(0, 0, 0, 0.1);
     --error: rgb(255, 48, 48);
@@ -98,7 +97,7 @@ svg {
     border-radius: 7px;
     color: var(--fg);
     background-color: var(--button);
-    border: 1px solid var(--fg);
+    border: 1px solid currentColor;
     box-shadow: 0px 0px 3px 0px var(--shadow);
     -webkit-box-shadow: 0px 0px 3px 0px var(--shadow);
     -moz-box-shadow: 0px 0px 3px 0px var(--shadow);
@@ -107,6 +106,7 @@ svg {
 
 .btn:hover {
     background-color: var(--hover);
+    border: 1px solid var(--highlight, currentColor);
     box-shadow: 1px 1px 3px 0px var(--shadow);
     -webkit-box-shadow: 1px 1px 3px 0px var(--shadow);
     -moz-box-shadow: 1px 1px 3px 0px var(--shadow);
@@ -414,9 +414,9 @@ input:focus {
     min-width: 350px;
     min-height: 250px;
     overflow: hidden;
-    box-shadow: 0 0px 5px var(--border);
+    box-shadow: 1px 1px 20px 0px color-mix(in srgb, var(--highlight, --fg) 10%, transparent);
     animation: fadeIn .7s ease;
-    transition: all .7s;
+    transition: all .3s;
 }
 
 /* Card - Kopfzeile */
@@ -441,15 +441,13 @@ input:focus {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    color: currentColor;
     background-color: transparent;
     box-shadow: none;
     border: none;
     overflow: hidden;
 }
 
-.button-icon {
-    color: var(--highlight);
-}
 
 .btnMenuToggle:hover {
     background-color: var(--hover);
@@ -565,7 +563,7 @@ input:focus {
     position: relative;
     display: flex;
     flex-direction: column-reverse;
-    width: 300px;
+    max-width: 300px;
     height: fit-content;
     margin-top: 1em;
     padding: 1.5rem;
@@ -576,7 +574,8 @@ input:focus {
 
 .typImage {
     width: 100%;
-    max-height: fit-content;
+    max-height: 300px;
+    object-fit: contain;
     overflow: hidden;
     z-index: 1;
     background: transparent;
@@ -584,25 +583,28 @@ input:focus {
 
 .errorDescription {
     display: flex;
+    flex: 1;
     flex-direction: column;
     width: 100%;
     gap: 1em;
-    padding: 1rem 0.5rem;
-    justify-content: center;
+    padding: 1rem .5rem;
 }
 
 .iconLine {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
-.errorDescription p {
-    margin: 0 0 0 22px;
+.iconLine .icon {
+    margin-bottom: auto;
+    margin-top: 4px;
 }
 
-.errorDescription p img {
-    margin-top: 5px;
+.iconLine span {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 .errorDescriptionItem:last-of-type {
@@ -648,23 +650,6 @@ h3 {
 
 .detailsContainer h3 {
     font-size: 1.1em;
-}
-
-.topContainer {
-    display: flex;
-    flex-wrap: wrap-reverse;
-    gap: 1em;
-    justify-items: center;
-}
-
-.topContainer .textBoxSmall {
-    flex: 3 2 400px;
-    align-content: center;
-}
-
-.topContainer .typImageWrapper img {
-    width: 200px;
-    justify-self: center;
 }
 
 .updateInfo {
@@ -752,27 +737,6 @@ h3 {
     padding: 0 1rem;
 }
 
-/*
-.modalHtmlContent img {
-    max-width: 100%;
-    height: auto;
-}
-
-.modalHtmlContent h1,
-h2,
-h3 {
-    margin: 0.5rem 0;
-    padding: 0;
-}
-
-.modalHtmlContent p {
-    margin: 0.4rem;
-}
-
-.modalHtmlContent ul {
-    margin: 0 1.7rem;
-}
-*/
 .typImageContainer {
     position: relative;
     display: flex;
@@ -781,10 +745,10 @@ h3 {
     width: 200px;
     height: fit-content;
     justify-content: center;
-    transition: all .5s ease;
+    transition: all .5s ease-in-out;
     overflow: hidden;
+    padding: .25rem;
 }
-
 
 .typImageContainer .imageOverlayText {
     position: absolute;
@@ -792,7 +756,7 @@ h3 {
     right: -60px;
     width: 200px;
     padding: .1rem;
-    background: var(--highlight1);
+    background: var(--highlight, rgb(66 192 227));
     color: #ffffff;
     font-size: 1.1em;
     text-align: center;
@@ -810,7 +774,7 @@ h3 {
 }
 
 .typImageWrapper:hover .imageOverlayText {
-    opacity: .2;
+    opacity: 0;
     transform: translate(50px, 50px) rotate(-45deg);
 }
 
@@ -831,7 +795,7 @@ h3 {
     flex-direction: column;
     transform: translateY(-115%) scale(.7);
     opacity: 0;
-    transition: all .5s ease, opacity .3s ease-in-out;
+    transition: all .5s ease, opacity .5s ease-in-out;
 }
 
 /* Splash-Screen Hintergrund */
@@ -1118,5 +1082,14 @@ h3 {
 
     .updateInfo button {
         border-radius: 8px;
+    }
+
+    .modalHtmlContent {
+        padding: 0;
+    }
+
+    .typImageWrapper {
+        padding-bottom: 0;
+        margin-top: 0;
     }
 }

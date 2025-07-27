@@ -308,35 +308,83 @@ function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
 // ==== Rendern der fehlerbeschreibung Items ====
 function renderFehlerItem(code, kategorie, text) {
   return `
-    <div class="errorDescriptionItem">
-      <div class="iconLine">
-        <svg class="icon small"><use href="#icon-fehler"></use></svg>
-        <h4>Fehler: ${code}</h4> ${kategorie ? `<b>(${kategorie})</b>` : ""}
+    <div style="max-width: 500px;">
+      <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
+        <div style="display: flex;">
+          <svg style="width: 24px; height: fit-content; margin-top: 7px" viewBox="0 0 128 128">
+            <path d="M9.6 114.26L64 20.03l54.41 94.23z" fill="#fcc21b" />
+            <g fill="#2f2f2f">
+              <path
+                d="M127.07 115.93L66.89 11.7c-.6-1.03-1.7-1.67-2.89-1.67c-1.19 0-2.29.64-2.88 1.67L.93 115.93c-.6 1.03-.6 2.3 0 3.34c.6 1.03 1.7 1.66 2.89 1.66h120.36c1.19 0 2.29-.63 2.89-1.66c.59-1.04.59-2.31 0-3.34zM9.6 114.26L64 20.03l54.41 94.23H9.6z"
+              />
+              <path
+                d="M59.12 83.21h9.76c.36 0 .65-.23.67-.53l2.66-38.27c.01-.16-.05-.3-.18-.42a.736.736 0 0 0-.49-.18H56.46c-.19 0-.37.07-.49.18a.54.54 0 0 0-.18.42l2.67 38.27c.01.29.3.53.66.53zm-3.01 20.11c0-1.41.2-2.6.61-3.57c.4-.98.96-1.77 1.68-2.37c.72-.6 1.56-1.04 2.54-1.31c.97-.27 2.01-.41 3.13-.41c1.05 0 2.05.14 3 .41c.95.27 1.78.71 2.49 1.31c.72.6 1.29 1.38 1.71 2.37c.42.97.63 2.16.63 3.57c0 1.35-.21 2.51-.63 3.46c-.42.96-.99 1.76-1.71 2.39c-.71.63-1.54 1.09-2.49 1.37c-.95.28-1.95.43-3 .43c-1.11 0-2.15-.14-3.13-.43s-1.82-.74-2.54-1.37a6.196 6.196 0 0 1-1.68-2.39c-.41-.96-.61-2.11-.61-3.46z"
+              />
+            </g>
+          </svg>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p style="margin: 0.5rem 0;">
+            <b>Fehler: ${code}</b>
+            ${kategorie ? `<b> (${kategorie})</b>` : ""}
+          </p>
+          <p>${text}</p>
+        </div>
       </div>
-      <p>${text}</p>
-    </div>`;
+    </div>
+  `;
 }
 
 function renderUrsacheItem(text) {
   return `
-    <div class="errorDescriptionItem">
-      <div class="iconLine">
-        <svg class="icon small"><use href="#icon-ursache"></use></svg>
-        <h4>Maßnahme:</h4>
+  <div style="max-width: 500px;">
+    <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
+      <div style="display: flex;">
+        <svg style="width: 24px; height: fit-content; margin-top: 7px" viewBox="0 0 72 72">
+              <path d="M35.71 64.65c4.779 0 7.509-2.244 8.156-5.151h-16.31c.647 2.907 3.376 5.151 8.155 5.151z" fill="#fff"/>
+              <path d="M45.5 10.41s-12.23-3.457-18.2 1.269c-5.969 4.726-7.651 15.6-7.651 15.6c.585 2.213 4.226 8.493 4.226 8.493c.54.911 2.253 7.981 3.249 11.86h17.17c.866-2.845 4.35-13.65 4.805-14.71c.584-1.363 1.58-4.016 2.083-5.017c1.21-2.409.538-4.455.538-7.027c0-5.487-1.902-7.726-6.221-10.47z" fill="#fff600"/>
+              <path d="M35.71 7.202c-8.532 0-16.5 6.752-16.5 15.28c0 1.079-.264 4.491 1.217 4.491c0 0 2.393-7.825 8.362-12.55s15.52-3.725 15.52-3.725c-.664-2.045-5.55-3.499-8.596-3.499z" fill="#fff"/>
+              <g stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10">
+                  <path d="M52.55 23.75c0 3.985-1.785 5.908-3.754 10.5c-.503 1.172-4.211 13.38-4.211 13.38h-17.17s-2.981-11.67-3.546-12.62c-2.37-3.998-4.419-6.91-4.419-11.26C19.45 14.609 26.86 7.2 36 7.2c9.141 0 16.55 7.41 16.55 16.55z" fill="none" strokeWidth="2"/>
+                  <path d="M36 47.22V35.28m5.97 0H30.03" strokeWidth="3"/>
+                  <path d="M44.16 58.79c0 3.24-3.651 5.867-8.155 5.867S27.85 62.03 27.85 58.79z" fill="none" strokeWidth="1.696"/>
+                  <path d="m27.99 54.98l16.02-3.47" strokeWidth="1.965"/>
+                  <path d="m38.2 56.07l5.78-1.18M28.02 51.6l5.78-1.18" strokeWidth="3"/>
+              </g>
+          </svg>
       </div>
-      <p>${text}</p>
-    </div>`;
+      <div style="display: flex; flex-direction: column;">
+        <p style="margin: 0.5rem 0;">
+          <b>Maßnahme:</b>
+        </p>
+        <p>${text}</p>
+      </div>
+    </div>
+  </div>  
+  `;
 }
 
 function renderInfoItem(text) {
   return `
-    <div class="errorDescriptionItem">
-      <div class="iconLine">
-        <svg class="icon small"><use href="#icon-info"></use></svg>
-        <strong>Info:</strong>
+    <div style="max-width: 500px;">
+      <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
+        <div style="display: flex;">
+          <svg style="width: 24px; height: fit-content; margin-top: 7px" viewBox="0 0 1024 1024">
+            <path
+              d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z"
+              fill="var(--fg)"
+            />
+          </svg>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p style="margin: 0.5rem 0;">
+            <b>Info:</b>
+          </p>
+          <p>${text}</p>
+        </div>
       </div>
-      <p>${text}</p>
-    </div>`;
+    </div>  
+  `;
 }
 
 function renderLinkItem(link) {
@@ -372,7 +420,7 @@ function renderCard(item) {
         ${item.fehler ? renderFehlerItem(item.code, item.kategorie, item.fehler) : ""}
         ${item.ursache ? renderUrsacheItem(item.ursache) : ""}
         ${item.infos ? renderInfoItem(item.infos) : ""}
-        ${item.weitere ? `<div class="errorDescriptionItem"><p>${item.weitere}</p></div>` : ""}
+        ${item.weitere ? `<div style="margin-top:auto;"><p>${item.weitere}</p></div>` : ""}
         <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
         ${item.link ? renderLinkItem(item.link) : ""}
       </div>
@@ -672,7 +720,7 @@ function showHomeCard(hinweisText = null) {
   homeCard.innerHTML = `
     <div class="cardheader">
       <div class="cardHeaderContent"></div>
-      <button class="btnMenuToggle highlight transition-03" id="homeMenuToggle" title="Extras">
+      <button class="btnMenuToggle" id="homeMenuToggle" title="Extras">
         <svg class="icon"><use href="#icon-menu"></use></svg>
       </button>
     </div>
@@ -1139,7 +1187,7 @@ async function initApp() {
       div.innerHTML = svg;
       document.body.appendChild(div);
     });
-  
+
   // Vorinitialisierung von Versionen
   window.APP_VERSION = "Unbekannt";
   window.CSV_VERSION = "Unbekannt";
