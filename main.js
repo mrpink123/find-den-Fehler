@@ -311,7 +311,7 @@ function renderFehlerItem(code, kategorie, text) {
     <div style="max-width: 500px;">
       <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
         <div style="display: flex;">
-          <svg style="width: 24px; height: fit-content; margin-top: 7px" viewBox="0 0 128 128">
+          <svg style="width: 24px; height: fit-content; margin-top: 7px; margin-bottom: auto;" viewBox="0 0 128 128">
             <path d="M9.6 114.26L64 20.03l54.41 94.23z" fill="#fcc21b" />
             <g fill="#2f2f2f">
               <path
