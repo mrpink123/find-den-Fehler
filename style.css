@@ -607,7 +607,7 @@ input:focus {
     align-items: center;
 }
 
-.errorDescriptionItem:last-of-type {
+.linkItem {
     margin-top: auto;
 }
 

@@ -308,7 +308,7 @@ function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
 // ==== Rendern der fehlerbeschreibung Items ====
 function renderFehlerItem(code, kategorie, text) {
   return `
-    <div style="max-width: 500px;">
+    <div style="max-width: 500px; padding: .5rem; border-radius: .5rem; border: 1px solid transparent; background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box, linear-gradient(90deg, #ff0000a5, rgba(255, 255, 255, 0)) border-box;">
       <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
         <div style="display: flex;">
           <svg style="width: 24px; height: 24px; margin-top: 7px; margin-bottom: auto;" viewBox="0 0 128 128">
@@ -335,58 +335,6 @@ function renderFehlerItem(code, kategorie, text) {
   `;
 }
 
-function renderUrsacheItem(text) {
-  return `
-  <div style="max-width: 500px;">
-    <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
-      <div style="display: flex;">
-        <svg style="width: 24px; height: 24px; margin-top: 7px" viewBox="0 0 72 72">
-              <path d="M35.71 64.65c4.779 0 7.509-2.244 8.156-5.151h-16.31c.647 2.907 3.376 5.151 8.155 5.151z" fill="#fff"/>
-              <path d="M45.5 10.41s-12.23-3.457-18.2 1.269c-5.969 4.726-7.651 15.6-7.651 15.6c.585 2.213 4.226 8.493 4.226 8.493c.54.911 2.253 7.981 3.249 11.86h17.17c.866-2.845 4.35-13.65 4.805-14.71c.584-1.363 1.58-4.016 2.083-5.017c1.21-2.409.538-4.455.538-7.027c0-5.487-1.902-7.726-6.221-10.47z" fill="#fff600"/>
-              <path d="M35.71 7.202c-8.532 0-16.5 6.752-16.5 15.28c0 1.079-.264 4.491 1.217 4.491c0 0 2.393-7.825 8.362-12.55s15.52-3.725 15.52-3.725c-.664-2.045-5.55-3.499-8.596-3.499z" fill="#fff"/>
-              <g stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10">
-                  <path d="M52.55 23.75c0 3.985-1.785 5.908-3.754 10.5c-.503 1.172-4.211 13.38-4.211 13.38h-17.17s-2.981-11.67-3.546-12.62c-2.37-3.998-4.419-6.91-4.419-11.26C19.45 14.609 26.86 7.2 36 7.2c9.141 0 16.55 7.41 16.55 16.55z" fill="none" strokeWidth="2"/>
-                  <path d="M36 47.22V35.28m5.97 0H30.03" strokeWidth="3"/>
-                  <path d="M44.16 58.79c0 3.24-3.651 5.867-8.155 5.867S27.85 62.03 27.85 58.79z" fill="none" strokeWidth="1.696"/>
-                  <path d="m27.99 54.98l16.02-3.47" strokeWidth="1.965"/>
-                  <path d="m38.2 56.07l5.78-1.18M28.02 51.6l5.78-1.18" strokeWidth="3"/>
-              </g>
-          </svg>
-      </div>
-      <div style="display: flex; flex-direction: column;">
-        <p style="margin: 0.5rem 0;">
-          <b>Maßnahme:</b>
-        </p>
-        <p>${text}</p>
-      </div>
-    </div>
-  </div>  
-  `;
-}
-
-function renderInfoItem(text) {
-  return `
-    <div style="max-width: 500px;">
-      <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
-        <div style="display: flex;">
-          <svg style="width: 24px; height: 24px; margin-top: 7px" viewBox="0 0 1024 1024">
-            <path
-              d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z"
-              fill="var(--fg)"
-            />
-          </svg>
-        </div>
-        <div style="display: flex; flex-direction: column;">
-          <p style="margin: 0.5rem 0;">
-            <b>Info:</b>
-          </p>
-          <p>${text}</p>
-        </div>
-      </div>
-    </div>  
-  `;
-}
-
 function renderLinkItem(link) {
   return `
     <div class="errorDescriptionItem">
@@ -395,6 +343,34 @@ function renderLinkItem(link) {
         <h4>${link}</h4>
       </div>
     </div>`;
+}
+
+function renderDescriptionItem(color = "var(--card-bg)", svg = "", name = "", text = "", clsName = null) {
+  return `
+    <div style="
+      max-width: 500px; 
+      padding: .5rem; 
+      border-radius: .5rem; 
+      border: 1px solid transparent; 
+      background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box, 
+        linear-gradient(90deg, ${color}, rgba(255, 255, 255, 0)) border-box;" 
+      ${clsName ? `class = ${clsName}` : ""}
+    >
+      <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
+        <div style="display: flex;">
+          <svg style="width: 24px; height: 24px; margin-top: 7px">
+            <use href="${svg}"></use>
+          </svg>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+          <p style="margin: 0.5rem 0;">
+            <b>${name}:</b>
+          </p>
+          <p>${text}</p>
+        </div>
+      </div>
+    </div>  
+  `;
 }
 
 // ==== Fehler Card rendern ====
@@ -418,11 +394,11 @@ function renderCard(item) {
     <div class="cardContent">
       <div class="errorDescription">
         ${item.fehler ? renderFehlerItem(item.code, item.kategorie, item.fehler) : ""}
-        ${item.ursache ? renderUrsacheItem(item.ursache) : ""}
-        ${item.infos ? renderInfoItem(item.infos) : ""}
-        ${item.weitere ? `<div style="margin-top:auto;"><p>${item.weitere}</p></div>` : ""}
-        <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
-        ${item.link ? renderLinkItem(item.link) : ""}
+        ${item.ursache ? renderDescriptionItem("#fcc21b", "#icon-ursache", "Maßnahme", item.ursache, "") : ""}
+        ${item.infos ? renderDescriptionItem("#00a6ffff", "#icon-info", "Info", item.infos, "") : ""}
+        ${item.weitere ? `<div style="margin-top:auto; padding-left:1rem;"><p>${item.weitere}</p></div>` : ""}
+        <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>        
+        ${item.link ? renderDescriptionItem(color = "var(--card-bg)", "#icon-hilfe", item.link, "", "linkItem") : ""}
       </div>
     </div>
   `;
@@ -439,6 +415,7 @@ function renderCard(item) {
 
     const typImage = document.createElement("img");
     typImage.className = "typImage";
+
     typImage.src = typImagePath;
     typImage.alt = item.typ;
     typImage.onerror = () => {
