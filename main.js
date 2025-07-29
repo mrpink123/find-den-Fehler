@@ -52,45 +52,64 @@ function escapeRegExp(string) {
 
 function parseCSV(text) {
   const result = Papa.parse(text, { header: true, skipEmptyLines: true });
+
   if (result.errors.length > 0) {
+    console.error("Fehler beim Parsen der CSV-Datei:", result.errors);
     showStatusMessage("Fehler beim Parsen der CSV-Datei", "error");
     return [];
   }
-  return result.data.filter(row => row.Hersteller?.toLowerCase() !== "csvversion" && row.Code).map((row) => ({
-    hersteller: row.Hersteller?.trim() || "",
-    typ: row.Typ?.trim() || "",
-    code: row.Code?.trim() || "",
-    suchbegriffe: row.Suchbegriffe?.trim() || "",
-    fehler: row.Fehler?.trim() || "",
-    ursache: row.Ursache?.trim() || "",
-    infos: row.Info?.trim() || "",
-    weitere: row.Weitere?.trim() || "",
-    kategorie: row.Kategorie?.trim() || "",
-    link: row.Link?.trim() || "",
-    typImage: row.TypBild?.trim() || "",
-    details: row.Details?.trim() || "",
-    modal: (row.Modal || "").split("|").map(entry => {
-      const [label, url] = entry.split(":");
-      return { label: label?.trim() || "", url: url?.trim() || "" };
-    })
-      .filter(entry => entry.label && entry.url),
 
-    csvVersion: row.CsvVersion?.trim() || "",
-  }));
+  return result.data
+    .filter(row => {
+      const hersteller = row.Hersteller?.trim().toLowerCase();
+      const code = row.Code?.trim();
+      return hersteller !== "csvversion" && code;
+    })
+    .map(row => {
+      const get = (field) => row[field]?.trim() || "";
+
+      const modalEntries = (row.Modal || "")
+        .split("|")
+        .map(entry => {
+          const [label, url] = entry.split(":");
+          return {
+            label: label?.trim() || "",
+            url: url?.trim() || ""
+          };
+        })
+        .filter(entry => entry.label && entry.url); // Nur gültige
+
+      return {
+        hersteller: get("Hersteller"),
+        typ: get("Typ"),
+        code: get("Code"),
+        suchbegriffe: get("Suchbegriffe"),
+        fehler: get("Fehler"),
+        ursache: get("Ursache"),
+        infos: get("Info"),
+        weitere: get("Weitere"),
+        kategorie: get("Kategorie"),
+        link: get("Link"),
+        typImage: get("TypBild"),
+        details: get("Details"),
+        modal: modalEntries,
+        csvVersion: get("CsvVersion")
+      };
+    });
 }
 
 function validateCSVHeaders(csvText, requiredHeaders = ["Hersteller", "Typ", "Code", "Fehler", "CsvVersion"]) {
   try {
     const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
-    const headers = parsed.meta.fields || [];
+    const actualHeaders = new Set((parsed.meta.fields || []).map(h => h.trim().toLowerCase()));
+    const missing = requiredHeaders.filter(h => !actualHeaders.has(h.toLowerCase()));
 
-    const missing = requiredHeaders.filter(header => !headers.includes(header));
     if (missing.length > 0) {
       console.warn("Fehlende Pflichtspalten in CSV:", missing);
       return { valid: false, missing };
     }
 
-    return { valid: true, headers };
+    return { valid: true, headers: parsed.meta.fields };
   } catch (err) {
     console.error("CSV Parsing fehlgeschlagen:", err);
     return { valid: false, error: err };
@@ -101,9 +120,23 @@ function validateCSVHeaders(csvText, requiredHeaders = ["Hersteller", "Typ", "Co
 function extractCSVVersion(csvText) {
   try {
     const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
-    const row = parsed.data.find(row => row?.CsvVersion);
-    return row?.CsvVersion?.trim() || null;
-  } catch {
+
+    // Version aus regulären Datenzeilen
+    const fromData = parsed.data.find(row =>
+      row?.CsvVersion?.trim() && row?.CsvVersion?.toLowerCase() !== "csvversion"
+    );
+    if (fromData?.CsvVersion) {
+      return fromData.CsvVersion.trim();
+    }
+
+    const firstRow = parsed.data[0];
+    if (firstRow?.Hersteller?.toLowerCase() === "csvversion") {
+      return firstRow.CsvVersion?.trim() || null;
+    }
+
+    return null;
+  } catch (err) {
+    console.warn("Fehler beim Auslesen der CSV-Version:", err);
     return null;
   }
 }
@@ -398,7 +431,7 @@ function renderCard(item) {
         ${item.infos ? renderDescriptionItem("#00a6ffff", "#icon-info", "Info", item.infos, "") : ""}
         ${item.weitere ? `<div style="margin-top:auto; padding-left:1rem;"><p>${item.weitere}</p></div>` : ""}
         <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>        
-        ${item.link ? renderDescriptionItem(color = "var(--card-bg)", "#icon-hilfe", item.link, "", "linkItem") : ""}
+        ${item.link ? renderDescriptionItem(color = "var(--border)", "#icon-hilfe", item.link, "", "linkItem") : ""}
       </div>
     </div>
   `;
@@ -769,20 +802,39 @@ function showHomeCard(hinweisText = null) {
   document.getElementById("homeResetBtn")?.addEventListener("click", resetData);
 
   csvInput?.addEventListener("change", function () {
-    const file = this.files[0];
-    if (!file) return;
+  const file = this.files[0];
+  if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const text = e.target.result;
-      daten = parseCSV(text);
-      storage.setItem("csvData", text);
-      fillDropdowns(daten);
-      renderDaten();
-      showStatusMessage(`${file.name} erfolgreich geladen`, "success");
-    };
-    reader.readAsText(file, "UTF-8");
-  });
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const text = e.target.result;
+
+    // Gültigkeit prüfen
+    const validation = validateCSVHeaders(text);
+    if (!validation.valid) {
+      showStatusMessage("Die hochgeladene Fehlerliste ist ungültig.", "error");
+      return;
+    }
+
+    // Version extrahieren
+    const version = extractCSVVersion(text) || "Unbekannt";
+
+    // Daten speichern & anzeigen
+    storage.setItem("csvData", text);
+    storage.setItem("csvVersion", version);
+    window.CSV_VERSION = version;
+
+    daten = parseCSV(text);
+    fillDropdowns(daten);
+    updateCSVVersionInUI?.();
+    renderDaten();
+    showStatusMessage(`${file.name} erfolgreich geladen`, "success");
+
+    csvInput.value = "";
+  };
+  reader.readAsText(file, "UTF-8");
+});
+
 
   // Versionen aktualisieren
   updateAppVersionInUI();

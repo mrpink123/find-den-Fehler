@@ -386,7 +386,8 @@ input:focus {
     height: 30px;
     text-align: left;
     margin-right: auto;
-    color: var(--border);
+    align-items: center;
+    color: var(--fg);
 }
 
 /* Hauptfenster */
@@ -586,8 +587,8 @@ input:focus {
     flex: 1;
     flex-direction: column;
     width: 100%;
-    gap: 1em;
-    padding: 1rem .5rem;
+    gap: .5em;
+    padding: .5rem;
 }
 
 .iconLine {

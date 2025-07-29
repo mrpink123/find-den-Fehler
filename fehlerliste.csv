@@ -1536,188 +1536,155 @@ Wiederanlauf nach 60 s</p>
 <br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Hindernis in Öffnungsrichtung,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E15/02,1502 e15-02 e1502,Zu viele Hindernisse in Folge aufgetreten,"Anlage überprüfen. <br>
 Hindernis entfernen. <br>
-Türflügel in Zielposition bringen.","Handbetrieb mit Wiederanlauf-Versuch 
+Türflügel in Zielposition bringen.","<p>Handbetrieb mit Wiederanlauf-Versuch 
 Antrieb setzt sich selber für eine bestimmte Zeit still
-Wiederanlauf nach 60 s
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,Hindernis in Schließrichtung,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Wiederanlauf nach 60 s</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Hindernis in Schließrichtung,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E18/01,1801 e18-01 e1801,Fehlfunktion EMY Eingang,"Brücke EMY prüfen. <br>
-Verkabelung EMY prüfen.","Handbetrieb mit Wiederanlauf-Versuch
-<br><b>Prüfzeitpunkt:</b> 
-Permanent",,EMY Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Verkabelung EMY prüfen.","<p>Handbetrieb mit Wiederanlauf-Versuch</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,EMY Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E20/01,2001 e20-01 e2001,SER Testsignal erfolglos,"SER Kurzschluss gegen Ground <br>
-Verkabelung Sensor oder Brücke prüfen","Antrieb setzt sich selber für eine bestimmte Zeit still
-<br><b>Prüfzeitpunkt:</b>
-Vor der Schließung ",,SER Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Verkabelung Sensor oder Brücke prüfen","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><p><b>Prüfzeitpunkt: </b> Vor der Schließung </p>",,SER Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E20/02,2002 e20-02 e2002,SER zu langsam,"SER reagiert zu langsam <br>
 Verkabelung Sensor prüfen <br>
-Verpolung Testsignal prüfen","Antrieb setzt sich selber für eine bestimmte Zeit still
-<br><b>Prüfzeitpunkt:</b>
-Vor der Schließung ",,SER Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Verpolung Testsignal prüfen","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><p><b>Prüfzeitpunkt: </b> Vor der Schließung </p>",,SER Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E21/01,2101 e21-01 e2101,SES Testsignal erfolglos,"SES Kurzschluss gegen Ground <br>
-Verkabelung Sensor oder Brücke prüfen","Antrieb setzt sich selber für eine bestimmte Zeit still
-<br><b>Prüfzeitpunkt:</b>
-Vor der Öffnung",,SES Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Verkabelung Sensor oder Brücke prüfen","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><p><b>Prüfzeitpunkt: </b> Vor der Öffnung<p>",,SES Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E21/02,2102 e21-02 e2102,SES zu langsam,"SES reagiert zu langsam <br>
 Verkabelung Sensor prüfen <br>
-Verpolung Testsignal prüfen. ","Antrieb setzt sich selber für eine bestimmte Zeit still
-<br><b>Prüfzeitpunkt:</b>
-Vor der Öffnung",,SES Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Verpolung Testsignal prüfen. ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><b>Prüfzeitpunkt: </b> Vor der Öffnung</p>",,SES Test,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E22/01,2201 e22-01 e2201,EMY Eingang auf 24 V,"Brücke EMY prüfen <br>
-Verkabelung EMY prüfen","Handbetrieb mit Wiederanlauf-Versuch
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"EMY Test
+Verkabelung EMY prüfen","<p>Handbetrieb mit Wiederanlauf-Versuch</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"EMY Test
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E22/02,2202 e22-02 e2202,Fehlfunktion EMY Eingang,"Brücke EMY prüfen <br>
-Verkabelung EMY prüfen",Antrieb setzt sich selber für eine bestimmte Zeit still,,"EMY Test
+Verkabelung EMY prüfen","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"EMY Test
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E30/01,3001 e30-01 e3001,30V zu tief,"Netzausfall <br>
 Überlast Motor <br>
 Einspeisung prüfen <br>
-Hardware ersetzen ","Antrieb setzt sich selber für eine bestimmte Zeit still
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"30V Fehler
+Hardware ersetzen ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"30V Fehler
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E30/02,3002 e30-02 e3002,30V zu hoch,"Netzausfall <br>
 Überlast Motor <br>
 Einspeisung prüfen <br>
-Hardware ersetzen ","Antrieb setzt sich selber für eine bestimmte Zeit still
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"31V Fehler
+Hardware ersetzen ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"31V Fehler
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E30/03,3003 e30-03 e3003,Fehler beim Einschalten,"Netzausfall <br>
 Überlast Motor <br>
 Einspeisung prüfen <br>
-Hardware ersetzen ","Antrieb setzt sich selber für eine bestimmte Zeit still
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"32V Fehler
+Hardware ersetzen ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"32V Fehler
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E31/01,3101 e31-01 e3101,Fehler beim Einschalten,"Überlast 24 VDC auf Klemmen X101, X104, X108, X110, X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
-Wiederanlauf nach 10 s 
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"24V Generell
+Gilgen,FD-10,E31/01,3101 e31-01 e3101,Fehler beim Einschalten,"Überlast 24 VDC auf Klemmen X101, X104, X108, X110, X113 ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still. Wiederanlauf nach 10 </p>
+<br></p><b>Prüfzeitpunkt: </b> Permanent</p>",,"24V Generell
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E31/02,3102 e31-02 e3102,Über / Unterspannung,"Überlast 24 VDC auf Klemmen X101, X104, X108, X110, X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
-
-Wiederanlauf nach 10 s 
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"24V Generell
+Gilgen,FD-10,E31/02,3102 e31-02 e3102,Über / Unterspannung,"Überlast 24 VDC auf Klemmen X101, X104, X108, X110, X113 ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still Wiederanlauf nach 10 s</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"24V Generell
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E32/01,3201 e32-01 e3201,Über / Unterspannung,"Überlast, Kurzschluss 24 VDC auf Klemmen X108 oder X110 ","Antrieb setzt sich selber für eine bestimmte Zeit still
-
-Wiederanlauf nach 10 s 
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,24V Safety,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E32/01,3201 e32-01 e3201,Über / Unterspannung,"Überlast, Kurzschluss 24 VDC auf Klemmen X108 oder X110 ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still Wiederanlauf nach 10 s </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,24V Safety,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E33/01,3301 e3301 e3301,"Fehler: 
-Über / Unterspannung ","Überlast, Kurzschluss 24 VDC auf Klemme X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
-
-Wiederanlauf nach 10 s 
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"24V E-Lock
+Über / Unterspannung ","Überlast, Kurzschluss 24 VDC auf Klemme X113 ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still Wiederanlauf nach 10 s </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"24V E-Lock
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E33/02,3302 e33-02 e3302,"Vorwarnung: 
-Über / Unterspannung ","Überlast, Kurzschluss 24 VDC auf Klemme X113 ","Antrieb setzt sich selber für eine bestimmte Zeit still
-
-Wiederanlauf nach 10 s ",,"24V E-Lock
+Über / Unterspannung ","Überlast, Kurzschluss 24 VDC auf Klemme X113 ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still Wiederanlauf nach 10 s </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"24V E-Lock
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E34/01,3401 e34-01 e3401,Über / Unterspannung,"Überlast, Kurzschluss Fremdspeisung CAN ","Antrieb setzt sich selber für eine bestimmte Zeit still
-
-Wiederanlauf nach 10 s 
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"24V CAN
+Gilgen,FD-10,E34/01,3401 e34-01 e3401,Über / Unterspannung,"Überlast, Kurzschluss Fremdspeisung CAN ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still Wiederanlauf nach 10 s </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"24V CAN
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E50/01...99,E50 50,Unerwartetes Hard oder Software Ereignis,"Antrieb aus / einschalten <br>
 Factory Reset durchführen <br>
 Software Update durchführen <br>
-Hersteller informieren. ","Warnung oder
-Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler",,"Systemfehler
+Hersteller informieren. ","<p>Warnung oder Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"Systemfehler
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E51/01...99,E51 51,Unerwartetes Hard oder Software Ereignis,"Antrieb aus / einschalten <br>
 Factory Reset durchführen <br>
 Software Update durchführen <br>
-Hersteller informieren. ","Warnung oder
-Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"Systemfehler
+Hersteller informieren. ","<p>Warnung oder Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"Systemfehler
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E52/01...99,E52 52,Unerwartetes Hard oder Software Ereignis,"Antrieb aus / einschalten <br>
 Factory Reset durchführen <br>
 Software Update durchführen <br>
-Hersteller informieren. ","Warnung oder
-Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"Systemfehler
+Hersteller informieren. ","<p>Warnung oder Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"Systemfehler
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E53/01..99,E53 53,Unerwartetes Hard oder Software Ereignis,"Antrieb aus / einschalten <br>
 Factory Reset durchführen <br>
 Software Update durchführen <br>
-Hersteller informieren. ","Warnung oder
-Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,"Systemfehler
+Hersteller informieren. ","<p>Warnung oder Handbetrieb mit Wiederanlauf-Versuch oder Fataler Fehler</p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,"Systemfehler
 ","<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E60/00,E60-00 e6000 6000,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
-Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","Warnung
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,Relaisprint 0,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Relaisprint 0,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E60/10,E60-10 e6010 6010,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
-Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","Warnung
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,Relaisprint 1,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Relaisprint 1,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E60/20,E60-20 e6020 6020,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
-Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","Warnung
-<br><b>Prüfzeitpunkt:</b>
-Permanent",,Funkprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Funkprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E60/30,E60-30 e6030 6030,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
 Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","<p>Antrieb setzt sich selber für eine bestimmte Zeit still </p>
-<br><p><b>Prüfzeitpunkt: </b>Permanent</p>",,Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E60/31,E60-31 e6031 6031,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
-Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","Warnung
-<br><b>Prüfzeitpunkt: </b> Permanent",,Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E60/32,E60-32 e6032 6032,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
-Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","Warnung
-<br><b>Prüfzeitpunkt: </b> Permanent",,Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Brandschutzprint,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E60/33,E60-33 e6033 6033,"Optionsprint wurde entfernt, umadressiert oder ist defekt","Kontrollieren ob Optionsprint vorhanden (bei Double Door beide Antriebe kontrollieren).
-Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","Warnung
-<br><b>Prüfzeitpunkt: </b> Permanent",,Brandschutzprint Double Door,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E70/xx,E70 70,Adresse xx zweimal vorhanden,Schließfolge- oder Schleusen-Rolle korrekt definieren,"Warnung
-<br><b>Prüfzeitpunkt: </b> Permanent",,Bus-Einstellung,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Falls defekt: Ersetzen oder Print und Konfiguration entfernen (siehe Kapitel 13.5.1). ","<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Brandschutzprint Double Door,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E70/xx,E70 70,Adresse xx zweimal vorhanden,Schließfolge- oder Schleusen-Rolle korrekt definieren,"<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Bus-Einstellung,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E71/01,E71-01 e7101 7101,Keine Verbindung,"Klemmen verbinden, kontrollieren oder ersetzen. <br> 
-Kontrollieren ob alle Teilnehmer eingeschaltet sind. ","Warnung
-<br><b>Prüfzeitpunkt: </b> Permanent",,Verbindung,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E80/01,E80-01 e8001 8001,Fehlfunktion,Antrieb aus-/einschalten,"Warnung
-<br><b>Prüfzeitpunkt: </b> Permanent",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Kontrollieren ob alle Teilnehmer eingeschaltet sind. ","<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Verbindung,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E80/01,E80-01 e8001 8001,Fehlfunktion,Antrieb aus-/einschalten,"<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E80/02,E80-02 e8002 8002,Fehlfunktion,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
 <br><b>Prüfzeitpunkt: </b> Permanent",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E82/01,E82-01 e8201 8201,Fehlfunktion,Antrieb aus-/einschalten,"Warnung
-<br><b>Prüfzeitpunkt: </b> Nach dem Aufstarten ",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E82/02,E82-02 e8202 8202,Fehlfunktion,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Nach dem Aufstarten ",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E83/01,E83-01 e8301 8301,Motorstromtest fehlgeschlagen,Antrieb aus-/einschalten,"Warnung
-<br><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h ",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E82/01,E82-01 e8201 8201,Fehlfunktion,Antrieb aus-/einschalten,"<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Nach dem Aufstarten </p>",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E82/02,E82-02 e8202 8202,Fehlfunktion,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler </p>
+<br><p><b>Prüfzeitpunkt: </b> Nach dem Aufstarten </p>",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E83/01,E83-01 e8301 8301,Motorstromtest fehlgeschlagen,Antrieb aus-/einschalten,"<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h </p>",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E83/02,E83-02 e8302 8302,Motorstromtest fehlgeschlagen,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h ",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E84/01,E84-01 e8401 8401,Dämpfungstest fehlgeschlagen,Antrieb aus-/einschalten,"Warnung
-<br><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h ",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h </p>",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E84/01,E84-01 e8401 8401,Dämpfungstest fehlgeschlagen,Antrieb aus-/einschalten,"<p>Warnung </p>
+<br><p><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h </p>",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E84/02,E84-02 e8402 8402,Dämpfungstest fehlgeschlagen,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h ",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h </p>",,Interner Sicherheitstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E85/02,E85-02 e8502 8502,Fehlfunktion,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Permanent",,Brandschutzprint: Hardwaretest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Brandschutzprint: Hardwaretest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E85/03,E85-03 e8503 8503,Fehlfunktion,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Permanent",,Brandschutzprint: Hardwaretest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Brandschutzprint: Hardwaretest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E85/04,E85/04 e8504 8504,Fehlfunktion,Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Permanent",,Brandschutzprint: Hardwaretest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Brandschutzprint: Hardwaretest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E86/02,E86-02 e8602 8602,Zu hohe Schließgeschwindigkeit (mittels Federkraft),"Federspannung kontrollieren (wenn möglich verringern). <br>
 Türflügelbreite (width) und Türflügelgewicht (weight) kontrollieren/korrigieren. ","<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Beim Schliessen des Türflügels während dem Teach ",,Federspannungstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
-Gilgen,FD-10,E87/01,E87-01 e8701 8701,Zu hohe Schließgeschwindigkeit (mittels Federkraft),Test wird nach 2 Stunden automatisch wiederholt.,"Warnung
-<br><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h ",,Dämpfungstest einmal fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Beim Schliessen des Türflügels während dem Teach </p>",,Federspannungstest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+Gilgen,FD-10,E87/01,E87-01 e8701 8701,Zu hohe Schließgeschwindigkeit (mittels Federkraft),Test wird nach 2 Stunden automatisch wiederholt.,"<p>Warnung</p>
+<br><p><b>Prüfzeitpunkt: </b> Nach dem Aufstarten und danach alle 24 h </p>",,Dämpfungstest einmal fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E88/01,E88-01 e8801 8801,Fehlfunktion,Leichtgängigkeit des Türflügels überprüfen. Federspannung kontrollieren/erhöhen.,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Beim Schliessen des Türflügels während dem Teach, nach dem Aufstarten und danach alle 24 h ",,Motortrennrelaistest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Beim Schliessen des Türflügels während dem Teach, nach dem Aufstarten und danach alle 24 h </p>",,Motortrennrelaistest fehlgeschlagen,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E89/02,E89-02 e8902 8902,Verdrahtungsfehler oder Brandschutzprint defekt,Brandschutzprint gemäss Anleitung anschliessen (siehe Kapitel 5.3). <br> Antrieb aus-/einschalten,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Permanent",,Versorgungsrelais: Unterbruch (24 V/ GND) oder defekt,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Versorgungsrelais: Unterbruch (24 V/ GND) oder defekt,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-10,E89/03,E89-03 e8903 8903,Jumper (X103) wurde vor der Montage des Brandschutzprintes nicht entfernt,Jumper (X103) entfernen,"<p style=""color: red"">Fataler Fehler</p>
-<br><b>Prüfzeitpunkt: </b> Permanent",,Jumper (X103) auf Steuerungsprint wurde nicht entfernt,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
+<br><p><b>Prüfzeitpunkt: </b> Permanent</p>",,Jumper (X103) auf Steuerungsprint wurde nicht entfernt,"<a href=""https://media.gilgendoorsystems.com/download/QQdwTNVzQqWJ"" target=""_blank""style=""color: var(--fg);"">FD-10 Betreiberhandbuch</a> ",images/typen/fd-10.png,,,,,,
 Gilgen,FD-20,E01/01,0101 101 e01-01 e0101,Kanal A verloren,"<p>Encoder Verbindung prüfen.<br>
 Motorkabel prüfen.<br>
 Motor-Drehrichtung stimmt nicht mit Gestänge überein <br>
