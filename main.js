@@ -368,16 +368,6 @@ function renderFehlerItem(code, kategorie, text) {
   `;
 }
 
-function renderLinkItem(link) {
-  return `
-    <div class="errorDescriptionItem">
-      <div class="iconLine">
-        <svg class="icon small"><use href="#icon-hilfe"></use></svg>
-        <h4>${link}</h4>
-      </div>
-    </div>`;
-}
-
 function renderDescriptionItem(color = "var(--card-bg)", svg = "", name = "", text = "", clsName = null) {
   return `
     <div style="
@@ -431,7 +421,7 @@ function renderCard(item) {
         ${item.infos ? renderDescriptionItem("#00a6ffff", "#icon-info", "Info", item.infos, "") : ""}
         ${item.weitere ? `<div style="margin-top:auto; padding-left:1rem;"><p>${item.weitere}</p></div>` : ""}
         <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>        
-        ${item.link ? renderDescriptionItem(color = "var(--border)", "#icon-hilfe", item.link, "", "linkItem") : ""}
+        ${item.link ? renderDescriptionItem(color = "var(--fg)", "#icon-hilfe", item.link, "", "linkItem") : ""}
       </div>
     </div>
   `;
