@@ -626,6 +626,7 @@ function renderDaten() {
     });
   }
   updateThemeAssets(document.body.getAttribute("data-theme"));
+  window.scrollTo(0, 0);
 }
 
 // ==== Theme-Abhängige Assets aktualisieren ====
