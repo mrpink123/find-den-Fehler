@@ -381,13 +381,13 @@ function renderDescriptionItem(color = "var(--card-bg)", svg = "", name = "", te
     >
       <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
         <div style="display: flex;">
-          <svg style="width: 24px; height: 24px; margin-top: 7px">
+          <svg style="width: 24px; height: 24px; margin-top: 7px; overflow: visible;">
             <use href="${svg}"></use>
           </svg>
         </div>
         <div style="display: flex; flex-direction: column;">
           <p style="margin: 0.5rem 0;">
-            <b>${name}:</b>
+            <b>${name}</b>
           </p>
           <p>${text}</p>
         </div>
@@ -417,8 +417,8 @@ function renderCard(item) {
     <div class="cardContent">
       <div class="errorDescription">
         ${item.fehler ? renderFehlerItem(item.code, item.kategorie, item.fehler) : ""}
-        ${item.ursache ? renderDescriptionItem("#fcc21b", "#icon-ursache", "Maßnahme", item.ursache, "") : ""}
-        ${item.infos ? renderDescriptionItem("#00a6ffff", "#icon-info", "Info", item.infos, "") : ""}
+        ${item.ursache ? renderDescriptionItem("#fcc21b", "#icon-ursache", "Maßnahme:", item.ursache, "") : ""}
+        ${item.infos ? renderDescriptionItem("#00a6ffff", "#icon-info", "Info:", item.infos, "") : ""}
         ${item.weitere ? `<div style="margin-top:auto; padding-left:1rem;"><p>${item.weitere}</p></div>` : ""}
         <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>        
         ${item.link ? renderDescriptionItem(color = "var(--fg)", "#icon-hilfe", item.link, "", "linkItem") : ""}
@@ -498,10 +498,12 @@ function renderCard(item) {
 
 // ==== Modal erstellen ====
 function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
+  const scrollY = window.scrollY;
+  document.body.style.setProperty('--scroll-top', `-${scrollY}px`);
   document.body.classList.add("modal-open");
+
   const modalOverlay = document.createElement("div");
   modalOverlay.className = "modalOverlay";
-  document.body.classList.add("modal-open");
   const modalHeader = document.createElement("div");
   modalHeader.className = "modalHeader"
 
@@ -558,10 +560,17 @@ function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {
   // Modal schließen + Cleanup
   function closeModal() {
     document.body.classList.remove("modal-open");
+
+    const scrollY = document.body.style.getPropertyValue('--scroll-top');
+    document.body.style.removeProperty('--scroll-top');
+
+    document.body.style.position = '';
+    document.body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY || "0") * -1);
+
     document.removeEventListener("keydown", onKeyDown);
     if (modalOverlay.parentNode) {
       modalOverlay.parentNode.removeChild(modalOverlay);
-      document.body.classList.remove("modal-open");
     }
   }
 }
@@ -626,7 +635,6 @@ function renderDaten() {
     });
   }
   updateThemeAssets(document.body.getAttribute("data-theme"));
-  window.scrollTo(0, 0);
 }
 
 // ==== Theme-Abhängige Assets aktualisieren ====
@@ -793,39 +801,38 @@ function showHomeCard(hinweisText = null) {
   document.getElementById("homeResetBtn")?.addEventListener("click", resetData);
 
   csvInput?.addEventListener("change", function () {
-  const file = this.files[0];
-  if (!file) return;
+    const file = this.files[0];
+    if (!file) return;
 
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    const text = e.target.result;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const text = e.target.result;
 
-    // Gültigkeit prüfen
-    const validation = validateCSVHeaders(text);
-    if (!validation.valid) {
-      showStatusMessage("Die hochgeladene Fehlerliste ist ungültig.", "error");
-      return;
-    }
+      // Gültigkeit prüfen
+      const validation = validateCSVHeaders(text);
+      if (!validation.valid) {
+        showStatusMessage("Die hochgeladene Fehlerliste ist ungültig.", "error");
+        return;
+      }
 
-    // Version extrahieren
-    const version = extractCSVVersion(text) || "Unbekannt";
+      // Version extrahieren
+      const version = extractCSVVersion(text) || "Unbekannt";
 
-    // Daten speichern & anzeigen
-    storage.setItem("csvData", text);
-    storage.setItem("csvVersion", version);
-    window.CSV_VERSION = version;
+      // Daten speichern & anzeigen
+      storage.setItem("csvData", text);
+      storage.setItem("csvVersion", version);
+      window.CSV_VERSION = version;
 
-    daten = parseCSV(text);
-    fillDropdowns(daten);
-    updateCSVVersionInUI?.();
-    renderDaten();
-    showStatusMessage(`${file.name} erfolgreich geladen`, "success");
+      daten = parseCSV(text);
+      fillDropdowns(daten);
+      updateCSVVersionInUI?.();
+      renderDaten();
+      showStatusMessage(`${file.name} erfolgreich geladen`, "success");
 
-    csvInput.value = "";
-  };
-  reader.readAsText(file, "UTF-8");
-});
-
+      csvInput.value = "";
+    };
+    reader.readAsText(file, "UTF-8");
+  });
 
   // Versionen aktualisieren
   updateAppVersionInUI();
@@ -1103,6 +1110,7 @@ function resetHash() {
 // Eingabeänderung löst Debounce aus
 [searchInput, herstellerFilter, typFilter].forEach((input) => {
   input.addEventListener("input", debounce(() => {
+    window.scrollTo({ top: 0});
     updateURLHash();
     renderDaten();
     updateControlButtons();
