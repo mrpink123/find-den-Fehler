@@ -986,6 +986,9 @@ h3 {
 
     .container {
         display: flex;
+        min-height: fit-content;
+        margin: 0;
+        padding: 0 0.25rem;
     }
 
     header {
