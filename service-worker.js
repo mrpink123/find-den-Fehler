@@ -1,4 +1,4 @@
-const CACHE_NAME = "fehlercode-cache-v1.1.4";
+const CACHE_NAME = "fehlercode-cache-v1.1.5";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",
@@ -38,7 +38,10 @@ const ASSETS_TO_CACHE = [
   "images/typen/sta-15.png",
 
   "details/bde-e.html",
+  "details/bedienung_dfa127_bde-d.html",
+  "details/bedienung_dfa127_tasten.html",
   "details/bedienung_fd20_tasten.html",
+  "details/bedienung_fd10_tasten.html",
   "details/notauf_sta16.html",
   "details/notauf_sta19red.html",
   "details/ohne_fehler_sl35.html",
