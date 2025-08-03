@@ -1064,7 +1064,7 @@ function onScroll() {
   // Immer sichtbar, wenn ganz oben
   if (currentY <= 5) {
     headerEl.classList.remove("hide");
-  } else if (currentY > lastScrollY && currentY > 80) {
+  } else if (currentY > lastScrollY && currentY > 110) {
     headerEl.classList.add("hide"); // Nach unten scrollen → ausblenden
   } else if (currentY < lastScrollY - 6) {
     headerEl.classList.remove("hide"); // Nach oben scrollen → einblenden
