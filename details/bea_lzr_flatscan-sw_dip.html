@@ -1,0 +1,205 @@
+<div style="padding: 0.5rem;">
+  <style>
+    .bea-dip-container {
+      display: grid;
+      width: fit-content;
+      grid-template-columns: 40px 100px 90px 90px auto;
+      grid-template-rows: auto;
+      gap: 0.5rem;
+      row-gap: 1rem;
+      margin: 0;
+      padding: 0.5rem;
+      align-items: center;
+      text-align: center;
+      background-color: var(--bg);
+      border-radius: 0.5rem;
+    }
+    .mark_wht {
+      background-color: transparent;
+    }
+    .bea-dip1-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0.5rem;
+    }
+    .bea-dip-default {
+      text-align: center;
+      border: 2px solid #fcd83c;
+      padding: 2px;
+      background-color: var(--card-bg);
+      border-radius: 0.5rem;
+      align-self: center;
+    }
+    .bea-dip-container-text {
+      font-size: small;
+      min-width: 230px;
+      text-align: start;
+    }
+    .on-item {
+      grid-column: 3 / span 1;
+    }
+    .off-item {
+      grid-column: 4 / span 2;
+    }
+    .dip-confirm-container {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: #fcd83c;
+      border: 1px solid black;
+      border-radius: 0.5rem;
+      padding: 1rem 0.5rem;
+      gap: 1rem;
+      align-items: center;
+      color: black;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .dip-confirm-container img {
+      width: 250px;
+      height: 74px;
+      margin: auto;
+    }
+    .dip-confirm-container p {
+      flex: 1;
+      min-width: 450px;
+    }
+    .dip1-grid {
+      display: grid;
+      grid-template-columns: 30px 300px;
+      gap: 1rem;
+    }
+    .dip1-grid img {
+        width: 300px;
+        height: auto;
+    }
+    @media (max-width: 650px) {
+      .bea-dip-container {
+        margin: 0.5rem auto;
+      }
+      .bea-dip-container-text {
+        grid-column: 1 / -1;
+      }
+      .bea-dip-container {
+        grid-template-columns: 40px 100px 90px auto;
+      }
+      .bea-dip1-container {
+        margin: auto;
+        max-width: 350px;
+      }
+      .off-item {
+        grid-column: 4 / span 1;
+      }
+      .dip-confirm-container p {
+        min-width: 300px;
+      }
+    }
+  </style>
+
+  <h3>DIP-Schalter 1</h3>
+  <p style="margin: 0.5rem;">
+    Stellen Sie sicher, dass die Einstellung des DIP-Schalters 1 auf allen
+    Modulen entsprechend der jeweiligen Türseite korrekt ist.
+  </p>
+  <br />
+  <div class="bea-dip1-container">
+    <div class="dip1-grid">
+      <p>ON</p>
+      <div>
+        <img
+          src="images/symbole/flatscan_dip1_on.png"
+          alt="DIP-Schalter 1 ON"
+        />
+        <p>RELAIS 1: STOPP-Impuls auf Bandseite der Tür</p>
+      </div>
+      <p>OFF</p>
+      <div>
+        <img
+          src="images/symbole/flatscan_dip1_off.png"
+          alt="DIP-Schalter 1 OFF"
+        />
+        <p>RELAIS 2: WIEDERÖFFNUNGS-Impuls auf Bandgegenseite der Tür</p>
+      </div>
+    </div>
+    <div style="margin: auto; padding: .5rem;">
+      <img
+        style="width: 200px; height: auto;"
+        src="images/symbole/flatscan_dip1_1.png"
+        alt="Vorschau Funktion Dip 1"
+      />
+    </div>
+  </div>
+
+  <h3>DIP-Schalter 2 - 4</h3>
+
+  <div
+    style="
+      display: flex;
+      gap: 1rem;
+      margin: 0.7rem 1rem 0 1rem;
+      align-items: center;
+    "
+  >
+    <img
+      style="width: 80px; height: 60px;"
+      src="images/symbole/flatscan_dipschalter.png"
+      alt="DIP-Schalter"
+    />
+    <p>
+      Um diese Parameter per Fernbedienung anzupassen, stellen Sie den
+      entsprechenden DIP-Schalter auf ON.
+    </p>
+  </div>
+
+  <div class="bea-dip-container mark_wht">
+    <p class="on-item">ON</p>
+    <p class="off-item">OFF</p>
+  </div>
+
+  <div class="bea-dip-container">
+    <p><b>DIP2</b></p>
+    <p><b>Umgebung</b></p>
+    <p class="bea-dip-default">standard</p>
+    <p>*schwierig❗</p>
+    <p class="bea-dip-container-text">
+      Auf SCHWIERIG schalten, wenn die Umgebung unerwünschte Erfassungen
+      verursacht (min. Objektgröße, Immunität und Grauzone werden erhöht).
+    </p>
+  </div>
+  <div class="bea-dip-container mark_wht">
+    <p><b>DIP3</b></p>
+    <p><b>Hintergrund</b></p>
+    <p class="bea-dip-default">an</p>
+    <p>aus</p>
+    <p class="bea-dip-container-text">
+      Auf AUS schalten, wenn es keinen Hintergrund gibt (Glasboden,
+      Fußgängerbrücke...)
+    </p>
+  </div>
+  <div class="bea-dip-container">
+    <p><b>DIP4</b></p>
+    <p><b>Fingerschutz</b></p>
+    <p class="bea-dip-default">an</p>
+    <p>aus</p>
+    <p class="bea-dip-container-text">
+      Auf AUS schalten, wenn keine Nebenschließkantenabsicherung benötigt wird
+      und Objekte unerwünschte Erfassungen verursachen können.
+    </p>
+  </div>
+  <p style="margin: 0.5rem;">
+    ❗ *Führen Sie eine Risikoanalyse durch, um zu überprüfen, ob die Umgebung
+    einen zusätzlichen mechanischen Schutz im Fingerschutzbereich erfordert
+  </p>
+
+  <div class="dip-confirm-container">
+    <img
+      src="images/symbole/flatscan_dip_confirm.png"
+      alt="Dip änderung bestädigen"
+    />
+    <p>
+      Wenn ein DIP-Schalter geändert wurde, blinkt die LED orange. Betätigen Sie
+      den Drucktaster länger als 3 Sekunden um die Einstellung zu bestätigen.
+      Anschließend wird durch grünes Blinken (x) die Anzahl der angeschlossenen
+      Module angezeigt.
+    </p>
+  </div>
+</div>

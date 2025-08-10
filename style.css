@@ -49,6 +49,7 @@ body {
     font-family: system-ui, sans-serif;
     font-size: medium;
     transition: background-color 0.3s, color 0.3s;
+    scroll-behavior: smooth;
 }
 
 body.modal-open {
@@ -63,6 +64,7 @@ body.modal-open {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -247,7 +249,8 @@ header.hide {
 
 .searchContainer {
     display: flex;
-    width: 300px;
+    width: auto;
+    min-width: fit-content;
     height: 40px;
     border: 1px solid var(--border);
     border-radius: 20px;
@@ -274,6 +277,7 @@ header.hide {
     font-family: inherit;
     font-size: 1rem;
     padding-left: 1rem;
+    padding-right: .5rem;
     height: 40px;
     background-color: var(--card-bg);
     color: var(--fg);
@@ -376,6 +380,29 @@ button:disabled {
     border-left: 1px solid var(--bg);
 }
 
+select option {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--card-bg);
+}
+
+select option:disabled {
+    color: #6a6a6a5e;
+    background-color: #00000000;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select option:checked,
+select option:hover {
+    background-color: var(--hover-bg) !important;
+}
+
 select:focus,
 button {
     cursor: pointer;
@@ -404,7 +431,7 @@ input:focus {
     margin: 1em 2px;
     min-height: 80vh;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
 }
 
 /* Card */
@@ -435,6 +462,7 @@ input:focus {
     border-bottom: 1px solid var(--border);
     box-shadow: 0 1px 4px var(--shadow);
     padding: 2px;
+    margin-bottom: .5rem;
 }
 
 .cardHeaderContent {
@@ -459,13 +487,20 @@ input:focus {
     background-color: var(--hover);
 }
 
+
 .herstellerImageContainer {
-    margin: 0.3rem;
+    margin: .3rem .2rem .2rem .5rem;
+    height: 30px;
+    max-width: 120px;
+    display: inline-block;
+    overflow: hidden;
 }
 
 .herstellerImage {
-    max-height: 30px;
-    max-width: 120px;
+    height: 100%;
+    width: fit-content;
+    display: block;
+    max-width: 100%;
 }
 
 .cardHeaderTyp {
@@ -478,6 +513,7 @@ input:focus {
 }
 
 .cardHeaderTyp :nth-child(2) {
+    display: flex;
     background-color: white;
     border: 1px solid var(--error);
     border-radius: 100vh;
@@ -485,6 +521,8 @@ input:focus {
     color: var(--error);
     font-weight: 700;
     font-size: small;
+    align-items: center;
+    margin-left: auto;
 }
 
 
@@ -495,6 +533,7 @@ input:focus {
     right: 0;
     width: 250px;
     height: 100%;
+    min-height: fit-content;
     display: flex;
     border: 1px solid var(--border);
     background: var(--bg2);
@@ -547,7 +586,7 @@ input:focus {
 .cardContent {
     position: relative;
     display: flex;
-    min-height: 210px;
+    min-height: auto;
 }
 
 
@@ -576,8 +615,8 @@ input:focus {
     flex-direction: column-reverse;
     max-width: 300px;
     height: fit-content;
-    margin-top: 1em;
     padding: 1.5rem;
+    padding-bottom: 0;
     gap: .5rem;
     align-items: center;
     justify-content: center;
@@ -597,8 +636,18 @@ input:focus {
     flex: 1;
     flex-direction: column;
     width: 100%;
-    gap: 1rem;
-    padding: 1rem .5rem;
+    margin: 0 .5rem;
+}
+
+.errorDescriptionItem {
+    margin-bottom: .5rem;
+    padding: .5rem; 
+    border-radius: .5rem;
+    max-width: fit-content;
+    
+    & ol, ul {
+        margin-left: 1.4rem;
+    }
 }
 
 .iconLine {
@@ -632,6 +681,7 @@ input:focus {
 
 .detailsContainer {
     font-size: 0.95em;
+    margin: 1rem 0.5rem;
 }
 
 .detailsContainer h1,
@@ -769,7 +819,7 @@ h3 {
     right: -60px;
     width: 200px;
     padding: .1rem;
-    background:rgb(66 192 227);
+    background: rgb(66 192 227);
     color: #ffffff;
     font-size: 1.1em;
     text-align: center;
@@ -1108,4 +1158,8 @@ h3 {
         padding-bottom: 0;
         margin-top: 0;
     }
+
+    .detailsContainer p {
+    margin-left: 0;
+}
 }

@@ -1,0 +1,160 @@
+<div style="padding: 0.5rem;">
+  <style>
+    .warnContainer {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      background-color: #fcd83c;
+      padding: 0.5rem;
+      gap: 0.5rem;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      color: black;
+      & svg {
+        width: 50px;
+        height: 50px;
+      }
+      & p {
+        min-width: 200px;
+      }
+      & ul {
+        margin-left: 1.2rem;
+      }
+    }
+    .descriptionContainer {
+      padding: 0.5rem 1rem;
+      background-color: rgb(220, 220, 220);
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      margin-bottom: 1rem;
+      color: black;
+
+      & ol {
+        margin-left: 1.2rem;
+      }
+      & li {
+        margin: 0.3rem;        
+      }
+      & p {
+        margin: 1rem 0;
+      }
+    }
+    .teachImgContainer {
+      display: flex;
+      flex-wrap: wrap;
+      height: auto;
+      padding: .5rem;
+      background-color: rgb(255, 255, 255);
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: .5rem;
+      margin-bottom: 1rem;
+
+      & img {
+        object-fit: contain;
+      }
+    }
+  </style>
+
+  <div>
+    <h1>Einlernen</h1>
+    <div class="warnContainer">
+      <svg>
+        <use href="#icon-fehler"></use>
+      </svg>
+      <span>
+        <p>Vor dem Einlernen sicherstellen, daß:</p>
+        <ul>
+          <li>Glasflächen in der Nähe der Tür bedeckt wurden</li>
+          <li>die Türsteuerung vollständig konfiguriert wurde</li>
+          <li>
+            die Tür geschlossen ist (den Service-Modus einschalten falls
+            notwendig).
+          </li>
+          <li>
+            die Türsteuerung mit beiden Relais verkabelt sind und auf diese
+            reagiert
+          </li>
+          <li>das Master-Slave-Kabel zwischen beiden Modulen verkabelt sind</li>
+          <li>
+            das Erfassungsfeld frei von starkem Regen, Nebel, Schneefall und
+            sonstigen beweglichen Objekten oder Personen ist.
+          </li>
+          <li>der Laserfensterschutz entfernt wurde</li>
+        </ul>
+      </span>
+    </div>
+
+    <div class="descriptionContainer">
+      <ol>
+        <li>
+          Um das Einlernen zu starten, drücken Sie kurz den Drucktaster des
+          Master-Moduls📌. Die LED blinkt zunächst rot-grün. Wird der Sensor an
+          einer Doppeldrehflügeltür installiert, muss dies für das zweite
+          Master-Modul ebenfalls durchgeführt werden.
+        </li>
+        <li>
+          Warten Sie ab bis die LED grün blinkt. Stellen Sie sich vor die Tür
+          und strecken Sie Ihren Arm aus. Bewegen Sie Ihren Arm entlang der
+          Schließkante von oben nach unten, um die Grenze des Erfassungsbereichs
+          festzulegen. Während die Breite der Türflügel berechnet wird, blinkt
+          die LED rot.
+        </li>
+        <li>
+          Wenn die LED wieder grün blinkt, lösen Sie eine Öffnung der Tür aus,
+          damit der Sensor seine Umgebung einlernen kann. Achten Sie darauf,
+          sich außerhalb des Erfassungsbereichs aufzuhalten. Während des
+          Schließens der Tür blinkt die LED rot.
+        </li>
+        <li>
+          Sobald die Tür wieder vollständig geschlossen und die LED aus ist, ist
+          das Einlernen abgeschlossen.
+        </li>
+      </ol>
+      <p>
+        📌 Ein Einlernen auf dem Master konfiguriert sowohl den Master als auch
+        den Slave. Ein Einlernen auf dem Slave konfiguriert nur den Slave. Falls
+        Master und Slave-Modul auf verschiedenem Abstand der Türkante montiert
+        sind, ein Einlernen zuerst auf dem Master und dann auf dem Slave
+        starten.
+      </p>
+      <div class="teachImgContainer">
+        <img
+          src="images/symbole/flatscan_teach1.png"
+          alt="Flatscan einlernen"
+          width="182px"
+          height="200px"
+        />
+        <img
+          src="images/symbole/flatscan_teach2.png"
+          alt="Flatscan einlernen"
+          width="100px"
+          height="75px"
+        />
+        <img
+          src="images/symbole/flatscan_teach3.png"
+          alt="Flatscan einlernen"
+          width="127px"
+          height="200px"
+        />
+        <img
+          src="images/symbole/flatscan_teach4.png"
+          alt="Flatscan einlernen"
+          width="100px"
+          height="75px"
+        />
+        <img
+          src="images/symbole/flatscan_teach5.png"
+          alt="Flatscan einlernen"
+          width="171px"
+          height="200px"
+        />
+        <img
+          src="images/symbole/flatscan_teach6.png"
+          alt="Flatscan einlernen"
+          width="100px"
+          height="75px"
+        />
+      </div>
+    </div>
+  </div>
+</div>
