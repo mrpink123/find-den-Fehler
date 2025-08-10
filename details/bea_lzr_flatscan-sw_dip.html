@@ -3,6 +3,7 @@
     .bea-dip-container {
       display: grid;
       width: fit-content;
+      max-width: 99%;
       grid-template-columns: 40px 100px 90px 90px auto;
       grid-template-rows: auto;
       gap: 0.5rem;
@@ -65,28 +66,30 @@
     }
     .dip1-grid {
       display: grid;
-      grid-template-columns: 30px 300px;
-      gap: 1rem;
+      grid-template-columns: 30px auto;
+      gap: .5rem;
     }
     .dip1-grid img {
-        width: 300px;
+        width: 250px;
         height: auto;
     }
     @media (max-width: 650px) {
       .bea-dip-container {
-        margin: 0.5rem auto;
+        margin: 0.25rem;
+        font-size: small;
       }
       .bea-dip-container-text {
         grid-column: 1 / -1;
       }
       .bea-dip-container {
-        grid-template-columns: 40px 100px 90px auto;
+        grid-template-columns: 35px 90px 75px 1fr;
       }
       .bea-dip1-container {
         margin: auto;
         max-width: 350px;
       }
       .off-item {
+        display: flex;
         grid-column: 4 / span 1;
       }
       .dip-confirm-container p {
