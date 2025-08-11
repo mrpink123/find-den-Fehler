@@ -343,7 +343,7 @@ function renderFehlerItem(code, kategorie, text) {
   if (code === "ohne") { code = ""; }
   return `
     <div class="errorDescriptionItem" style="border: 1px solid transparent; background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box, linear-gradient(90deg, #ff0000a5, rgba(255, 255, 255, 0)) border-box;">
-      <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
+      <div class="descriptionItemGrid">
         <div style="display: flex;">
           <svg style="width: 24px; height: 24px; margin-top: 7px; margin-bottom: auto;" viewBox="0 0 128 128">
             <path d="M9.6 114.26L64 20.03l54.41 94.23z" fill="#fcc21b" />
@@ -360,7 +360,7 @@ function renderFehlerItem(code, kategorie, text) {
         <div style="display: flex; flex-direction: column;">
           <p style="margin: 0.5rem 0;">
             <b>Fehler: ${code}</b>
-            ${kategorie ? `<div style="margin: 0 0 1rem .5rem"><b> ${kategorie}</b></div>` : ""}
+            ${kategorie ? `<div style="margin: 0 0 .7rem .1rem"><b> ${kategorie}</b></div>` : ""}
           </p>
           <p>${text}</p>
         </div>
@@ -377,7 +377,7 @@ function renderDescriptionItem(color = "var(--card-bg)", svg = "", name = "", te
         linear-gradient(90deg, ${color}, rgba(255, 255, 255, 0)) border-box;" 
       ${clsName ? `class = ${clsName}` : ""}
     >
-      <div style="display: grid; grid-template-columns: 26px auto; gap: 0.5rem;">
+      <div class="descriptionItemGrid">
         <div style="display: flex;">
           <svg style="width: 24px; height: 24px; margin-top: 7px; overflow: visible;">
             <use href="${svg}"></use>
