@@ -147,10 +147,473 @@ const herstellerFilter = document.getElementById("herstellerFilter");
 const typFilter = document.getElementById("typFilter");
 const container = document.getElementById("container");
 const searchHint = document.getElementById("searchHint");
+const voiceBtn = document.getElementById("voiceSearchBtn");
 let currentRenderSessionId = 0;
 let daten = [];
 window.APP_VERSION = "Unbekannt";
 window.CSV_VERSION = "Unbekannt";
+
+// === Sprachaufnahme Modal ===
+(function () {
+  // Timeouts & Heuristik
+  const SILENCE_TIMEOUT_NO_SPEECH = 5000;   // 5s, wenn noch kein final/heuristic
+  const SILENCE_TIMEOUT_AFTER_FINAL = 2000; // 2s, wenn final oder heuristic
+  const MIN_WORDS_FOR_SHORT = 1;            // heuristik: mindestens 1 Wort
+  const MIN_CHARS_FOR_SHORT = 6;            // heuristik: mindestens 6 Zeichen
+
+  // DOM-Elemente
+  const voiceBtn = document.getElementById("voiceSearchBtn"); // Suchleisten-Button
+  const searchInput = document.getElementById("searchInput");
+  const speechModal = document.getElementById("speechModal");
+  const speechText = document.getElementById("speechText");
+  const speechStatus = document.getElementById("speechStatus");
+  const speechVisual = document.getElementById("speechVisual");
+  const modalStopBtn = document.getElementById("modalStopBtn");
+  const cancelBtn = document.getElementById("speechCancelBtn");
+
+  // state
+  let mediaStream = null;
+  let audioCtx = null;
+  let analyser = null;
+  let rafId = null;
+
+  let recognition = null;
+  let isRecording = false;
+  let interimTranscript = "";
+  let silenceTimer = null;
+
+  let hasFinal = false;
+  let adoptOnTimeout = false;
+  let lastTranscript = "";
+
+  const hasSpeechAPI = "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
+
+  function showModal() {
+    if (!speechModal) return;
+    speechModal.classList.remove("hidden");
+    speechModal.removeAttribute("aria-hidden");
+    if (speechModal.hasAttribute("inert")) speechModal.removeAttribute("inert");
+
+    if (speechText) speechText.textContent = "Sprachsuche verwenden";
+    if (speechStatus) speechStatus.textContent = "";
+    setTimeout(() => {
+      if (cancelBtn) cancelBtn.focus();
+      else if (modalStopBtn) modalStopBtn.focus();
+    }, 80);
+  }
+
+  function hideModal() {
+    if (!speechModal) return;
+    if (speechModal.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
+
+    speechModal.classList.add("hidden");
+    speechModal.setAttribute("aria-hidden", "true");
+    speechModal.setAttribute("inert", "");
+  }
+
+  function updateVisual(rms) {
+    const minScale = 0.9;
+    const maxScale = 1.8;
+    const clamped = Math.min(1, Math.max(0, rms));
+    const scale = minScale + (maxScale - minScale) * clamped;
+    const circle = speechVisual && speechVisual.querySelector(".speech-visual__circle");
+    if (circle) {
+      circle.style.transform = `scale(${scale})`;
+      circle.style.opacity = `${0 + 1 * clamped}`;
+    }
+  }
+
+  function startAudioMetering(stream) {
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const src = audioCtx.createMediaStreamSource(stream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      src.connect(analyser);
+      const buffer = new Float32Array(analyser.fftSize);
+
+      const loop = () => {
+        analyser.getFloatTimeDomainData(buffer);
+        let sum = 0;
+        for (let i = 0; i < buffer.length; i++) sum += buffer[i] * buffer[i];
+        const rms = Math.sqrt(sum / buffer.length);
+        const normalized = Math.min(1, rms * 7);
+        updateVisual(normalized);
+        rafId = requestAnimationFrame(loop);
+      };
+      loop();
+    } catch (err) {
+      console.warn("Audio Metering nicht möglich:", err);
+    }
+  }
+
+  function stopAudioMetering() {
+    try {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+      if (analyser) { analyser.disconnect(); analyser = null; }
+      if (audioCtx) { try { audioCtx.close(); } catch (_) { } audioCtx = null; }
+      if (mediaStream) {
+        mediaStream.getTracks().forEach((t) => { try { t.stop(); } catch (_) { } });
+        mediaStream = null;
+      }
+      updateVisual(0);
+    } catch (err) {
+      console.warn("Fehler beim Stoppen des Audio-Meterings:", err);
+    }
+  }
+
+  function clearSilenceTimer() {
+    if (silenceTimer) {
+      clearTimeout(silenceTimer);
+      silenceTimer = null;
+    }
+  }
+
+  function scheduleSilenceStop() {
+    clearSilenceTimer();
+    const timeout = (hasFinal || adoptOnTimeout) ? SILENCE_TIMEOUT_AFTER_FINAL : SILENCE_TIMEOUT_NO_SPEECH;
+    silenceTimer = setTimeout(() => {
+      handleAutoSilence();
+    }, timeout);
+  }
+
+  /* Aufnahme: start/stop + event handlers */
+  function startRecognition() {
+    if (isRecording) return;
+    if (!hasSpeechAPI) {
+      if (speechStatus) speechStatus.textContent = "Spracherkennung wird in diesem Browser nicht unterstützt.";
+      return;
+    }
+    if (speechText) speechText.textContent = "Sprich Jetzt..."
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.lang = "de-DE";
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+
+    interimTranscript = "";
+    hasFinal = false;
+    adoptOnTimeout = false;
+    lastTranscript = "";
+
+    const onResult = (ev) => {
+      // wenn Aufnahme bereits gestoppt, nichts tun
+      if (!isRecording) return;
+
+      let parts = [];
+      let foundFinal = false;
+      for (let i = 0; i < ev.results.length; i++) {
+        const r = ev.results[i];
+        const t = (r[0] && r[0].transcript) ? r[0].transcript : "";
+        parts.push(t + (r.isFinal ? "" : " "));
+        if (r.isFinal) foundFinal = true;
+      }
+      const newTranscript = parts.join("").trim();
+      interimTranscript = newTranscript;
+
+      const wordCount = interimTranscript.split(/\s+/).filter(Boolean).length;
+      const charCount = interimTranscript.length;
+
+      if (foundFinal) {
+        hasFinal = true;
+        adoptOnTimeout = "final";
+        if (speechStatus) speechStatus.textContent = "Satz erkannt — wird bei kurzer Pause übernommen.";
+      } else if (interimTranscript && (wordCount >= MIN_WORDS_FOR_SHORT || charCount >= MIN_CHARS_FOR_SHORT)) {
+        adoptOnTimeout = "heuristic";
+        if (speechStatus) speechStatus.textContent = "Erkannter Text — wird bei kurzer Pause übernommen.";
+      } else {
+        adoptOnTimeout = false;
+        if (!interimTranscript && speechStatus) speechStatus.textContent = "";
+      }
+
+      if (speechText) speechText.textContent = interimTranscript || "";
+
+      if (newTranscript !== lastTranscript || hasFinal || adoptOnTimeout) {
+        lastTranscript = newTranscript;
+        scheduleSilenceStop();
+      }
+    };
+
+    const onError = (ev) => {
+      if (!isRecording) return;
+      console.warn("SpeechRecognition error:", ev && ev.error);
+      if (ev && ev.error === "not-allowed") {
+        if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
+      } else {
+        if (speechStatus) speechStatus.textContent = "Erkennungsfehler.";
+      }
+    };
+
+    const onEnd = () => {
+      if (!isRecording) return;
+      scheduleSilenceStop();
+    };
+
+    // Binde die Handler und speichere Referenzen auf der Instanz
+    recognition._handlers = { onResult, onError, onEnd };
+    recognition.addEventListener("result", onResult);
+    recognition.addEventListener("error", onError);
+    recognition.addEventListener("end", onEnd);
+
+    try {
+      recognition.start();
+      isRecording = true;
+      if (voiceBtn) voiceBtn.classList.add("listening");
+      if (modalStopBtn) modalStopBtn.classList.add("listening");
+      if (speechStatus) speechStatus.textContent = "";
+      scheduleSilenceStop();
+    } catch (err) {
+      console.warn("recognition.start() failed:", err);
+      if (speechStatus) speechStatus.textContent = "Start fehlgeschlagen.";
+    }
+  }
+
+  // --- entfernt Handler und unterbindet Timer ---
+  function stopRecordingManual() {
+    isRecording = false;
+    clearSilenceTimer();
+
+    if (recognition && recognition._handlers) {
+      try {
+        recognition.removeEventListener("result", recognition._handlers.onResult);
+        recognition.removeEventListener("error", recognition._handlers.onError);
+        recognition.removeEventListener("end", recognition._handlers.onEnd);
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    try { recognition && recognition.stop(); } catch (_) { }
+    setTimeout(() => { try { recognition && recognition.abort(); } catch (_) { } recognition = null; }, 200);
+
+    stopAudioMetering();
+
+    if (voiceBtn) voiceBtn.classList.remove("listening");
+    if (modalStopBtn) modalStopBtn.classList.remove("listening");
+
+    if (interimTranscript) {
+      // Übernehme und schließe modal
+      if (searchInput) {
+        searchInput.value = interimTranscript;
+        searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      if (speechStatus) speechStatus.textContent = "";
+      hideModal();
+      showStatusMessage("🎤 Spracheingabe beendet", "success");
+    } else {
+      // nichts Aufgenommen
+      if (speechText) speechText.textContent = "Mikrofon deaktiviert. Versuche es noch einmal.";
+      if (speechStatus) speechStatus.textContent = "Auf Mikrofon tippen, um Spracheingabe zu wiederholen";
+    }
+
+    interimTranscript = "";
+    hasFinal = false;
+    adoptOnTimeout = false;
+    lastTranscript = "";
+  }
+
+  function handleAutoSilence() {
+    clearSilenceTimer();
+
+    if ((hasFinal || adoptOnTimeout) && interimTranscript) {
+      try { recognition && recognition.stop(); } catch (_) { }
+      setTimeout(() => { try { recognition && recognition.abort(); } catch (_) { } recognition = null; }, 200);
+      stopAudioMetering();
+
+      isRecording = false;
+      if (voiceBtn) voiceBtn.classList.remove("listening");
+      if (modalStopBtn) modalStopBtn.classList.remove("listening");
+
+      if (searchInput) {
+        searchInput.value = interimTranscript;
+        searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      hideModal();
+      showStatusMessage("🎤 Spracheingabe beendet", "success");
+
+      interimTranscript = "";
+      hasFinal = false;
+      adoptOnTimeout = false;
+      lastTranscript = "";
+      return;
+    }
+
+    // micro Freigeben modal offen lassen
+    try { recognition && recognition.stop(); } catch (_) { }
+    setTimeout(() => { try { recognition && recognition.abort(); } catch (_) { } recognition = null; }, 200);
+    stopAudioMetering();
+
+    isRecording = false;
+    if (voiceBtn) voiceBtn.classList.remove("listening");
+    if (modalStopBtn) modalStopBtn.classList.remove("listening");
+    if (speechText) speechText.textContent = "Mikrofon deaktiviert. Es wurde nichts erkannt, Versuche es noch einmal.".replace(/\.\s*/g, ".\n");
+    if (speechStatus) speechStatus.textContent = "Auf Mikrofon tippen, um Spracheingabe zu wiederholen.";
+    interimTranscript = "";
+    hasFinal = false;
+    adoptOnTimeout = false;
+    lastTranscript = "";
+  }
+
+  function prepareModalAndRequestPermission() {
+    showModal();
+    if (speechText) speechText.textContent = "Berechtigung steht aus";
+    if (speechStatus) speechStatus.textContent = "Zugriff auf Mikrofon zulassen, um die Sprachsuche zu aktivieren";
+
+    if (!window.isSecureContext) {
+      if (speechStatus) speechStatus.textContent = "Bitte HTTPS verwenden (sicherer Kontext).";
+      return;
+    }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      if (speechStatus) speechStatus.textContent = "Keine Mikrofon-API verfügbar.";
+      return;
+    }
+
+    if (navigator.permissions && navigator.permissions.query) {
+      navigator.permissions.query({ name: "microphone" })
+        .then((permissionStatus) => {
+          if (permissionStatus.state === "granted") {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+              .then((stream) => {
+                mediaStream = stream;
+                startAudioMetering(stream);
+                if (speechText) speechText.textContent = "Sprich Jetzt…";
+                if (speechStatus) speechStatus.textContent = "";
+                startRecognition();
+              })
+              .catch((err) => {
+                console.warn("getUserMedia trotz granted fehlgeschlagen:", err);
+                if (speechStatus) speechStatus.textContent = "Mikrofonzugriff konnte nicht verwendet werden.";
+              });
+          } else {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+              .then((stream) => {
+                mediaStream = stream;
+                startAudioMetering(stream);
+                if (speechText) speechText.textContent = "Sprachsuche verwenden";
+                if (speechStatus) speechStatus.textContent = "Bereit. Drücke die Mikrofontaste, um die Aufnahme zu starten.";
+              })
+              .catch((err) => {
+                console.warn("getUserMedia Fehler:", err);
+                if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
+              });
+          }
+          permissionStatus.onchange = () => {
+            // optional
+          };
+        })
+        .catch(() => {
+          navigator.mediaDevices.getUserMedia({ audio: true })
+            .then((stream) => {
+              mediaStream = stream;
+              startAudioMetering(stream);
+              if (speechText) speechText.textContent = "Sprachsuche verwenden";
+              if (speechStatus) speechStatus.textContent = "Bereit. Drücke die Mikrofontaste, um die Aufnahme zu starten.";
+            })
+            .catch((err) => {
+              console.warn("getUserMedia Fehler (fallback):", err);
+              if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
+            });
+        });
+    } else {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then((stream) => {
+          mediaStream = stream;
+          startAudioMetering(stream);
+          if (speechText) speechText.textContent = "Sprachsuche verwenden";
+          if (speechStatus) speechStatus.textContent = "Bereit. Drücke die Mikrofontaste, um die Aufnahme zu starten.";
+        })
+        .catch((err) => {
+          console.warn("getUserMedia Fehler:", err);
+          if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
+        });
+    }
+  }
+
+  if (voiceBtn) {
+    voiceBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!isRecording) {
+        if (!speechModal || speechModal.classList.contains("hidden")) {
+          prepareModalAndRequestPermission();
+        } else {
+          if (!mediaStream) {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+              .then((stream) => {
+                mediaStream = stream;
+                startAudioMetering(stream);
+                startRecognition();
+              })
+              .catch((err) => {
+                console.warn("getUserMedia Fehler beim Start:", err);
+                if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
+              });
+          } else {
+            startRecognition();
+          }
+        }
+      } else {
+        stopRecordingManual();
+      }
+    });
+  }
+
+  if (modalStopBtn) {
+    modalStopBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!isRecording) {
+        if (!mediaStream) {
+          navigator.mediaDevices.getUserMedia({ audio: true })
+            .then((stream) => {
+              mediaStream = stream;
+              startAudioMetering(stream);
+              startRecognition();
+            })
+            .catch((err) => {
+              console.warn("getUserMedia Fehler beim Start:", err);
+              if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
+            });
+        } else {
+          startRecognition();
+        }
+      } else {
+        stopRecordingManual();
+      }
+    });
+  }
+
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      clearSilenceTimer();
+      try { recognition && recognition.abort(); } catch (_) { }
+      recognition = null;
+      stopAudioMetering();
+      isRecording = false;
+      if (voiceBtn) voiceBtn.classList.remove("listening");
+      if (modalStopBtn) modalStopBtn.classList.remove("listening");
+      hideModal();
+      showStatusMessage("🎤 Aufnahme abgebrochen", "info");
+    });
+  }
+
+  document.addEventListener("keydown", (ev) => {
+    if (!speechModal || speechModal.classList.contains("hidden")) return;
+    if (ev.key === "Escape") {
+      clearSilenceTimer();
+      try { recognition && recognition.abort(); } catch (_) { }
+      recognition = null;
+      stopAudioMetering();
+      isRecording = false;
+      if (voiceBtn) voiceBtn.classList.remove("listening");
+      if (modalStopBtn) modalStopBtn.classList.remove("listening");
+      hideModal();
+      showStatusMessage("🎤 Aufnahme abgebrochen", "info");
+    }
+  });
+})();
 
 async function getAppVersionFromActiveSW() {
   if (navigator.serviceWorker?.controller) {
@@ -495,7 +958,7 @@ function renderCard(item) {
       typImageContainer.appendChild(overlay);
 
       const buttons = item.modal.map(entry => `
-        <button class="btn" data-url="${entry.url}" title="${entry.label}">
+        <button class="btn touchBtn" data-url="${entry.url}" title="${entry.label}">
           ${entry.label}
         </button>
       `).join("");
@@ -776,8 +1239,7 @@ function showHomeCard(hinweisText = null) {
     <div class="cardContent">
       <div class="homeContent">
         <div class="logo-box highlight">
-          <svg
-            
+          <svg            
             width="100%"
             height="100%"
             viewBox="0 0 1517.0656 615.5">
@@ -1267,6 +1729,12 @@ function parseURLHash() {
     typ: params.get("typ") || "",
   };
 }
+
+document.querySelectorAll('.touchBtn').forEach(btn => {
+  btn.addEventListener('touchstart', () => btn.classList.add('tapped'));
+  btn.addEventListener('touchend', () => btn.classList.remove('tapped'));
+  btn.addEventListener('touchcancel', () => btn.classList.remove('tapped'));
+});
 
 // ==== App starten ====
 async function initApp() {

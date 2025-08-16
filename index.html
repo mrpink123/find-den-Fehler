@@ -166,11 +166,19 @@
           </div>
 
           <div class="InputContainer">
-            <div class="searchContainer ">
+            <div class="searchContainer">
               <div class="icon-search">
-                <svg>
-                  <use href="#icon-search"></use>
-                </svg>
+                <button
+                  id="voiceSearchBtn"
+                  class="voiceSearchBtn_sm"
+                  title="Spracheingabe"
+                >
+                  <!-- Mikrofon-Icon -->
+                  <svg class="icon-mic">
+                    <use href="#icon-mic"></use>
+                    >
+                  </svg>
+                </button>
               </div>
               <div class="autocomplete-wrapper">
                 <input
@@ -236,6 +244,64 @@
           <button id="modalCloseBtn" title="Schließen">×</button>
           <img id="modalImage" src="" alt="Typbild" />
           <div id="modalExtraContent"></div>
+        </div>
+      </div>
+
+      <!-- Speech Modal -->
+      <div id="speechModal" class="speech-modal hidden" aria-hidden="true">
+        <div class="speech-modal__backdrop"></div>
+
+        <div
+          class="speech-modal__content"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="speechModalTitle"
+        >
+          <div class="speech-modal__header">
+            <h3 id="speechModalTitle" class="speech-modal__title">
+              <div id="speechText" class="speech-text"></div>
+            </h3>
+
+            <button
+              id="speechCancelBtn"
+              class="btn--secondary"
+              title="Abbrechen"
+            >
+              <svg class="speech-modal__icon-x">
+                <use href="#icon-x" />
+              </svg>
+            </button>
+          </div>
+
+          <div style="position: relative;">
+            <div id="speechVisual" class="speech-visual" aria-hidden="true">
+              <svg
+                viewBox="0 0 100 100"
+                class="speech-visual__svg"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <circle cx="50" cy="50" r="28" class="speech-visual__circle" />
+              </svg>
+            </div>
+
+            <button
+              id="modalStopBtn"
+              class="voice-btn-modal"
+              title="Aufnahme starten / stoppen"
+              aria-pressed="false"
+            >
+              <!-- Mikrofon-Icon -->
+              <svg class="speech-modal__icon-mic">
+                <use href="#icon-mic" />
+              </svg>
+              <!-- Stop-Icon -->
+              <svg class="speech-modal__icon-stop">
+                <use href="#icon-stop" />
+              </svg>
+            </button>
+          </div>
+
+          <div id="speechStatus" class="speech-status" aria-live="polite"></div>
         </div>
       </div>
 

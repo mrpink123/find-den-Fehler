@@ -46,6 +46,7 @@ const ASSETS_TO_CACHE = [
   "images/typen/dorma_es200_bde.svg",
   "images/typen/fd-10.png",
   "images/typen/fd-20.png",
+  "images/typen/geze_dps.png",
   "images/typen/lzr-flatscan-sw-2.png",
   "images/typen/sl-35.png",
   "images/typen/slm-red.png",

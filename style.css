@@ -14,6 +14,7 @@
     --button: rgb(231, 231, 231);
     --hover: rgb(218, 218, 218);
     --highlight: rgb(160, 160, 160);
+    --accent: rgb(255, 0, 0);
     --shadow: rgba(0, 0, 0, 0.1);
     --error: rgb(255, 48, 48);
     --success: #388e3c;
@@ -45,8 +46,11 @@ body {
     display: flex;
     flex-direction: column;
     background: var(--bg);
+
+
     color: var(--fg);
     font-family: system-ui, sans-serif;
+    line-height: 1.5;
     font-size: medium;
     transition: background-color 0.3s, color 0.3s;
     scroll-behavior: smooth;
@@ -112,12 +116,40 @@ body.modal-open {
     transition: all 0.2s ease;
 }
 
-.btn:hover {
-    background-color: var(--hover);
-    border: 1px solid var(--highlight, currentColor);
-    box-shadow: 1px 1px 3px 0px var(--shadow);
-    -webkit-box-shadow: 1px 1px 3px 0px var(--shadow);
-    -moz-box-shadow: 1px 1px 3px 0px var(--shadow);
+@media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+        background-color: var(--hover);
+        border: 1px solid var(--highlight, currentColor);
+        box-shadow: 1px 1px 3px 0px var(--shadow);
+        -webkit-box-shadow: 1px 1px 3px 0px var(--shadow);
+        -moz-box-shadow: 1px 1px 3px 0px var(--shadow);
+    }
+
+    #btnClearSearch:hover,
+    #btnResetFilters:hover {
+        transform: rotate(30deg) scale(100%);
+    }
+
+    .modalCloseBtn:hover,
+    #speechCancelBtn:hover,
+    .btnMenuToggle:hover,
+    #voiceSearchBtn:hover {
+        background-color: var(--hover);
+    }
+
+    .typImageWrapper:hover .typinfos {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .typImageWrapper:hover .imageOverlayText {
+        opacity: 0;
+        transform: translate(50px, 50px) rotate(-45deg);
+    }
+
+    .typImageWrapper.clickable:hover .typImageContainer {
+        transform: scale(1.1) translateY(-12px);
+    }
 }
 
 .btn svg {
@@ -143,7 +175,7 @@ body.modal-open {
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
 #scrollTopBtn.show {
@@ -168,31 +200,31 @@ body.modal-open {
     pointer-events: none;
     justify-content: center;
     transform: translateY(-900%);
-    transition: all 0.5s ease-out;
+    transition: all 0.3s ease-out;
 }
 
 #statusMessage.show {
-    transition: transform 0.5s ease-in;
-    transition: all 0.5s ease-in;
+    transition: transform 0.3s ease-in;
+    transition: all 0.3s ease-in;
     transform: translateY(0);
 }
 
 #statusMessage.success {
-    transition: transform 0.5s ease-out;
+    transition: transform 0.3s ease-out;
     background-color: #c8e6c9;
     color: var(--success);
     border: 1px solid var(--success);
 }
 
 #statusMessage.error {
-    transition: transform 0.5s ease-out;
+    transition: transform 0.3s ease-out;
     background-color: #ffcdd2;
     color: var(--error);
     border: 1px solid var(--error);
 }
 
 #statusMessage.info {
-    transition: transform 0.5s ease-out;
+    transition: transform 0.3s ease-out;
     background-color: #cde5ff;
     color: var(--info);
     border: 1px solid var(--info);
@@ -249,15 +281,17 @@ header.hide {
 
 .searchContainer {
     display: flex;
+    flex: 1 1 30%;
     width: auto;
     min-width: fit-content;
     height: 40px;
     border: 1px solid var(--border);
     border-radius: 20px;
     background: var(--card-bg);
-    overflow: hidden;
+    overflow: visible;
     cursor: auto;
     align-items: center;
+    box-sizing: content-box;
 }
 
 .autocomplete-wrapper {
@@ -271,11 +305,18 @@ header.hide {
 }
 
 #searchInput,
+#herstellerFilter,
+#typFilter {
+    border-bottom: 0px solid var(--border);
+    border-top: 0px solid var(--border);
+}
+
+#searchInput,
 #searchHint,
 #typFilter,
 #herstellerFilter {
     font-family: inherit;
-    font-size: 1rem;
+    font-size: .9rem;
     padding-left: 1rem;
     padding-right: .5rem;
     height: 40px;
@@ -320,10 +361,221 @@ header.hide {
     align-items: center;
 }
 
-.icon-search svg {
-    max-height: 18px;
-    max-width: 19px;
-    opacity: 0.5;
+#voiceSearchBtn,
+.voice-btn-modal,
+#speechCancelBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--fg);
+    border-radius: 50%;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 2;
+}
+
+
+.icon-mic {
+    height: 16px;
+    width: 10.5px;
+}
+
+.icon-stop {
+    width: 20px;
+    height: 20px;
+}
+
+/* Puls-Effekt bei aktiver Aufnahme */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 18px rgba(255, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}
+
+/* Standard: nur Mikrofon sichtbar */
+.voice-btn-modal .speech-modal__icon-stop {
+    display: none;
+}
+
+.voice-btn-modal.listening .speech-modal__icon-mic {
+    display: none;
+}
+
+.voice-btn-modal.listening .speech-modal__icon-stop {
+    display: inline;
+}
+
+.voice-btn-modal.listening {
+    background-color: var(--error);
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+/* small style for modal stop btn */
+.voice-btn-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 55px;
+    height: 55px;
+    margin-right: 0.6rem;
+    background-color: var(--hover, transparent);
+    transition: background .3s linear;
+}
+
+.speech-modal__icon-stop {
+    width: 35px;
+    height: 35px;
+}
+
+.speech-modal__icon-mic {
+    width: 19px;
+    height: 25px;
+}
+
+.speech-modal__icon-x {
+    width: 16px;
+    height: 16px;
+}
+
+.speech-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    font-family: inherit;
+}
+
+.speech-modal * {
+    padding: 0;
+    margin: 0;
+}
+
+.speech-modal.hidden {
+    display: none;
+}
+
+.speech-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.speech-modal__content {
+    position: relative;
+    margin: 0 auto;
+    top: 10vh;
+    width: min(560px, 92%);
+    background: var(--card-bg, #fff);
+    color: var(--fg, #222);
+    border-radius: 12px;
+    padding: .75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    z-index: 2;
+    text-align: center;
+}
+
+/* Title and text */
+.speech-modal__header {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    min-height: 5rem;
+    margin-left: .5rem;
+}
+
+.speech-modal__title {
+    display: inline-flex;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.speech-text {
+    min-height: 3.2rem;
+    margin: 0.25rem;
+    padding: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.3;
+    color: var(--fg, #222);
+    white-space: pre-line;
+}
+
+.speech-status {
+    min-height: 1.2rem;
+    margin: 0.5rem;
+    color: var(--fg);
+    font-size: smaller;
+}
+
+/* Visual */
+.speech-visual {
+    width: 100px;
+    height: 100px;
+    margin: .5rem auto;
+}
+
+.speech-visual__svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.speech-visual__circle {
+    fill: color-mix(in hsl, var(--error), transparent 70%);
+    scale: 1;
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transition: transform 220ms linear, opacity 200ms linear;
+    filter: drop-shadow(0 0px 2rem var(--error));
+}
+
+/* Controls */
+.speech-modal__controls {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-top: .5rem;
+}
+
+.btn--danger {
+    background: #e53935;
+    color: white;
+}
+
+.btn--secondary {
+    background: #efefef;
+    color: #111;
+    justify-self: end;
+
+}
+
+/* small responsive tweak */
+@media (max-width:420px) {
+    .speech-visual {
+        width: 84px;
+        height: 84px;
+    }
+
+    .speech-modal__content {
+        padding: 1rem;
+    }
 }
 
 #btnClearSearch,
@@ -338,20 +590,17 @@ header.hide {
     box-shadow: none;
 }
 
-.searchContainer button,
-.searchContainer button:disabled:hover {
+#btnClearSearch,
+#btnResetFilters,
+#btnClearSearch:disabled:hover,
+#btnResetFilters:disabled:hover {
     transform: rotate(0deg) scale(80%);
-}
-
-.searchContainer button:hover {
-    transform: rotate(30deg) scale(100%);
 }
 
 #btnClearSearch svg,
 #btnResetFilters svg {
     width: 20px;
 }
-
 
 button:disabled svg {
     opacity: 0.2;
@@ -482,12 +731,6 @@ input:focus {
     overflow: hidden;
 }
 
-
-.btnMenuToggle:hover {
-    background-color: var(--hover);
-}
-
-
 .herstellerImageContainer {
     margin: .3rem .2rem .2rem .5rem;
     height: 30px;
@@ -538,6 +781,7 @@ input:focus {
     border: 1px solid var(--border);
     background: var(--bg2);
     justify-content: space-between;
+    align-items: stretch;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     overflow: hidden;
@@ -730,7 +974,7 @@ h3 {
     vertical-align: middle;
     gap: 0.5rem;
     color: #ffffff;
-    transition: all .5s ease;
+    transition: all .3s ease;
 }
 
 .updateInfo p {
@@ -746,7 +990,7 @@ h3 {
     align-items: center;
     z-index: 9999;
     animation: modal-open 500ms ease-in;
-    transition: all .5s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 .modalHeader {
@@ -792,10 +1036,6 @@ h3 {
     color: var(--error);
 }
 
-.modalCloseBtn:hover {
-    background-color: var(--hover);
-}
-
 .modalTitle {
     font-size: 1.5rem;
 }
@@ -815,7 +1055,7 @@ h3 {
     width: 200px;
     height: fit-content;
     justify-content: center;
-    transition: all .5s ease-in-out;
+    transition: all .3s ease-in-out;
     overflow: hidden;
     padding: .25rem;
 }
@@ -834,22 +1074,8 @@ h3 {
     font-weight: 500;
     z-index: 2;
     opacity: 1;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
     transform: rotate(-45deg);
-}
-
-.typImageWrapper:hover .typinfos {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.typImageWrapper:hover .imageOverlayText {
-    opacity: 0;
-    transform: translate(50px, 50px) rotate(-45deg);
-}
-
-.typImageWrapper.clickable:hover .typImageContainer {
-    transform: scale(1.1) translateY(-12px);
 }
 
 .typinfos button {
@@ -865,7 +1091,7 @@ h3 {
     flex-direction: column;
     transform: translateY(-115%) scale(.7);
     opacity: 0;
-    transition: all .5s ease, opacity .5s ease-in-out;
+    transition: all .3s ease, opacity .3s ease-in-out;
 }
 
 /* Splash-Screen Hintergrund */
@@ -967,6 +1193,7 @@ h3 {
     opacity: 1;
 }
 
+
 @keyframes si1 {
 
     0% {
@@ -1026,7 +1253,7 @@ h3 {
 @media (max-width: 650px) {
 
     body {
-        font-size: 3.7vw;
+        font-size: .9rem;
     }
 
     /* Benachrichtigungs Fenster */
@@ -1052,7 +1279,6 @@ h3 {
         display: flex;
         flex-direction: column;
         background: var(--bg);
-        padding: 0.25rem;
         gap: 0.25rem;
     }
 
@@ -1077,7 +1303,6 @@ h3 {
     }
 
     .InputContainer {
-        flex-direction: column;
         gap: 0.25rem;
     }
 
@@ -1110,9 +1335,37 @@ h3 {
         border-top-left-radius: 8px;
     }
 
+    #searchInput,
+    #searchHint,
+    #typFilter,
+    #herstellerFilter {
+        font-family: inherit;
+        font-size: 3.3vw;
+        padding-left: 1rem;
+        padding-right: .5rem;
+        height: 40px;
+        color: var(--fg);
+    }
+
+    #searchHint {
+        position: absolute;
+        inset: 0;
+        color: var(--hover);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    #voiceSearchBtn {
+        border-radius: .5rem;
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        z-index: 1;
+    }
+
     .card {
         margin: 0 0.1rem;
-        width: 100%;
+        width: 99.5%;
         border-radius: 0.5rem;
     }
 
@@ -1142,6 +1395,7 @@ h3 {
     }
 
     #homeMenuContainer {
+        display: flex;
         border-top-left-radius: 0.5rem;
         border-bottom-left-radius: 0.5rem;
     }
@@ -1183,7 +1437,7 @@ h3 {
         padding-top: .125rem;
     }
 
-    .typImageWrapper.clickable:hover .typImageContainer {
+    .typImageWrapper:hover {
         transform: scale(1) translateY(0);
     }
 
@@ -1214,7 +1468,6 @@ h3 {
         margin-left: 0;
     }
 
-    .errorDescriptionItem>div>div:nth-child(2) {}
 
     .descriptionItemGrid {
         gap: .1rem;
@@ -1228,4 +1481,29 @@ h3 {
         }
     }
 
+    .btn:active {
+        background-color: var(--hover);
+        border: 1px solid var(--highlight, currentColor);
+        box-shadow: 1px 1px 3px 0px var(--shadow);
+        -webkit-box-shadow: 1px 1px 3px 0px var(--shadow);
+        -moz-box-shadow: 1px 1px 3px 0px var(--shadow);
+    }
+
+    
+    #btnClearSearch:active,
+    #btnResetFilters:active {
+        transform: rotate(30deg) scale(100%);
+    }
+
+    .modalCloseBtn:active,
+    #speechCancelBtn:active,
+    .btnMenuToggle:active,
+    #voiceSearchBtn:active {
+        background-color: var(--hover);
+    }
+
+    .touchBtn.tapped {
+        background-color: #ff0000;
+        transform: scale(0.97);
+    }
 }
