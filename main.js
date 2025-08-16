@@ -1804,6 +1804,50 @@ document.querySelectorAll('.touchBtn').forEach(btn => {
   btn.addEventListener('touchcancel', () => btn.classList.remove('tapped'));
 });
 
+// Deaktiviere/ersetze Voice-Button auf Smartphones
+(function () {
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // kurze Meldung showStatusMessage 
+  function showDisabledInfo(msg) {
+    if (typeof showStatusMessage === "function") {
+      showStatusMessage(msg, "info", 3000);
+    } else {
+      // fallback
+      alert(msg);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("voiceSearchBtn");
+    if (!btn) return;
+
+    if (isMobile) {
+      btn.classList.add("voice-disabled");
+      btn.setAttribute("aria-disabled", "true");
+      btn.setAttribute("title", "Sprachsuche auf Smartphones deaktiviert");
+      btn.innerHTML = `
+        <svg style="width:20px">
+          <use href="#icon-search" />
+        </svg>
+      `;
+
+      btn.addEventListener(
+        "click",
+        (e) => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          // showDisabledInfo("Sprachsuche ist auf Mobilgeräten deaktiviert.");
+        },
+        true
+      );
+    } else {
+      btn.removeAttribute("aria-disabled");
+      btn.classList.remove("voice-disabled");
+    }
+  });
+})();
+
 // ==== App starten ====
 async function initApp() {
   // Theme laden

@@ -390,6 +390,12 @@ header.hide {
     height: 20px;
 }
 
+.icon-search svg {
+    max-height: 18px;
+    max-width: 19px;
+    opacity: 0.5;
+}
+
 /* Puls-Effekt bei aktiver Aufnahme */
 @keyframes pulse {
     0% {
@@ -416,6 +422,12 @@ header.hide {
 
 .voice-btn-modal.listening .speech-modal__icon-stop {
     display: inline;
+}
+
+.voice-disabled {
+    opacity: 0.7;
+    color: #888;
+    background: transparent;
 }
 
 .voice-btn-modal.listening {
@@ -1489,7 +1501,7 @@ h3 {
         -moz-box-shadow: 1px 1px 3px 0px var(--shadow);
     }
 
-    
+
     #btnClearSearch:active,
     #btnResetFilters:active {
         transform: rotate(30deg) scale(100%);
