@@ -156,13 +156,13 @@ window.CSV_VERSION = "Unbekannt";
 // === Sprachaufnahme Modal ===
 (function () {
   // Timeouts & Heuristik
-  const SILENCE_TIMEOUT_NO_SPEECH = 5000;   // 5s, wenn noch kein final/heuristic
-  const SILENCE_TIMEOUT_AFTER_FINAL = 2000; // 2s, wenn final oder heuristic
-  const MIN_WORDS_FOR_SHORT = 1;            // heuristik: mindestens 1 Wort
-  const MIN_CHARS_FOR_SHORT = 6;            // heuristik: mindestens 6 Zeichen
+  const SILENCE_TIMEOUT_NO_SPEECH = 5000;   // 5s default
+  const SILENCE_TIMEOUT_AFTER_FINAL = 2000; // 2s after final/heuristic
+  const MIN_WORDS_FOR_SHORT = 1;
+  const MIN_CHARS_FOR_SHORT = 6;
 
-  // DOM-Elemente
-  const voiceBtn = document.getElementById("voiceSearchBtn"); // Suchleisten-Button
+  // DOM 
+  const voiceBtn = document.getElementById("voiceSearchBtn");
   const searchInput = document.getElementById("searchInput");
   const speechModal = document.getElementById("speechModal");
   const speechText = document.getElementById("speechText");
@@ -193,7 +193,6 @@ window.CSV_VERSION = "Unbekannt";
     speechModal.classList.remove("hidden");
     speechModal.removeAttribute("aria-hidden");
     if (speechModal.hasAttribute("inert")) speechModal.removeAttribute("inert");
-
     if (speechText) speechText.textContent = "Sprachsuche verwenden";
     if (speechStatus) speechStatus.textContent = "";
     setTimeout(() => {
@@ -204,10 +203,7 @@ window.CSV_VERSION = "Unbekannt";
 
   function hideModal() {
     if (!speechModal) return;
-    if (speechModal.contains(document.activeElement)) {
-      document.activeElement.blur();
-    }
-
+    if (speechModal.contains(document.activeElement)) document.activeElement.blur();
     speechModal.classList.add("hidden");
     speechModal.setAttribute("aria-hidden", "true");
     speechModal.setAttribute("inert", "");
@@ -221,7 +217,7 @@ window.CSV_VERSION = "Unbekannt";
     const circle = speechVisual && speechVisual.querySelector(".speech-visual__circle");
     if (circle) {
       circle.style.transform = `scale(${scale})`;
-      circle.style.opacity = `${0 + 1 * clamped}`;
+      circle.style.opacity = `${0.6 + 0.4 * clamped}`;
     }
   }
 
@@ -280,7 +276,28 @@ window.CSV_VERSION = "Unbekannt";
     }, timeout);
   }
 
-  /* Aufnahme: start/stop + event handlers */
+  function reallyCleanupRecognition() {
+    try { recognition && recognition.stop(); } catch (_) { }
+    try { recognition && recognition.abort(); } catch (_) { }
+    try {
+      if (recognition && recognition._handlers) {
+        recognition.removeEventListener("result", recognition._handlers.onResult);
+        recognition.removeEventListener("error", recognition._handlers.onError);
+        recognition.removeEventListener("end", recognition._handlers.onEnd);
+      }
+    } catch (_) { }
+    recognition = null;
+
+    if (mediaStream) {
+      try {
+        mediaStream.getTracks().forEach(track => { try { track.stop(); } catch (_) { } });
+      } catch (_) { }
+      mediaStream = null;
+    }
+
+    stopAudioMetering();
+  }
+
   function startRecognition() {
     if (isRecording) return;
     if (!hasSpeechAPI) {
@@ -295,15 +312,14 @@ window.CSV_VERSION = "Unbekannt";
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
+    // reset flags
     interimTranscript = "";
     hasFinal = false;
     adoptOnTimeout = false;
     lastTranscript = "";
 
     const onResult = (ev) => {
-      // wenn Aufnahme bereits gestoppt, nichts tun
       if (!isRecording) return;
-
       let parts = [];
       let foundFinal = false;
       for (let i = 0; i < ev.results.length; i++) {
@@ -372,31 +388,32 @@ window.CSV_VERSION = "Unbekannt";
     }
   }
 
-  // --- entfernt Handler und unterbindet Timer ---
+  /* Stoppen (manuell) */
   function stopRecordingManual() {
     isRecording = false;
     clearSilenceTimer();
 
-    if (recognition && recognition._handlers) {
-      try {
+    try {
+      if (recognition && recognition._handlers) {
         recognition.removeEventListener("result", recognition._handlers.onResult);
         recognition.removeEventListener("error", recognition._handlers.onError);
         recognition.removeEventListener("end", recognition._handlers.onEnd);
-      } catch (e) {
-        // ignore
       }
-    }
+    } catch (_) { }
 
     try { recognition && recognition.stop(); } catch (_) { }
-    setTimeout(() => { try { recognition && recognition.abort(); } catch (_) { } recognition = null; }, 200);
+    setTimeout(() => {
+      try { recognition && recognition.abort(); } catch (_) { }
+      recognition = null;
+    }, 200);
 
     stopAudioMetering();
 
+    // UI reset
     if (voiceBtn) voiceBtn.classList.remove("listening");
     if (modalStopBtn) modalStopBtn.classList.remove("listening");
 
     if (interimTranscript) {
-      // Übernehme und schließe modal
       if (searchInput) {
         searchInput.value = interimTranscript;
         searchInput.dispatchEvent(new Event("input", { bubbles: true }));
@@ -405,11 +422,21 @@ window.CSV_VERSION = "Unbekannt";
       hideModal();
       showStatusMessage("🎤 Spracheingabe beendet", "success");
     } else {
-      // nichts Aufgenommen
       if (speechText) speechText.textContent = "Mikrofon deaktiviert. Versuche es noch einmal.";
       if (speechStatus) speechStatus.textContent = "Auf Mikrofon tippen, um Spracheingabe zu wiederholen";
     }
 
+    setTimeout(() => {
+      if (mediaStream) {
+        try {
+          mediaStream.getTracks().forEach(t => { try { t.stop(); } catch (_) { } });
+        } catch (_) { }
+        mediaStream = null;
+      }
+      stopAudioMetering();
+    }, 500);
+
+    // reset flags
     interimTranscript = "";
     hasFinal = false;
     adoptOnTimeout = false;
@@ -421,7 +448,11 @@ window.CSV_VERSION = "Unbekannt";
 
     if ((hasFinal || adoptOnTimeout) && interimTranscript) {
       try { recognition && recognition.stop(); } catch (_) { }
-      setTimeout(() => { try { recognition && recognition.abort(); } catch (_) { } recognition = null; }, 200);
+      setTimeout(() => {
+        try { recognition && recognition.abort(); } catch (_) { }
+        recognition = null;
+      }, 200);
+
       stopAudioMetering();
 
       isRecording = false;
@@ -435,6 +466,14 @@ window.CSV_VERSION = "Unbekannt";
       hideModal();
       showStatusMessage("🎤 Spracheingabe beendet", "success");
 
+      setTimeout(() => {
+        if (mediaStream) {
+          try { mediaStream.getTracks().forEach(t => { try { t.stop(); } catch (_) { } }); } catch (_) { }
+          mediaStream = null;
+        }
+        stopAudioMetering();
+      }, 500);
+
       interimTranscript = "";
       hasFinal = false;
       adoptOnTimeout = false;
@@ -442,7 +481,6 @@ window.CSV_VERSION = "Unbekannt";
       return;
     }
 
-    // micro Freigeben modal offen lassen
     try { recognition && recognition.stop(); } catch (_) { }
     setTimeout(() => { try { recognition && recognition.abort(); } catch (_) { } recognition = null; }, 200);
     stopAudioMetering();
@@ -456,8 +494,17 @@ window.CSV_VERSION = "Unbekannt";
     hasFinal = false;
     adoptOnTimeout = false;
     lastTranscript = "";
+
+    setTimeout(() => {
+      if (mediaStream) {
+        try { mediaStream.getTracks().forEach(t => { try { t.stop(); } catch (_) { } }); } catch (_) { }
+        mediaStream = null;
+      }
+      stopAudioMetering();
+    }, 500);
   }
 
+  /* Permission */
   function prepareModalAndRequestPermission() {
     showModal();
     if (speechText) speechText.textContent = "Berechtigung steht aus";
@@ -475,6 +522,7 @@ window.CSV_VERSION = "Unbekannt";
     if (navigator.permissions && navigator.permissions.query) {
       navigator.permissions.query({ name: "microphone" })
         .then((permissionStatus) => {
+          console.debug("microphone permission state:", permissionStatus.state);
           if (permissionStatus.state === "granted") {
             navigator.mediaDevices.getUserMedia({ audio: true })
               .then((stream) => {
@@ -482,7 +530,7 @@ window.CSV_VERSION = "Unbekannt";
                 startAudioMetering(stream);
                 if (speechText) speechText.textContent = "Sprich Jetzt…";
                 if (speechStatus) speechStatus.textContent = "";
-                startRecognition();
+                startRecognition(); // auto-start
               })
               .catch((err) => {
                 console.warn("getUserMedia trotz granted fehlgeschlagen:", err);
@@ -502,7 +550,7 @@ window.CSV_VERSION = "Unbekannt";
               });
           }
           permissionStatus.onchange = () => {
-            // optional
+            console.debug("permission state changed to", permissionStatus.state);
           };
         })
         .catch(() => {
@@ -533,6 +581,7 @@ window.CSV_VERSION = "Unbekannt";
     }
   }
 
+  /* UI */
   if (voiceBtn) {
     voiceBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -588,10 +637,9 @@ window.CSV_VERSION = "Unbekannt";
   if (cancelBtn) {
     cancelBtn.addEventListener("click", () => {
       clearSilenceTimer();
-      try { recognition && recognition.abort(); } catch (_) { }
-      recognition = null;
-      stopAudioMetering();
+      reallyCleanupRecognition();
       isRecording = false;
+      stopAudioMetering();
       if (voiceBtn) voiceBtn.classList.remove("listening");
       if (modalStopBtn) modalStopBtn.classList.remove("listening");
       hideModal();
@@ -603,10 +651,9 @@ window.CSV_VERSION = "Unbekannt";
     if (!speechModal || speechModal.classList.contains("hidden")) return;
     if (ev.key === "Escape") {
       clearSilenceTimer();
-      try { recognition && recognition.abort(); } catch (_) { }
-      recognition = null;
-      stopAudioMetering();
+      reallyCleanupRecognition();
       isRecording = false;
+      stopAudioMetering();
       if (voiceBtn) voiceBtn.classList.remove("listening");
       if (modalStopBtn) modalStopBtn.classList.remove("listening");
       hideModal();
