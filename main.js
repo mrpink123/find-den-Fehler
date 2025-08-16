@@ -664,7 +664,7 @@ window.CSV_VERSION = "Unbekannt";
       if (voiceBtn) voiceBtn.classList.remove("listening");
       if (modalStopBtn) modalStopBtn.classList.remove("listening");
       hideModal();
-      showStatusMessage("🎤 Aufnahme abgebrochen", "info");
+      showStatusMessage("🎤 Spracheingabe abgebrochen", "info");
     });
   }
 
@@ -678,7 +678,7 @@ window.CSV_VERSION = "Unbekannt";
       if (voiceBtn) voiceBtn.classList.remove("listening");
       if (modalStopBtn) modalStopBtn.classList.remove("listening");
       hideModal();
-      showStatusMessage("🎤 Aufnahme abgebrochen", "info");
+      showStatusMessage("🎤 Spracheingabe abgebrochen", "info");
     }
   });
 })();
@@ -1823,11 +1823,10 @@ document.querySelectorAll('.touchBtn').forEach(btn => {
     if (!btn) return;
 
     if (isMobile) {
-      btn.classList.add("voice-disabled");
       btn.setAttribute("aria-disabled", "true");
       btn.setAttribute("title", "Sprachsuche auf Smartphones deaktiviert");
       btn.innerHTML = `
-        <svg style="width:20px">
+        <svg style="width:18px; height:18px;">
           <use href="#icon-search" />
         </svg>
       `;

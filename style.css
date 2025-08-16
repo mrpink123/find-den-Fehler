@@ -1353,7 +1353,6 @@ h3 {
     #herstellerFilter {
         font-family: inherit;
         font-size: 3.3vw;
-        padding-left: 1rem;
         padding-right: .5rem;
         height: 40px;
         color: var(--fg);
