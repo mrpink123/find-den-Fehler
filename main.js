@@ -173,6 +173,8 @@ window.CSV_VERSION = "Unbekannt";
 
   // state
   let mediaStream = null;
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  let meteringActive = false;
   let audioCtx = null;
   let analyser = null;
   let rafId = null;
@@ -222,6 +224,8 @@ window.CSV_VERSION = "Unbekannt";
   }
 
   function startAudioMetering(stream) {
+    meteringActive = true;
+    mediaStream = stream;
     try {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const src = audioCtx.createMediaStreamSource(stream);
@@ -250,11 +254,14 @@ window.CSV_VERSION = "Unbekannt";
       if (rafId) cancelAnimationFrame(rafId);
       rafId = null;
       if (analyser) { analyser.disconnect(); analyser = null; }
-      if (audioCtx) { try { audioCtx.close(); } catch (_) { } audioCtx = null; }
+      if (audioCtx) { try { audioCtx.close(); } catch (e) { } audioCtx = null; }
       if (mediaStream) {
-        mediaStream.getTracks().forEach((t) => { try { t.stop(); } catch (_) { } });
+        mediaStream.getTracks().forEach(t => {
+          try { t.stop(); } catch (e) { }
+        });
         mediaStream = null;
       }
+      meteringActive = false;
       updateVisual(0);
     } catch (err) {
       console.warn("Fehler beim Stoppen des Audio-Meterings:", err);
@@ -304,88 +311,102 @@ window.CSV_VERSION = "Unbekannt";
       if (speechStatus) speechStatus.textContent = "Spracherkennung wird in diesem Browser nicht unterstützt.";
       return;
     }
-    if (speechText) speechText.textContent = "Sprich Jetzt..."
+    if (speechText) speechText.textContent = "Sprich Jetzt...";
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SpeechRecognition();
-    recognition.lang = "de-DE";
-    recognition.interimResults = true;
-    recognition.maxAlternatives = 1;
-
-    // reset flags
-    interimTranscript = "";
-    hasFinal = false;
-    adoptOnTimeout = false;
-    lastTranscript = "";
-
-    const onResult = (ev) => {
-      if (!isRecording) return;
-      let parts = [];
-      let foundFinal = false;
-      for (let i = 0; i < ev.results.length; i++) {
-        const r = ev.results[i];
-        const t = (r[0] && r[0].transcript) ? r[0].transcript : "";
-        parts.push(t + (r.isFinal ? "" : " "));
-        if (r.isFinal) foundFinal = true;
+    if (meteringActive && mediaStream) {
+      try {
+        stopAudioMetering(); // stoppt tracks & audioContext und setzt mediaStream = null
+      } catch (e) {
+        console.warn("Fehler beim Stoppen des Meters vor Recognition:", e);
       }
-      const newTranscript = parts.join("").trim();
-      interimTranscript = newTranscript;
-
-      const wordCount = interimTranscript.split(/\s+/).filter(Boolean).length;
-      const charCount = interimTranscript.length;
-
-      if (foundFinal) {
-        hasFinal = true;
-        adoptOnTimeout = "final";
-        if (speechStatus) speechStatus.textContent = "Satz erkannt — wird bei kurzer Pause übernommen.";
-      } else if (interimTranscript && (wordCount >= MIN_WORDS_FOR_SHORT || charCount >= MIN_CHARS_FOR_SHORT)) {
-        adoptOnTimeout = "heuristic";
-        if (speechStatus) speechStatus.textContent = "Erkannter Text — wird bei kurzer Pause übernommen.";
-      } else {
-        adoptOnTimeout = false;
-        if (!interimTranscript && speechStatus) speechStatus.textContent = "";
-      }
-
-      if (speechText) speechText.textContent = interimTranscript || "";
-
-      if (newTranscript !== lastTranscript || hasFinal || adoptOnTimeout) {
-        lastTranscript = newTranscript;
-        scheduleSilenceStop();
-      }
-    };
-
-    const onError = (ev) => {
-      if (!isRecording) return;
-      console.warn("SpeechRecognition error:", ev && ev.error);
-      if (ev && ev.error === "not-allowed") {
-        if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
-      } else {
-        if (speechStatus) speechStatus.textContent = "Erkennungsfehler.";
-      }
-    };
-
-    const onEnd = () => {
-      if (!isRecording) return;
-      scheduleSilenceStop();
-    };
-
-    // Binde die Handler und speichere Referenzen auf der Instanz
-    recognition._handlers = { onResult, onError, onEnd };
-    recognition.addEventListener("result", onResult);
-    recognition.addEventListener("error", onError);
-    recognition.addEventListener("end", onEnd);
-
-    try {
-      recognition.start();
-      isRecording = true;
-      if (voiceBtn) voiceBtn.classList.add("listening");
-      if (modalStopBtn) modalStopBtn.classList.add("listening");
-      if (speechStatus) speechStatus.textContent = "";
-      scheduleSilenceStop();
-    } catch (err) {
-      console.warn("recognition.start() failed:", err);
-      if (speechStatus) speechStatus.textContent = "Start fehlgeschlagen.";
     }
+
+    // kurze Pause, damit das Gerät Zeit hat, das Mic freizugeben
+    const START_DELAY_MS = 300; // 200-400ms empfohlen
+    setTimeout(() => {
+      // defensive check erneut
+      if (isRecording) return;
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = "de-DE";
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      interimTranscript = "";
+      hasFinal = false;
+      adoptOnTimeout = false;
+      lastTranscript = "";
+
+      // benannte handler 
+      const onResult = (ev) => {
+        if (!isRecording) return;
+        let parts = [];
+        let foundFinal = false;
+        for (let i = 0; i < ev.results.length; i++) {
+          const r = ev.results[i];
+          const t = (r[0] && r[0].transcript) ? r[0].transcript : "";
+          parts.push(t + (r.isFinal ? "" : " "));
+          if (r.isFinal) foundFinal = true;
+        }
+        const newTranscript = parts.join("").trim();
+        interimTranscript = newTranscript;
+
+        const wordCount = interimTranscript.split(/\s+/).filter(Boolean).length;
+        const charCount = interimTranscript.length;
+
+        if (foundFinal) {
+          hasFinal = true; adoptOnTimeout = "final";
+          if (speechStatus) speechStatus.textContent = "Satz erkannt — wird bei kurzer Pause übernommen.";
+        } else if (interimTranscript && (wordCount >= MIN_WORDS_FOR_SHORT || charCount >= MIN_CHARS_FOR_SHORT)) {
+          adoptOnTimeout = "heuristic";
+          if (speechStatus) speechStatus.textContent = "Erkannter Text — wird bei kurzer Pause übernommen.";
+        } else {
+          adoptOnTimeout = false;
+          if (!interimTranscript && speechStatus) speechStatus.textContent = "";
+        }
+
+        if (speechText) speechText.textContent = interimTranscript || "";
+
+        if (newTranscript !== lastTranscript || hasFinal || adoptOnTimeout) {
+          lastTranscript = newTranscript;
+          scheduleSilenceStop();
+        }
+      };
+
+      const onError = (ev) => {
+        if (!isRecording) return;
+        console.warn("SpeechRecognition error:", ev && ev.error);
+        if (ev && ev.error === "not-allowed") {
+          if (speechStatus) speechStatus.textContent = "Mikrofonzugriff verweigert.";
+        } else {
+          if (speechStatus) speechStatus.textContent = "Erkennungsfehler.";
+        }
+      };
+
+      const onEnd = () => {
+        if (!isRecording) return;
+        // safety
+        scheduleSilenceStop();
+      };
+
+      recognition._handlers = { onResult, onError, onEnd };
+      recognition.addEventListener("result", onResult);
+      recognition.addEventListener("error", onError);
+      recognition.addEventListener("end", onEnd);
+
+      try {
+        recognition.start();
+        isRecording = true;
+        if (voiceBtn) voiceBtn.classList.add("listening");
+        if (modalStopBtn) modalStopBtn.classList.add("listening");
+        if (speechStatus) speechStatus.textContent = "";
+        scheduleSilenceStop();
+      } catch (err) {
+        console.warn("recognition.start() failed:", err);
+        if (speechStatus) speechStatus.textContent = "Start fehlgeschlagen.";
+      }
+    }, START_DELAY_MS);
   }
 
   /* Stoppen (manuell) */
