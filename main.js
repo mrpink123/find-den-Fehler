@@ -1825,7 +1825,7 @@ document.querySelectorAll('.touchBtn').forEach(btn => {
     if (isMobile) {
       btn.setAttribute("aria-disabled", "true");
       btn.setAttribute("title", "Sprachsuche auf Smartphones deaktiviert");
-      btn.innerHTML = `
+      btn.querySelector('svg').outerHTML = `
         <svg style="width:18px; height:18px;">
           <use href="#icon-search" />
         </svg>
