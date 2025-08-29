@@ -856,6 +856,8 @@ FLUVERI-A: .<br>
 - Schalterstellung kontrollieren.<br>
 - Freilauf Schließzylinder kontrollieren.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
+Gilgen,SL-35,E1401,1401,CARLOCK Fehler.,CARLOCK ersetzen.,,,,"
+<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E1402,1402,Verriegelungs oder Entriegelungsfehler.,"CARLOCK kontrollieren.<br>
 Verriegelungsmechanik kontrollieren.<br>
 FLUVERI-A: .<br>
@@ -868,7 +870,17 @@ FLUVERI-A: .<br>
 - Schalterstellung kontrollieren.<br>
 - Freilauf Schließzylinder kontrollieren.<br>",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
-Gilgen,SL-35,E1401,1401,CARLOCK Fehler.,CARLOCK ersetzen.,,,,"
+Gilgen,SL-35,E1404,1404,CARLOCK Fehler.,"CARLOCK kontrollieren.<br>
+Reboot durchführen.<br>
+CARLOCK abmelden, ausstecken und wieder einstecken.",,,,"
+<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
+Gilgen,SL-35,E1405,1405,CARLOCK Fehler.,"CARLOCK kontrollieren.<br>
+Reboot durchführen.<br>
+CARLOCK abmelden, ausstecken und wieder einstecken.",,,,"
+<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
+Gilgen,SL-35,E1410,1410,CARLOCK-FS Energiespeicher ungenügend.,Energiespeicher ersetzen.,,,,"
+<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
+Gilgen,SL-35,E1411,1411,CARLOCK-FS Energiespeicher ungenügend.,Energiespeicher ersetzen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E1420,1420,CARLOCK Fehler.,CARLOCK ersetzen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
@@ -933,18 +945,6 @@ Gilgen,SL-35,E1449,1449,CARLOCK Fehler.,CARLOCK ersetzen.,,,,"
 Gilgen,SL-35,E1450,1450,CARLOCK Fehler.,CARLOCK ersetzen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E1451,1451,CARLOCK Fehler.,CARLOCK ersetzen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
-Gilgen,SL-35,E1404,1404,CARLOCK Fehler.,"CARLOCK kontrollieren.<br>
-Reboot durchführen.<br>
-CARLOCK abmelden, ausstecken und wieder einstecken.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
-Gilgen,SL-35,E1405,1405,CARLOCK Fehler.,"CARLOCK kontrollieren.<br>
-Reboot durchführen.<br>
-CARLOCK abmelden, ausstecken und wieder einstecken.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
-Gilgen,SL-35,E1410,1410,CARLOCK-FS Energiespeicher ungenügend.,Energiespeicher ersetzen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
-Gilgen,SL-35,E1411,1411,CARLOCK-FS Energiespeicher ungenügend.,Energiespeicher ersetzen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E1500,1500,Mehr als 5 Hindernisse.,Hindernis entfernen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
@@ -1031,6 +1031,8 @@ CAN Komponenten kontrollieren.<br>
 CARLOCK und / oder Steuerung ersetzen.",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E3110,3110,13 VDC Fehler.,Steuerung ersetzen.,,,,"
+<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
+Gilgen,SL-35,E3211,3211,Konfiguration,"Der Ausgang G.E.L ist bei Aktivieren von «Redundant» automatisch auf F+R und erwartet einen Fluchtwegumschalter an der Steuerung. Ist er nicht angeschlossen, muss G.E.L manuell umkonfiguriert werden ","⚠ Achtung: die vorhandene Konfiguration von G.E.L wird beim Softwareupdate überschrieben, da automatisch ein Factory-Reset durchgeführt wird. ",,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E3300,3300,Schaltnetzteil Dauerleistung zu hoch.,"Externe Last (24 V) reduzieren.<br>
 Parameter Fch reduzieren.",,,,"
@@ -1164,6 +1166,7 @@ Gilgen,SL-35,E7805,7805,CAN Nachrichten CRC Fehler.,"Reboot durchführen.<br>
 Sensor ersetzen.",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E7807,7807,CAN Nachrichten 14 s Timer ist abgelaufen.,"Reboot durchführen.<br>
+Software Update durchführen.<br>
 Sensor ersetzen.",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E7903,7903,Speicher Fehler beim Schreiben der Sensordaten.,Reboot durchführen.,,,,"
@@ -1206,6 +1209,8 @@ E9274, E9275, E9276, E9277, E9278, E9279, E9280, E9281, E9282, E9283, E9284, E92
 Software Update durchführen.<br>
 Factory Reset durchführen.<br>
 Steuerung ersetzen.",,,,"
+<a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
+Gilgen,SL-36,E9303,9303,Software Fehler.,Software Update durchführen.,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
 Gilgen,SL-35,E9801,9801,Sammelfehler.,Mindestens ein Fehler ist aktiv (nur bei Anlagen mit mehreren Mikrocontrollern / Steuerungen).,,,,"
 <a href=""https://media.gilgendoorsystems.com/download/lAXlnJLLnQhh"" target=""_blank""style=""color: var(--fg);"">SL35 Betreiberhandbuch</a>",images/typen/sl-35.png,,Reset:details/reset_sl-35.html | Not Schließen:details/schliessen_sl35.html,,,,
