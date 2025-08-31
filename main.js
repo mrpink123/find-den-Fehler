@@ -1932,6 +1932,7 @@ async function initApp() {
 initApp();
 
 /* ===== App Installieren ===== */
+
 (function () {
   const ua = navigator.userAgent || "";
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
@@ -1945,6 +1946,19 @@ initApp();
       || window.navigator.standalone === true;
   }
 
+  // zeigt/versteckt ALLE vorhandenen Buttons mit der ID pwaInstallBtn
+  function showInstallButtons() {
+    document.querySelectorAll("#pwaInstallBtn").forEach(btn => {
+      btn.style.display = "inline-flex";
+    });
+  }
+  function hideInstallButtons() {
+    document.querySelectorAll("#pwaInstallBtn").forEach(btn => {
+      btn.style.display = "none";
+    });
+  }
+
+  // kleiner Toast (oder showStatusMessage falls vorhanden)
   function showToast(msg, t = 3000) {
     if (typeof showStatusMessage === "function") { showStatusMessage(msg, "info", t); return; }
     const el = document.createElement("div");
@@ -1958,20 +1972,7 @@ initApp();
     setTimeout(() => el.remove(), t);
   }
 
-  function ensureBtn() {
-    let btn = document.getElementById("pwaInstallBtn");
-    if (btn) return btn;
-    btn = document.createElement("button");
-    btn.id = "pwaInstallBtn";
-    btn.type = "button";
-    btn.className = "btn--primary";
-    btn.style.display = "none";
-    btn.innerHTML = '<svg style="width:18px;height:18px;margin-right:6px;" aria-hidden="true"><use href="#icon-download"></use></svg><span>Installieren</span>';
-    const place = document.querySelector(".toolbar, .header, .topbar, nav, header");
-    try { if (place) place.appendChild(btn); else document.body.appendChild(btn); } catch (e) { document.body.appendChild(btn); }
-    return btn;
-  }
-
+  // iOS Modal (einfach)
   function showIosInstallModal() {
     if (document.getElementById("pwaIosInstallModal")) {
       document.getElementById("pwaIosInstallModal").style.display = "flex";
@@ -1993,91 +1994,64 @@ initApp();
     modal.querySelector("#pwaIosInstallClose").addEventListener("click", () => modal.style.display = "none");
   }
 
-  function bindButton() {
-    const btn = ensureBtn();
-    if (!btn) return;
+  // global delegated click handler: reagiert auf Klicks auf das (dynamische) #pwaInstallBtn
+  document.addEventListener("click", async (ev) => {
+    const btn = ev.target.closest ? ev.target.closest("#pwaInstallBtn") : null;
+    if (!btn) return; // kein Klick auf Install-Button
 
-    btn.style.display = "none";
+    ev.preventDefault();
+    ev.stopPropagation();
 
+    // falls bereits installiert: verstecken
     if (isAppInstalled()) {
-      btn.style.display = "none";
+      hideInstallButtons();
+      showToast("App ist bereits installiert.", 2000);
       return;
     }
 
-    if (btn._pwaHandler) {
-      try { btn.removeEventListener("click", btn._pwaHandler, true); } catch (e) { }
+    // Android/Chromium flow: prompt wenn deferredPrompt vorhanden
+    if (deferredPrompt) {
+      try {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        console.debug("PWA install choice:", choice);
+        // nach Entscheidung Button verbergen
+        hideInstallButtons();
+        deferredPrompt = null;
+        if (choice && choice.outcome === "accepted") showToast("Installation akzeptiert", 2000);
+        else showToast("Installation abgebrochen", 2000);
+        return;
+      } catch (err) {
+        console.warn("deferredPrompt.prompt() error:", err);
+        // weiter zu fallback
+      }
     }
 
-    btn._pwaHandler = async function (ev) {
-      ev.preventDefault();
-      ev.stopPropagation();
-
-      if (isAppInstalled()) {
-        btn.style.display = "none";
-        showToast("App ist bereits installiert.", 2000);
-        return;
-      }
-
-      if (deferredPrompt) {
-        try {
-          deferredPrompt.prompt();
-          const choice = await deferredPrompt.userChoice;
-          console.debug("PWA install result:", choice);
-          deferredPrompt = null;
-          btn.style.display = "none";
-          if (choice && choice.outcome === "accepted") showToast("Installation akzeptiert", 2000);
-          else showToast("Installation abgebrochen", 2000);
-          return;
-        } catch (err) {
-          console.warn("deferredPrompt.prompt() error:", err);
-        }
-      }
-
-      if (isIos) {
-        showIosInstallModal();
-        return;
-      }
-
-      showToast("Installation nicht verfügbar. Prüfe HTTPS, manifest.json, Service Worker.", 6000);
-    };
-
-    btn.addEventListener("click", btn._pwaHandler, true);
-
-    if (isIos && isMobile) {
-      btn.style.display = "inline-flex";
-    } else if (isAndroid && deferredPrompt) {
-      btn.style.display = "inline-flex";
-    } else {
-      btn.style.display = "none";
+    // iOS fallback
+    if (isIos) {
+      showIosInstallModal();
+      return;
     }
-  }
 
+    // generisches Fallback
+    showToast("Installation nicht verfügbar. Prüfe HTTPS, manifest.json und Service Worker.", 6000);
+  }, { capture: true });
+
+  // Wenn beforeinstallprompt kommt -> speichern und alle vorhandenen buttons anzeigen
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
     console.debug("beforeinstallprompt captured");
-    const btn = ensureBtn();
-    if (btn && isAndroid && isMobile && !isAppInstalled()) {
-      btn.style.display = "inline-flex";
+    if (!isAppInstalled() && isMobile) {
+      showInstallButtons();
     }
   });
 
+  // Wenn App installiert wird -> Buttons verbergen
   window.addEventListener("appinstalled", () => {
-    const b = document.getElementById("pwaInstallBtn");
-    if (b) b.style.display = "none";
+    hideInstallButtons();
     console.debug("appinstalled event received");
   });
 
-  const mo = new MutationObserver((mutations) => {
-    if (document.getElementById("pwaInstallBtn")) {
-      bindButton();
-    }
-  });
-  mo.observe(document.body, { childList: true, subtree: true });
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bindButton);
-  } else {
-    bindButton();
-  }
-})();
+  document.querySelectorAll("#pwaInstallBtn").forEach(b => { b.style.display = "none"; });
+})(); 
