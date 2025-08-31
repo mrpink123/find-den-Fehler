@@ -1851,171 +1851,6 @@ document.querySelectorAll('.touchBtn').forEach(btn => {
   });
 })();
 
-(function () {
-  const ua = navigator.userAgent || "";
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
-  const isIos = /iPhone|iPad|iPod/i.test(ua);
-  const isAndroid = /Android/i.test(ua);
-
-  let deferredPrompt = null;
-
-  function isAppInstalled() {
-    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
-      || window.navigator.standalone === true;
-  }
-
-  function ensureBtn() {
-    const btn = document.getElementById("pwaInstallBtn");
-    if (!btn) {
-      console.warn("Kein Element mit id='pwaInstallBtn' gefunden.");
-    }
-    return btn;
-  }
-
-  function showToast(msg, timeout = 3000) {
-    if (typeof showStatusMessage === "function") { showStatusMessage(msg, "info", timeout); return; }
-    const t = document.createElement("div");
-    Object.assign(t.style, {
-      position: "fixed", left: "50%", bottom: "20px", transform: "translateX(-50%)",
-      background: "rgba(0,0,0,0.8)", color: "#fff", padding: "8px 12px", borderRadius: "8px", zIndex: 99999
-    });
-    t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), timeout);
-  }
-
-  async function checkInstallPrereqs() {
-    const issues = [];
-    if (!window.isSecureContext) issues.push("Seite muss über HTTPS (oder localhost) geladen werden.");
-    const manifestLink = document.querySelector('link[rel="manifest"]');
-    if (!manifestLink) issues.push("manifest.json ist nicht verlinkt (<link rel=\"manifest\" href=\"/manifest.json\">).");
-    // check SW registration
-    if (!('serviceWorker' in navigator)) {
-      issues.push("Service Worker wird nicht unterstützt.");
-    } else {
-      try {
-        const reg = await navigator.serviceWorker.getRegistration();
-        if (!reg) issues.push("Kein Service Worker registriert (oder außerhalb Scope).");
-      } catch (e) {
-        issues.push("Fehler beim Prüfen des Service Worker");
-      }
-    }
-    return issues;
-  }
-
-  // iOS modal
-  function showIosInstallModal() {
-    if (document.getElementById("pwaIosInstallModal")) {
-      document.getElementById("pwaIosInstallModal").style.display = "flex";
-      return;
-    }
-    const modal = document.createElement("div");
-    modal.id = "pwaIosInstallModal";
-    Object.assign(modal.style, { position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2147483647 });
-    modal.innerHTML = `
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,.5)"></div>
-      <div role="dialog" aria-modal="true" style="position:relative;background:#fff;padding:16px;border-radius:10px;max-width:420px;width:92%;box-shadow:0 10px 30px rgba(0,0,0,.35)">
-        <h3 style="margin:0 0 .5rem">App installieren</h3>
-        <p style="margin:.25rem 0 0">Tippe auf das Teilen-Symbol (Quadrat mit Pfeil) und wähle <strong>„Zum Home-Bildschirm“</strong>.</p>
-        <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem">
-          <button id="pwaIosInstallClose" style="background:transparent;border:none;padding:.4rem .8rem;border-radius:6px">Schließen</button>
-        </div>
-      </div>`;
-    document.body.appendChild(modal);
-    modal.querySelector("#pwaIosInstallClose").addEventListener("click", () => modal.style.display = "none");
-  }
-
-  // Android/Chromium
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    console.debug("beforeinstallprompt captured");
-    const btn = ensureBtn();
-    if (!btn) return;
-    if (isMobile && !isAppInstalled()) {
-      btn.style.display = "inline-flex";
-    }
-  });
-
-  (function attachPwaButtonWhenReady() {
-    function attachHandlers() {
-      const btn = document.getElementById("pwaInstallBtn");
-      if (!btn) return false;
-
-      btn.style.display = "none";
-
-      if (isAppInstalled()) {
-        btn.style.display = "none";
-        return true;
-      }
-
-      if (isIos && isMobile) {
-        btn.style.display = "block";
-        btn.setAttribute("aria-label", "PWA installieren (iOS Anleitung)");
-        btn.removeEventListener("click", btn._pwaClickHandler);
-        btn._pwaClickHandler = function (ev) {
-          ev.preventDefault();
-          showIosInstallModal();
-        };
-        btn.addEventListener("click", btn._pwaClickHandler, { capture: true });
-        return true;
-      }
-
-      if (deferredPrompt && isAndroid) {
-        btn.style.display = "inline-flex";
-      }
-
-      btn.removeEventListener("click", btn._pwaClickHandler);
-      btn._pwaClickHandler = async function (ev) {
-        ev.preventDefault();
-
-        if (isAppInstalled()) {
-          btn.style.display = "none";
-          return;
-        }
-
-        if (deferredPrompt) {
-          try {
-            deferredPrompt.prompt();
-            const choice = await deferredPrompt.userChoice;
-            console.debug("PWA install choice:", choice);
-            deferredPrompt = null;
-            btn.style.display = "none";
-            return;
-          } catch (err) {
-            console.warn("Prompt fehlgeschlagen:", err);
-          }
-        }
-
-        if (isIos) {
-          showIosInstallModal();
-        } else {
-          showToast("Installation nicht verfügbar. Prüfe: HTTPS, manifest.json und Service Worker.", 6000);
-        }
-      };
-      btn.addEventListener("click", btn._pwaClickHandler, { capture: true });
-
-      return true;
-    }
-
-    try { attachHandlers(); } catch (e) { /* ignore */ }
-
-    const observer = new MutationObserver((mutations) => {
-      if (document.getElementById("pwaInstallBtn")) {
-        const ok = attachHandlers();
-        if (ok) observer.disconnect(); // done
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  })();
-
-  window.addEventListener("appinstalled", () => {
-    const b = document.getElementById("pwaInstallBtn");
-    if (b) b.style.display = "none";
-    console.debug("appinstalled event received");
-  });
-})();
-
 // ==== App starten ====
 async function initApp() {
   // Theme laden
@@ -2095,3 +1930,154 @@ async function initApp() {
 
 // Start
 initApp();
+
+/* ===== App Installieren ===== */
+(function () {
+  const ua = navigator.userAgent || "";
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
+  const isIos = /iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+
+  let deferredPrompt = null;
+
+  function isAppInstalled() {
+    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
+      || window.navigator.standalone === true;
+  }
+
+  function showToast(msg, t = 3000) {
+    if (typeof showStatusMessage === "function") { showStatusMessage(msg, "info", t); return; }
+    const el = document.createElement("div");
+    el.textContent = msg;
+    Object.assign(el.style, {
+      position: "fixed", left: "50%", transform: "translateX(-50%)",
+      bottom: "20px", background: "rgba(0,0,0,0.8)", color: "#fff",
+      padding: "8px 12px", borderRadius: "8px", zIndex: 99999
+    });
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), t);
+  }
+
+  function ensureBtn() {
+    let btn = document.getElementById("pwaInstallBtn");
+    if (btn) return btn;
+    btn = document.createElement("button");
+    btn.id = "pwaInstallBtn";
+    btn.type = "button";
+    btn.className = "btn--primary";
+    btn.style.display = "none";
+    btn.innerHTML = '<svg style="width:18px;height:18px;margin-right:6px;" aria-hidden="true"><use href="#icon-download"></use></svg><span>Installieren</span>';
+    const place = document.querySelector(".toolbar, .header, .topbar, nav, header");
+    try { if (place) place.appendChild(btn); else document.body.appendChild(btn); } catch (e) { document.body.appendChild(btn); }
+    return btn;
+  }
+
+  function showIosInstallModal() {
+    if (document.getElementById("pwaIosInstallModal")) {
+      document.getElementById("pwaIosInstallModal").style.display = "flex";
+      return;
+    }
+    const modal = document.createElement("div");
+    modal.id = "pwaIosInstallModal";
+    Object.assign(modal.style, { position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2147483647 });
+    modal.innerHTML = `
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.5)"></div>
+      <div role="dialog" aria-modal="true" style="position:relative;background:#fff;padding:16px;border-radius:10px;max-width:420px;width:92%;box-shadow:0 10px 30px rgba(0,0,0,.35)">
+        <h3 style="margin:0 0 .5rem">App installieren</h3>
+        <p style="margin:.4rem 0">Tippe auf das <strong>Teilen-Symbol</strong> (Quadrat mit Pfeil) und wähle <strong>„Zum Home-Bildschirm“</strong>.</p>
+        <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem">
+          <button id="pwaIosInstallClose" style="background:transparent;border:none;padding:.4rem .8rem;border-radius:6px">Schließen</button>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.querySelector("#pwaIosInstallClose").addEventListener("click", () => modal.style.display = "none");
+  }
+
+  function bindButton() {
+    const btn = ensureBtn();
+    if (!btn) return;
+
+    btn.style.display = "none";
+
+    if (isAppInstalled()) {
+      btn.style.display = "none";
+      return;
+    }
+
+    if (btn._pwaHandler) {
+      try { btn.removeEventListener("click", btn._pwaHandler, true); } catch (e) { }
+    }
+
+    btn._pwaHandler = async function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+
+      if (isAppInstalled()) {
+        btn.style.display = "none";
+        showToast("App ist bereits installiert.", 2000);
+        return;
+      }
+
+      if (deferredPrompt) {
+        try {
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          console.debug("PWA install result:", choice);
+          deferredPrompt = null;
+          btn.style.display = "none";
+          if (choice && choice.outcome === "accepted") showToast("Installation akzeptiert", 2000);
+          else showToast("Installation abgebrochen", 2000);
+          return;
+        } catch (err) {
+          console.warn("deferredPrompt.prompt() error:", err);
+        }
+      }
+
+      if (isIos) {
+        showIosInstallModal();
+        return;
+      }
+
+      showToast("Installation nicht verfügbar. Prüfe HTTPS, manifest.json, Service Worker.", 6000);
+    };
+
+    btn.addEventListener("click", btn._pwaHandler, true);
+
+    if (isIos && isMobile) {
+      btn.style.display = "inline-flex";
+    } else if (isAndroid && deferredPrompt) {
+      btn.style.display = "inline-flex";
+    } else {
+      btn.style.display = "none";
+    }
+  }
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.debug("beforeinstallprompt captured");
+    const btn = ensureBtn();
+    if (btn && isAndroid && isMobile && !isAppInstalled()) {
+      btn.style.display = "inline-flex";
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    const b = document.getElementById("pwaInstallBtn");
+    if (b) b.style.display = "none";
+    console.debug("appinstalled event received");
+  });
+
+  const mo = new MutationObserver((mutations) => {
+    if (document.getElementById("pwaInstallBtn")) {
+      bindButton();
+    }
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindButton);
+  } else {
+    bindButton();
+  }
+})();
