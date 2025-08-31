@@ -786,14 +786,13 @@ function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedT
   herstellerOhneTreffer.sort((a, b) => a.label.localeCompare(b.label));
 
   [...herstellerMitTreffern, ...herstellerOhneTreffer].forEach(({ key, label, count, selected }) => {
-    const showLabel = count > 0 ? `${label} (${count})` : label;
+    const showLabel = label;
     const sel = selected ? "selected" : "";
     const dis = count === 0 ? "disabled" : "";
     herstellerOptions.push(`<option value="${key}" ${sel} ${dis}>${showLabel}</option>`);
   });
 
   herstellerFilter.innerHTML = herstellerOptions.join("");
-
 
   // Typ-Dropdown: zwei Gruppen → [Treffer > 0], [Treffer = 0]
   const withTreffer = [];
@@ -1367,7 +1366,15 @@ function showHomeCard(hinweisText = null) {
         </div>
         
       </div>
-    </div>
+    </div>    
+
+    <button id="pwaInstallBtn" style="display:none;" class="btn--primary">
+      <svg style="width:18px; height:18px; margin-right:6px;">
+        <use href="#icon-download" />
+      </svg>
+      App installieren
+    </button>
+
     <div id="updateInfoContainer"></div>
   `;
 
@@ -1643,6 +1650,69 @@ if ("serviceWorker" in navigator) {
     }
   });
 }
+
+// ==== App Installieren ====
+(function () {
+  let deferredPrompt = null;
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // Prüfen, ob App bereits installiert ist
+  function isAppInstalled() {
+    return (
+      window.matchMedia("(display-mode: standalone)").matches || // Android + iOS (neuere)
+      window.navigator.standalone === true // iOS Safari
+    );
+  }
+
+  // Button sichtbar machen, wenn Bedingung erfüllt
+  function showInstallButton() {
+    const installBtn = document.getElementById("pwaInstallBtn");
+    if (installBtn && isMobile && !isAppInstalled()) {
+      installBtn.style.display = "inline-flex";
+    }
+  }
+
+  // beforeinstallprompt abfangen
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.log("📲 PWA install prompt captured");
+    showInstallButton();
+  });
+
+  // DOM fertig
+  document.addEventListener("DOMContentLoaded", () => {
+    const installBtn = document.getElementById("pwaInstallBtn");
+    if (!installBtn) return;
+
+    // Klick auf Button -> Install prompt zeigen
+    installBtn.addEventListener("click", async () => {
+      if (!deferredPrompt) {
+        console.warn("⚠️ Kein Installations-Prompt verfügbar");
+        return;
+      }
+      deferredPrompt.prompt();
+
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`📲 PWA installation outcome: ${outcome}`);
+
+      deferredPrompt = null;
+      installBtn.style.display = "none";
+    });
+
+    // Wenn App bereits installiert ist -> Button verstecken
+    if (isAppInstalled()) {
+      installBtn.style.display = "none";
+    }
+  });
+
+  // Auch auf "appinstalled" hören -> Button verschwinden lassen
+  window.addEventListener("appinstalled", () => {
+    console.log("✅ PWA wurde installiert");
+    const installBtn = document.getElementById("pwaInstallBtn");
+    if (installBtn) installBtn.style.display = "none";
+  });
+})();
 
 // ==== Scroll-Top-Button ====
 const scrollTopBtn = document.getElementById("scrollTopBtn");

@@ -1,4 +1,4 @@
-const CACHE_NAME = "fehlercode-cache-v1.1.6";
+const CACHE_NAME = "fehlercode-cache-v1.1.7";
 const ASSETS_TO_CACHE = [
   "index.html",
   "main.js",
@@ -35,6 +35,8 @@ const ASSETS_TO_CACHE = [
   "images/symbole/sta19_entriegeln1.png",
   "images/symbole/sta19_entriegeln2.png",
   "images/symbole/sta19_verschalung_auf.png",
+  "images/symbole/tormax/FRW-Schlüsselschalter.png",
+  "images/symbole/tormax/FRW-Schlüsseltaster.png",
 
   "images/typen/bde_sta-15.svg",
   "images/typen/bde-d_dfa127.png",
@@ -53,6 +55,7 @@ const ASSETS_TO_CACHE = [
   "images/typen/slm.png",
   "images/typen/slx.png",
   "images/typen/sta-15.png",
+  "images/typen/tormax_bde.png",
 
   "details/bde-e.html",
   "details/bea_combiscan_dip.html",
@@ -72,6 +75,8 @@ const ASSETS_TO_CACHE = [
   "details/reset_sl-35.html",
   "details/schliessen_sl35.html",
   "details/schliessen_sta19.html",
+  "details/tormax_bde.html",
+  "details/tormax_stoerung.html",
 ];
 
 // Installation – Cache aufbauen
