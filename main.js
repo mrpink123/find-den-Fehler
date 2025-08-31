@@ -2053,5 +2053,30 @@ initApp();
     console.debug("appinstalled event received");
   });
 
-  document.querySelectorAll("#pwaInstallBtn").forEach(b => { b.style.display = "none"; });
+  document.querySelectorAll("#pwaInstallBtn").forEach(b => {
+  // Default: verstecken — aber auf iOS zeigen, falls nicht bereits installiert
+  if (isIos && isMobile && !isAppInstalled()) {
+    // setze sichtbar und überscheibe evtl. CSS mit inline-style
+    b.style.display = "inline-flex";
+    b.style.visibility = "visible";
+    b.style.opacity = b.style.opacity || "1";
+  } else {
+    b.style.display = "none";
+  }
+});
+
+const mo = new MutationObserver((mutations) => {
+  const btns = document.querySelectorAll("#pwaInstallBtn");
+  if (btns.length > 0) {
+    // für neu gefundene Buttons: sichtbar machen (iOS) und binden
+    btns.forEach(b => {
+      if (isIos && isMobile && !isAppInstalled()) {
+        b.style.display = "inline-flex";
+        b.style.visibility = "visible";
+      }
+    });
+    bindButton(); 
+  }
+});
+
 })(); 
