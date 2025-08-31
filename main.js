@@ -1983,7 +1983,7 @@ initApp();
     Object.assign(modal.style, { position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 });
     modal.innerHTML = `
       <div style="position:absolute;inset:0;background:rgba(0,0,0,.5)"></div>
-      <div role="dialog" aria-modal="true" style="position:relative;background:var(--card-bg);padding:16px;border-radius:10px;max-width:420px;width:92%;box-shadow:0 10px 30px rgba(0,0,0,.35)">
+      <div role="dialog" aria-modal="true" style="position:relative;background:var(--card-bg);padding:16px;border-radius:10px;max-width:420px;width:92%;box-shadow:0 10px 30px var(--shadow)">
         <h3 style="margin:0 0 .5rem">App installieren</h3>
         <p style="margin:.4rem 0">Tippe auf das <strong>Teilen-Symbol</strong> (Quadrat mit Pfeil) und wähle <strong>„Zum Home-Bildschirm“</strong>.</p>
         <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem">
