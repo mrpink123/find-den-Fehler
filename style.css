@@ -1379,8 +1379,8 @@ h3 {
     }
 
     .card {
-        margin: 0 0.1rem;
-        width: 99.5%;
+        margin: 0;
+        width: 99dvw;
         border-radius: 0.5rem;
     }
 
