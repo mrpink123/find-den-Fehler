@@ -2053,30 +2053,79 @@ initApp();
     console.debug("appinstalled event received");
   });
 
-  document.querySelectorAll("#pwaInstallBtn").forEach(b => {
-  // Default: verstecken — aber auf iOS zeigen, falls nicht bereits installiert
-  if (isIos && isMobile && !isAppInstalled()) {
-    // setze sichtbar und überscheibe evtl. CSS mit inline-style
-    b.style.display = "inline-flex";
-    b.style.visibility = "visible";
-    b.style.opacity = b.style.opacity || "1";
-  } else {
-    b.style.display = "none";
-  }
-});
+  // ---  #pwaInstallBtn ---
+  (function () {
+    function forceShowButton(btn) {
+      try {
+        if (isIos && isMobile && !isAppInstalled()) {
+          btn.style.setProperty("display", "inline-flex", "important");
+          btn.style.setProperty("visibility", "visible", "important");
+          btn.style.setProperty("opacity", "1", "important");
+          btn.style.outline = "2px solid rgba(0,200,0,0.85)";
+          setTimeout(() => { btn.style.outline = ""; }, 1800);
+          console.debug("pwa: forced show (iOS) for", btn);
+        } else {
+          btn.style.setProperty("display", "none", "important");
+        }
+      } catch (err) {
+        console.warn("pwa: forceShowButton error", err);
+      }
+    }
 
-const mo = new MutationObserver((mutations) => {
-  const btns = document.querySelectorAll("#pwaInstallBtn");
-  if (btns.length > 0) {
-    // für neu gefundene Buttons: sichtbar machen (iOS) und binden
-    btns.forEach(b => {
-      if (isIos && isMobile && !isAppInstalled()) {
-        b.style.display = "inline-flex";
-        b.style.visibility = "visible";
+    function initExistingButtons() {
+      const btns = document.querySelectorAll("#pwaInstallBtn");
+      if (!btns || btns.length === 0) {
+        console.debug("pwa: no existing #pwaInstallBtn found at init");
+        return;
+      }
+      btns.forEach(btn => {
+        forceShowButton(btn);
+
+        const cs = getComputedStyle(btn);
+        if (cs.display === "none" || cs.visibility === "hidden" || cs.opacity === "0") {
+          let ancestor = btn.parentElement;
+          while (ancestor && ancestor !== document.body) {
+            const asc = getComputedStyle(ancestor);
+            if (asc.display === "none" || asc.visibility === "hidden" || asc.opacity === "0") {
+              console.warn("pwa: ancestor hides button:", ancestor, "style:", asc);
+              break;
+            }
+            ancestor = ancestor.parentElement;
+          }
+          console.warn("pwa: button remains hidden despite inline styles. Computed:", cs, btn);
+        } else {
+          console.debug("pwa: button visible (after force):", btn);
+        }
+      });
+    }
+
+    const mo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.type === "childList" && m.addedNodes.length) {
+          for (const node of m.addedNodes) {
+            if (!(node instanceof HTMLElement)) continue;
+            if (node.id === "pwaInstallBtn") {
+              console.debug("pwa: detected new #pwaInstallBtn (added node)", node);
+              forceShowButton(node);
+            } else {
+              const nested = node.querySelector && node.querySelector("#pwaInstallBtn");
+              if (nested) {
+                console.debug("pwa: detected nested #pwaInstallBtn", nested);
+                forceShowButton(nested);
+              }
+            }
+          }
+        }
       }
     });
-    bindButton(); 
-  }
-});
+
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initExistingButtons);
+    } else {
+      initExistingButtons();
+    }
+  })();
 
 })(); 

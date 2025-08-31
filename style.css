@@ -137,19 +137,6 @@ body.modal-open {
         background-color: var(--hover);
     }
 
-    .typImageWrapper:hover .typinfos {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    .typImageWrapper:hover .imageOverlayText {
-        opacity: 0;
-        transform: translate(50px, 50px) rotate(-45deg);
-    }
-
-    .typImageWrapper.clickable:hover .typImageContainer {
-        transform: scale(1.1) translateY(-12px);
-    }
 }
 
 .btn svg {
@@ -681,7 +668,10 @@ input:focus {
     text-align: left;
     margin-right: auto;
     align-items: center;
+    justify-content: center;
     color: var(--fg);
+    font-weight: 800;
+    opacity: 0.6;
 }
 
 /* Hauptfenster */
@@ -857,6 +847,7 @@ input:focus {
     flex-basis: 40%;
     align-items: flex-start;
     justify-content: center;
+    max-width: 300px;
 }
 
 .homeText {
@@ -873,7 +864,6 @@ input:focus {
     height: fit-content;
     padding: 1.5rem;
     padding-bottom: 0;
-    gap: .5rem;
     align-items: center;
     justify-content: center;
 }
@@ -1082,6 +1072,7 @@ h3 {
 }
 
 .typImageContainer .imageOverlayText {
+    display: none;
     position: absolute;
     bottom: 28px;
     right: -60px;
@@ -1110,8 +1101,6 @@ h3 {
     gap: .4rem;
     width: 220px;
     flex-direction: column;
-    transform: translateY(-115%) scale(.7);
-    opacity: 0;
     transition: all .3s ease, opacity .3s ease-in-out;
 }
 
@@ -1271,7 +1260,13 @@ h3 {
     }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 1000px) {
+    .logo-sm svg {
+        display: none;
+    }
+}
+
+@media (max-width: 750px) {
 
     body {
         font-size: .9rem;
