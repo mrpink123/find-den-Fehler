@@ -34,7 +34,7 @@
     --border: #7373739e;
     --button: #454545;
     --hover: rgb(90, 90, 90);
-    --shadow: rgba(255, 255, 255, 0.2);
+    --shadow: rgba(255, 255, 255, 0.1);
     --bg-gradient: linear-gradient(176deg,
             var(--hover) 0%,
             rgba(90, 90, 90, 0.4) 55%,
