@@ -1937,64 +1937,77 @@ document.querySelectorAll('.touchBtn').forEach(btn => {
     }
   });
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    const btn = ensureBtn();
-    if (!btn) return;
+  (function attachPwaButtonWhenReady() {
+    function attachHandlers() {
+      const btn = document.getElementById("pwaInstallBtn");
+      if (!btn) return false;
 
-    btn.style.display = "none";
-
-    if (isAppInstalled()) {
       btn.style.display = "none";
-      return;
-    }
-
-    const issues = await checkInstallPrereqs();
-    if (issues.length) {
-      console.info("PWA-Install-Hinweise:", issues);
-    }
-
-    if (isIos && isMobile) {
-      btn.style.display = "block";
-      btn.setAttribute("aria-label", "PWA installieren (iOS Anleitung)");
-      btn.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        showIosInstallModal();
-      }, { capture: true });
-      return;
-    }
-
-    if (deferredPrompt && isAndroid) {
-      btn.style.display = "inline-flex";
-    }
-
-    btn.addEventListener("click", async (ev) => {
-      ev.preventDefault();
 
       if (isAppInstalled()) {
         btn.style.display = "none";
-        return;
+        return true;
       }
 
-      if (deferredPrompt) {
-        try {
-          deferredPrompt.prompt();
-          const choice = await deferredPrompt.userChoice;
-          console.debug("PWA install choice:", choice);
-          deferredPrompt = null;
+      if (isIos && isMobile) {
+        btn.style.display = "block";
+        btn.setAttribute("aria-label", "PWA installieren (iOS Anleitung)");
+        btn.removeEventListener("click", btn._pwaClickHandler);
+        btn._pwaClickHandler = function (ev) {
+          ev.preventDefault();
+          showIosInstallModal();
+        };
+        btn.addEventListener("click", btn._pwaClickHandler, { capture: true });
+        return true;
+      }
+
+      if (deferredPrompt && isAndroid) {
+        btn.style.display = "inline-flex";
+      }
+
+      btn.removeEventListener("click", btn._pwaClickHandler);
+      btn._pwaClickHandler = async function (ev) {
+        ev.preventDefault();
+
+        if (isAppInstalled()) {
           btn.style.display = "none";
           return;
-        } catch (err) {
-          console.warn("Prompt fehlgeschlagen:", err);
         }
-      }
 
-      if (isIos) {
-        showIosInstallModal();
-      } else {
-        showToast("Installation nicht verfügbar. Prüfe: HTTPS, manifest.json und Service Worker. Alternativ: Menü → 'Zum Startbildschirm hinzufügen'.", 6000);
+        if (deferredPrompt) {
+          try {
+            deferredPrompt.prompt();
+            const choice = await deferredPrompt.userChoice;
+            console.debug("PWA install choice:", choice);
+            deferredPrompt = null;
+            btn.style.display = "none";
+            return;
+          } catch (err) {
+            console.warn("Prompt fehlgeschlagen:", err);
+          }
+        }
+
+        if (isIos) {
+          showIosInstallModal();
+        } else {
+          showToast("Installation nicht verfügbar. Prüfe: HTTPS, manifest.json und Service Worker.", 6000);
+        }
+      };
+      btn.addEventListener("click", btn._pwaClickHandler, { capture: true });
+
+      return true;
+    }
+
+    try { attachHandlers(); } catch (e) { /* ignore */ }
+
+    const observer = new MutationObserver((mutations) => {
+      if (document.getElementById("pwaInstallBtn")) {
+        const ok = attachHandlers();
+        if (ok) observer.disconnect(); // done
       }
-    }, { capture: true });
-  });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  })();
 
   window.addEventListener("appinstalled", () => {
     const b = document.getElementById("pwaInstallBtn");
