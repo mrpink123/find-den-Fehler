@@ -993,6 +993,15 @@ h3 {
     font-weight: 600;
 }
 
+#pwaInstallBtn {
+    justify-content: center;
+    margin-top: auto;
+    height: 30px;
+    align-items: center;
+    background-color: var(--border);
+    color: var(--fg);
+}
+
 .modalOverlay {
     position: fixed;
     inset: 0;
