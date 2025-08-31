@@ -1369,9 +1369,6 @@ function showHomeCard(hinweisText = null) {
     </div>    
 
     <button id="pwaInstallBtn" style="display:none;" class="btn--primary">
-      <svg style="width:18px; height:18px; margin-right:6px;">
-        <use href="#icon-download" />
-      </svg>
       App installieren
     </button>
 
@@ -1651,66 +1648,6 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-// ==== App Installieren ====
-(function () {
-  let deferredPrompt = null;
-  const ua = navigator.userAgent;
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
-  const isIos = /iPhone|iPad|iPod/i.test(ua);
-  const isInStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-
-  function showInstallButton() {
-    const installBtn = document.getElementById("pwaInstallBtn");
-    if (!installBtn) return;
-
-    if (isMobile && !isInStandalone) {
-      installBtn.style.display = "inline-flex";
-    }
-  }
-
-  // Android / Chrome Pfad
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    console.log("📲 PWA install prompt captured (Android/Chrome)");
-    if (!isIos) {
-      showInstallButton();
-    }
-  });
-
-  // iOS Safari Pfad
-  document.addEventListener("DOMContentLoaded", () => {
-    const installBtn = document.getElementById("pwaInstallBtn");
-    if (!installBtn) return;
-
-    if (isIos && !isInStandalone) {
-      // Statt prompt eine Erklärung
-      installBtn.style.display = "inline-flex";
-      installBtn.addEventListener("click", () => {
-        alert("👉 Um die App zu installieren:\n\n1. Tippe unten auf das Teilen-Symbol (Quadrat mit Pfeil).\n2. Wähle 'Zum Home-Bildschirm hinzufügen'.");
-      });
-    }
-
-    if (!isIos) {
-      // Android: richtiger Install-Prompt
-      installBtn.addEventListener("click", async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`📲 PWA installation outcome: ${outcome}`);
-        deferredPrompt = null;
-        installBtn.style.display = "none";
-      });
-    }
-  });
-
-  // Falls installiert -> Button ausblenden
-  window.addEventListener("appinstalled", () => {
-    const installBtn = document.getElementById("pwaInstallBtn");
-    if (installBtn) installBtn.style.display = "none";
-  });
-})();
-
 // ==== Scroll-Top-Button ====
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 window.addEventListener("scroll", () => {
@@ -1911,6 +1848,158 @@ document.querySelectorAll('.touchBtn').forEach(btn => {
       btn.removeAttribute("aria-disabled");
       btn.classList.remove("voice-disabled");
     }
+  });
+})();
+
+(function () {
+  const ua = navigator.userAgent || "";
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
+  const isIos = /iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+
+  let deferredPrompt = null;
+
+  function isAppInstalled() {
+    return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
+      || window.navigator.standalone === true;
+  }
+
+  function ensureBtn() {
+    const btn = document.getElementById("pwaInstallBtn");
+    if (!btn) {
+      console.warn("Kein Element mit id='pwaInstallBtn' gefunden.");
+    }
+    return btn;
+  }
+
+  function showToast(msg, timeout = 3000) {
+    if (typeof showStatusMessage === "function") { showStatusMessage(msg, "info", timeout); return; }
+    const t = document.createElement("div");
+    Object.assign(t.style, {
+      position: "fixed", left: "50%", bottom: "20px", transform: "translateX(-50%)",
+      background: "rgba(0,0,0,0.8)", color: "#fff", padding: "8px 12px", borderRadius: "8px", zIndex: 99999
+    });
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), timeout);
+  }
+
+  async function checkInstallPrereqs() {
+    const issues = [];
+    if (!window.isSecureContext) issues.push("Seite muss über HTTPS (oder localhost) geladen werden.");
+    const manifestLink = document.querySelector('link[rel="manifest"]');
+    if (!manifestLink) issues.push("manifest.json ist nicht verlinkt (<link rel=\"manifest\" href=\"/manifest.json\">).");
+    // check SW registration
+    if (!('serviceWorker' in navigator)) {
+      issues.push("Service Worker wird nicht unterstützt.");
+    } else {
+      try {
+        const reg = await navigator.serviceWorker.getRegistration();
+        if (!reg) issues.push("Kein Service Worker registriert (oder außerhalb Scope).");
+      } catch (e) {
+        issues.push("Fehler beim Prüfen des Service Worker");
+      }
+    }
+    return issues;
+  }
+
+  // iOS modal
+  function showIosInstallModal() {
+    if (document.getElementById("pwaIosInstallModal")) {
+      document.getElementById("pwaIosInstallModal").style.display = "flex";
+      return;
+    }
+    const modal = document.createElement("div");
+    modal.id = "pwaIosInstallModal";
+    Object.assign(modal.style, { position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2147483647 });
+    modal.innerHTML = `
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.5)"></div>
+      <div role="dialog" aria-modal="true" style="position:relative;background:#fff;padding:16px;border-radius:10px;max-width:420px;width:92%;box-shadow:0 10px 30px rgba(0,0,0,.35)">
+        <h3 style="margin:0 0 .5rem">App installieren</h3>
+        <p style="margin:.25rem 0 0">Tippe auf das Teilen-Symbol (Quadrat mit Pfeil) und wähle <strong>„Zum Home-Bildschirm“</strong>.</p>
+        <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem">
+          <button id="pwaIosInstallClose" style="background:transparent;border:none;padding:.4rem .8rem;border-radius:6px">Schließen</button>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.querySelector("#pwaIosInstallClose").addEventListener("click", () => modal.style.display = "none");
+  }
+
+  // Android/Chromium
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.debug("beforeinstallprompt captured");
+    const btn = ensureBtn();
+    if (!btn) return;
+    if (isMobile && !isAppInstalled()) {
+      btn.style.display = "inline-flex";
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const btn = ensureBtn();
+    if (!btn) return;
+
+    btn.style.display = "none";
+
+    if (isAppInstalled()) {
+      btn.style.display = "none";
+      return;
+    }
+
+    const issues = await checkInstallPrereqs();
+    if (issues.length) {
+      console.info("PWA-Install-Hinweise:", issues);
+    }
+
+    if (isIos && isMobile) {
+      btn.style.display = "block";
+      btn.setAttribute("aria-label", "PWA installieren (iOS Anleitung)");
+      btn.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        showIosInstallModal();
+      }, { capture: true });
+      return;
+    }
+
+    if (deferredPrompt && isAndroid) {
+      btn.style.display = "inline-flex";
+    }
+
+    btn.addEventListener("click", async (ev) => {
+      ev.preventDefault();
+
+      if (isAppInstalled()) {
+        btn.style.display = "none";
+        return;
+      }
+
+      if (deferredPrompt) {
+        try {
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          console.debug("PWA install choice:", choice);
+          deferredPrompt = null;
+          btn.style.display = "none";
+          return;
+        } catch (err) {
+          console.warn("Prompt fehlgeschlagen:", err);
+        }
+      }
+
+      if (isIos) {
+        showIosInstallModal();
+      } else {
+        showToast("Installation nicht verfügbar. Prüfe: HTTPS, manifest.json und Service Worker. Alternativ: Menü → 'Zum Startbildschirm hinzufügen'.", 6000);
+      }
+    }, { capture: true });
+  });
+
+  window.addEventListener("appinstalled", () => {
+    const b = document.getElementById("pwaInstallBtn");
+    if (b) b.style.display = "none";
+    console.debug("appinstalled event received");
   });
 })();
 

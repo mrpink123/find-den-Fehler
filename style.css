@@ -1423,7 +1423,7 @@ h3 {
     }
 
     .modalHtmlContent {
-        padding: 0;
+        padding: 0.25rem;
     }
 
     .typImageWrapper.clickable {
