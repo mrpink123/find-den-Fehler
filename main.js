@@ -1654,61 +1654,58 @@ if ("serviceWorker" in navigator) {
 // ==== App Installieren ====
 (function () {
   let deferredPrompt = null;
-  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const ua = navigator.userAgent;
+  const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
+  const isIos = /iPhone|iPad|iPod/i.test(ua);
+  const isInStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
 
-  // Prüfen, ob App bereits installiert ist
-  function isAppInstalled() {
-    return (
-      window.matchMedia("(display-mode: standalone)").matches || // Android + iOS (neuere)
-      window.navigator.standalone === true // iOS Safari
-    );
-  }
-
-  // Button sichtbar machen, wenn Bedingung erfüllt
   function showInstallButton() {
     const installBtn = document.getElementById("pwaInstallBtn");
-    if (installBtn && isMobile && !isAppInstalled()) {
+    if (!installBtn) return;
+
+    if (isMobile && !isInStandalone) {
       installBtn.style.display = "inline-flex";
     }
   }
 
-  // beforeinstallprompt abfangen
+  // Android / Chrome Pfad
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    console.log("📲 PWA install prompt captured");
-    showInstallButton();
+    console.log("📲 PWA install prompt captured (Android/Chrome)");
+    if (!isIos) {
+      showInstallButton();
+    }
   });
 
-  // DOM fertig
+  // iOS Safari Pfad
   document.addEventListener("DOMContentLoaded", () => {
     const installBtn = document.getElementById("pwaInstallBtn");
     if (!installBtn) return;
 
-    // Klick auf Button -> Install prompt zeigen
-    installBtn.addEventListener("click", async () => {
-      if (!deferredPrompt) {
-        console.warn("⚠️ Kein Installations-Prompt verfügbar");
-        return;
-      }
-      deferredPrompt.prompt();
+    if (isIos && !isInStandalone) {
+      // Statt prompt eine Erklärung
+      installBtn.style.display = "inline-flex";
+      installBtn.addEventListener("click", () => {
+        alert("👉 Um die App zu installieren:\n\n1. Tippe unten auf das Teilen-Symbol (Quadrat mit Pfeil).\n2. Wähle 'Zum Home-Bildschirm hinzufügen'.");
+      });
+    }
 
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`📲 PWA installation outcome: ${outcome}`);
-
-      deferredPrompt = null;
-      installBtn.style.display = "none";
-    });
-
-    // Wenn App bereits installiert ist -> Button verstecken
-    if (isAppInstalled()) {
-      installBtn.style.display = "none";
+    if (!isIos) {
+      // Android: richtiger Install-Prompt
+      installBtn.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`📲 PWA installation outcome: ${outcome}`);
+        deferredPrompt = null;
+        installBtn.style.display = "none";
+      });
     }
   });
 
-  // Auch auf "appinstalled" hören -> Button verschwinden lassen
+  // Falls installiert -> Button ausblenden
   window.addEventListener("appinstalled", () => {
-    console.log("✅ PWA wurde installiert");
     const installBtn = document.getElementById("pwaInstallBtn");
     if (installBtn) installBtn.style.display = "none";
   });
