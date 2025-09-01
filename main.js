@@ -1932,7 +1932,6 @@ async function initApp() {
 initApp();
 
 /* ===== App Installieren ===== */
-
 (function () {
   const ua = navigator.userAgent || "";
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(ua);
@@ -1958,20 +1957,6 @@ initApp();
     });
   }
 
-  // kleiner Toast (oder showStatusMessage falls vorhanden)
-  function showToast(msg, t = 3000) {
-    if (typeof showStatusMessage === "function") { showStatusMessage(msg, "info", t); return; }
-    const el = document.createElement("div");
-    el.textContent = msg;
-    Object.assign(el.style, {
-      position: "fixed", left: "50%", transform: "translateX(-50%)",
-      bottom: "20px", background: "rgba(0,0,0,0.8)", color: "#fff",
-      padding: "8px 12px", borderRadius: "8px", zIndex: 99999
-    });
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), t);
-  }
-
   // iOS Modal (einfach)
   function showIosInstallModal() {
     if (document.getElementById("pwaIosInstallModal")) {
@@ -1982,14 +1967,30 @@ initApp();
     modal.id = "pwaIosInstallModal";
     Object.assign(modal.style, { position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 });
     modal.innerHTML = `
-      <div style="position:absolute;inset:0;background:rgba(0,0,0,.5)"></div>
-      <div role="dialog" aria-modal="true" style="position:relative;background:var(--card-bg);padding:16px;border:1px solid var(--border);border-radius:10px;max-width:420px;width:92%;box-shadow:0 10px 30px var(--shadow)">
-        <h3 style="margin:0 0 .5rem">App installieren</h3>
-        <p style="margin:.4rem 0">Tippe auf das <strong>Teilen-Symbol</strong> (Quadrat mit Pfeil) und wähle <strong>„Zum Home-Bildschirm“</strong>.</p>
-        <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem">
-          <button id="pwaIosInstallClose" style="background:transparent;border:none;padding:.4rem .8rem;border-radius:6px">Schließen</button>
+      <div> 
+        <style>
+          .pwaIosInstallPanel { display: flex; flex-direction: column; position: relative; background: var(--card-bg, #222);color: var(--fg, #dfdfdf); width: min(420px, 92%); margin: auto; border: 2px solid var(--border, #b1b1b1c4); border-radius: 0.5rem; padding: 1rem; box-shadow: 0 10px 30px var(--shadow, rgba(0, 0, 0, 0.25)); z-index: 999; text-align: left; }
+          .pwaIosInstallPanel ol { padding: 0 0 0 1.2rem; margin: 0.5rem 0; font-size: 1rem; }
+          .pwaIosInstallPanel li { line-height: 1.4; padding: 0.35rem 0.25rem; }
+          .pwaIosInstallPanel li svg { height: 30px; width: 30px; transform: translateY(4px); }
+          .pwaIosInstallPanel .pwa-install-tip, .pwaIosInstallPanel p { margin: 1rem 0; font-size: 0.85rem; }
+          .pwaIosInstallPanel button { border: 1px solid var(--border, #a2a2a2); background-color: var(--button, #454545); color: var(--fg, #dfdfdf); border-radius: 7px; padding: 0.35rem 2rem; margin: 1rem auto 0.25rem auto; font-weight: 600; }
+          #pwaIosInstallModal { position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(.2rem); } 
+        </style>
+        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none; position: absolute;"><symbol id="share-apple" viewBox="0 0 512 512"><g fill="currentColor"> <polygon points="334.9,120.6 256,41.7 177.1,120.6 156.3,99.7 256,0 355.7,99.7 	"/> <rect x="241.1" y="20.8" width="29.8" height="312.6" /> <path d="M404.8,512H107.2c-25.3,0-44.7-19.4-44.7-44.7V199.4c0-25.3,19.3-44.7,44.7-44.7h104.2v29.8H107.2c-8.9,0-14.9,6-14.9,14.9 v267.9c0,8.9,6,14.9,14.9,14.9h297.7c8.9,0,14.9-6,14.9-14.9V199.4c0-8.9-6-14.9-14.9-14.9H300.7v-29.8h104.2 c25.3,0,44.7,19.3,44.7,44.7v267.9C449.5,492.6,430.1,512,404.8,512z" /></g></symbol></svg>
+        <div class="pwaIosInstallPanel" role="dialog" aria-modal="true" aria-labelledby="pwaInstallTitle" >
+          <h3 id="pwaInstallTitle">App installieren</h3>
+          <p> Führe die folgenden Schritte aus, um die App auf deinem Home-Bildschirm zu speichern: </p>
+          <ol> 
+            <li> Tippe auf das <strong>Teilen-Symbol</strong> <svg><use href="#share-apple"></use></svg> </li>
+            <li>Wähle <strong>„Zum Home-Bildschirm“</strong> aus.</li>
+            <li> Tippe auf <strong>Hinzufügen</strong>. Die App erscheint dann auf deinem Home-Bildschirm. </li>
+          </ol>
+          <div class="pwa-install-tip"> Wenn du Hilfe brauchst, wähle stattdessen <em>Mehr</em> → <em>Zum Home-Bildschirm</em>. </div>
+          <button id="pwaIosInstallClose">Alles Klar</button>
         </div>
-      </div>`;
+      </div>
+    `;
     document.body.appendChild(modal);
     modal.querySelector("#pwaIosInstallClose").addEventListener("click", () => modal.style.display = "none");
   }
@@ -2005,7 +2006,6 @@ initApp();
     // falls bereits installiert: verstecken
     if (isAppInstalled()) {
       hideInstallButtons();
-      showToast("App ist bereits installiert.", 2000);
       return;
     }
 
@@ -2014,12 +2014,8 @@ initApp();
       try {
         deferredPrompt.prompt();
         const choice = await deferredPrompt.userChoice;
-        console.debug("PWA install choice:", choice);
-        // nach Entscheidung Button verbergen
         hideInstallButtons();
         deferredPrompt = null;
-        if (choice && choice.outcome === "accepted") showToast("Installation akzeptiert", 2000);
-        else showToast("Installation abgebrochen", 2000);
         return;
       } catch (err) {
         console.warn("deferredPrompt.prompt() error:", err);
@@ -2033,15 +2029,12 @@ initApp();
       return;
     }
 
-    // generisches Fallback
-    showToast("Installation nicht verfügbar. Prüfe HTTPS, manifest.json und Service Worker.", 6000);
   }, { capture: true });
 
   // Wenn beforeinstallprompt kommt -> speichern und alle vorhandenen buttons anzeigen
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    console.debug("beforeinstallprompt captured");
     if (!isAppInstalled() && isMobile) {
       showInstallButtons();
     }
@@ -2050,7 +2043,6 @@ initApp();
   // Wenn App installiert wird -> Buttons verbergen
   window.addEventListener("appinstalled", () => {
     hideInstallButtons();
-    console.debug("appinstalled event received");
   });
 
   // ---  #pwaInstallBtn ---
@@ -2061,9 +2053,6 @@ initApp();
           btn.style.setProperty("display", "inline-flex", "important");
           btn.style.setProperty("visibility", "visible", "important");
           btn.style.setProperty("opacity", "1", "important");
-          btn.style.outline = "2px solid rgba(0,200,0,0.85)";
-          setTimeout(() => { btn.style.outline = ""; }, 1800);
-          console.debug("pwa: forced show (iOS) for", btn);
         } else {
           btn.style.setProperty("display", "none", "important");
         }
@@ -2075,7 +2064,6 @@ initApp();
     function initExistingButtons() {
       const btns = document.querySelectorAll("#pwaInstallBtn");
       if (!btns || btns.length === 0) {
-        console.debug("pwa: no existing #pwaInstallBtn found at init");
         return;
       }
       btns.forEach(btn => {
@@ -2087,12 +2075,10 @@ initApp();
           while (ancestor && ancestor !== document.body) {
             const asc = getComputedStyle(ancestor);
             if (asc.display === "none" || asc.visibility === "hidden" || asc.opacity === "0") {
-              console.warn("pwa: ancestor hides button:", ancestor, "style:", asc);
               break;
             }
             ancestor = ancestor.parentElement;
           }
-          console.warn("pwa: button remains hidden despite inline styles. Computed:", cs, btn);
         } else {
           console.debug("pwa: button visible (after force):", btn);
         }
@@ -2105,12 +2091,10 @@ initApp();
           for (const node of m.addedNodes) {
             if (!(node instanceof HTMLElement)) continue;
             if (node.id === "pwaInstallBtn") {
-              console.debug("pwa: detected new #pwaInstallBtn (added node)", node);
               forceShowButton(node);
             } else {
               const nested = node.querySelector && node.querySelector("#pwaInstallBtn");
               if (nested) {
-                console.debug("pwa: detected nested #pwaInstallBtn", nested);
                 forceShowButton(nested);
               }
             }
