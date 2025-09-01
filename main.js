@@ -1939,13 +1939,14 @@ initApp();
   const isAndroid = /Android/i.test(ua);
 
   let deferredPrompt = null;
+  let mutationObserver = null;
+  let lastFocusedBeforeModal = null;
 
   function isAppInstalled() {
     return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)
       || window.navigator.standalone === true;
   }
 
-  // zeigt/versteckt ALLE vorhandenen Buttons mit der ID pwaInstallBtn
   function showInstallButtons() {
     document.querySelectorAll("#pwaInstallBtn").forEach(btn => {
       btn.style.display = "inline-flex";
@@ -1957,159 +1958,157 @@ initApp();
     });
   }
 
-  // iOS Modal (einfach)
-  function showIosInstallModal() {
-    if (document.getElementById("pwaIosInstallModal")) {
-      document.getElementById("pwaIosInstallModal").style.display = "flex";
-      return;
-    }
-    const modal = document.createElement("div");
-    modal.id = "pwaIosInstallModal";
-    Object.assign(modal.style, { position: "fixed", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 });
-    modal.innerHTML = `
-      <div> 
-        <style>
-          .pwaIosInstallPanel { display: flex; flex-direction: column; position: relative; background: var(--card-bg, #222);color: var(--fg, #dfdfdf); width: min(420px, 92%); margin: auto; border: 2px solid var(--border, #b1b1b1c4); border-radius: 0.5rem; padding: 1rem; box-shadow: 0 10px 30px var(--shadow, rgba(0, 0, 0, 0.25)); z-index: 999; text-align: left; }
-          .pwaIosInstallPanel ol { padding: 0 0 0 1.2rem; margin: 0.5rem 0; font-size: 1rem; }
-          .pwaIosInstallPanel li { line-height: 1.4; padding: 0.35rem 0.25rem; }
-          .pwaIosInstallPanel li svg { height: 30px; width: 30px; transform: translateY(4px); }
-          .pwaIosInstallPanel .pwa-install-tip, .pwaIosInstallPanel p { margin: 1rem 0; font-size: 0.85rem; }
-          .pwaIosInstallPanel button { border: 1px solid var(--border, #a2a2a2); background-color: var(--button, #454545); color: var(--fg, #dfdfdf); border-radius: 7px; padding: 0.35rem 2rem; margin: 1rem auto 0.25rem auto; font-weight: 600; }
-          #pwaIosInstallModal { position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(.2rem); } 
-        </style>
-        <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none; position: absolute;"><symbol id="share-apple" viewBox="0 0 512 512"><g fill="currentColor"> <polygon points="334.9,120.6 256,41.7 177.1,120.6 156.3,99.7 256,0 355.7,99.7 	"/> <rect x="241.1" y="20.8" width="29.8" height="312.6" /> <path d="M404.8,512H107.2c-25.3,0-44.7-19.4-44.7-44.7V199.4c0-25.3,19.3-44.7,44.7-44.7h104.2v29.8H107.2c-8.9,0-14.9,6-14.9,14.9 v267.9c0,8.9,6,14.9,14.9,14.9h297.7c8.9,0,14.9-6,14.9-14.9V199.4c0-8.9-6-14.9-14.9-14.9H300.7v-29.8h104.2 c25.3,0,44.7,19.3,44.7,44.7v267.9C449.5,492.6,430.1,512,404.8,512z" /></g></symbol></svg>
-        <div class="pwaIosInstallPanel" role="dialog" aria-modal="true" aria-labelledby="pwaInstallTitle" >
-          <h3 id="pwaInstallTitle">App installieren</h3>
-          <p> Führe die folgenden Schritte aus, um die App auf deinem Home-Bildschirm zu speichern: </p>
-          <ol> 
-            <li> Tippe auf das <strong>Teilen-Symbol</strong> <svg><use href="#share-apple"></use></svg> </li>
-            <li>Wähle <strong>„Zum Home-Bildschirm“</strong> aus.</li>
-            <li> Tippe auf <strong>Hinzufügen</strong>. Die App erscheint dann auf deinem Home-Bildschirm. </li>
-          </ol>
-          <div class="pwa-install-tip"> Wenn du Hilfe brauchst, wähle stattdessen <em>Mehr</em> → <em>Zum Home-Bildschirm</em>. </div>
-          <button id="pwaIosInstallClose">Alles Klar</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-    modal.querySelector("#pwaIosInstallClose").addEventListener("click", () => modal.style.display = "none");
+  function showToast(msg, t = 3000) {
+    if (typeof showStatusMessage === "function") { showStatusMessage(msg, "info", t); return; }
+    const el = document.createElement("div");
+    el.textContent = msg;
+    Object.assign(el.style, {
+      position: "fixed", left: "50%", transform: "translateX(-50%)",
+      bottom: "20px", background: "rgba(0,0,0,0.8)", color: "#fff",
+      padding: "8px 12px", borderRadius: "8px", zIndex: 2147483646
+    });
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), t);
   }
 
-  // global delegated click handler: reagiert auf Klicks auf das (dynamische) #pwaInstallBtn
+  function injectModalStyles() {
+    if (document.getElementById("pwaInstallStyles")) return;
+    const s = document.createElement("style");
+    s.id = "pwaInstallStyles";
+    s.textContent = `
+      .pwa-ios-modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2147483647; }
+      .pwa-ios-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.5); }
+      .pwa-ios-panel { position: relative; width: min(420px,92%); padding: 1rem; border-radius: 10px; background: var(--card-bg,#222); color: var(--fg,#dfdfdf); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+      .pwa-ios-panel h3 { margin: 0 0 .5rem; }
+      .pwa-ios-panel ol { margin: .5rem 0; padding-left: 1.2rem; }
+      .pwa-ios-panel button { margin-top: 0.75rem; padding: .4rem .9rem; border-radius: 8px; border: none; background: var(--button,#1e88e5); color:var(--fg, #fff); }
+    `;
+    document.head.appendChild(s);
+  }
+
+  function showIosInstallModal() {
+    injectModalStyles();
+
+    let modal = document.getElementById("pwaIosInstallModal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "pwaIosInstallModal";
+      modal.className = "pwa-ios-modal";
+      modal.innerHTML = `
+        <div class="pwa-ios-backdrop" tabindex="-1"></div>
+        <div class="pwa-ios-panel" role="dialog" aria-modal="true" aria-labelledby="pwaInstallTitle">
+          <h3 id="pwaInstallTitle">App installieren</h3>
+          <p>Tippe auf das <strong>Teilen-Symbol</strong> und wähle <strong>„Zum Home-Bildschirm“</strong>.</p>
+          <ol>
+            <li>Teilen-Symbol antippen</li>
+            <li>„Zum Home-Bildschirm“ wählen</li>
+            <li>Hinzufügen tippen</li>
+          </ol>
+          <button id="pwaIosInstallClose">Alles klar</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const closeBtn = modal.querySelector("#pwaIosInstallClose");
+      closeBtn.addEventListener("click", () => closeModal(modal));
+      modal.querySelector(".pwa-ios-backdrop").addEventListener("click", () => closeModal(modal));
+      modal.addEventListener("keydown", (ev) => { if (ev.key === "Escape") closeModal(modal); });
+    }
+
+    lastFocusedBeforeModal = document.activeElement;
+    modal.style.display = "flex";
+    const closeBtn = modal.querySelector("#pwaIosInstallClose");
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeModal(modal) {
+    if (!modal) modal = document.getElementById("pwaIosInstallModal");
+    if (!modal) return;
+    modal.style.display = "none";
+    if (lastFocusedBeforeModal && lastFocusedBeforeModal.focus) lastFocusedBeforeModal.focus();
+  }
+
   document.addEventListener("click", async (ev) => {
     const btn = ev.target.closest ? ev.target.closest("#pwaInstallBtn") : null;
-    if (!btn) return; // kein Klick auf Install-Button
+    if (!btn) return;
 
     ev.preventDefault();
-    ev.stopPropagation();
 
-    // falls bereits installiert: verstecken
     if (isAppInstalled()) {
       hideInstallButtons();
       return;
     }
 
-    // Android/Chromium flow: prompt wenn deferredPrompt vorhanden
     if (deferredPrompt) {
       try {
         deferredPrompt.prompt();
         const choice = await deferredPrompt.userChoice;
-        hideInstallButtons();
         deferredPrompt = null;
+        hideInstallButtons();
+        if (choice && choice.outcome === "accepted") showToast("Installation akzeptiert", 2000);
         return;
       } catch (err) {
-        console.warn("deferredPrompt.prompt() error:", err);
-        // weiter zu fallback
+        // fallback below
       }
     }
 
-    // iOS fallback
     if (isIos) {
       showIosInstallModal();
       return;
     }
 
+    showToast("Installation nicht verfügbar. Prüfe HTTPS, manifest.json und Service Worker.", 6000);
   }, { capture: true });
 
-  // Wenn beforeinstallprompt kommt -> speichern und alle vorhandenen buttons anzeigen
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    if (!isAppInstalled() && isMobile) {
-      showInstallButtons();
-    }
+    if (!isAppInstalled() && isMobile) showInstallButtons();
   });
 
-  // Wenn App installiert wird -> Buttons verbergen
   window.addEventListener("appinstalled", () => {
     hideInstallButtons();
+    if (mutationObserver) {
+      try { mutationObserver.disconnect(); } catch (e) {}
+      mutationObserver = null;
+    }
   });
 
-  // ---  #pwaInstallBtn ---
-  (function () {
-    function forceShowButton(btn) {
-      try {
-        if (isIos && isMobile && !isAppInstalled()) {
-          btn.style.setProperty("display", "inline-flex", "important");
-          btn.style.setProperty("visibility", "visible", "important");
-          btn.style.setProperty("opacity", "1", "important");
-        } else {
-          btn.style.setProperty("display", "none", "important");
-        }
-      } catch (err) {
-        console.warn("pwa: forceShowButton error", err);
-      }
-    }
-
-    function initExistingButtons() {
-      const btns = document.querySelectorAll("#pwaInstallBtn");
-      if (!btns || btns.length === 0) {
-        return;
-      }
-      btns.forEach(btn => {
-        forceShowButton(btn);
-
-        const cs = getComputedStyle(btn);
-        if (cs.display === "none" || cs.visibility === "hidden" || cs.opacity === "0") {
-          let ancestor = btn.parentElement;
-          while (ancestor && ancestor !== document.body) {
-            const asc = getComputedStyle(ancestor);
-            if (asc.display === "none" || asc.visibility === "hidden" || asc.opacity === "0") {
-              break;
-            }
-            ancestor = ancestor.parentElement;
-          }
-        } else {
-          console.debug("pwa: button visible (after force):", btn);
-        }
-      });
-    }
-
-    const mo = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        if (m.type === "childList" && m.addedNodes.length) {
-          for (const node of m.addedNodes) {
-            if (!(node instanceof HTMLElement)) continue;
-            if (node.id === "pwaInstallBtn") {
-              forceShowButton(node);
-            } else {
-              const nested = node.querySelector && node.querySelector("#pwaInstallBtn");
-              if (nested) {
-                forceShowButton(nested);
-              }
-            }
-          }
-        }
-      }
-    });
-
-    mo.observe(document.body, { childList: true, subtree: true });
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initExistingButtons);
+  function forceShowIfIos(btn) {
+    if (isIos && isMobile && !isAppInstalled()) {
+      btn.style.setProperty("display", "inline-flex", "important");
+      btn.style.setProperty("visibility", "visible", "important");
+      btn.style.setProperty("opacity", "1", "important");
     } else {
-      initExistingButtons();
+      btn.style.setProperty("display", "none", "important");
     }
-  })();
+  }
 
-})(); 
+  function initExistingButtons() {
+    const nodes = document.querySelectorAll("#pwaInstallBtn");
+    nodes.forEach(forceShowIfIos);
+  }
+
+  mutationObserver = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.type !== "childList") continue; // safety
+      for (const node of m.addedNodes) {
+        if (!(node instanceof HTMLElement)) continue;
+        if (node.id === "pwaInstallBtn") {
+          forceShowIfIos(node);
+        } else {
+          const nested = node.querySelector && node.querySelector("#pwaInstallBtn");
+          if (nested) forceShowIfIos(nested);
+        }
+      }
+    }
+  });
+  mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initExistingButtons);
+  } else {
+    initExistingButtons();
+  }
+})();
+
