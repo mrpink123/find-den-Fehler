@@ -912,6 +912,7 @@ input:focus {
 }
 
 .share-btn {
+    display: none;
     background-color: transparent;
     color: var(--fg);
     font-size: small;
