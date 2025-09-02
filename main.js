@@ -93,6 +93,7 @@ function parseCSV(text) {
         typImage: get("TypBild"),
         details: get("Details"),
         modal: modalEntries,
+        cardId: get("ID"),
         csvVersion: get("CsvVersion")
       };
     });
@@ -958,6 +959,7 @@ function setHerstellerSVGViewBox(svg) {
 function renderCard(item) {
   const card = document.createElement("div");
   card.className = "card";
+  card.id = item.cardId;
 
   const herstellerId = item.hersteller?.toLowerCase().replace(/\s+/g, "_") || "";
   const typImagePath = item.typImage?.trim() || "";
@@ -978,11 +980,13 @@ function renderCard(item) {
         ${item.ursache ? renderDescriptionItem("#fcc21b", "#icon-ursache", "Maßnahme:", item.ursache, "") : ""}
         ${item.infos ? renderDescriptionItem("#00a6ffff", "#icon-info", "Info:", item.infos, "") : ""}
         ${item.weitere ? `<div style="padding-left:1rem; padding-right: .5rem;"><p>${item.weitere}</p></div>` : ""}
+        ${item.link ? renderDescriptionItem("var(--fg)", "#icon-hilfe", item.link, "", "linkItem") : ""}
       </div>
     </div>
     <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
-    <div class="errorDescription">      
-      ${item.link ? renderDescriptionItem("var(--fg)", "#icon-hilfe", item.link, "", "linkItem") : ""}
+    
+    <div class="cardfooter">
+      <button class="share-btn" data-id="${item.cardId}">🔗 Link zu dieser Card</button>
     </div>
   `;
 
@@ -1018,11 +1022,6 @@ function renderCard(item) {
       const typInfos = document.createElement("div");
       typInfos.className = "typinfos";
       typImageWrapper.appendChild(typInfos);
-
-      const overlay = document.createElement("div");
-      overlay.className = "imageOverlayText";
-      overlay.textContent = "mehr Infos";
-      typImageContainer.appendChild(overlay);
 
       const buttons = item.modal.map(entry => `
         <button class="btn touchBtn" data-url="${entry.url}" title="${entry.label}">
@@ -1063,6 +1062,109 @@ function renderCard(item) {
 
   return card;
 }
+
+/* === Card Link teilen: kopiert Card-URL in Zwischenablage === */
+(function () {
+  // Erzeugt eine sichere URL, die auf die Card-ID als Hash verweist
+  function cardUrlForId(cardId) {
+    const url = new URL(location.href);
+    url.hash = cardId;
+    return url.toString();
+  }
+
+  // Text in Clipboard schreiben (modern + fallback)
+  async function copyTextToClipboard(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (e) { /* fallthrough */ }
+
+    // Fallback für ältere Browser
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      ta.setAttribute("aria-hidden", "true");
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  // Feedback: verwendet showStatusMessage wenn vorhanden, sonst kleines Toast
+  function feedback(msg, type = "info", timeout = 2500) {
+    if (typeof showStatusMessage === "function") {
+      try { showStatusMessage(msg, type, timeout); } catch (e) { /* ignore */ }
+      return;
+    }
+    // einfacher Toast
+    const el = document.createElement("div");
+    el.textContent = msg;
+    Object.assign(el.style, {
+      position: "fixed",
+      left: "50%",
+      transform: "translateX(-50%)",
+      bottom: "18px",
+      background: "rgba(0,0,0,0.8)",
+      color: "#fff",
+      padding: "8px 12px",
+      borderRadius: "8px",
+      zIndex: 99999,
+      fontSize: "14px",
+    });
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), timeout);
+  }
+
+  // Klick-Handler für Share-Buttons (data-id / data-share-btn + .share-btn)
+  function onDocumentClick(ev) {
+    const btn = ev.target.closest ? ev.target.closest(".share-btn, [data-share-btn], [data-id].share-btn, [data-id][data-share-btn]") : null;
+    if (!btn) return;
+
+    ev.preventDefault();
+
+    const id = btn.dataset.id || btn.getAttribute("data-id");
+    if (!id) {
+      feedback("Keine Card-ID vorhanden", "error");
+      return;
+    }
+
+    const card = document.getElementById(id);
+    if (!card) {
+      feedback("Card nicht gefunden", "error");
+      return;
+    }
+
+    const title = (card.querySelector("h3")?.textContent || card.querySelector("h2")?.textContent || "").trim();
+    const url = cardUrlForId(id);
+    const textToCopy = title ? `${title}\n${url}` : url;
+
+    copyTextToClipboard(textToCopy).then(ok => {
+      if (ok) {
+        feedback("Link in Zwischenablage kopiert", "success");
+      } else {
+        feedback("Kopieren fehlgeschlagen. Link: " + url, "error", 6000);
+      }
+    }).catch(() => {
+      feedback("Fehler beim Kopieren des Links.", "error", 4000);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener("click", onDocumentClick, { capture: true, passive: false });
+    });
+  } else {
+    document.addEventListener("click", onDocumentClick, { capture: true, passive: false });
+  }
+})();
 
 
 // ==== Modal erstellen ====
@@ -1652,7 +1754,7 @@ if ("serviceWorker" in navigator) {
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 window.addEventListener("scroll", () => {
   scrollTopBtn.classList.toggle("show", window.scrollY > 300);
-}, { passive: true });
+});
 
 scrollTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1684,7 +1786,7 @@ window.addEventListener("scroll", () => {
     requestAnimationFrame(onScroll);
     ticking = true;
   }
-}, { passive: true });
+});
 
 // Aktualisiert die Steuerungs-Buttons (Sichtbarkeit / Aktivierung)
 function updateControlButtons() {
@@ -2069,7 +2171,7 @@ initApp();
   window.addEventListener("appinstalled", () => {
     hideInstallButtons();
     if (mutationObserver) {
-      try { mutationObserver.disconnect(); } catch (e) {}
+      try { mutationObserver.disconnect(); } catch (e) { }
       mutationObserver = null;
     }
   });

@@ -708,6 +708,7 @@ input:focus {
     display: flex;
     flex-wrap: nowrap;
     min-height: 40px;
+    background: var(--border);
     background: var(--bg-gradient);
     align-items: center;
     border-bottom: 1px solid var(--border);
@@ -860,10 +861,10 @@ input:focus {
     position: relative;
     display: flex;
     flex-direction: column-reverse;
+    gap: .2rem;
     max-width: 300px;
     height: fit-content;
-    padding: 1.5rem;
-    padding-bottom: 0;
+    padding: .5rem;
     align-items: center;
     justify-content: center;
 }
@@ -881,8 +882,8 @@ input:focus {
     display: flex;
     flex: 1;
     flex-direction: column;
-    width: 100%;
     margin: 0 .5rem;
+    width: -webkit-fill-available;
 }
 
 .descriptionItemGrid {
@@ -901,6 +902,19 @@ input:focus {
     ul {
         margin-left: 1.4rem;
     }
+}
+
+.cardfooter {
+    display: flex;
+    background-color: var(--button);
+    justify-content: flex-end;
+    padding: .1rem .5rem;
+}
+
+.share-btn {
+    background-color: transparent;
+    color: var(--fg);
+    font-size: small;
 }
 
 .iconLine {
@@ -1008,6 +1022,7 @@ h3 {
     position: sticky;
     display: flex;
     top: 0;
+    background: var(--border);
     background: var(--bg-gradient);
     justify-content: space-between;
     padding-left: 1rem;
@@ -1068,7 +1083,6 @@ h3 {
     justify-content: center;
     transition: all .3s ease-in-out;
     overflow: hidden;
-    padding: .25rem;
 }
 
 .typImageContainer .imageOverlayText {
@@ -1092,14 +1106,14 @@ h3 {
 
 .typinfos button {
     height: 25px;
-    border-radius: 100vh;
+    border-radius: .25rem;
 }
 
 .typinfos {
     position: relative;
     display: flex;
     gap: .4rem;
-    width: 220px;
+    width: -webkit-fill-available;
     flex-direction: column;
     transition: all .3s ease, opacity .3s ease-in-out;
 }
@@ -1400,7 +1414,6 @@ h3 {
         display: flex;
         flex-wrap: wrap;
         flex-direction: column-reverse;
-        align-items: center;
         gap: 0.5em;
     }
 
@@ -1436,6 +1449,8 @@ h3 {
         padding: .5rem;
         padding-bottom: 0;
         margin-top: 0;
+        justify-content: space-around;
+        align-items: flex-start;
     }
 
     .typImageContainer,
@@ -1450,6 +1465,7 @@ h3 {
 
     .typImageWrapper {
         padding-top: .125rem;
+        max-width: unset;
     }
 
     .typImageWrapper:hover {
