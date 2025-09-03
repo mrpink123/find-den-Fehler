@@ -962,7 +962,8 @@ function renderCard(item) {
   const card = document.createElement("div");
   card.className = "card";
   card.id = item.cardId;
-  card.setAttribute("data-title", [item.hersteller, item.typ, item.code].filter(Boolean).join(" "))
+  const title = [item.hersteller, item.typ, item.code].filter(Boolean).join(" ");
+  card.setAttribute("data-title", title);
 
   const herstellerId = item.hersteller?.toLowerCase().replace(/\s+/g, "_") || "";
   const typImagePath = item.typImage?.trim() || "";
@@ -989,10 +990,13 @@ function renderCard(item) {
     <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
     
     <div class="cardfooter">
-      <button class="share-btn" data-id="${item.cardId}" title="Diese Karte teilen">🔗 Teilen</button>
+      <div style="width:20px">
+        <button class="home-btn" title="Startseite"><svg width="20px" height="18px"><use href="#icon-home" /></svg></button>
+      </div>      
+      <p><em>${title}</em></p>
+      <button class="share-btn" data-id="${item.cardId}" title="Diese Karte teilen"><svg width="20px" height="18px"><use href="#icon-share" /></svg></button>
     </div>
   `;
-
   // Hersteller-SVG skalieren
   const svg = card.querySelector('.herstellerImage');
   if (svg) {
@@ -1065,6 +1069,13 @@ function renderCard(item) {
 
   return card;
 }
+
+// Filter und Suche leeren bei klick auf Home 
+document.addEventListener("click", (ev) => {
+  if (ev.target.closest(".home-btn")) {
+    resetFilter();
+  }
+});
 
 /* === Card Link teilen === */
 (function () {
@@ -1270,7 +1281,7 @@ function renderDaten(Id) {
   const hersteller = herstellerFilter.value.trim().toLowerCase();
   const typ = typFilter.value.trim().toLowerCase();
   const codeFilter = suchwoerter.length > 0 ? suchtext : "";
-  const cardId = Id? Id : "";
+  const cardId = Id ? Id : "";
 
   const trefferAnzahl = document.getElementById("trefferAnzahl");
   container.innerHTML = "";
@@ -1803,6 +1814,19 @@ function updateControlButtons() {
   document.getElementById("btnClearSearch").disabled = !hasText;
   document.getElementById("btnResetFilters").disabled = !hasFilter;
 }
+// Home-Button Sichtbarkeit 
+function updateHomeBtnVisibility() {
+  const btn = document.querySelector(".home-btn");
+  if (!btn) return;
+
+  const params = parseURLHash();
+  // sichtbar nur wenn eine ID im Hash steckt
+  if (params.id) {
+    btn.style.display = "inline-flex";
+  } else {
+    btn.style.display = "none";
+  }
+}
 
 function updateURLHash() {
   const params = new URLSearchParams();
@@ -1829,6 +1853,7 @@ function resetHash() {
     updateURLHash();
     renderDaten();
     updateControlButtons();
+    updateHomeBtnVisibility();
   }, 400));
 });
 
@@ -1839,6 +1864,7 @@ document.getElementById("btnClearSearch").addEventListener("click", () => {
   updateURLHash();
   renderDaten();
   updateControlButtons();
+  updateHomeBtnVisibility();
 });
 
 // Filter-Reset-Button
@@ -1848,10 +1874,16 @@ document.getElementById("btnResetFilters").addEventListener("click", () => {
   updateURLHash();
   renderDaten();
   updateControlButtons();
+  updateHomeBtnVisibility();
 });
 
-// ==== Filter und Suche leeren bei klick auf logo ====
+// Filter und Suche leeren bei klick auf logo 
 document.getElementById("logo-sm")?.addEventListener("click", () => {
+  resetFilter();
+});
+
+// Filter und Suche leeren
+function resetFilter() {
   searchInput.value = "";
   searchHint.value = "";
   herstellerFilter.value = "";
@@ -1859,7 +1891,8 @@ document.getElementById("logo-sm")?.addEventListener("click", () => {
   updateURLHash();
   renderDaten();
   updateControlButtons();
-});
+  updateHomeBtnVisibility();
+}
 
 // ==== Autocomplete für Codes ====
 searchInput.addEventListener("input", () => {
@@ -2037,6 +2070,7 @@ async function initApp() {
   // Inhalte anzeigen
   renderDaten(id);
   updateControlButtons();
+  updateHomeBtnVisibility();
 }
 
 // Start

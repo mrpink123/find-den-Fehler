@@ -864,7 +864,7 @@ input:focus {
     gap: .2rem;
     max-width: 300px;
     height: fit-content;
-    padding:1rem .5rem;
+    padding: 1rem .5rem;
     align-items: center;
     justify-content: center;
 }
@@ -907,14 +907,23 @@ input:focus {
 .cardfooter {
     display: flex;
     background-color: var(--button);
-    justify-content: flex-end;
-    padding: .1rem .5rem;
+    justify-content: space-between;
+    align-items: end;
+    padding: .2rem .5rem;
+    gap: .5rem;
+    font-size: small;
+
+    & button {
+        background-color: transparent;
+        color: var(--fg);
+    }
 }
 
 .share-btn {
-    background-color: transparent;
-    color: var(--fg);
-    font-size: small;
+    display: flex;
+}
+
+.home-btn {
 }
 
 .iconLine {
