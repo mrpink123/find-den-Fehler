@@ -864,7 +864,7 @@ input:focus {
     gap: .2rem;
     max-width: 300px;
     height: fit-content;
-    padding: .5rem;
+    padding:1rem .5rem;
     align-items: center;
     justify-content: center;
 }
@@ -912,7 +912,6 @@ input:focus {
 }
 
 .share-btn {
-    display: none;
     background-color: transparent;
     color: var(--fg);
     font-size: small;

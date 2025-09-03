@@ -849,12 +849,13 @@ function fillDropdowns(data, codeFilter = "", selectedHersteller = "", selectedT
 }
 
 // ==== Filterlogik ====
-function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
+function filterDaten(data, suchwoerter = [], hersteller = "", typ = "", cardId = "") {
   return data.filter(item => {
     const code = item.code?.toLowerCase() || "";
     const suchbegriffe = item.suchbegriffe?.toLowerCase() || "";
     const itemHersteller = item.hersteller?.toLowerCase() || "";
     const itemTyp = item.typ?.toLowerCase() || "";
+    const itemId = item.cardId?.toLowerCase() || "";
 
     const matchesSuchtext = suchwoerter.every(w => {
       const regex = new RegExp(`\\b${w.normalize("NFD").replace(/\p{Diacritic}/gu, "")}\\b`, "i");
@@ -864,8 +865,9 @@ function filterDaten(data, suchwoerter = [], hersteller = "", typ = "") {
 
     const matchesHersteller = !hersteller || itemHersteller === hersteller;
     const matchesTyp = !typ || itemTyp === typ;
+    const matchesId = !cardId || itemId === cardId;
 
-    return matchesSuchtext && matchesHersteller && matchesTyp;
+    return matchesSuchtext && matchesHersteller && matchesTyp && matchesId;
   });
 }
 
@@ -960,6 +962,7 @@ function renderCard(item) {
   const card = document.createElement("div");
   card.className = "card";
   card.id = item.cardId;
+  card.setAttribute("data-title", [item.hersteller, item.typ, item.code].filter(Boolean).join(" "))
 
   const herstellerId = item.hersteller?.toLowerCase().replace(/\s+/g, "_") || "";
   const typImagePath = item.typImage?.trim() || "";
@@ -986,7 +989,7 @@ function renderCard(item) {
     <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
     
     <div class="cardfooter">
-      <button class="share-btn" data-id="${item.cardId}">🔗 Link zu dieser Card</button>
+      <button class="share-btn" data-id="${item.cardId}" title="Diese Karte teilen">🔗 Teilen</button>
     </div>
   `;
 
@@ -1063,13 +1066,12 @@ function renderCard(item) {
   return card;
 }
 
-/* === Card Link teilen: kopiert Card-URL in Zwischenablage === */
+/* === Card Link teilen === */
 (function () {
   // Erzeugt eine sichere URL, die auf die Card-ID als Hash verweist
   function cardUrlForId(cardId) {
-    const url = new URL(location.href);
-    url.hash = cardId;
-    return url.toString();
+    const url = location.origin + location.pathname + location.search + "#id=" + encodeURIComponent(cardId);
+    return url;
   }
 
   // Text in Clipboard schreiben (modern + fallback)
@@ -1123,46 +1125,50 @@ function renderCard(item) {
     setTimeout(() => el.remove(), timeout);
   }
 
-  // Klick-Handler für Share-Buttons (data-id / data-share-btn + .share-btn)
-  function onDocumentClick(ev) {
-    const btn = ev.target.closest ? ev.target.closest(".share-btn, [data-share-btn], [data-id].share-btn, [data-id][data-share-btn]") : null;
-    if (!btn) return;
+  async function shareCard(card) {
+    const id = card.id || card.dataset.id;
+    const url = cardUrlForId(id);
+    const title = card.dataset.title || "";
+    const text = title ? `${title}\n${url}` : url;
 
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: title || undefined, text: title ? (title + "\n" + url) : url, url });
+        feedback("Teilen gestartet", "success");
+        return;
+      } catch (err) {
+        // user hat abgebrochen oder Fehler
+      }
+    }
+
+    const ok = await copyTextToClipboard(text);
+    if (ok) {
+      feedback("Link in Zwischenablage kopiert", "success");
+    } else {
+      feedback("Kopieren fehlgeschlagen. Link: " + url, "error", 6000);
+    }
+  }
+
+  // Click handler für share buttons
+  function onDocClick(ev) {
+    const btn = ev.target.closest ? ev.target.closest(".share-btn, [data-share-btn]") : null;
+    if (!btn) return;
     ev.preventDefault();
 
     const id = btn.dataset.id || btn.getAttribute("data-id");
-    if (!id) {
-      feedback("Keine Card-ID vorhanden", "error");
-      return;
-    }
-
+    if (!id) { feedback("Keine Card-ID vorhanden", "error"); return; }
     const card = document.getElementById(id);
-    if (!card) {
-      feedback("Card nicht gefunden", "error");
-      return;
-    }
+    if (!card) { feedback("Card nicht gefunden", "error"); return; }
 
-    const title = (card.querySelector("h3")?.textContent || card.querySelector("h2")?.textContent || "").trim();
-    const url = cardUrlForId(id);
-    const textToCopy = title ? `${title}\n${url}` : url;
-
-    copyTextToClipboard(textToCopy).then(ok => {
-      if (ok) {
-        feedback("Link in Zwischenablage kopiert", "success");
-      } else {
-        feedback("Kopieren fehlgeschlagen. Link: " + url, "error", 6000);
-      }
-    }).catch(() => {
-      feedback("Fehler beim Kopieren des Links.", "error", 4000);
-    });
+    shareCard(card);
   }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
-      document.addEventListener("click", onDocumentClick, { capture: true, passive: false });
+      document.addEventListener("click", onDocClick, { capture: true, passive: false });
     });
   } else {
-    document.addEventListener("click", onDocumentClick, { capture: true, passive: false });
+    document.addEventListener("click", onDocClick, { capture: true, passive: false });
   }
 })();
 
@@ -1258,17 +1264,18 @@ function escapeHTML(str) {
 }
 
 // ==== Rendert gefilterte Cards ====
-function renderDaten() {
+function renderDaten(Id) {
   const suchtext = searchInput.value.trim().toLowerCase();
   const suchwoerter = suchtext.split(/\s+/).filter(w => w.length > 0);
   const hersteller = herstellerFilter.value.trim().toLowerCase();
   const typ = typFilter.value.trim().toLowerCase();
   const codeFilter = suchwoerter.length > 0 ? suchtext : "";
+  const cardId = Id? Id : "";
 
   const trefferAnzahl = document.getElementById("trefferAnzahl");
   container.innerHTML = "";
 
-  const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ;
+  const keineFilterAktiv = suchwoerter.length === 0 && !hersteller && !typ && !cardId;
 
   // Neue Session-ID setzen für Lazy-Abbruch
   const thisRenderSession = Date.now();
@@ -1282,7 +1289,8 @@ function renderDaten() {
     return;
   }
 
-  const filtered = filterDaten(daten, suchwoerter, hersteller, typ);
+
+  const filtered = filterDaten(daten, suchwoerter, hersteller, typ, cardId);
 
   if (filtered.length === 0) {
     updateAutocompleteList(daten);
@@ -1892,7 +1900,7 @@ searchInput.addEventListener("input", () => {
 });
 
 function parseURLHash() {
-  if (!location.hash.startsWith("#")) return { code: "", hersteller: "", typ: "" };
+  if (!location.hash.startsWith("#")) return { code: "", hersteller: "", typ: "", id: "" };
 
   const hash = location.hash.substring(1);
   const params = new URLSearchParams(hash);
@@ -1901,6 +1909,7 @@ function parseURLHash() {
     code: params.get("code") || "",
     hersteller: params.get("hersteller") || "",
     typ: params.get("typ") || "",
+    id: params.get("id") || "",
   };
 }
 
@@ -2014,7 +2023,7 @@ async function initApp() {
   checkForUpdates();
 
   // URL-Hash auslesen
-  const { code = "", hersteller = "", typ = "" } = parseURLHash() || {};
+  const { code = "", hersteller = "", typ = "", id = "" } = parseURLHash() || {};
   if (code) searchInput.value = code;
   if (hersteller) herstellerFilter.value = hersteller;
   if (typ) typFilter.value = typ;
@@ -2026,7 +2035,7 @@ async function initApp() {
   }
 
   // Inhalte anzeigen
-  renderDaten();
+  renderDaten(id);
   updateControlButtons();
 }
 
