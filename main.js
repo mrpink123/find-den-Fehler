@@ -1144,7 +1144,7 @@ document.addEventListener("click", (ev) => {
 
     if (navigator.share) {
       try {
-        await navigator.share({ title: title || undefined, text: title ? (title + "\n" + url) : url, url });
+        await navigator.share({ title: title || undefined, text: title ? (title + "\n" + url) : url });
         return;
       } catch (err) {
         // user hat abgebrochen oder Fehler
