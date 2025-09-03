@@ -924,6 +924,7 @@ input:focus {
 }
 
 .home-btn {
+    display: none;
 }
 
 .iconLine {
