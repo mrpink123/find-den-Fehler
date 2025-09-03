@@ -1135,6 +1135,7 @@ h3 {
     display: flex;
     gap: .4rem;
     width: -webkit-fill-available;
+    height: -webkit-fill-available;
     flex-direction: column;
     transition: all .3s ease, opacity .3s ease-in-out;
 }
@@ -1502,8 +1503,7 @@ h3 {
     }
 
     .typinfos {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        justify-content: center;
     }
 
     .errorDescription {
