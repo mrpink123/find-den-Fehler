@@ -1433,7 +1433,6 @@ h3 {
 
     .cardContent {
         display: flex;
-        flex-wrap: wrap;
         flex-direction: column-reverse;
         gap: 0.5em;
     }
