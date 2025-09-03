@@ -1135,7 +1135,7 @@ h3 {
     display: flex;
     gap: .4rem;
     width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    margin-block: .5rem;
     flex-direction: column;
     transition: all .3s ease, opacity .3s ease-in-out;
 }
