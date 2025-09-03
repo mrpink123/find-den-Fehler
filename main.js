@@ -990,11 +990,11 @@ function renderCard(item) {
     <div class="errorDescriptionItem detailsContainer">Wird geladen ...</div>
     
     <div class="cardfooter">
-      <div style="width:20px">
-        <button class="home-btn" title="Startseite"><svg width="20px" height="18px"><use href="#icon-home" /></svg></button>
+      <div style="width:1rem">
+        <button class="home-btn" title="Startseite"><svg><use href="#icon-home" /></svg></button>
       </div>      
-      <p><em>${title}</em></p>
-      <button class="share-btn" data-id="${item.cardId}" title="Diese Karte teilen"><svg width="20px" height="18px"><use href="#icon-share" /></svg></button>
+      <p><em>${item.hersteller} ${item.typ} <span>${item.code}</span></em></p>
+      <button class="share-btn" data-id="${item.cardId}" title="Diese Karte teilen"><svg><use href="#icon-share" /></svg></button>
     </div>
   `;
   // Hersteller-SVG skalieren
@@ -1145,7 +1145,6 @@ document.addEventListener("click", (ev) => {
     if (navigator.share) {
       try {
         await navigator.share({ title: title || undefined, text: title ? (title + "\n" + url) : url, url });
-        feedback("Teilen gestartet", "success");
         return;
       } catch (err) {
         // user hat abgebrochen oder Fehler

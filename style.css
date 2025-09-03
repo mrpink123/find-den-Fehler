@@ -906,16 +906,27 @@ input:focus {
 
 .cardfooter {
     display: flex;
-    background-color: var(--button);
+    background: var(--bg-gradient);
     justify-content: space-between;
-    align-items: end;
-    padding: .2rem .5rem;
+    padding: .25rem .5rem;
     gap: .5rem;
     font-size: small;
+    box-shadow: 0 -1 4px var(--shadow);
+    border-top: 1px solid var(--border);
 
     & button {
         background-color: transparent;
         color: var(--fg);
+
+        & svg {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    & p span {
+        color: #ff0000;
+        font-weight: 700;
     }
 }
 
