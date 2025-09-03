@@ -1822,7 +1822,7 @@ function updateHomeBtnVisibility() {
   const params = parseURLHash();
   // sichtbar nur wenn eine ID im Hash steckt
   if (params.id) {
-    btn.style.display = "inline-flex";
+    btn.style.display = "flex";
   } else {
     btn.style.display = "none";
   }
