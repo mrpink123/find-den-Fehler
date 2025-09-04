@@ -780,7 +780,6 @@ input:focus {
     width: 250px;
     height: 100%;
     min-height: fit-content;
-    display: flex;
     border: 1px solid var(--border);
     background: var(--bg2);
     justify-content: space-between;
@@ -792,7 +791,8 @@ input:focus {
 
 .version {
     font-size: small;
-    font-weight: 500;
+    font-weight: 400;
+    font-style: italic;
 }
 
 .versionContainer {
@@ -833,7 +833,7 @@ input:focus {
 .cardContent {
     position: relative;
     display: flex;
-    min-height: auto;
+    min-height: 200px;
 }
 
 

@@ -1506,10 +1506,9 @@ function showHomeCard(hinweisText = null) {
           </button>
         </div>
         <div class="versionContainer">
-          <p class="version highlight">App: <span id="appVersionText">lade…</span></p>
-          <p class="version highlight">Fehlerliste: <span id="csvVersionText"> lade…</span></p>
-        </div>
-        
+            <p class="version highlight">App: <span id="appVersionText">lade…</span></p>
+            <p class="version highlight">Fehlerliste: <span id="csvVersionText"> lade…</span></p>
+        </div>        
       </div>
     </div>    
 
