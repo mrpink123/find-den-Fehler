@@ -2,7 +2,7 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("splash-screen").style.display = "none";
     document.getElementById("app").style.display = "block";
-  }, 1500);
+  }, 500);
 });
 
 // ==== Lokaler Speicher mit Fallback ====
@@ -1079,13 +1079,10 @@ document.addEventListener("click", (ev) => {
 
 /* === Card Link teilen === */
 (function () {
-  // Erzeugt eine sichere URL, die auf die Card-ID als Hash verweist
   function cardUrlForId(cardId) {
-    const url = location.origin + location.pathname + location.search + "#id=" + encodeURIComponent(cardId);
-    return url;
+    return location.origin + location.pathname + location.search + "#id=" + encodeURIComponent(cardId);
   }
 
-  // Text in Clipboard schreiben (modern + fallback)
   async function copyTextToClipboard(text) {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1094,7 +1091,6 @@ document.addEventListener("click", (ev) => {
       }
     } catch (e) { /* fallthrough */ }
 
-    // Fallback für ältere Browser
     try {
       const ta = document.createElement("textarea");
       ta.value = text;
@@ -1111,13 +1107,11 @@ document.addEventListener("click", (ev) => {
     }
   }
 
-  // Feedback: verwendet showStatusMessage wenn vorhanden, sonst kleines Toast
   function feedback(msg, type = "info", timeout = 2500) {
     if (typeof showStatusMessage === "function") {
       try { showStatusMessage(msg, type, timeout); } catch (e) { /* ignore */ }
       return;
     }
-    // einfacher Toast
     const el = document.createElement("div");
     el.textContent = msg;
     Object.assign(el.style, {
@@ -1142,24 +1136,56 @@ document.addEventListener("click", (ev) => {
     const title = card.dataset.title || "";
     const text = title ? `${title}\n${url}` : url;
 
+    // 1. Native Web Share API
     if (navigator.share) {
       try {
-        await navigator.share({ title: title || undefined, text: title ? (title + "\n" + url) : url });
+        await navigator.share({ title: title || undefined, text, url });
+        feedback("Teilen gestartet", "success");
         return;
       } catch (err) {
-        // user hat abgebrochen oder Fehler
+        // User abgebrochen oder Fehler -> Fallback
       }
     }
 
-    const ok = await copyTextToClipboard(text);
-    if (ok) {
-      feedback("Link in Zwischenablage kopiert", "success");
-    } else {
-      feedback("Kopieren fehlgeschlagen. Link: " + url, "error", 6000);
-    }
+    // 2. Clipboard
+    try {
+      const ok = await copyTextToClipboard(text);
+      if (ok) {
+        feedback("Link in Zwischenablage kopiert", "success");
+        return;
+      }
+    } catch (e) { /* weiter zum Fallback */ }
+
+    // 3. Fallback: eigenes Modal/Prompt mit Auto-Select
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.readOnly = true;
+    Object.assign(ta.style, {
+      position: "fixed",
+      left: "50%",
+      top: "30%",
+      transform: "translateX(-50%)",
+      width: "80%",
+      maxWidth: "420px",
+      padding: "10px",
+      zIndex: 10000,
+      background: "#fff",
+      color: "#000",
+      border: "1px solid #ccc",
+      borderRadius: "6px",
+      fontSize: "14px",
+    });
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    feedback("Bitte STRG+C oder lange tippen, um den Link zu kopieren.", "info", 4000);
+
+    // Automatisch nach einigen Sekunden wieder entfernen
+    setTimeout(() => {
+      try { document.body.removeChild(ta); } catch (e) {}
+    }, 10000);
   }
 
-  // Click handler für share buttons
   function onDocClick(ev) {
     const btn = ev.target.closest ? ev.target.closest(".share-btn, [data-share-btn]") : null;
     if (!btn) return;
@@ -1181,7 +1207,6 @@ document.addEventListener("click", (ev) => {
     document.addEventListener("click", onDocClick, { capture: true, passive: false });
   }
 })();
-
 
 // ==== Modal erstellen ====
 function openTypImageModal(imagePath = null, typ = "", htmlPath = "") {

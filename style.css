@@ -966,41 +966,6 @@ input:focus {
     margin: 3px 0;
 }
 
-
-.detailsContainer {
-    font-size: 0.95em;
-    margin: 1rem 0.5rem;
-}
-
-.detailsContainer h1,
-h2,
-h3 {
-    margin: 0;
-    padding: 0.5em 0 0 0.2em;
-}
-
-.detailsContainer p {
-    margin-left: 0.5em;
-}
-
-.detailsContainer ul {
-    margin-left: 1.7em;
-    padding: 0 0 0.2em 0;
-}
-
-.detailsContainer h1 {
-    font-size: 1.4em;
-    text-align: center;
-}
-
-.detailsContainer h2 {
-    font-size: 1.2em;
-}
-
-.detailsContainer h3 {
-    font-size: 1.1em;
-}
-
 .updateInfo {
     display: flex;
     flex-wrap: wrap;
@@ -1025,6 +990,11 @@ h3 {
     align-items: center;
     background-color: var(--border);
     color: var(--fg);
+}
+
+.detailsContainer {
+    max-width: 100%;
+    padding-block: 0;
 }
 
 .modalOverlay {
@@ -1163,9 +1133,9 @@ h3 {
     height: 122px;
     transform-origin: center;
     overflow: visible;
-    animation: fadeIn 0.6s ease-in;
+    animation: fadeIn 0.5s ease-in;
     color: var(--highlight);
-    animation: si1 .8s ease-in-out;
+    animation: si1 .6s ease-in-out;
 }
 
 .loading-text {
