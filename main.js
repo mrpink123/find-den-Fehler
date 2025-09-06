@@ -964,6 +964,9 @@ function renderCard(item) {
   card.id = item.cardId;
   const title = [item.hersteller, item.typ, item.code].filter(Boolean).join(" ");
   card.setAttribute("data-title", title);
+  card.setAttribute("data-hersteller", item.hersteller);
+  card.setAttribute("data-typ", item.typ);
+  card.setAttribute("data-code", item.code);
 
   const herstellerId = item.hersteller?.toLowerCase().replace(/\s+/g, "_") || "";
   const typImagePath = item.typImage?.trim() || "";
@@ -1079,8 +1082,8 @@ document.addEventListener("click", (ev) => {
 
 /* === Card Link teilen === */
 (function () {
-  function cardUrlForId(cardId) {
-    return location.origin + location.pathname + location.search + "#id=" + encodeURIComponent(cardId);
+  function cardUrlForId(cardId, typ) {
+    return location.origin + location.pathname + location.search + "#typ=" + encodeURIComponent(typ) + "&id=" + encodeURIComponent(cardId);
   }
 
   async function copyTextToClipboard(text) {
@@ -1132,7 +1135,8 @@ document.addEventListener("click", (ev) => {
 
   async function shareCard(card) {
     const id = card.id || card.dataset.id;
-    const url = cardUrlForId(id);
+    const typ = card.typ || card.dataset.typ;
+    const url = cardUrlForId(id, typ.toLowerCase());
     const title = card.dataset.title || "";
     const text = title ? `${title}\n${url}` : url;
 
@@ -1182,7 +1186,7 @@ document.addEventListener("click", (ev) => {
 
     // Automatisch nach einigen Sekunden wieder entfernen
     setTimeout(() => {
-      try { document.body.removeChild(ta); } catch (e) {}
+      try { document.body.removeChild(ta); } catch (e) { }
     }, 10000);
   }
 
@@ -1513,6 +1517,7 @@ function showHomeCard(hinweisText = null) {
     </div>    
 
     <button id="pwaInstallBtn" style="display:none;" class="btn--primary">
+      <svg><use href="#icon-press"></use></svg>
       App installieren
     </button>
 
@@ -1978,16 +1983,6 @@ document.querySelectorAll('.touchBtn').forEach(btn => {
 // Deaktiviere/ersetze Voice-Button auf Smartphones
 (function () {
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  // kurze Meldung showStatusMessage 
-  function showDisabledInfo(msg) {
-    if (typeof showStatusMessage === "function") {
-      showStatusMessage(msg, "info", 3000);
-    } else {
-      // fallback
-      alert(msg);
-    }
-  }
 
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("voiceSearchBtn");

@@ -833,9 +833,7 @@ input:focus {
 .cardContent {
     position: relative;
     display: flex;
-    min-height: 200px;
 }
-
 
 .homeContent {
     display: flex;
@@ -884,6 +882,10 @@ input:focus {
     flex-direction: column;
     margin: 0 .5rem;
     width: -webkit-fill-available;
+}
+
+.errorDescriptionItem:last-of-type {
+    margin-top: auto;
 }
 
 .descriptionItemGrid {
@@ -989,7 +991,16 @@ input:focus {
     height: 30px;
     align-items: center;
     background-color: var(--border);
+    background: var(--bg-gradient);
     color: var(--fg);
+    gap: .3rem;
+
+    & svg {
+        width: 26px;
+        height: 26px;
+        stroke-width: 2;
+        transform: rotate(-45deg);
+    }
 }
 
 .detailsContainer {

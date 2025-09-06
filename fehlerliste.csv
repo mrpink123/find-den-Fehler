@@ -74,57 +74,57 @@ Gilgen,SLM,ohne,Tür bleibt zu lange oder zu kurz offen,Tür bleibt zu lange ode
 Gilgen,SLM,Reset mit Bedis,SLM Reset,,,,,,"
 ",,details/reset_mit_bedis.html,,10034,,,
 Gilgen,SLM-RED,E0,0,Netzausfall.,Netzsicherung und Sicherungen in ANTE 1 + 2 kontrollieren,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10035,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10035,,,
 Gilgen,SLM-RED,E1,1,ANTE 1 defekt.,"Verkabelung ANTE-KLESE auf Unterbrechung/Kurzschluss kontrollieren ANTE ersetzen, NOT-AUS kontrollieren ",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10036,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10036,,,
 Gilgen,SLM-RED,E2,2,ANTE 2 defekt.,"Verkabelung ANTE-KLESE auf Unterbrechung/Kurzschluss kontrollieren ANTE ersetzen, NOT-AUS kontrollieren ",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10037,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10037,,,
 Gilgen,SLM-RED,E3,3,beim Lernen behindert (Weg kleiner als 230 mm).,"Verriegelung entriegeln, Flügelblockierung aufheben Nach Behebung: RESET durchführen.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10038,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10038,,,
 Gilgen,SLM-RED,E4,4,beim Lernen überlaufen (Weg größer als 9'800 mm).,Zahnriemen und ANTE-Getriebe kontrollieren.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10039,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10039,,,
 Gilgen,SLM-RED,E5,5,Notöffnung wird zu langsam.,"Kontrolle der Bodenführung, Gegendruckrollen, Zahnriemenspannung und Flügelgewichte, allgemeine Verschmutzung.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10040,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10040,,,
 Gilgen,SLM-RED,E6,6,Notöffnung ist zu langsam.,"Kontrolle der Bodenführung, Gegendruckrollen, Zahnriemenspannung und Flügelgewichte, allgemeine Verschmutzung.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10041,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10041,,,
 Gilgen,SLM-RED,E7,7,KLESE.,Steuerung ersetzen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10042,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10042,,,
 Gilgen,SLM-RED,E8,8,EPROM/RAM beim Master (links).,RESET durchführen Bei Fehlerwiederholung: EPROM (gleiche Version) oder KLESE austauschen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10043,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10043,,,
 Gilgen,SLM-RED,E9,9,EPROM/RAM beim Slave (rechts).,RESET durchführen Bei Fehlerwiederholung: EPROM (gleiche Version) oder KLESE austauschen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10044,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10044,,,
 Gilgen,SLM-RED,E10,10,Schlüsselprogrammschalter FLUCHTWEG.,"Verdrahtung kontrollieren, ev Schalter defekt Kabel muss getrennt vom Kabel des Bedienungstableaus verlegt sein Wenn kein Schalter vorhanden: Brücke einlegen.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10045,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10045,,,
 Gilgen,SLM-RED,E11,11,Kurzschluss/Überlastung 24 V.,Anschlüsse auf KLESE kontrollieren.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10046,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10046,,,
 Gilgen,SLM-RED,E12,12,Verriegelung.,Verriegelungsendschalter und Anschlüsse auf Verriegelung kontrollieren Verriegelungsklinke muss frei bewegbar sein.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10047,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10047,,,
 Gilgen,SLM-RED,E13,13,Bodenschloss.,Schlüsselprogrammschalter auf KEIN FLUCHTWEG stellen Bodenschloss entriegeln Schlüsselprogrammschalter auf FLUCHTWEG stellen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10048,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10048,,,
 Gilgen,SLM-RED,E14,14,Lichtschranken.,Freie Sichtverbindung und Verkabelung kontrollieren Eventuell Brücke einlegen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10049,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10049,,,
 Gilgen,SLM-RED,E15,15,Radar Redundant,"Verkabelung zur KLESE kontrollieren Radar Redundant ersetzen, Interfaceprint wechseln.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10050,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10050,,,
 Gilgen,SLM-RED,E17,17,ZU-Stellung (Tür wird aus ZU-Stellung gedrückt).,"Mittendichtung, Laufwagen (Puffer) oder Lichte Weite kontrollieren.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10051,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10051,,,
 Gilgen,SLM-RED,E18,18,Netzausfall ANTE 1.,Sicherung in ANTE 1 kontrollieren.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10052,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10052,,,
 Gilgen,SLM-RED,E19,19,Netzausfall ANTE 2.,Sicherung in ANTE 2 kontrollieren.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10053,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10053,,,
 Gilgen,SLM-RED,E23,23,Tür öffnet zu langsam oder reagiert nicht auf Öffnungsbefehl.,Flügelblockierung aufheben Radar Redundant kontrollieren.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10054,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10054,,,
 Gilgen,SLM-RED,E23,23,Einstellungsfehler Öffnungsweite (Winter).,RESET durchführen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10055,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10055,,,
 Gilgen,SLM-RED,E24,24,NOT-AUF gedrückt oder Brücke Klemme 17 nicht eingelegt.,NOT-AUF lösen oder Brücke einlegen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10056,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10056,,,
 Gilgen,SLM-RED,E25,25,Kommunikation.,EPROM oder KLESE austauschen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10057,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10057,,,
 Gilgen,SLM-RED,E29,29,Notbatterie verringert funktionsfähig.,"Notbatterie wird geladen, Charge-LED auf KLESE blinkt Wenn Fehler nach 8 h immer noch vorhanden: Notbatterie ersetzen.",,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10058,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10058,,,
 Gilgen,SLM-RED,E30,30,Notbatterie defekt.,Notbatterie ersetzen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10059,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10059,,,
 Gilgen,SLM-RED,E31,31,Schließbehinderung spezial.,Wenn Softswitch 31 ON: Mittels KEY-Befehl oder BEDIS-Stellung HAND Fehler löschen.,,,,"
-<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm-red.png,,,10060,,,
+<a href=""https://media.gilgendoorsystems.com/download/jQnsEFUQuknG"" target=""_blank""style=""color: var(--fg);"">SLM-RED Betreiberhandbuch</a> ",images/typen/slm.png,,,10060,,,
 Gilgen,SLM-RED,Reset mit Bedis,SLM-red Reset,,,,,,"
 ",,details/reset_mit_bedis.html,,1060,,,
 Gilgen,SLX,E10,10,"SLX-Standard Not-Stopp: Tür steht still.<br>
@@ -2224,9 +2224,9 @@ Record,STA-19 Red,"LED 1, 2, 3, 4, 6",,SSK - Sensor länger als 60 sec aktiv,SSK
 Record,STA-19 Red,Notöffnung,"notauf, not, oeffnen ",,,,,,,,details/notauf_sta19red.html,,10706,,,
 Record,STA-19 Red,schließen im Fehlerfall,schließen schliessen zu,,,,,,,,details/schliessen_sta19.html,,10707,,,
 Record,STA-19 Red,BDE-E,Reset,,,,,,,,details/bde-e.html,,10708,,,
-Record,DFA-127 FP,Status  3,AKI aktiv,Ein Öffnungssignal auf der Innenseite der Tür ist dauerhaft ausgelöst.,"<ul><li>Sich bewegende Objekte im Erfassungsbereich von AKISensoren entfernen.</li><li>Die Ansprechzeit der Störung kann konfiguriert, oder die Störungsanzeige generell unterdrückt werden (siehe Parameter → Diverses → Alarmanzeige → Zeit Auslösung)</li></ul>","<p>Tür bleibt offen</p><br><p>Rücksetzung automatisch, sofern i.O.</p><br><p>🔒 Tür kann trotz anstehender Störung behelfsmässig wie folgt verriegelt werden:</p>
+Record,DFA-127 FP,Status  3,AKI aktiv,Ein Öffnungssignal auf der Innenseite der Tür ist dauerhaft ausgelöst.,"<ul><li>Sich bewegende Objekte im Erfassungsbereich von AKISensoren entfernen.</li><li>Die Ansprechzeit der Störung kann konfiguriert, oder die Störungsanzeige generell unterdrückt werden (siehe Parameter → Diverses → Alarmanzeige → Zeit Auslösung)</li></ul>","<p>Tür bleibt offen</p><p>Rücksetzung automatisch, sofern i.O.</p><br><p>🔒 Tür kann trotz anstehender Störung behelfsmässig wie folgt verriegelt werden:</p>
 <ul><li>BDE-D auf Betriebsart HANDBETRIEB stellen.</li><li>BDE-D auf Betriebsart VERRIEGELN stellen.</li><li>Tür bleibt zu und verriegelt</li></ul>",,AKI aktiv,"<a href=""https://www.record.de//de/dokumente/DownloadDocument/21480/1"" target=""_blank""style=""color: var(--fg);"">DFA 127 – Bedienungsanleitung</a> ",images/typen/bde-d_dfa127.png,,Bedienung mit BDI:details/bedienung_dfa127_tasten.html | Bedienung mit BDE-D:details/bedienung_dfa127_bde-d.html,10709,,,
-Record,DFA-127 FP,Status  5,AKA aktiv,Ein Öffnungssignal auf der Aussenseite der Tür ist dauerhaft ausgelöst.,"<ul><li>Sich bewegende Objekte im Erfassungsbereich von AKASensoren entfernen.</li><li>Die Ansprechzeit der Störung kann konfiguriert, oder die Störungsanzeige generell unterdrückt werden (siehe Parameter → Diverses → Alarmanzeige → Zeit Auslösung)</li></ul>","<p>Tür bleibt offen</p><br><p>Rücksetzung automatisch, sofern i.O.</p><br><p>🔒 Tür kann trotz anstehender Störung behelfsmässig wie folgt verriegelt werden:</p>
+Record,DFA-127 FP,Status  5,AKA aktiv,Ein Öffnungssignal auf der Aussenseite der Tür ist dauerhaft ausgelöst.,"<ul><li>Sich bewegende Objekte im Erfassungsbereich von AKASensoren entfernen.</li><li>Die Ansprechzeit der Störung kann konfiguriert, oder die Störungsanzeige generell unterdrückt werden (siehe Parameter → Diverses → Alarmanzeige → Zeit Auslösung)</li></ul>","<p>Tür bleibt offen</p><p>Rücksetzung automatisch, sofern i.O.</p><br><p>🔒 Tür kann trotz anstehender Störung behelfsmässig wie folgt verriegelt werden:</p>
 <ul><li>BDE-D auf Betriebsart HANDBETRIEB stellen.</li><li>BDE-D auf Betriebsart VERRIEGELN stellen.</li><li>Tür bleibt zu und verriegelt</li></ul>",,AKA aktiv,"<a href=""https://www.record.de//de/dokumente/DownloadDocument/21480/1"" target=""_blank""style=""color: var(--fg);"">DFA 127 – Bedienungsanleitung</a> ",images/typen/bde-d_dfa127.png,,Bedienung mit BDI:details/bedienung_dfa127_tasten.html | Bedienung mit BDE-D:details/bedienung_dfa127_bde-d.html,10710,,,
 Record,DFA-127 FP,Status  6,Entriegelung,Entriegelungsfehler,"<p>Es konnte nicht ordnungsgemäss entriegelt werden.</p>
 <ul><li>Mit BDE-D/M die Betriebsart Verriegelt anwählen und, nachdem
