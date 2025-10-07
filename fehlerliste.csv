@@ -1,5 +1,5 @@
 Hersteller,Typ,Code,Suchbegriffe,Fehler,Ursache,Info,Weitere,Kategorie,Link,TypBild,Details,Modal,ID,,,CsvVersion
-CsvVersion,,,,,,,,,,,,,,,,1.0.10
+CsvVersion,,,,,,,,,,,,,,,,1.0.11
 Gilgen,SLM,E1,1,ANTE 1 defekt.,"Überprüfen, ob NOT-AUS-Brücke gesteckt. Wenn ja, ANTE 1 ersetzen. ",,,,"
 <a href=""https://media.gilgendoorsystems.com/download/CDLCKpXBwnbh"" target=""_blank""style=""color: var(--fg);"">SLM Betreiberhandbuch</a> ",images/typen/slm.png,,Reset mit Bedis:details/reset_mit_bedis.html,10000,,,
 Gilgen,SLM,E3,3,ANTE 1 beim Lernen behindert. Weg kleiner als 230 mm.,Tür wird durch ein Hindernis in AUF-Richtung blockiert. Hindernis entfernen und RESET durchführen.,,,,"
